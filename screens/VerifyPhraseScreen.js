@@ -1,9 +1,59 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import PhraseWord from "../components/PhraseWord";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { Text } from "react-native";
+import { Seed } from "./PhraseScreen";
 
+var tmpSeed = [];
+var secretPhrase = "";
+var currentSeed = "";
 const VerifyPhraseScreen = ({ navigation }) => {
+  const [seed, setSeed] = useState("");
+  const [words, setWords] = useState([]);
+  const [disabled, setDisabled] = useState(false);
+
+  const mixOrder = () => {
+    let i1 = 0, i2 = 0, tmp;
+    for (let i = 0; i < 100; i++) {
+      i1 = Math.floor(Math.random() * 12);
+      i2 = Math.floor(Math.random() * 12);
+
+      tmp = Seed[i1], Seed[i1] = Seed[i2], Seed[i2] = tmp;
+    }
+  }
+  useEffect(() => {
+    tmpSeed = Seed;
+    for (let i = 0; i < 12; i++) {
+      secretPhrase += tmpSeed[i] + " ";
+    }
+    mixOrder();
+    setWords(Seed);
+  }, [])
+
+  const onPress = (word) => {
+    if (seed.includes(word) == false) {
+      setSeed((prevSeed) => prevSeed + word + " ");
+    }
+    else {
+      currentSeed = seed;
+      currentSeed.replace(word, "");
+      setSeed(currentSeed);
+    }
+  }
+
+  const onNextScene = () => {
+    console.log(secretPhrase);
+    console.log(seed);
+    if (secretPhrase == seed) {
+      navigation.navigate("TabNavigator", {
+        screen: "PortfolioScreen",
+      })
+    }
+    else {
+      console.log("Error!");
+    }
+  }
   return (
     <Container>
       <Body>
@@ -12,19 +62,22 @@ const VerifyPhraseScreen = ({ navigation }) => {
           Tap the words to put them next to each other in the correct order.
         </SubHeader>
       </Body>
-      <PhraseContainer></PhraseContainer>
+      <PhraseContainer>
+        <Text>{seed}</Text>
+      </PhraseContainer>
       <SeedPhrase>
         {words.map((word, index) => (
-          <PhraseWord key={index} number={word.number} word={word.word} />
+          <TouchableOpacity
+            key={index}
+            onPress={() => onPress(word)}
+          >
+            <PhraseWord key={index} number={""} word={word} />
+          </TouchableOpacity>
         ))}
       </SeedPhrase>
       <Footer>
         <TouchableOpacity
-          onPress={() =>
-            navigation.navigate("TabNavigator", {
-              screen: "PortfolioScreen",
-            })
-          }
+          onPress={() => onNextScene()}
         >
           <Button>Done</Button>
         </TouchableOpacity>
@@ -87,53 +140,53 @@ const Button = styled.Text`
   margin: 25px auto 0 auto;
 `;
 
-const words = [
-  {
-    number: "1",
-    word: "broken",
-  },
-  {
-    number: "2",
-    word: "task",
-  },
-  {
-    number: "3",
-    word: "violin",
-  },
-  {
-    number: "4",
-    word: "steak",
-  },
-  {
-    number: "5",
-    word: "key",
-  },
-  {
-    number: "6",
-    word: "desert",
-  },
-  {
-    number: "7",
-    word: "follow",
-  },
-  {
-    number: "8",
-    word: "find",
-  },
-  {
-    number: "9",
-    word: "peace",
-  },
-  {
-    number: "10",
-    word: "awkward",
-  },
-  {
-    number: "11",
-    word: "tortoise",
-  },
-  {
-    number: "12",
-    word: "surprise",
-  },
-];
+// const words = [
+//   {
+//     number: "1",
+//     word: "broken",
+//   },
+//   {
+//     number: "2",
+//     word: "task",
+//   },
+//   {
+//     number: "3",
+//     word: "violin",
+//   },
+//   {
+//     number: "4",
+//     word: "steak",
+//   },
+//   {
+//     number: "5",
+//     word: "key",
+//   },
+//   {
+//     number: "6",
+//     word: "desert",
+//   },
+//   {
+//     number: "7",
+//     word: "follow",
+//   },
+//   {
+//     number: "8",
+//     word: "find",
+//   },
+//   {
+//     number: "9",
+//     word: "peace",
+//   },
+//   {
+//     number: "10",
+//     word: "awkward",
+//   },
+//   {
+//     number: "11",
+//     word: "tortoise",
+//   },
+//   {
+//     number: "12",
+//     word: "surprise",
+//   },
+// ];
