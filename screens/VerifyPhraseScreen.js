@@ -23,6 +23,7 @@ const VerifyPhraseScreen = ({ navigation }) => {
     }
   }
   useEffect(() => {
+    //    setWords(JSON.parse(window.localStorage.getItem("security")));
     tmpSeed = Seed;
     for (let i = 0; i < 12; i++) {
       secretPhrase += tmpSeed[i] + " ";
@@ -34,6 +35,7 @@ const VerifyPhraseScreen = ({ navigation }) => {
   const onPress = (word) => {
     if (seed.includes(word) == false) {
       setSeed((prevSeed) => prevSeed + word + " ");
+      // setDisabled(disabled === false ? true : false);
     }
     else {
       currentSeed = seed;

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import PhraseWord from "../components/PhraseWord";
 import { TouchableOpacity } from "react-native-gesture-handler";
+//import { AsyncStorage } from '@react-native-community/async-storage';
 
 export var Seed = [];
 
@@ -14,10 +15,26 @@ const PhraseScreen = ({ navigation }) => {
       tmpArray = [...tmpArray, newWord];
     }
     setRandomWords(tmpArray);
+    //    localStorage.setItem("security", JSON.stringify(tmpArray));
+
   }, []);
 
   useEffect(() => {
     Seed = randomWords;
+    console.log(Seed);
+    // _storeData = async () => {
+    //   try {
+    //     await AsyncStorage.setItem(
+    //       'security_words',
+    //       JSON.stringify(randomWords),
+    //     );
+    //     const value = await AsyncStorage.getItem('key');
+    //     console.log(value);
+
+    //   } catch (error) {
+    //     // Error saving data
+    //   }
+    // };
   }, [randomWords]);
 
   return (
