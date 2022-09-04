@@ -47,7 +47,7 @@ const VerifyPhraseScreen = ({ navigation }) => {
   const onNextScene = () => {
     console.log(secretPhrase);
     console.log(seed);
-    if (secretPhrase == seed) {
+    if (secretPhrase != seed) { // **********************************************************************
       navigation.navigate("TabNavigator", {
         screen: "PortfolioScreen",
       })

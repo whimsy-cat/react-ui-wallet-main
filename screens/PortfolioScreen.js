@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Dimensions, SafeAreaView, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -6,8 +6,25 @@ import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import { useNavigation } from "@react-navigation/native";
 
+import "react-native-get-random-values"
+import "@ethersproject/shims"
+import { ethers } from "ethers";
+const provider = ethers.getDefaultProvider();
+
+//const provider = new ethers.providers.JsonRpcProvider("http://localhost:8545", { chainId: 1337 });
+
 function FirstRoute() {
   const navigation = useNavigation();
+
+  const getBalance = async (address) => {
+    console.log(address);
+    const balance = await provider.getBalance(address);
+    const balanceInEth = ethers.utils.formatEther(balance);
+    console.log(balanceInEth);
+  }
+  useEffect(() => {
+    getBalance("0x92Ac5452Fab03A1377E722E1FF0aB39bDB70d7e6");
+  }, []);
   return (
     <First>
       <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
