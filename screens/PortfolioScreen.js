@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Dimensions, SafeAreaView, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -14,12 +14,14 @@ const provider = ethers.getDefaultProvider();
 //const provider = new ethers.providers.JsonRpcProvider("http://localhost:8545", { chainId: 1337 });
 
 function FirstRoute() {
+  const [ethBalance, setEthBalance] = useState("0.0");
   const navigation = useNavigation();
 
   const getBalance = async (address) => {
     console.log(address);
     const balance = await provider.getBalance(address);
     const balanceInEth = ethers.utils.formatEther(balance);
+    setEthBalance(balanceInEth);
     console.log(balanceInEth);
   }
   useEffect(() => {
@@ -56,7 +58,7 @@ function FirstRoute() {
             </TokenNamePrice>
           </TokenDetails>
           <TokenCol2>
-            <TokenAmount>0</TokenAmount>
+            <TokenAmount>{ethBalance}</TokenAmount>
             <TokenSymbol>ETH</TokenSymbol>
           </TokenCol2>
         </Token>
