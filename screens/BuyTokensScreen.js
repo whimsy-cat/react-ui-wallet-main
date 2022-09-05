@@ -1,125 +1,69 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import TokensContainer from "../components/TokensContainer";
 
 const BuyTokensScreen = ({ navigation }) => {
+  const [searchKeyWord, setSearchKeyWord] = React.useState("");
+
+  useEffect(() => {
+    console.log(searchKeyWord);
+  }, [searchKeyWord]);
   return (
     <Container>
       <Header>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name={"arrow-back"} color="#fff" size={28} />
         </TouchableOpacity>
-        <SearchBar placeholder="Search - Buy" placeholderTextColor="#CCDDEE" />
+        <SearchBar placeholder="Search - Buy" placeholderTextColor="#CCDDEE" value={searchKeyWord} onChangeText={setSearchKeyWord} />
       </Header>
       <Body>
-        <TokensContainer>
-          <TokenName>
-            <Image source={require("../assets/images/bitcoin.png")} />
-            <Token>
-              <Name>Bitcoin</Name>
-            </Token>
-          </TokenName>
-          <TokenCol2>
-            <TokenAmount>0</TokenAmount>
-            <TokenSymbol>BTC</TokenSymbol>
-          </TokenCol2>
+        <TokensContainer tokenImage={require("../assets/images/bitcoin.png")}
+          tokenName="Bitcoin"
+          tokenAmount="0"
+          tokenSymbol="BTC"
+        >
         </TokensContainer>
-        <TokensContainer>
-          <TokenName>
-            <Image source={require("../assets/images/ethereum.png")} />
-            <Token>
-              <Name>Ethereum</Name>
-            </Token>
-          </TokenName>
-          <TokenCol2>
-            <TokenAmount>0</TokenAmount>
-            <TokenSymbol>ETH</TokenSymbol>
-          </TokenCol2>
+        <TokensContainer tokenImage={require("../assets/images/ethereum.png")}
+          tokenName="Ethereum"
+          tokenAmount="0"
+          tokenSymbol="ETH">
         </TokensContainer>
-        <TokensContainer>
-          <TokenName>
-            <Image source={require("../assets/images/bnb2.png")} />
-            <Token>
-              <Name>BNB Beacon Chain</Name>
-            </Token>
-          </TokenName>
-          <TokenCol2>
-            <TokenAmount>0</TokenAmount>
-            <TokenSymbol>BNB</TokenSymbol>
-          </TokenCol2>
+        <TokensContainer tokenImage={require("../assets/images/bnb2.png")}
+          tokenName="BNB Beacon Chain"
+          tokenAmount="0"
+          tokenSymbol="BNB">
         </TokensContainer>
-        <TokensContainer>
-          <TokenName>
-            <Image source={require("../assets/images/bnb.png")} />
-            <Token>
-              <Name>BNB Smart Chain</Name>
-            </Token>
-          </TokenName>
-          <TokenCol2>
-            <TokenAmount>0</TokenAmount>
-            <TokenSymbol>BNB</TokenSymbol>
-          </TokenCol2>
+        <TokensContainer tokenImage={require("../assets/images/bnb.png")}
+          tokenName="BNB Smart Chain"
+          tokenAmount="0"
+          tokenSymbol="BNB">
         </TokensContainer>
-        <TokensContainer>
-          <TokenName>
-            <Image source={require("../assets/images/cardano.png")} />
-            <Token>
-              <Name>Cardano</Name>
-            </Token>
-          </TokenName>
-          <TokenCol2>
-            <TokenAmount>0</TokenAmount>
-            <TokenSymbol>ADA</TokenSymbol>
-          </TokenCol2>
+        <TokensContainer tokenImage={require("../assets/images/cardano.png")}
+          tokenName="Cardano"
+          tokenAmount="0"
+          tokenSymbol="ADA">
         </TokensContainer>
-        <TokensContainer>
-          <TokenName>
-            <Image source={require("../assets/images/xrp.png")} />
-            <Token>
-              <Name>XRP</Name>
-            </Token>
-          </TokenName>
-          <TokenCol2>
-            <TokenAmount>0</TokenAmount>
-            <TokenSymbol>XRP</TokenSymbol>
-          </TokenCol2>
+        <TokensContainer tokenImage={require("../assets/images/xrp.png")}
+          tokenName="XRP"
+          tokenAmount="0"
+          tokenSymbol="XRP">
         </TokensContainer>
-        <TokensContainer>
-          <TokenName>
-            <Image source={require("../assets/images/solana.png")} />
-            <Token>
-              <Name>Solana</Name>
-            </Token>
-          </TokenName>
-          <TokenCol2>
-            <TokenAmount>0</TokenAmount>
-            <TokenSymbol>SOL</TokenSymbol>
-          </TokenCol2>
+        <TokensContainer tokenImage={require("../assets/images/solana.png")}
+          tokenName="Solana"
+          tokenAmount="0"
+          tokenSymbol="SOL">
         </TokensContainer>
-        <TokensContainer>
-          <TokenName>
-            <Image source={require("../assets/images/doge.png")} />
-            <Token>
-              <Name>DogeCoin</Name>
-            </Token>
-          </TokenName>
-          <TokenCol2>
-            <TokenAmount>0</TokenAmount>
-            <TokenSymbol>DOGE</TokenSymbol>
-          </TokenCol2>
+        <TokensContainer tokenImage={require("../assets/images/doge.png")}
+          tokenName="DogeCoin"
+          tokenAmount="0"
+          tokenSymbol="DOGE">
         </TokensContainer>
-        <TokensContainer>
-          <TokenName>
-            <Image source={require("../assets/images/polkadot.png")} />
-            <Token>
-              <Name>Polkadot</Name>
-            </Token>
-          </TokenName>
-          <TokenCol2>
-            <TokenAmount>0</TokenAmount>
-            <TokenSymbol>DOT</TokenSymbol>
-          </TokenCol2>
+        <TokensContainer tokenImage={require("../assets/images/polkadot.png")}
+          tokenName="Polkadot"
+          tokenAmount="0"
+          tokenSymbol="DOT">
         </TokensContainer>
       </Body>
     </Container>
@@ -151,40 +95,4 @@ const SearchBar = styled.TextInput`
 `;
 const Body = styled.View`
   padding: 0 20px;
-`;
-const Token = styled.View`
-  flex-direction: row;
-  align-items: center;
-`;
-const TokensContainer = styled.View`
-  width: 109%;
-  padding-right: 30px;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom-width: 1px;
-  border-bottom-color: #eee;
-`;
-const TokenName = styled.View`
-  flex-direction: row;
-  padding: 20px 20px 20px 0;
-`;
-const Image = styled.Image`
-  width: 30px;
-  height: 30px;
-`;
-const Name = styled.Text`
-  font-size: 18px;
-  margin-left: 16px;
-`;
-const TokenAmount = styled.Text`
-  font-size: 18px;
-`;
-const TokenSymbol = styled.Text`
-  font-size: 18px;
-  margin-left: 5px;
-`;
-const TokenCol2 = styled.View`
-  flex-direction: row;
-  align-items: center;
 `;
