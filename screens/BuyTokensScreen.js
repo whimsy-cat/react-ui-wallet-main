@@ -10,6 +10,14 @@ const BuyTokensScreen = ({ navigation }) => {
   useEffect(() => {
     console.log(searchKeyWord);
   }, [searchKeyWord]);
+
+  const searchFilter = (text) => {
+    let lowerText = text.toLowerCase();
+    if (lowerText.includes(searchKeyWord)) {
+      return false;
+    }
+    return true;
+  }
   return (
     <Container>
       <Header>
@@ -23,47 +31,56 @@ const BuyTokensScreen = ({ navigation }) => {
           tokenName="Bitcoin"
           tokenAmount="0"
           tokenSymbol="BTC"
+          hide={searchFilter("BitcoinBTC")}
         >
         </TokensContainer>
         <TokensContainer tokenImage={require("../assets/images/ethereum.png")}
           tokenName="Ethereum"
           tokenAmount="0"
-          tokenSymbol="ETH">
+          tokenSymbol="ETH"
+          hide={searchFilter("Ethereum")}>
         </TokensContainer>
         <TokensContainer tokenImage={require("../assets/images/bnb2.png")}
           tokenName="BNB Beacon Chain"
           tokenAmount="0"
-          tokenSymbol="BNB">
+          tokenSymbol="BNB"
+          hide={searchFilter("BNBBeaconChainBNB")}>
         </TokensContainer>
         <TokensContainer tokenImage={require("../assets/images/bnb.png")}
           tokenName="BNB Smart Chain"
           tokenAmount="0"
-          tokenSymbol="BNB">
+          tokenSymbol="BNB"
+          hide={searchFilter("BNBSmartChainBNB")}>
         </TokensContainer>
         <TokensContainer tokenImage={require("../assets/images/cardano.png")}
           tokenName="Cardano"
           tokenAmount="0"
-          tokenSymbol="ADA">
+          tokenSymbol="ADA"
+          hide={searchFilter("CardanoADA")}>
         </TokensContainer>
         <TokensContainer tokenImage={require("../assets/images/xrp.png")}
           tokenName="XRP"
           tokenAmount="0"
-          tokenSymbol="XRP">
+          tokenSymbol="XRP"
+          hide={searchFilter("XRP")}>
         </TokensContainer>
         <TokensContainer tokenImage={require("../assets/images/solana.png")}
           tokenName="Solana"
           tokenAmount="0"
-          tokenSymbol="SOL">
+          tokenSymbol="SOL"
+          hide={searchFilter("SolanaSOL")}>
         </TokensContainer>
         <TokensContainer tokenImage={require("../assets/images/doge.png")}
           tokenName="DogeCoin"
           tokenAmount="0"
-          tokenSymbol="DOGE">
+          tokenSymbol="DOGE"
+          hide={searchFilter("DogeCoinDOGE")}>
         </TokensContainer>
         <TokensContainer tokenImage={require("../assets/images/polkadot.png")}
           tokenName="Polkadot"
           tokenAmount="0"
-          tokenSymbol="DOT">
+          tokenSymbol="DOT"
+          hide={searchFilter("PolkadotDot")}>
         </TokensContainer>
       </Body>
     </Container>

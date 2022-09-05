@@ -28,16 +28,6 @@ const TokensContainer = (props) => {
 
 export default TokensContainer;
 
-const tokenStyle = `
-  width: 109%;
-  padding-right: 30px;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom-width: 1px;
-  border-bottom-color: #eee;
-`;
-
 const Token = styled.View`
   flex-direction: row;
   align-items: center;
