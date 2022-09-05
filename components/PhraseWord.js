@@ -2,9 +2,10 @@ import * as React from "react";
 import styled from "styled-components";
 
 const PhraseWord = (props) => (
-  <Container>
+  <Container style={props.selected ? { backgroundColor: "#eee" } : { backgroundColor: "white" }}>
     <Number>{props.number}</Number>
-    <Word>{props.word}</Word>
+    <Word style={props.selected ? { color: "#555" } : { color: "black" }}>{props.word}</Word>
+    <Close>{props.close}</Close>
   </Container>
 );
 
@@ -26,4 +27,8 @@ const Number = styled.Text`
 `;
 const Word = styled.Text`
   margin-left: 5px;
+`;
+const Close = styled.Text`
+  margin-left: 5px;
+  color: #888;
 `;

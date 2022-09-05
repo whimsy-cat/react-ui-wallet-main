@@ -12,6 +12,7 @@ const VerifyPhraseScreen = ({ navigation }) => {
   const [seed, setSeed] = useState("");
   const [words, setWords] = useState([]);
   const [disabled, setDisabled] = useState(false);
+  const [selectedWords, setSelectedWords] = useState([]);
 
   const mixOrder = () => {
     let i1 = 0, i2 = 0, tmp;
@@ -22,28 +23,27 @@ const VerifyPhraseScreen = ({ navigation }) => {
       tmp = Seed[i1], Seed[i1] = Seed[i2], Seed[i2] = tmp;
     }
   }
-  useEffect(() => {
-    //    setWords(JSON.parse(window.localStorage.getItem("security")));
-    tmpSeed = Seed;
-    for (let i = 0; i < 12; i++) {
-      secretPhrase += tmpSeed[i] + " ";
-    }
-    mixOrder();
-    setWords(Seed);
-  }, [])
-
   const onPress = (word) => {
-    if (seed.includes(word) == false) {
+    if (selectedWords.includes(word) == false) {
       setSeed((prevSeed) => prevSeed + word + " ");
+
+      let tmpArray = selectedWords;
+      tmpArray = [...tmpArray, word];
+      setSelectedWords(tmpArray);
       // setDisabled(disabled === false ? true : false);
     }
     else {
-      currentSeed = seed;
-      currentSeed.replace(word, "");
-      setSeed(currentSeed);
+
     }
   }
 
+  const onRemove = (deletedIndex) => {
+    console.log("index : " + deletedIndex);
+    console.log("word : " + selectedWords[deletedIndex]);
+    const tmpArray = selectedWords.filter((word) => selectedWords.indexOf(word) !== deletedIndex)
+    console.log(tmpArray)
+    setSelectedWords(tmpArray);
+  }
   const onNextScene = () => {
     console.log(secretPhrase);
     console.log(seed);
@@ -56,6 +56,21 @@ const VerifyPhraseScreen = ({ navigation }) => {
       console.log("Error!");
     }
   }
+
+  useEffect(() => {
+    //    setWords(JSON.parse(window.localStorage.getItem("security")));
+    tmpSeed = Seed;
+    for (let i = 0; i < 12; i++) {
+      secretPhrase += tmpSeed[i] + " ";
+    }
+    mixOrder();
+    setWords(Seed);
+  }, [])
+
+  useEffect(() => {
+    console.log(selectedWords)
+  }, [selectedWords]);
+
   return (
     <Container>
       <Body>
@@ -65,7 +80,16 @@ const VerifyPhraseScreen = ({ navigation }) => {
         </SubHeader>
       </Body>
       <PhraseContainer>
-        <Text>{seed}</Text>
+        <SeedPhrase>
+          {selectedWords.map((word, index) => (
+            <TouchableOpacity
+              key={index}
+              onPress={() => onRemove(index)}
+            >
+              <PhraseWord key={index} number={""} word={word} close={"x"} />
+            </TouchableOpacity>
+          ))}
+        </SeedPhrase>
       </PhraseContainer>
       <SeedPhrase>
         {words.map((word, index) => (
@@ -73,7 +97,7 @@ const VerifyPhraseScreen = ({ navigation }) => {
             key={index}
             onPress={() => onPress(word)}
           >
-            <PhraseWord key={index} number={""} word={word} />
+            <PhraseWord key={index} number={""} word={word} close={""} selected={selectedWords.includes(word) ? true : false} />
           </TouchableOpacity>
         ))}
       </SeedPhrase>
