@@ -11,7 +11,9 @@ import "@ethersproject/shims"
 import { ethers } from "ethers";
 const provider = ethers.getDefaultProvider();
 
-//const provider = new ethers.providers.JsonRpcProvider("http://localhost:8545", { chainId: 1337 });
+
+//var url = 'HTTP://127.0.0.1:7545';
+//const provider = new ethers.providers.JsonRpcProvider(url, { chainId: 1337 });
 
 function FirstRoute() {
   const [ethBalance, setEthBalance] = useState("0.0");
@@ -25,7 +27,7 @@ function FirstRoute() {
     console.log(balanceInEth);
   }
   useEffect(() => {
-    getBalance("0x92Ac5452Fab03A1377E722E1FF0aB39bDB70d7e6");
+    getBalance("0x35fD12f4ED2Eb8678710063795A7a20d32541aa0"); // wallet address
   }, []);
   return (
     <First>
