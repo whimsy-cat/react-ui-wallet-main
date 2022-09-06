@@ -11,12 +11,13 @@ import "@ethersproject/shims"
 import { ethers } from "ethers";
 const provider = ethers.getDefaultProvider();
 
-
 //var url = 'HTTP://127.0.0.1:7545';
 //const provider = new ethers.providers.JsonRpcProvider(url, { chainId: 1337 });
 
 function FirstRoute() {
   const [ethBalance, setEthBalance] = useState("0.0");
+  const [ethCoins, setEthCoins] = useState([]);
+  const [bitCoins, setBitCoins] = useState([]);
   const navigation = useNavigation();
 
   const getBalance = async (address) => {
@@ -26,8 +27,23 @@ function FirstRoute() {
     setEthBalance(balanceInEth);
     console.log(balanceInEth);
   }
+  const loadData = async () => {
+    const res = await fetch(
+      "https://api.poloniex.com/markets/eth_usdt/price"
+    );
+    const data = await res.json();
+    setEthCoins(data);
+
+    const res1 = await fetch(
+      "https://api.poloniex.com/markets/btc_usdt/price"
+    );
+    const data1 = await res1.json();
+    setBitCoins(data1);
+  };
+
   useEffect(() => {
     getBalance("0x35fD12f4ED2Eb8678710063795A7a20d32541aa0"); // wallet address
+    loadData();
   }, []);
   return (
     <First>
@@ -38,8 +54,8 @@ function FirstRoute() {
             <TokenNamePrice>
               <TokenName>Bitcoin</TokenName>
               <TokenPriceAction>
-                <TokenPrice>$23,295.92</TokenPrice>
-                <TokenPercent>+1.97%</TokenPercent>
+                <TokenPrice>${bitCoins.price}</TokenPrice>
+                <TokenPercent>{bitCoins.dailyChange > 0 ? "+" : ""} {bitCoins.dailyChange} %</TokenPercent>
               </TokenPriceAction>
             </TokenNamePrice>
           </TokenDetails>
@@ -54,8 +70,8 @@ function FirstRoute() {
             <TokenNamePrice>
               <TokenName>Ethereum</TokenName>
               <TokenPriceAction>
-                <TokenPrice>$1,533.98</TokenPrice>
-                <TokenPercent>+4.58%</TokenPercent>
+                <TokenPrice>${ethCoins.price}</TokenPrice>
+                <TokenPercent>{ethCoins.dailyChange > 0 ? "+" : "-"} {ethCoins.dailyChange} %</TokenPercent>
               </TokenPriceAction>
             </TokenNamePrice>
           </TokenDetails>
