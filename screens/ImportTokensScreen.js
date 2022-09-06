@@ -1,109 +1,97 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Switch } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import TokensContainer from "../components/TokensContainer";
 
 const ImportTokensScreen = ({ navigation }) => {
+  const [searchKeyWord, setSearchKeyWord] = React.useState("");
+
+  useEffect(() => {
+    console.log(searchKeyWord);
+  }, [searchKeyWord]);
+
+  const searchFilter = (text) => {
+    let lowerText = text.toLowerCase();
+    if (lowerText.includes(searchKeyWord)) {
+      return false;
+    }
+    return true;
+  }
   return (
     <Container>
       <Header>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name={"arrow-back"} color="#fff" size={28} />
         </TouchableOpacity>
-        <SearchBar placeholder="Search tokens" placeholderTextColor="#CCDDEE" />
+        <SearchBar placeholder="Search tokens" placeholderTextColor="#CCDDEE" value={searchKeyWord} onChangeText={setSearchKeyWord} />
         <Ionicons name={"add"} color="#fff" size={28} />
       </Header>
       <Body>
-        <TokensContainer>
-          <TokenName>
-            <Image source={require("../assets/images/bitcoin.png")} />
-            <Token>
-              <Name>Bitcoin</Name>
-              <TokenSymbol>BTC</TokenSymbol>
-            </Token>
-          </TokenName>
-          <Switch />
+        <TokensContainer tokenImage={require("../assets/images/bitcoin.png")}
+          tokenName="Bitcoin"
+          tokenAmount=""
+          tokenSymbol="BTC"
+          hide={searchFilter("BitcoinBTC")}
+          isSwitch={true}
+        >
         </TokensContainer>
-        <TokensContainer>
-          <TokenName>
-            <Image source={require("../assets/images/ethereum.png")} />
-            <Token>
-              <Name>Ethereum</Name>
-              <TokenSymbol>ETH</TokenSymbol>
-            </Token>
-          </TokenName>
-          <Switch />
+        <TokensContainer tokenImage={require("../assets/images/ethereum.png")}
+          tokenName="Ethereum"
+          tokenAmount=""
+          tokenSymbol="ETH"
+          hide={searchFilter("Ethereum")}
+          isSwitch={true}>
         </TokensContainer>
-        <TokensContainer>
-          <TokenName>
-            <Image source={require("../assets/images/bnb2.png")} />
-            <Token>
-              <Name>BNB Beacon Chain</Name>
-              <TokenSymbol>BNB</TokenSymbol>
-            </Token>
-          </TokenName>
-          <Switch />
+        <TokensContainer tokenImage={require("../assets/images/bnb2.png")}
+          tokenName="BNB Beacon Chain"
+          tokenAmount=""
+          tokenSymbol="BNB"
+          hide={searchFilter("BNBBeaconChainBNB")}
+          isSwitch={true}>
         </TokensContainer>
-        <TokensContainer>
-          <TokenName>
-            <Image source={require("../assets/images/bnb.png")} />
-            <Token>
-              <Name>BNB Smart Chain</Name>
-              <TokenSymbol>BNB</TokenSymbol>
-            </Token>
-          </TokenName>
-          <Switch />
+        <TokensContainer tokenImage={require("../assets/images/bnb.png")}
+          tokenName="BNB Smart Chain"
+          tokenAmount=""
+          tokenSymbol="BNB"
+          hide={searchFilter("BNBSmartChainBNB")}
+          isSwitch={true}>
         </TokensContainer>
-        <TokensContainer>
-          <TokenName>
-            <Image source={require("../assets/images/cardano.png")} />
-            <Token>
-              <Name>Cardano</Name>
-              <TokenSymbol>ADA</TokenSymbol>
-            </Token>
-          </TokenName>
-          <Switch />
+        <TokensContainer tokenImage={require("../assets/images/cardano.png")}
+          tokenName="Cardano"
+          tokenAmount=""
+          tokenSymbol="ADA"
+          hide={searchFilter("CardanoADA")}
+          isSwitch={true}>
         </TokensContainer>
-        <TokensContainer>
-          <TokenName>
-            <Image source={require("../assets/images/xrp.png")} />
-            <Token>
-              <Name>XRP</Name>
-              <TokenSymbol>XRP</TokenSymbol>
-            </Token>
-          </TokenName>
-          <Switch />
+        <TokensContainer tokenImage={require("../assets/images/xrp.png")}
+          tokenName="XRP"
+          tokenAmount=""
+          tokenSymbol="XRP"
+          hide={searchFilter("XRP")}
+          isSwitch={true}>
         </TokensContainer>
-        <TokensContainer>
-          <TokenName>
-            <Image source={require("../assets/images/solana.png")} />
-            <Token>
-              <Name>Solana</Name>
-              <TokenSymbol>SOL</TokenSymbol>
-            </Token>
-          </TokenName>
-          <Switch />
+        <TokensContainer tokenImage={require("../assets/images/solana.png")}
+          tokenName="Solana"
+          tokenAmount=""
+          tokenSymbol="SOL"
+          hide={searchFilter("SolanaSOL")}
+          isSwitch={true}>
         </TokensContainer>
-        <TokensContainer>
-          <TokenName>
-            <Image source={require("../assets/images/doge.png")} />
-            <Token>
-              <Name>DogeCoin</Name>
-              <TokenSymbol>DOGE</TokenSymbol>
-            </Token>
-          </TokenName>
-          <Switch />
+        <TokensContainer tokenImage={require("../assets/images/doge.png")}
+          tokenName="DogeCoin"
+          tokenAmount=""
+          tokenSymbol="DOGE"
+          hide={searchFilter("DogeCoinDOGE")}
+          isSwitch={true}>
         </TokensContainer>
-        <TokensContainer>
-          <TokenName>
-            <Image source={require("../assets/images/polkadot.png")} />
-            <Token>
-              <Name>Polkadot</Name>
-              <TokenSymbol>DOT</TokenSymbol>
-            </Token>
-          </TokenName>
-          <Switch />
+        <TokensContainer tokenImage={require("../assets/images/polkadot.png")}
+          tokenName="Polkadot"
+          tokenAmount=""
+          tokenSymbol="DOT"
+          hide={searchFilter("PolkadotDot")}
+          isSwitch={true}>
         </TokensContainer>
       </Body>
     </Container>
@@ -135,34 +123,4 @@ const SearchBar = styled.TextInput`
 `;
 const Body = styled.View`
   padding: 0 20px;
-`;
-const Token = styled.View`
-  flex-direction: row;
-  align-items: center;
-`;
-const TokenSymbol = styled.Text`
-  margin-left: 10px;
-  color: #979797;
-  font-size: 16px;
-`;
-const TokensContainer = styled.View`
-  width: 109%;
-  padding-right: 20px;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom-width: 1px;
-  border-bottom-color: #eee;
-`;
-const TokenName = styled.View`
-  flex-direction: row;
-  padding: 20px 20px 20px 0;
-`;
-const Image = styled.Image`
-  width: 30px;
-  height: 30px;
-`;
-const Name = styled.Text`
-  font-size: 18px;
-  margin-left: 16px;
 `;

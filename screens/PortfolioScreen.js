@@ -55,7 +55,7 @@ function FirstRoute() {
               <TokenName>Bitcoin</TokenName>
               <TokenPriceAction>
                 <TokenPrice>${bitCoins.price}</TokenPrice>
-                <TokenPercent>{bitCoins.dailyChange > 0 ? "+" : ""} {bitCoins.dailyChange} %</TokenPercent>
+                <TokenPercent>{bitCoins.dailyChange > 0 ? "+" : ""}{bitCoins.dailyChange} %</TokenPercent>
               </TokenPriceAction>
             </TokenNamePrice>
           </TokenDetails>
@@ -71,7 +71,7 @@ function FirstRoute() {
               <TokenName>Ethereum</TokenName>
               <TokenPriceAction>
                 <TokenPrice>${ethCoins.price}</TokenPrice>
-                <TokenPercent>{ethCoins.dailyChange > 0 ? "+" : "-"} {ethCoins.dailyChange} %</TokenPercent>
+                <TokenPercent>{ethCoins.dailyChange > 0 ? "+" : "-"}{ethCoins.dailyChange} %</TokenPercent>
               </TokenPriceAction>
             </TokenNamePrice>
           </TokenDetails>
