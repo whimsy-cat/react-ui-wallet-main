@@ -6,11 +6,9 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import "react-native-get-random-values"
 import "@ethersproject/shims"
 import { ethers } from "ethers";
-const provider = ethers.getDefaultProvider("ropsten");
+// const provider = ethers.getDefaultProvider("ropsten");
 
 const contract_address = "";
-const send_token_amount = "1";
-const to_address = "0x0b486fe115a457138C6FF624F42d0671ceB02e5B";
 const send_address = "0x9381D7598F28fAbd2f94Aa9d01B4040C5F436197"
 const private_key = "69b2ce785561f97e2aa896e67f6f61e9c8442a9f11b3cbb476439219141db91f";
 const gas_limit = "0x100000";
@@ -18,35 +16,14 @@ const gas_limit = "0x100000";
 window.ethersProvider = new ethers.providers.InfuraProvider("ropsten")
 const SendTokenFormScreen = ({ navigation }) => {
   const [recipentAddress, setRecipentAddress] = React.useState(null);
-  const [amount, setAmount] = React.useState('0.0');
+  const [send_token_amount, setAmount] = React.useState('0.0');
   const sendToken = () => {
-    send_token(contract_address, send_token_amount, to_address, send_address, private_key);
-    // console.log("Sending to : " + recipentAddress + " with " + amount);
-    // let privateKey = '69b2ce785561f97e2aa896e67f6f61e9c8442a9f11b3cbb476439219141db91f' // ba777afd45b2b4db18f2ac061c0a7b556c77eddb3a67408cd91fc20ea2e97760
-    // // Create a wallet instance
-    // let wallet = new ethers.Wallet(privateKey, provider)
-    // // Receiver Address which receives Ether
-    // let receiverAddress = receiverAddress;
-    // // Ether amount to send
-    // let amountInEther = amount;
-    // // Create a transaction object
-    // let tx = {
-    //   to: receiverAddress,
-    //   // Convert currency unit from ether to wei
-    //   value: ethers.utils.parseEther(amountInEther)
-    // }
-    // // Send a transaction
-    // wallet.sendTransaction(tx)
-    //   .then((txObj) => {
-    //     console.log('txHash', txObj.hash)
-    //     // => 0x9c172314a693b94853b49dc057cf1cb8e529f29ce0272f451eea8f5741aa9b58
-    //     // A transaction result can be checked in a etherscan with a transaction hash which can be obtained here.
-    //   })
+    send_token(contract_address, send_token_amount, recipentAddress, send_address, private_key);
   }
   function send_token(
     contract_address,
     send_token_amount,
-    to_address,
+    recipentAddress,
     send_account,
     private_key
   ) {
@@ -72,7 +49,7 @@ const SendTokenFormScreen = ({ navigation }) => {
         console.log(`numberOfTokens: ${numberOfTokens}`)
 
         // Send tokens
-        contract.transfer(to_address, numberOfTokens).then((transferResult) => {
+        contract.transfer(recipentAddress, numberOfTokens).then((transferResult) => {
           console.dir(transferResult)
           alert("sent token")
         })
@@ -81,7 +58,7 @@ const SendTokenFormScreen = ({ navigation }) => {
         console.log('else');
         const tx = {
           from: send_account,
-          to: to_address,
+          to: recipentAddress,
           value: ethers.utils.parseEther(send_token_amount),
           nonce: window.ethersProvider.getTransactionCount(
             send_account,
@@ -121,7 +98,7 @@ const SendTokenFormScreen = ({ navigation }) => {
             </Paste>
           </Recipient>
           <AmountContainer>
-            <Amount placeholder="Amount BTC" value={amount} onChangeText={setAmount} />
+            <Amount placeholder="Amount BTC" value={send_token_amount} onChangeText={setAmount} />
             <MaxContainer>
               <Max>Max</Max>
               <TokenName>BTC</TokenName>
