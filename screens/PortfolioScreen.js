@@ -27,6 +27,15 @@ function FirstRoute() {
     setEthBalance(balanceInEth);
     console.log(balanceInEth);
   }
+  const getTestBalance = async (address) => {
+    console.log("getting test balance...")
+    const res = await fetch(
+      `https://api-ropsten.etherscan.io/api?module=account&action=balance&address=${address}&tag=latest&apikey=SZH2FUBGJY2J2F85MHRVMSCSVXC7W7E5ST`
+    );
+    console.log(res);
+    const data = await res.json();
+    console.log(data);
+  };
   const loadData = async () => {
     const res = await fetch(
       "https://api.poloniex.com/markets/eth_usdt/price"
@@ -43,6 +52,7 @@ function FirstRoute() {
 
   useEffect(() => {
     getBalance("0x35fD12f4ED2Eb8678710063795A7a20d32541aa0"); // wallet address
+    // getTestBalance("0x35fD12f4ED2Eb8678710063795A7a20d32541aa0");
     loadData();
   }, []);
   return (

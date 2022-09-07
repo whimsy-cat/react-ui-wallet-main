@@ -12,7 +12,6 @@ import {
 } from "react-native";
 
 const { width, height } = Dimensions.get("window");
-
 const COLORS = { primary: "#3275BB", white: "#fff" };
 
 const Slide = ({ item }) => {
