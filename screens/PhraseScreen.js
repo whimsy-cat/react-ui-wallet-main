@@ -2,26 +2,28 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import PhraseWord from "../components/PhraseWord";
 import { TouchableOpacity } from "react-native-gesture-handler";
-//import { AsyncStorage } from '@react-native-community/async-storage';
-
+import { wallet } from "./OnboardingScreen";
 export var Seed = [];
+
 
 const PhraseScreen = ({ navigation }) => {
   const [randomWords, setRandomWords] = useState([]);
   useEffect(() => {
-    let tmpArray = [];
-    for (let i = 0; i < 12; i++) {
-      const newWord = EnWords[Math.floor(Math.random() * EnWords.length)];
-      tmpArray = [...tmpArray, newWord];
-    }
-    setRandomWords(tmpArray);
+    let mnemonicTmp = [];
+    mnemonicTmp = wallet.mnemonic.phrase.split(" ");
+    // let tmpArray = [];
+    // for (let i = 0; i < 12; i++) {
+    //   const newWord = EnWords[Math.floor(Math.random() * EnWords.length)];
+    //   tmpArray = [...tmpArray, newWord];
+    // }
+    setRandomWords(mnemonicTmp);
     //    localStorage.setItem("security", JSON.stringify(tmpArray));
 
   }, []);
 
   useEffect(() => {
     Seed = randomWords;
-    console.log(Seed);
+    //    console.log(Seed);
     // _storeData = async () => {
     //   try {
     //     await AsyncStorage.setItem(

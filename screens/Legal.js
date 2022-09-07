@@ -4,6 +4,7 @@ import { CheckBox } from "react-native-elements";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
+
 const LegalScreen = ({ navigation }) => {
   return (
     <Container>

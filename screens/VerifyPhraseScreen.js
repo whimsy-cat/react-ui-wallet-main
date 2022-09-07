@@ -38,15 +38,10 @@ const VerifyPhraseScreen = ({ navigation }) => {
   }
 
   const onRemove = (deletedIndex) => {
-    console.log("index : " + deletedIndex);
-    console.log("word : " + selectedWords[deletedIndex]);
     const tmpArray = selectedWords.filter((word) => selectedWords.indexOf(word) !== deletedIndex)
-    console.log(tmpArray)
     setSelectedWords(tmpArray);
   }
   const onNextScene = () => {
-    console.log(secretPhrase);
-    console.log(seed);
     if (secretPhrase != seed) { // ********************************************************************** I have to change this like '=='
       navigation.navigate("TabNavigator", {
         screen: "PortfolioScreen",
@@ -68,7 +63,6 @@ const VerifyPhraseScreen = ({ navigation }) => {
   }, [])
 
   useEffect(() => {
-    console.log(selectedWords)
   }, [selectedWords]);
 
   return (
