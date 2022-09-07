@@ -41,7 +41,6 @@ function FirstRoute() {
   const navigation = useNavigation();
 
   const getBalance = (address) => {
-    console.log(address);
     // const balance = await provider.getBalance(address);
     // const balanceInEth = ethers.utils.formatEther(balance);
     // setEthBalance(balanceInEth);
@@ -75,7 +74,7 @@ function FirstRoute() {
   };
 
   useEffect(() => {
-    getBalance("0x9381D7598F28fAbd2f94Aa9d01B4040C5F436197"); // wallet address
+    getBalance("0x9381D7598F28fAbd2f94Aa9d01B4040C5F436197"); // wallet.address
     // getTestBalance("0x9381D7598F28fAbd2f94Aa9d01B4040C5F436197");
     loadData();
   }, []);

@@ -3,7 +3,10 @@ import { Ionicons } from "@expo/vector-icons";
 import { CheckBox } from "react-native-elements";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { wallet } from "./OnboardingScreen";
 
+const qrUrl = `https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=${wallet.address}`;
+console.log(qrUrl);
 const RecieveTokenScreen = ({ navigation }) => {
   return (
     <Container>
@@ -15,9 +18,9 @@ const RecieveTokenScreen = ({ navigation }) => {
       </Header>
       <Body>
         <QRContainer elevation={1}>
-          <Image source={require("../assets/images/QR.png")} />
+          <Image source={{ uri: qrUrl }} />
           <WalletAddress>
-            0xBA31440510794D3c0edFfc4badcde62960C55241
+            {wallet.address}
           </WalletAddress>
         </QRContainer>
         <WarningText>
@@ -40,6 +43,7 @@ const RecieveTokenScreen = ({ navigation }) => {
               }}
             />
             <ActionText>Copy</ActionText>
+
           </Action>
           <Action>
             <Ionicons
