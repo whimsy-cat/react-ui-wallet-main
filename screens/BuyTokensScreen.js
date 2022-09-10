@@ -3,6 +3,8 @@ import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import TokensContainer from "../components/TokensContainer";
+import { useNavigation } from "@react-navigation/native";
+
 
 const BuyTokensScreen = ({ navigation }) => {
   const [searchKeyWord, setSearchKeyWord] = React.useState("");
@@ -27,21 +29,25 @@ const BuyTokensScreen = ({ navigation }) => {
         <SearchBar placeholder="Search - Buy" placeholderTextColor="#CCDDEE" value={searchKeyWord} onChangeText={setSearchKeyWord} />
       </Header>
       <Body>
-        <TokensContainer tokenImage={require("../assets/images/bitcoin.png")}
-          tokenName="Bitcoin"
-          tokenAmount="0"
-          tokenSymbol="BTC"
-          hide={searchFilter("BitcoinBTC")}
-          isSwitch={false}
-        >
-        </TokensContainer>
-        <TokensContainer tokenImage={require("../assets/images/ethereum.png")}
-          tokenName="Ethereum"
-          tokenAmount="0"
-          tokenSymbol="ETH"
-          hide={searchFilter("Ethereum")}
-          isSwitch={false}>
-        </TokensContainer>
+        <TouchableOpacity onPress={() => navigation.navigate("BuyTokenDetail")}>
+          <TokensContainer tokenImage={require("../assets/images/bitcoin.png")}
+            tokenName="Bitcoin"
+            tokenAmount="0"
+            tokenSymbol="BTC"
+            hide={searchFilter("BitcoinBTC")}
+            isSwitch={false}
+          >
+          </TokensContainer>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("BuyTokenDetail")}>
+          <TokensContainer tokenImage={require("../assets/images/ethereum.png")}
+            tokenName="Ethereum"
+            tokenAmount="0"
+            tokenSymbol="ETH"
+            hide={searchFilter("Ethereum")}
+            isSwitch={false}>
+          </TokensContainer>
+        </TouchableOpacity>
         <TokensContainer tokenImage={require("../assets/images/bnb2.png")}
           tokenName="BNB Beacon Chain"
           tokenAmount="0"

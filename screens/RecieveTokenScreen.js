@@ -28,23 +28,25 @@ const RecieveTokenScreen = ({ navigation }) => {
           result in permanent loss.
         </WarningText>
         <Actions>
-          <Action>
-            <Ionicons
-              name="copy-outline"
-              color="#fff"
-              size={20}
-              style={{
-                backgroundColor: "#3275bb",
-                width: 50,
-                height: 50,
-                borderRadius: 25,
-                textAlign: "center",
-                padding: 15,
-              }}
-            />
-            <ActionText>Copy</ActionText>
-
-          </Action>
+          <TouchableOpacity
+          >
+            <Action>
+              <Ionicons
+                name="copy-outline"
+                color="#fff"
+                size={20}
+                style={{
+                  backgroundColor: "#3275bb",
+                  width: 50,
+                  height: 50,
+                  borderRadius: 25,
+                  textAlign: "center",
+                  padding: 15,
+                }}
+              />
+              <ActionText>Copy</ActionText>
+            </Action>
+          </TouchableOpacity>
           <Action>
             <Ionicons
               name="pricetag-outline"

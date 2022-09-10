@@ -12,6 +12,8 @@ import SettingsScreen from "../screens/SettingsScreen";
 import ImportTokensScreen from "../screens/ImportTokensScreen";
 import AddCustomTokenScreen from "../screens/AddCustomTokenScreen";
 import BuyTokensScreen from "../screens/BuyTokensScreen";
+import BuyTokenDetail from "../screens/BuyTokenDetail";
+import TokenDetailScreen from "../screens/TokenDetailScreen"
 import RecieveTokenScreen from "../screens/RecieveTokenScreen";
 import SearchRecieveTokensScreen from "../screens/SearchRecieveTokensScreen";
 import SwapScreen from "../screens/SwapScreen";
@@ -52,21 +54,14 @@ const PortfolioStackNavigator = () => {
         options={{ headerLeft: (props) => null }}
       />
       <Stack.Screen name="ImportTokensScreen" component={ImportTokensScreen} />
-      <Stack.Screen
-        name="AddCustomTokenScreen"
-        component={AddCustomTokenScreen}
-      />
+      <Stack.Screen name="AddCustomTokenScreen" component={AddCustomTokenScreen} />
       <Stack.Screen name="BuyTokensScreen" component={BuyTokensScreen} />
+      <Stack.Screen name="BuyTokenDetail" component={BuyTokenDetail} />
       <Stack.Screen name="RecieveTokenScreen" component={RecieveTokenScreen} />
-      <Stack.Screen
-        name="SearchRecieveTokensScreen"
-        component={SearchRecieveTokensScreen}
-      />
+      <Stack.Screen name="SearchRecieveTokensScreen" component={SearchRecieveTokensScreen} />
       <Stack.Screen name="SwapScreen" component={SwapScreen} />
-      <Stack.Screen
-        name="SendTokenFormScreen"
-        component={SendTokenFormScreen}
-      />
+      <Stack.Screen name="TokenDetailScreen" component={TokenDetailScreen} />
+      <Stack.Screen name="SendTokenFormScreen" component={SendTokenFormScreen} />
     </Stack.Navigator>
   );
 };
@@ -108,14 +103,8 @@ const SettingsStackNavigator = () => {
       <Stack.Screen name="WalletsScreen" component={WalletsScreen} />
       <Stack.Screen name="WalletEditScreen" component={WalletEditScreen} />
       <Stack.Screen name="PreferencesScreen" component={PreferencesScreen} />
-      <Stack.Screen
-        name="WalletConnectScreen"
-        component={WalletConnectScreen}
-      />
-      <Stack.Screen
-        name="PushNotificationsScreen"
-        component={PushNotificationsScreen}
-      />
+      <Stack.Screen name="WalletConnectScreen" component={WalletConnectScreen} />
+      <Stack.Screen name="PushNotificationsScreen" component={PushNotificationsScreen} />
     </Stack.Navigator>
   );
 };

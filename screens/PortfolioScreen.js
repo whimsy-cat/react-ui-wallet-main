@@ -81,22 +81,26 @@ function FirstRoute() {
   return (
     <First>
       <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
-        <Token>
-          <TokenDetails>
-            <Image source={require("../assets/images/bitcoin.png")} />
-            <TokenNamePrice>
-              <TokenName>Bitcoin</TokenName>
-              <TokenPriceAction>
-                <TokenPrice>${bitCoins.price}</TokenPrice>
-                <TokenPercent>{bitCoins.dailyChange > 0 ? "+" : ""}{bitCoins.dailyChange} %</TokenPercent>
-              </TokenPriceAction>
-            </TokenNamePrice>
-          </TokenDetails>
-          <TokenCol2>
-            <TokenAmount>0</TokenAmount>
-            <TokenSymbol>BTC</TokenSymbol>
-          </TokenCol2>
-        </Token>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("TokenDetailScreen")}
+        >
+          <Token>
+            <TokenDetails>
+              <Image source={require("../assets/images/bitcoin.png")} />
+              <TokenNamePrice>
+                <TokenName>Bitcoin</TokenName>
+                <TokenPriceAction>
+                  <TokenPrice>${bitCoins.price}</TokenPrice>
+                  <TokenPercent>{bitCoins.dailyChange > 0 ? "+" : ""}{bitCoins.dailyChange} %</TokenPercent>
+                </TokenPriceAction>
+              </TokenNamePrice>
+            </TokenDetails>
+            <TokenCol2>
+              <TokenAmount>0</TokenAmount>
+              <TokenSymbol>BTC</TokenSymbol>
+            </TokenCol2>
+          </Token>
+        </TouchableOpacity>
         <Token>
           <TokenDetails>
             <Image source={require("../assets/images/ethereum.png")} />

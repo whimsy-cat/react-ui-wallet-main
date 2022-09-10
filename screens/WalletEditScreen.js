@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { Switch } from "react-native";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { wallet } from "./OnboardingScreen";
 
 const WalletEditScreen = ({ navigation }) => {
+  const [secretPhrase, setSecretPhrase] = React.useState("");
+  const onShowSecretPhrase = () => {
+    setSecretPhrase(wallet.mnemonic.phrase);
+  }
   return (
     <Container>
       <Header>
@@ -17,9 +22,9 @@ const WalletEditScreen = ({ navigation }) => {
         <Ionicons name={"trash"} color="#fff" size={28} />
       </Header>
       <Body>
-        <WalletNameInput placeholder="Multi-Coin Wallet 1" />
+        <WalletNameInput placeholder="Multi-Coin Wallet 1" value={secretPhrase} />
         <TouchableOpacity
-          onPress={() => navigation.navigate("WalletEditScreen")}
+          onPress={() => onShowSecretPhrase()}
         >
           <Row>
             <SecretPhrase>
