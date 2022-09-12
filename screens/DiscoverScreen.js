@@ -11,7 +11,7 @@ const DiscoverScreen = () => {
             <SeeAll>See All</SeeAll>
           </DiscoveryHead>
           <StakingTokenInfo>
-            <Image source={require("../assets/images/bitcoin.png")} />
+            <Image source={require("../assets/images/btc.png")} />
             <TokenDetails>
               <StakingTokenName>Solana (SOL)</StakingTokenName>
               <APR>
@@ -21,7 +21,7 @@ const DiscoverScreen = () => {
             </TokenDetails>
           </StakingTokenInfo>
           <StakingTokenInfo>
-            <Image source={require("../assets/images/bitcoin.png")} />
+            <Image source={require("../assets/images/btc.png")} />
             <TokenDetails>
               <StakingTokenName>Osmosis (OSMO)</StakingTokenName>
               <APR>
@@ -31,7 +31,7 @@ const DiscoverScreen = () => {
             </TokenDetails>
           </StakingTokenInfo>
           <StakingTokenInfo>
-            <Image source={require("../assets/images/bitcoin.png")} />
+            <Image source={require("../assets/images/btc.png")} />
             <TokenDetails>
               <StakingTokenName>Kava (KAVA)</StakingTokenName>
               <APR>
@@ -48,7 +48,7 @@ const DiscoverScreen = () => {
           </DiscoveryHead>
           <DefiTokenInfo>
             <Col1>
-              <Image source={require("../assets/images/bitcoin.png")} />
+              <Image source={require("../assets/images/btc.png")} />
               <TokenName>Solana (SOL)</TokenName>
             </Col1>
             <Col2>
@@ -58,7 +58,7 @@ const DiscoverScreen = () => {
           </DefiTokenInfo>
           <DefiTokenInfo>
             <Col1>
-              <Image source={require("../assets/images/bitcoin.png")} />
+              <Image source={require("../assets/images/btc.png")} />
               <TokenName>dYdX (DYDX)</TokenName>
             </Col1>
             <Col2>
@@ -68,7 +68,7 @@ const DiscoverScreen = () => {
           </DefiTokenInfo>
           <DefiTokenInfo>
             <Col1>
-              <Image source={require("../assets/images/bitcoin.png")} />
+              <Image source={require("../assets/images/btc.png")} />
               <TokenName>Synthetix (SNX)</TokenName>
             </Col1>
             <Col2>

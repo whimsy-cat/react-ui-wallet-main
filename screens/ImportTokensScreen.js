@@ -29,7 +29,7 @@ const ImportTokensScreen = ({ navigation }) => {
         <Ionicons name={"add"} color="#fff" size={28} />
       </Header>
       <Body>
-        <TokensContainer tokenImage={require("../assets/images/bitcoin.png")}
+        <TokensContainer tokenImage={require("../assets/images/btc.png")}
           tokenName="Bitcoin"
           tokenAmount=""
           tokenSymbol="BTC"
@@ -37,7 +37,7 @@ const ImportTokensScreen = ({ navigation }) => {
           isSwitch={true}
         >
         </TokensContainer>
-        <TokensContainer tokenImage={require("../assets/images/ethereum.png")}
+        <TokensContainer tokenImage={require("../assets/images/eth.png")}
           tokenName="Ethereum"
           tokenAmount=""
           tokenSymbol="ETH"

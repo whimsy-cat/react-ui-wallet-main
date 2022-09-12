@@ -3,23 +3,66 @@ import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import NumericInput from 'react-native-numeric-input'
+import { Linking } from 'react-native';
+import { selectedBuyToken } from "./BuyTokensScreen";
 
 const BuyTokenDetail = ({ navigation }) => {
   const [buyAmount, setBuyAmount] = React.useState(100);
+  const handleCoinBaseClick = () => {
+    console.log("opening...");
+    Linking.canOpenURL("https://pay.coinbase.com/buy/select-asset?appId=ab4b8829-a59d-44d3-accc-de77e4f18df2&attribution=extension&destinationWallets=%5B%7B%22address%22%3A%220x9381d7598f28fabd2f94aa9d01b4040c5f436197%22%2C%22assets%22%3A%5B%22ETH%22%2C%22USDC%22%2C%22DAI%22%5D%7D%5D").then(supported => {
+      if (supported) {
+        Linking.openURL("https://pay.coinbase.com/buy/select-asset?appId=ab4b8829-a59d-44d3-accc-de77e4f18df2&attribution=extension&destinationWallets=%5B%7B%22address%22%3A%220x9381d7598f28fabd2f94aa9d01b4040c5f436197%22%2C%22assets%22%3A%5B%22ETH%22%2C%22USDC%22%2C%22DAI%22%5D%7D%5D");
+      } else {
+        console.log("Don't know how to open URI: " + "https://pay.coinbase.com/buy/select-asset?appId=ab4b8829-a59d-44d3-accc-de77e4f18df2&attribution=extension&destinationWallets=%5B%7B%22address%22%3A%220x9381d7598f28fabd2f94aa9d01b4040c5f436197%22%2C%22assets%22%3A%5B%22ETH%22%2C%22USDC%22%2C%22DAI%22%5D%7D%5D");
+      }
+    });
+  };
+  const handleTransakClick = () => {
+    console.log("opening...");
+    Linking.canOpenURL("https://global.transak.com/?apiKey=25ac1309-a49b-4411-b20e-5e56c61a5b1c&hostURL=https%3A%2F%2Fmetamask.io&cryptoCurrencyList=ETH%2CUSDT%2CUSDC%2CDAI&defaultCryptoCurrency=ETH&networks=ethereum&walletAddress=0x9381d7598f28fabd2f94aa9d01b4040c5f436197").then(supported => {
+      if (supported) {
+        Linking.openURL("https://global.transak.com/?apiKey=25ac1309-a49b-4411-b20e-5e56c61a5b1c&hostURL=https%3A%2F%2Fmetamask.io&cryptoCurrencyList=ETH%2CUSDT%2CUSDC%2CDAI&defaultCryptoCurrency=ETH&networks=ethereum&walletAddress=0x9381d7598f28fabd2f94aa9d01b4040c5f436197");
+      } else {
+        console.log("Don't know how to open URI: " + "https://global.transak.com/?apiKey=25ac1309-a49b-4411-b20e-5e56c61a5b1c&hostURL=https%3A%2F%2Fmetamask.io&cryptoCurrencyList=ETH%2CUSDT%2CUSDC%2CDAI&defaultCryptoCurrency=ETH&networks=ethereum&walletAddress=0x9381d7598f28fabd2f94aa9d01b4040c5f436197");
+      }
+    });
+  };
+  const handleMoonPayClick = () => {
+    console.log("opening...");
+    Linking.canOpenURL("https://pay.sendwyre.com/purchase?accountId=AC-7AG3W4XH4N2&utm_campaign=AC-7AG3W4XH4N2&destCurrency=ETH&utm_medium=widget&paymentMethod=debit-card&reservation=3JF2YNPNBDALQX2UVR27&autoRedirect=false&dest=ethereum%3A0x9381d7598f28fabd2f94aa9d01b4040c5f436197&utm_source=checkout").then(supported => {
+      if (supported) {
+        Linking.openURL("https://pay.sendwyre.com/purchase?accountId=AC-7AG3W4XH4N2&utm_campaign=AC-7AG3W4XH4N2&destCurrency=ETH&utm_medium=widget&paymentMethod=debit-card&reservation=3JF2YNPNBDALQX2UVR27&autoRedirect=false&dest=ethereum%3A0x9381d7598f28fabd2f94aa9d01b4040c5f436197&utm_source=checkout");
+      } else {
+        console.log("Don't know how to open URI: " + "https://pay.sendwyre.com/purchase?accountId=AC-7AG3W4XH4N2&utm_campaign=AC-7AG3W4XH4N2&destCurrency=ETH&utm_medium=widget&paymentMethod=debit-card&reservation=3JF2YNPNBDALQX2UVR27&autoRedirect=false&dest=ethereum%3A0x9381d7598f28fabd2f94aa9d01b4040c5f436197&utm_source=checkout");
+      }
+    });
+  };
+  const handleWireClick = () => {
+    console.log("opening...");
+    Linking.canOpenURL("https://pay.sendwyre.com/purchase?accountId=AC-7AG3W4XH4N2&utm_campaign=AC-7AG3W4XH4N2&destCurrency=ETH&utm_medium=widget&paymentMethod=debit-card&reservation=EAXZNRULNJRMYZZVM2EZ&autoRedirect=false&dest=ethereum%3A0x9381d7598f28fabd2f94aa9d01b4040c5f436197&utm_source=checkout").then(supported => {
+      if (supported) {
+        Linking.openURL("https://pay.sendwyre.com/purchase?accountId=AC-7AG3W4XH4N2&utm_campaign=AC-7AG3W4XH4N2&destCurrency=ETH&utm_medium=widget&paymentMethod=debit-card&reservation=EAXZNRULNJRMYZZVM2EZ&autoRedirect=false&dest=ethereum%3A0x9381d7598f28fabd2f94aa9d01b4040c5f436197&utm_source=checkout");
+      } else {
+        console.log("Don't know how to open URI: " + "https://pay.sendwyre.com/purchase?accountId=AC-7AG3W4XH4N2&utm_campaign=AC-7AG3W4XH4N2&destCurrency=ETH&utm_medium=widget&paymentMethod=debit-card&reservation=EAXZNRULNJRMYZZVM2EZ&autoRedirect=false&dest=ethereum%3A0x9381d7598f28fabd2f94aa9d01b4040c5f436197&utm_source=checkout");
+      }
+    });
+  };
   return (
+
     <Container>
       <Header>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name={"arrow-back"} color="#fff" size={28} />
         </TouchableOpacity>
-        <HeaderText>Buy BTC</HeaderText>
+        <HeaderText> Buy {selectedBuyToken.toUpperCase()}</HeaderText>
       </Header>
       <Body>
         <Token>
           <TokenDetails>
-            <Image source={require("../assets/images/ethereum.png")} />
+            <Image source={require("../assets/images/eth.png")} />
             <TokenNamePrice>
-              <TokenName>Ethereum</TokenName>
+              <TokenName>{selectedBuyToken}</TokenName>
               <TokenPriceAction>
                 <TokenPrice>$1597</TokenPrice>
                 <TokenPercent>+0.0997 %</TokenPercent>
@@ -28,35 +71,22 @@ const BuyTokenDetail = ({ navigation }) => {
           </TokenDetails>
           <TokenCol2>
             <TokenAmount>0</TokenAmount>
-            <TokenSymbol>ETH</TokenSymbol>
+            <TokenSymbol>{selectedBuyToken}</TokenSymbol>
           </TokenCol2>
         </Token>
-        <SText>
-          $<NumericInput
-            type='up-down'
-            value={buyAmount}
-            onChange={value => setBuyAmount(value)} totalWidth={240}
-            totalHeight={50}
-            step={1}
-            valueType='real'
-            rounded
-            textColor='#333333'
-            iconStyle={{ color: 'black' }}
-            rightButtonBackgroundColor='#EA3788'
-            leftButtonBackgroundColor='#E56B70'
-            borderColor="#ffffff"
-          />
-        </SText>
-        <CryptoInfo>
-          0.061295343 ETH
-        </CryptoInfo>
-
-        <TouchableOpacity>
-          <PaymentButton>  Add Payment Method </PaymentButton>
+        <CoinbaseImage source={require("../assets/images/coinbase.png")}></CoinbaseImage>
+        <TouchableOpacity onPress={() => handleCoinBaseClick()}>
+          <Button>  Continue to CoinBase Pay </Button>
         </TouchableOpacity>
-        <TouchableOpacity
-        >
-          <Button>Next</Button>
+        <Transak source={require("../assets/images/transak.png")}></Transak>
+        <TouchableOpacity onPress={() => handleTransakClick()}>
+          <Button>  Continue to Transak  </Button>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => handleMoonPayClick()}>
+          <Button>  Continue to MoonPay  </Button>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => handleWireClick()}>
+          <Button>  Continue to Wire  </Button>
         </TouchableOpacity>
       </Body>
     </Container>
@@ -65,6 +95,40 @@ const BuyTokenDetail = ({ navigation }) => {
 
 export default BuyTokenDetail;
 
+const CoinbaseImage = styled.Image`
+  width: 350px;
+  height: 150px;
+`;
+const Transak = styled.Image`
+  width: 370px;
+  height: 220px;
+`;
+const CoinBaseInfo = styled.Text`
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size:30px;
+`;
+const CoinBaseHeder = styled.Text`
+  margin: auto;
+`;
+const CoinBase = styled.Text`
+  font-size: 40px;
+  font-weight:bold;
+  color : #3355cc;
+`;
+const CoinBaseRow = styled.View`
+  width: 50%;
+  margin: auto;
+`
+const CoinBaseDetail = styled.Text`
+  font-size: 20px;
+  color: #989898;
+`;
+const CoinBaseSmallDetail = styled.Text`
+  font-size: 15px;
+  color: #989898;
+`;
 const Container = styled.View`
   flex: 1;
   background: #fff;

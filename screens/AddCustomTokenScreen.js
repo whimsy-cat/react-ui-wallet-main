@@ -3,7 +3,23 @@ import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
+export var myCustomContractAdrress = "";
+export var myCustomTokenName = "";
+export var myCustomSymbol = "";
+export var myCustomDecimals = "";
 const AddCustomTokenScreen = ({ navigation }) => {
+  const [customContractAddress, setCustomContractAddress] = React.useState("");
+  const [customTokenName, setCustomTokenName] = React.useState("");
+  const [customSymbol, setCustomSymbol] = React.useState("");
+  const [customDecimals, setCustomDecimals] = React.useState("");
+
+  const onAddDone = () => {
+    myCustomContractAdrress = customContractAddress;
+    myCustomTokenName = customTokenName;
+    myCustomSymbol = customSymbol;
+    myCustomDecimals = customDecimals;
+    navigation.navigate("PortfolioScreen")
+  }
   return (
     <Container>
       <Header>
@@ -11,7 +27,10 @@ const AddCustomTokenScreen = ({ navigation }) => {
           <Ionicons name={"arrow-back"} color="#3275bb" size={28} />
         </TouchableOpacity>
         <HeaderText>Add Custom Token</HeaderText>
-        <Done>Done</Done>
+
+        <TouchableOpacity onPress={() => onAddDone()}>
+          <Done>Done</Done>
+        </TouchableOpacity>
       </Header>
       <Body>
         <TokenInfoContainer>
@@ -23,15 +42,15 @@ const AddCustomTokenScreen = ({ navigation }) => {
             </Token>
           </TokenNetwork>
           <CA>
-            <CAInput placeholder="Contract Address" />
+            <CAInput placeholder="Contract Address" value={customContractAddress} onChangeText={(value) => setCustomContractAddress(value)} />
             <Paste>
               <PasteText>Paste</PasteText>
               <Ionicons name={"clipboard-outline"} color="#3275bb" size={24} />
             </Paste>
           </CA>
-          <Name placeholder="Name" />
-          <Symbol placeholder="Symbol" />
-          <Decimals placeholder="Decimals" />
+          <Name placeholder="Name" value={customTokenName} onChangeText={(value) => setCustomTokenName(value)} />
+          <Symbol placeholder="Symbol" value={customSymbol} onChangeText={(value) => setCustomSymbol(value)} />
+          <Decimals placeholder="Decimals" value={customDecimals} onChangeText={(value) => setCustomDecimals(value)} />
         </TokenInfoContainer>
         <Warning>
           <Ionicons name={"warning-outline"} color="#c87527" size={24} />
@@ -47,6 +66,7 @@ const AddCustomTokenScreen = ({ navigation }) => {
 };
 
 export default AddCustomTokenScreen;
+
 
 const Container = styled.View`
   flex: 1;

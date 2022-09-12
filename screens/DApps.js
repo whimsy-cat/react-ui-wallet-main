@@ -100,7 +100,7 @@ const SeeAll = styled.Text`
 
 const cards = [
   {
-    image: require("../assets/images/ethereum.png"),
+    image: require("../assets/images/eth.png"),
     head: "WazirX  NFT",
     body: "Create & Collect Timeless NFTs. NFT Marketplace Made Simpler.",
   },
@@ -110,7 +110,7 @@ const cards = [
     body: "Create & Collect Timeless NFTs. NFT Marketplace Made Simpler.",
   },
   {
-    image: require("../assets/images/bitcoin.png"),
+    image: require("../assets/images/btc.png"),
     head: "WazirX  NFT",
     body: "Create & Collect Timeless NFTs. NFT Marketplace Made Simpler.",
   },

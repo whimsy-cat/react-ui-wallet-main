@@ -13,12 +13,13 @@ import {
 import {
   View,
   Text,
+  Switch,
   Dimensions,
 } from "react-native";
+import { Description } from "@ethersproject/properties";
 const TokenDetailScreen = ({ navigation }) => {
   return (
     <Container>
-
       <Header>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name={"arrow-back"} color="#fff" size={28} />
@@ -56,7 +57,7 @@ const TokenDetailScreen = ({ navigation }) => {
                 backgroundGradientFrom: "#ffffff",
                 backgroundGradientTo: "#ffffff",
                 decimalPlaces: 2, // optional, defaults to 2dp
-                color: (opacity = 1) => `rgba(30, 200, 200, ${opacity})`,
+                color: (opacity = 1) => `rgba(129, 201, 149, ${opacity})`,
                 labelColor: (opacity = 1) => `rgba(30, 30, 30, ${opacity})`,
                 style: {
                   borderRadius: 16
@@ -64,7 +65,7 @@ const TokenDetailScreen = ({ navigation }) => {
                 propsForDots: {
                   r: "6",
                   strokeWidth: "2",
-                  stroke: "#3ff726"
+                  stroke: "#80c796"
                 }
               }}
               bezier
@@ -75,7 +76,35 @@ const TokenDetailScreen = ({ navigation }) => {
             />
           </ChartView>
         </CryptoDetailContainer>
-
+        <CryptoSetting>
+          <PriceAlert>
+            <PriceAlertLabel>
+              Price Alert
+            </PriceAlertLabel>
+            <PriceAlertSwitch>
+              <Switch />
+            </PriceAlertSwitch>
+          </PriceAlert>
+          <PriceDescription>
+            Bitcoin is a cryptocurrency and worldwide payment system. It is the first decentralized digital currency, as the system works without a central bank or single administrator.
+          </PriceDescription>
+          <PriceAlert>
+            <PriceAlertLabel>
+              Website
+            </PriceAlertLabel>
+            <PriceAlertLink>
+              bitcoin.org
+            </PriceAlertLink>
+          </PriceAlert>
+          <PriceAlert>
+            <PriceAlertLabel>
+              Explorer
+            </PriceAlertLabel>
+            <PriceAlertLink>
+              blockchain.info
+            </PriceAlertLink>
+          </PriceAlert>
+        </CryptoSetting>
       </Body>
     </Container>
   );
@@ -83,6 +112,27 @@ const TokenDetailScreen = ({ navigation }) => {
 
 export default TokenDetailScreen;
 
+const PriceAlert = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+const PriceAlertLabel = styled.Text`
+  margin-top: 10px;
+  font-size: 15px;
+  color: #0f0f0f;
+`;
+const PriceAlertSwitch = styled.View`
+
+`;
+const PriceAlertLink = styled.Text`
+  color: #7f7f7f;
+
+`;
+const PriceDescription = styled.Text`
+  color: #7f7f7f;
+  font-size: 14px;
+`;
 const Container = styled.View`
   flex: 1;
   background: #fff;
@@ -110,6 +160,13 @@ const Continue = styled.Text`
   font-weight: bold;
 `;
 const CryptoDetailContainer = styled.View`
+  padding: 20px;
+  margin: 10px 10px;
+  border-radius: 10px;
+  border-color: #efefef;
+  border-width: 1px;
+`;
+const CryptoSetting = styled.View`
   padding: 20px;
   margin: 20px 10px;
   border-radius: 10px;

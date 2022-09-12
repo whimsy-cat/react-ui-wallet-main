@@ -5,6 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import { useNavigation } from "@react-navigation/native";
+import { myCustomContractAdrress, myCustomSymbol, myCustomTokenName, myCustomTokenDecimals } from "./AddCustomTokenScreen";
 
 import "react-native-get-random-values"
 import "@ethersproject/shims"
@@ -86,7 +87,7 @@ function FirstRoute() {
         >
           <Token>
             <TokenDetails>
-              <Image source={require("../assets/images/bitcoin.png")} />
+              <Image source={require("../assets/images/btc.png")} />
               <TokenNamePrice>
                 <TokenName>Bitcoin</TokenName>
                 <TokenPriceAction>
@@ -103,7 +104,7 @@ function FirstRoute() {
         </TouchableOpacity>
         <Token>
           <TokenDetails>
-            <Image source={require("../assets/images/ethereum.png")} />
+            <Image source={require("../assets/images/eth.png")} />
             <TokenNamePrice>
               <TokenName>Ethereum</TokenName>
               <TokenPriceAction>
@@ -133,6 +134,23 @@ function FirstRoute() {
             <TokenSymbol>BNB</TokenSymbol>
           </TokenCol2>
         </Token>
+
+        {(myCustomTokenName != "") && (<Token>
+          <TokenDetails>
+            <Image source={require("../assets/images/cardano.png")} />
+            <TokenNamePrice>
+              <TokenName>{myCustomTokenName}</TokenName>
+              <TokenPriceAction>
+                <TokenPrice>$0.514</TokenPrice>
+                <TokenPercent>+0.75%</TokenPercent>
+              </TokenPriceAction>
+            </TokenNamePrice>
+          </TokenDetails>
+          <TokenCol2>
+            <TokenAmount>0</TokenAmount>
+            <TokenSymbol>{myCustomSymbol}</TokenSymbol>
+          </TokenCol2>
+        </Token>)}
         <TouchableOpacity
           onPress={() => navigation.navigate("AddCustomTokenScreen")}
         >
@@ -165,6 +183,7 @@ const renderScene = SceneMap({
 });
 
 export default function PortfolioScreen({ navigation }) {
+
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     { key: "first", title: "Tokens" },

@@ -14,7 +14,7 @@ const ReceiveTokensScreen = () => {
       <Body>
         <TokensContainer>
           <TokenName>
-            <Image source={require("../assets/images/bitcoin.png")} />
+            <Image source={require("../assets/images/btc.png")} />
             <Token>
               <Name>Bitcoin</Name>
             </Token>
@@ -26,7 +26,7 @@ const ReceiveTokensScreen = () => {
         </TokensContainer>
         <TokensContainer>
           <TokenName>
-            <Image source={require("../assets/images/ethereum.png")} />
+            <Image source={require("../assets/images/eth.png")} />
             <Token>
               <Name>Ethereum</Name>
             </Token>

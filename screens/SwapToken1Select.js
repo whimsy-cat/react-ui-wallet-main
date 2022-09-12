@@ -5,8 +5,8 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import TokensContainer from "../components/TokensContainer";
 import { useNavigation } from "@react-navigation/native";
 
-export var selectedBuyToken = "eth";
-const BuyTokensScreen = ({ navigation }) => {
+export var selectedToken = "eth";
+const SwapToken1Select = ({ navigation }) => {
   const [searchKeyWord, setSearchKeyWord] = React.useState("");
 
   useEffect(() => {
@@ -21,9 +21,9 @@ const BuyTokensScreen = ({ navigation }) => {
     return true;
   }
 
-  const onHandleClick = (token) => {
-    selectedBuyToken = token;
-    navigation.navigate("BuyTokenDetail");
+  const selectToken = (token) => {
+    selectedToken = token;
+    navigation.navigate("SwapScreen");
   }
   return (
     <Container>
@@ -31,10 +31,10 @@ const BuyTokensScreen = ({ navigation }) => {
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name={"arrow-back"} color="#fff" size={28} />
         </TouchableOpacity>
-        <SearchBar placeholder="Search - Buy" placeholderTextColor="#CCDDEE" value={searchKeyWord} onChangeText={setSearchKeyWord} />
+        <SearchBar placeholder="Search - Swap" placeholderTextColor="#CCDDEE" value={searchKeyWord} onChangeText={setSearchKeyWord} />
       </Header>
       <Body>
-        <TouchableOpacity onPress={() => onHandleClick("btc")}>
+        <TouchableOpacity onPress={() => selectToken("BTC")}>
           <TokensContainer tokenImage={require("../assets/images/btc.png")}
             tokenName="Bitcoin"
             tokenAmount="0"
@@ -44,8 +44,7 @@ const BuyTokensScreen = ({ navigation }) => {
           >
           </TokensContainer>
         </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => onHandleClick("btc")}>
+        <TouchableOpacity onPress={() => selectToken("ETH")}>
           <TokensContainer tokenImage={require("../assets/images/eth.png")}
             tokenName="Ethereum"
             tokenAmount="0"
@@ -54,8 +53,7 @@ const BuyTokensScreen = ({ navigation }) => {
             isSwitch={false}>
           </TokensContainer>
         </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => onHandleClick("bnb")}>
+        <TouchableOpacity onPress={() => selectToken("BNB")}>
           <TokensContainer tokenImage={require("../assets/images/bnb2.png")}
             tokenName="BNB Beacon Chain"
             tokenAmount="0"
@@ -64,8 +62,7 @@ const BuyTokensScreen = ({ navigation }) => {
             isSwitch={false}>
           </TokensContainer>
         </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => onHandleClick("bnb")}>
+        <TouchableOpacity onPress={() => selectToken("BNB")}>
           <TokensContainer tokenImage={require("../assets/images/bnb.png")}
             tokenName="BNB Smart Chain"
             tokenAmount="0"
@@ -74,8 +71,7 @@ const BuyTokensScreen = ({ navigation }) => {
             isSwitch={false}>
           </TokensContainer>
         </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => onHandleClick("ada")}>
+        <TouchableOpacity onPress={() => selectToken("ADA")}>
           <TokensContainer tokenImage={require("../assets/images/cardano.png")}
             tokenName="Cardano"
             tokenAmount="0"
@@ -84,8 +80,7 @@ const BuyTokensScreen = ({ navigation }) => {
             isSwitch={false}>
           </TokensContainer>
         </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => onHandleClick("xrp")}>
+        <TouchableOpacity onPress={() => selectToken("XRP")}>
           <TokensContainer tokenImage={require("../assets/images/xrp.png")}
             tokenName="XRP"
             tokenAmount="0"
@@ -94,8 +89,7 @@ const BuyTokensScreen = ({ navigation }) => {
             isSwitch={false}>
           </TokensContainer>
         </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => onHandleClick("sol")}>
+        <TouchableOpacity onPress={() => selectToken("SOL")}>
           <TokensContainer tokenImage={require("../assets/images/solana.png")}
             tokenName="Solana"
             tokenAmount="0"
@@ -104,8 +98,7 @@ const BuyTokensScreen = ({ navigation }) => {
             isSwitch={false}>
           </TokensContainer>
         </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => onHandleClick("doge")}>
+        <TouchableOpacity onPress={() => selectToken("DOGE")}>
           <TokensContainer tokenImage={require("../assets/images/doge.png")}
             tokenName="DogeCoin"
             tokenAmount="0"
@@ -114,8 +107,7 @@ const BuyTokensScreen = ({ navigation }) => {
             isSwitch={false}>
           </TokensContainer>
         </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => onHandleClick("dot")}>
+        <TouchableOpacity onPress={() => selectToken("DOT")}>
           <TokensContainer tokenImage={require("../assets/images/polkadot.png")}
             tokenName="Polkadot"
             tokenAmount="0"
@@ -129,7 +121,7 @@ const BuyTokensScreen = ({ navigation }) => {
   );
 };
 
-export default BuyTokensScreen;
+export default SwapToken1Select;
 
 const Container = styled.View`
   flex: 1;
