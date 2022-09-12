@@ -102,39 +102,46 @@ function FirstRoute() {
             </TokenCol2>
           </Token>
         </TouchableOpacity>
-        <Token>
-          <TokenDetails>
-            <Image source={require("../assets/images/eth.png")} />
-            <TokenNamePrice>
-              <TokenName>Ethereum</TokenName>
-              <TokenPriceAction>
-                <TokenPrice>${ethCoins.price}</TokenPrice>
-                <TokenPercent>{ethCoins.dailyChange > 0 ? "+" : "-"}{ethCoins.dailyChange} %</TokenPercent>
-              </TokenPriceAction>
-            </TokenNamePrice>
-          </TokenDetails>
-          <TokenCol2>
-            <TokenAmount>{ethBalance}</TokenAmount>
-            <TokenSymbol>ETH</TokenSymbol>
-          </TokenCol2>
-        </Token>
-        <Token>
-          <TokenDetails>
-            <Image source={require("../assets/images/bnb.png")} />
-            <TokenNamePrice>
-              <TokenName>BNB Smart Chain</TokenName>
-              <TokenPriceAction>
-                <TokenPrice>$268.10</TokenPrice>
-                <TokenPercent>+1.75%</TokenPercent>
-              </TokenPriceAction>
-            </TokenNamePrice>
-          </TokenDetails>
-          <TokenCol2>
-            <TokenAmount>0</TokenAmount>
-            <TokenSymbol>BNB</TokenSymbol>
-          </TokenCol2>
-        </Token>
-
+        <TouchableOpacity
+          onPress={() => navigation.navigate("TokenDetailScreen")}
+        >
+          <Token>
+            <TokenDetails>
+              <Image source={require("../assets/images/eth.png")} />
+              <TokenNamePrice>
+                <TokenName>Ethereum</TokenName>
+                <TokenPriceAction>
+                  <TokenPrice>${ethCoins.price}</TokenPrice>
+                  <TokenPercent>{ethCoins.dailyChange > 0 ? "+" : "-"}{ethCoins.dailyChange} %</TokenPercent>
+                </TokenPriceAction>
+              </TokenNamePrice>
+            </TokenDetails>
+            <TokenCol2>
+              <TokenAmount>{ethBalance}</TokenAmount>
+              <TokenSymbol>ETH</TokenSymbol>
+            </TokenCol2>
+          </Token>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("TokenDetailScreen")}
+        >
+          <Token>
+            <TokenDetails>
+              <Image source={require("../assets/images/bnb.png")} />
+              <TokenNamePrice>
+                <TokenName>BNB Smart Chain</TokenName>
+                <TokenPriceAction>
+                  <TokenPrice>$268.10</TokenPrice>
+                  <TokenPercent>+1.75%</TokenPercent>
+                </TokenPriceAction>
+              </TokenNamePrice>
+            </TokenDetails>
+            <TokenCol2>
+              <TokenAmount>0</TokenAmount>
+              <TokenSymbol>BNB</TokenSymbol>
+            </TokenCol2>
+          </Token>
+        </TouchableOpacity>
         {(myCustomTokenName != "") && (<Token>
           <TokenDetails>
             <Image source={require("../assets/images/cardano.png")} />
@@ -204,7 +211,7 @@ export default function PortfolioScreen({ navigation }) {
         <WalletName>Multi-Coin Wallet 1</WalletName>
         <HeaderActions>
           <TouchableOpacity
-            onPress={() => navigation.navigate("SendTokenFormScreen")}
+            onPress={() => navigation.navigate("SendTokenChoose")}
           >
             <Action>
               <Ionicons

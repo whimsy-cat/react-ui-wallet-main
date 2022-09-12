@@ -26,6 +26,7 @@ import PreferencesScreen from "../screens/PreferencesScreen";
 import WalletsScreen from "../screens/WalletsScreen";
 import WalletEditScreen from "../screens/WalletEditScreen";
 import SwapToken1Select from "../screens/SwapToken1Select";
+import SendTokenChoose from "../screens/SendTokenChoose";
 
 import BottomTabNavigator from "./TabNavigator";
 
@@ -64,6 +65,7 @@ const PortfolioStackNavigator = () => {
       <Stack.Screen name="TokenDetailScreen" component={TokenDetailScreen} />
       <Stack.Screen name="SendTokenFormScreen" component={SendTokenFormScreen} />
       <Stack.Screen name="SwapToken1Select" component={SwapToken1Select} />
+      <Stack.Screen name="SendTokenChoose" component={SendTokenChoose} />
 
     </Stack.Navigator>
   );

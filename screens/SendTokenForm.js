@@ -6,9 +6,10 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import "react-native-get-random-values"
 import "@ethersproject/shims"
 import { ethers } from "ethers";
+import { selectedSendToken } from "./SendTokenChoose";
 // const provider = ethers.getDefaultProvider("ropsten");
 
-const contract_address = "";
+var contract_address = "";
 const send_address = "0x9381D7598F28fAbd2f94Aa9d01B4040C5F436197"
 const private_key = "69b2ce785561f97e2aa896e67f6f61e9c8442a9f11b3cbb476439219141db91f";
 const gas_limit = "0x100000";
@@ -17,6 +18,13 @@ window.ethersProvider = new ethers.providers.InfuraProvider("ropsten")
 const SendTokenFormScreen = ({ navigation }) => {
   const [recipentAddress, setRecipentAddress] = React.useState(null);
   const [send_token_amount, setAmount] = React.useState('0.0');
+
+  useEffect(() => {
+    if (selectedSendToken == "btc") contract_address = "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599";
+    else if (selectedSendToken == "bnb") contract_address = "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82";
+    else if (selectedSendToken == "xrp") contract_address = "0x1D2F0da169ceB9fC7B3144628dB156f3F6c60dBE";
+    else if (selectedSendToken == "sol") contract_address = "0x41848d32f281383f214c69b7b248dc7c2e0a7374";
+  })
   const sendToken = () => {
     send_token(contract_address, send_token_amount, recipentAddress, send_address, private_key);
   }
@@ -36,7 +44,6 @@ const SendTokenFormScreen = ({ navigation }) => {
       console.log(`gas_price: ${gas_price}`)
 
       if (contract_address) {
-        console.log('if');
         // general token send
         let contract = new ethers.Contract(
           contract_address,
@@ -55,7 +62,6 @@ const SendTokenFormScreen = ({ navigation }) => {
         })
       } // ether send
       else {
-        console.log('else');
         const tx = {
           from: send_account,
           to: recipentAddress,
@@ -85,7 +91,7 @@ const SendTokenFormScreen = ({ navigation }) => {
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name={"arrow-back"} color="#fff" size={28} />
         </TouchableOpacity>
-        <HeaderText>Send BTC</HeaderText>
+        <HeaderText>Send {selectedSendToken.toUpperCase()}</HeaderText>
         <Continue onPress={() => sendToken()}>Continue</Continue>
       </Header>
       <Body>
@@ -101,7 +107,7 @@ const SendTokenFormScreen = ({ navigation }) => {
             <Amount placeholder="Amount BTC" value={send_token_amount} onChangeText={setAmount} />
             <MaxContainer>
               <Max>Max</Max>
-              <TokenName>BTC</TokenName>
+              <TokenName>{selectedSendToken.toUpperCase()}</TokenName>
             </MaxContainer>
           </AmountContainer>
           <AmountInUSD>~$146,577,914.13</AmountInUSD>
