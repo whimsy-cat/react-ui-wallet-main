@@ -3,12 +3,15 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import MainStackNavigator from "./navigator/AppNavigator";
+import Store from "./reducers/store"
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <MainStackNavigator />
-    </NavigationContainer>
+    <Store>
+      <NavigationContainer>
+        <MainStackNavigator />
+      </NavigationContainer>
+    </Store>
   );
 };
 

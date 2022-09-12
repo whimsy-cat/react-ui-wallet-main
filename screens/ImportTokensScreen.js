@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Switch } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import TokensContainer from "../components/TokensContainer";
+import { Context } from '../reducers/store'
 
 const ImportTokensScreen = ({ navigation }) => {
   const [searchKeyWord, setSearchKeyWord] = React.useState("");
-
+  const [state, dispatch] = useContext(Context);
   useEffect(() => {
     console.log(searchKeyWord);
   }, [searchKeyWord]);
@@ -34,7 +35,7 @@ const ImportTokensScreen = ({ navigation }) => {
           tokenAmount=""
           tokenSymbol="BTC"
           hide={searchFilter("BitcoinBTC")}
-          isSwitch="show_check"
+          isSwitch={state.posts.includes('Bitcoin') ? "show_check" : "show"}
         >
         </TokensContainer>
         <TokensContainer tokenImage={require("../assets/images/eth.png")}
@@ -42,56 +43,64 @@ const ImportTokensScreen = ({ navigation }) => {
           tokenAmount=""
           tokenSymbol="ETH"
           hide={searchFilter("Ethereum")}
-          isSwitch="show_check">
+          isSwitch={state.posts.includes('Ethereum') ? "show_check" : "show"}
+        >
         </TokensContainer>
         <TokensContainer tokenImage={require("../assets/images/bnb2.png")}
           tokenName="BNB Beacon Chain"
           tokenAmount=""
           tokenSymbol="BNB"
           hide={searchFilter("BNBBeaconChainBNB")}
-          isSwitch="show">
+          isSwitch={state.posts.includes('BNB Beacon Chain') ? "show_check" : "show"}
+        >
         </TokensContainer>
         <TokensContainer tokenImage={require("../assets/images/bnb.png")}
           tokenName="BNB Smart Chain"
           tokenAmount=""
           tokenSymbol="BNB"
           hide={searchFilter("BNBSmartChainBNB")}
-          isSwitch="show_check">
+          isSwitch={state.posts.includes('BNB Smart Chain') ? "show_check" : "show"}
+        >
         </TokensContainer>
         <TokensContainer tokenImage={require("../assets/images/cardano.png")}
           tokenName="Cardano"
           tokenAmount=""
           tokenSymbol="ADA"
           hide={searchFilter("CardanoADA")}
-          isSwitch="show">
+          isSwitch={state.posts.includes('Cardano') ? "show_check" : "show"}
+        >
         </TokensContainer>
         <TokensContainer tokenImage={require("../assets/images/xrp.png")}
           tokenName="XRP"
           tokenAmount=""
           tokenSymbol="XRP"
           hide={searchFilter("XRP")}
-          isSwitch="show">
+          isSwitch={state.posts.includes('XRP') ? "show_check" : "show"}
+        >
         </TokensContainer>
         <TokensContainer tokenImage={require("../assets/images/solana.png")}
           tokenName="Solana"
           tokenAmount=""
           tokenSymbol="SOL"
           hide={searchFilter("SolanaSOL")}
-          isSwitch="show">
+          isSwitch={state.posts.includes('Solana') ? "show_check" : "show"}
+        >
         </TokensContainer>
         <TokensContainer tokenImage={require("../assets/images/doge.png")}
           tokenName="DogeCoin"
           tokenAmount=""
           tokenSymbol="DOGE"
           hide={searchFilter("DogeCoinDOGE")}
-          isSwitch="show">
+          isSwitch={state.posts.includes('DogeCoin') ? "show_check" : "show"}
+        >
         </TokensContainer>
         <TokensContainer tokenImage={require("../assets/images/polkadot.png")}
           tokenName="Polkadot"
           tokenAmount=""
           tokenSymbol="DOT"
           hide={searchFilter("PolkadotDot")}
-          isSwitch="show">
+          isSwitch={state.posts.includes('Polkadot') ? "show_check" : "show"}
+        >
         </TokensContainer>
       </Body>
     </Container>

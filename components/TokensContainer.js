@@ -1,19 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   View,
   Switch,
 } from 'react-native';
 import styled from "styled-components";
+import { Context } from '../reducers/store'
 
 const TokensContainer = (props) => {
   const { tokenImage, tokenName, tokenAmount, tokenSymbol, hide, isSwitch } = props;
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  const [isEnabled, setIsEnabled] = useState(true);
+  const [state, dispatch] = useContext(Context);
+
+  const toggleSwitch = () => {
+    if (!state.posts.includes(`${tokenName}`))
+      dispatch({ type: 'ADD_POST', payload: `${tokenName}` });
+    else
+      dispatch({ type: 'REMOVE_POST', payload: `${tokenName}` });
+  }
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
+
   if (hide) {
     return null;
   }
-  if (isSwitch != null) {
+  if (isSwitch != false) {
     return (
       <View style={{ width: "109%", paddingRight: 30, flexDirection: "row", alignItems: "center", justifyContent: "space-between", borderBottomWidth: 1, borderBottomColor: "#eee" }}>
         <TokenLeft>
@@ -31,7 +43,7 @@ const TokensContainer = (props) => {
         <TokenRight>
           <Switch
             onValueChange={toggleSwitch}
-            value={isSwitch == "show" ? isEnabled : !isEnabled} />
+            value={isSwitch == "show_check" ? true : false} />
         </TokenRight>
       </View>
     );
