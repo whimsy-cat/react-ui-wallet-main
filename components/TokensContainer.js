@@ -13,7 +13,7 @@ const TokensContainer = (props) => {
   if (hide) {
     return null;
   }
-  if (isSwitch) {
+  if (isSwitch != null) {
     return (
       <View style={{ width: "109%", paddingRight: 30, flexDirection: "row", alignItems: "center", justifyContent: "space-between", borderBottomWidth: 1, borderBottomColor: "#eee" }}>
         <TokenLeft>
@@ -31,7 +31,7 @@ const TokensContainer = (props) => {
         <TokenRight>
           <Switch
             onValueChange={toggleSwitch}
-            value={isEnabled} />
+            value={isSwitch == "show" ? isEnabled : !isEnabled} />
         </TokenRight>
       </View>
     );

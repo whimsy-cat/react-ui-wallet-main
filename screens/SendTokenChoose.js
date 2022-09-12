@@ -46,7 +46,7 @@ const SendTokenChoose = ({ navigation }) => {
           </TokensContainer>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => onHandleClick("btc")}>
+        <TouchableOpacity onPress={() => onHandleClick("eth")}>
           <TokensContainer tokenImage={require("../assets/images/eth.png")}
             tokenName="Ethereum"
             tokenAmount="0"

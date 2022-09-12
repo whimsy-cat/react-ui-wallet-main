@@ -26,6 +26,7 @@ const BuyTokensScreen = ({ navigation }) => {
     navigation.navigate("BuyTokenDetail");
   }
   return (
+
     <Container>
       <Header>
         <TouchableOpacity onPress={() => navigation.goBack()}>

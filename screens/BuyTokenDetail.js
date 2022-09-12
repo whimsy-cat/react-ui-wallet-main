@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import NumericInput from 'react-native-numeric-input'
 import { Linking } from 'react-native';
 import { selectedBuyToken } from "./BuyTokensScreen";
@@ -50,46 +50,51 @@ const BuyTokenDetail = ({ navigation }) => {
   };
   return (
 
-    <Container>
-      <Header>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Ionicons name={"arrow-back"} color="#fff" size={28} />
-        </TouchableOpacity>
-        <HeaderText> Buy {selectedBuyToken.toUpperCase()}</HeaderText>
-      </Header>
-      <Body>
-        <Token>
-          <TokenDetails>
-            <Image source={require("../assets/images/eth.png")} />
-            <TokenNamePrice>
-              <TokenName>{selectedBuyToken}</TokenName>
-              <TokenPriceAction>
-                <TokenPrice>$1597</TokenPrice>
-                <TokenPercent>+0.0997 %</TokenPercent>
-              </TokenPriceAction>
-            </TokenNamePrice>
-          </TokenDetails>
-          <TokenCol2>
-            <TokenAmount>0</TokenAmount>
-            <TokenSymbol>{selectedBuyToken}</TokenSymbol>
-          </TokenCol2>
-        </Token>
-        <CoinbaseImage source={require("../assets/images/coinbase.png")}></CoinbaseImage>
-        <TouchableOpacity onPress={() => handleCoinBaseClick()}>
-          <Button>  Continue to CoinBase Pay </Button>
-        </TouchableOpacity>
-        <Transak source={require("../assets/images/transak.png")}></Transak>
-        <TouchableOpacity onPress={() => handleTransakClick()}>
-          <Button>  Continue to Transak  </Button>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => handleMoonPayClick()}>
-          <Button>  Continue to MoonPay  </Button>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => handleWireClick()}>
-          <Button>  Continue to Wire  </Button>
-        </TouchableOpacity>
-      </Body>
-    </Container>
+    <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
+      <Container>
+        <Header>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Ionicons name={"arrow-back"} color="#fff" size={28} />
+          </TouchableOpacity>
+          <HeaderText> Buy {selectedBuyToken.toUpperCase()}</HeaderText>
+        </Header>
+        <Body>
+          <Token>
+            <TokenDetails>
+              <Image source={require("../assets/images/eth.png")} />
+              <TokenNamePrice>
+                <TokenName>{selectedBuyToken}</TokenName>
+                <TokenPriceAction>
+                  <TokenPrice>$1597</TokenPrice>
+                  <TokenPercent>+0.0997 %</TokenPercent>
+                </TokenPriceAction>
+              </TokenNamePrice>
+            </TokenDetails>
+            <TokenCol2>
+              <TokenAmount>0</TokenAmount>
+              <TokenSymbol>{selectedBuyToken}</TokenSymbol>
+            </TokenCol2>
+          </Token>
+          <CoinbaseImage source={require("../assets/images/coinbase.png")}></CoinbaseImage>
+          <TouchableOpacity onPress={() => handleCoinBaseClick()}>
+            <Button>  Continue to CoinBase Pay </Button>
+          </TouchableOpacity>
+          <Transak source={require("../assets/images/transak.png")}></Transak>
+          <TouchableOpacity onPress={() => handleTransakClick()}>
+            <Button>  Continue to Transak  </Button>
+          </TouchableOpacity>
+          <MoonPay source={require("../assets/images/moonpay.png")}></MoonPay>
+          <TouchableOpacity onPress={() => handleMoonPayClick()}>
+            <Button>  Continue to MoonPay  </Button>
+          </TouchableOpacity>
+          <Wire source={require("../assets/images/wyre.png")}></Wire>
+          <TouchableOpacity onPress={() => handleWireClick()}>
+            <Button>  Continue to Wyre  </Button>
+          </TouchableOpacity>
+        </Body>
+      </Container>
+
+    </ScrollView>
   );
 };
 
@@ -102,6 +107,14 @@ const CoinbaseImage = styled.Image`
 const Transak = styled.Image`
   width: 370px;
   height: 220px;
+`;
+const MoonPay = styled.Image`
+  width: 370px;
+  height: 220px;
+`;
+const Wire = styled.Image`
+  width: 370px;
+  height: 280px;
 `;
 const CoinBaseInfo = styled.Text`
   flex-direction: row;

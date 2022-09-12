@@ -34,7 +34,7 @@ const ImportTokensScreen = ({ navigation }) => {
           tokenAmount=""
           tokenSymbol="BTC"
           hide={searchFilter("BitcoinBTC")}
-          isSwitch={true}
+          isSwitch="show_check"
         >
         </TokensContainer>
         <TokensContainer tokenImage={require("../assets/images/eth.png")}
@@ -42,56 +42,56 @@ const ImportTokensScreen = ({ navigation }) => {
           tokenAmount=""
           tokenSymbol="ETH"
           hide={searchFilter("Ethereum")}
-          isSwitch={true}>
+          isSwitch="show_check">
         </TokensContainer>
         <TokensContainer tokenImage={require("../assets/images/bnb2.png")}
           tokenName="BNB Beacon Chain"
           tokenAmount=""
           tokenSymbol="BNB"
           hide={searchFilter("BNBBeaconChainBNB")}
-          isSwitch={true}>
+          isSwitch="show">
         </TokensContainer>
         <TokensContainer tokenImage={require("../assets/images/bnb.png")}
           tokenName="BNB Smart Chain"
           tokenAmount=""
           tokenSymbol="BNB"
           hide={searchFilter("BNBSmartChainBNB")}
-          isSwitch={true}>
+          isSwitch="show_check">
         </TokensContainer>
         <TokensContainer tokenImage={require("../assets/images/cardano.png")}
           tokenName="Cardano"
           tokenAmount=""
           tokenSymbol="ADA"
           hide={searchFilter("CardanoADA")}
-          isSwitch={true}>
+          isSwitch="show">
         </TokensContainer>
         <TokensContainer tokenImage={require("../assets/images/xrp.png")}
           tokenName="XRP"
           tokenAmount=""
           tokenSymbol="XRP"
           hide={searchFilter("XRP")}
-          isSwitch={true}>
+          isSwitch="show">
         </TokensContainer>
         <TokensContainer tokenImage={require("../assets/images/solana.png")}
           tokenName="Solana"
           tokenAmount=""
           tokenSymbol="SOL"
           hide={searchFilter("SolanaSOL")}
-          isSwitch={true}>
+          isSwitch="show">
         </TokensContainer>
         <TokensContainer tokenImage={require("../assets/images/doge.png")}
           tokenName="DogeCoin"
           tokenAmount=""
           tokenSymbol="DOGE"
           hide={searchFilter("DogeCoinDOGE")}
-          isSwitch={true}>
+          isSwitch="show">
         </TokensContainer>
         <TokensContainer tokenImage={require("../assets/images/polkadot.png")}
           tokenName="Polkadot"
           tokenAmount=""
           tokenSymbol="DOT"
           hide={searchFilter("PolkadotDot")}
-          isSwitch={true}>
+          isSwitch="show">
         </TokensContainer>
       </Body>
     </Container>
