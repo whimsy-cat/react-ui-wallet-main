@@ -21,6 +21,7 @@ const initialState = {
     CoinDailyChange: [],
     Swap1Token: "ETH",
     Swap2Token: "BNB",
+    BuyToken: "ETH",
 };
 
 const Store = ({ children }) => {

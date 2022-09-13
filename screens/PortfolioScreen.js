@@ -38,8 +38,6 @@ const provider = ethers.getDefaultProvider('ropsten');
 
 function FirstRoute() {
   const [ethBalance, setEthBalance] = useState("0.0");
-  const [ethCoins, setEthCoins] = useState([]);
-  const [bitCoins, setBitCoins] = useState([]);
   const [state, dispatch] = useContext(Context);
   const navigation = useNavigation();
 
@@ -83,7 +81,7 @@ function FirstRoute() {
                 </TokenNamePrice>
               </TokenDetails>
               <TokenCol2>
-                <TokenAmount>0</TokenAmount>
+                <TokenAmount>{coin == "Ethereum" ? ethBalance : 0.0}</TokenAmount>
                 <TokenSymbol>{state.CoinSymbol[state.CoinFullName.indexOf(state.ImportedCoinFullName[index])]}</TokenSymbol>
               </TokenCol2>
             </Token>

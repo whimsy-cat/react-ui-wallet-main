@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
-import NumericInput from 'react-native-numeric-input'
 import { Linking } from 'react-native';
-import { selectedBuyToken } from "./BuyTokensScreen";
+import { Context } from '../reducers/store'
 
 const BuyTokenDetail = ({ navigation }) => {
   const [buyAmount, setBuyAmount] = React.useState(100);
+  const [state, dispatch] = useContext(Context);
+
   const handleCoinBaseClick = () => {
     console.log("opening...");
     Linking.canOpenURL("https://pay.coinbase.com/buy/select-asset?appId=ab4b8829-a59d-44d3-accc-de77e4f18df2&attribution=extension&destinationWallets=%5B%7B%22address%22%3A%220x9381d7598f28fabd2f94aa9d01b4040c5f436197%22%2C%22assets%22%3A%5B%22ETH%22%2C%22USDC%22%2C%22DAI%22%5D%7D%5D").then(supported => {
@@ -56,14 +57,14 @@ const BuyTokenDetail = ({ navigation }) => {
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Ionicons name={"arrow-back"} color="#fff" size={28} />
           </TouchableOpacity>
-          <HeaderText> Buy {selectedBuyToken.toUpperCase()}</HeaderText>
+          <HeaderText> Buy {state.BuyToken}</HeaderText>
         </Header>
         <Body>
           <Token>
             <TokenDetails>
-              <Image source={38} />
+              <Image source={state.CoinImage[state.CoinSymbol.indexOf(state.BuyToken)]} />
               <TokenNamePrice>
-                <TokenName>{selectedBuyToken}</TokenName>
+                <TokenName>{state.BuyToken}</TokenName>
                 <TokenPriceAction>
                   <TokenPrice>$1597</TokenPrice>
                   <TokenPercent>+0.0997 %</TokenPercent>
@@ -72,7 +73,7 @@ const BuyTokenDetail = ({ navigation }) => {
             </TokenDetails>
             <TokenCol2>
               <TokenAmount>0</TokenAmount>
-              <TokenSymbol>{selectedBuyToken}</TokenSymbol>
+              <TokenSymbol>{state.BuyToken}</TokenSymbol>
             </TokenCol2>
           </Token>
           <CoinbaseImage source={require("../assets/images/coinbase.png")}></CoinbaseImage>

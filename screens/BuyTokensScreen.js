@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import TokensContainer from "../components/TokensContainer";
-import { useNavigation } from "@react-navigation/native";
+import { Context } from '../reducers/store'
 
-export var selectedBuyToken = "eth";
 const BuyTokensScreen = ({ navigation }) => {
   const [searchKeyWord, setSearchKeyWord] = React.useState("");
+  const [state, dispatch] = useContext(Context);
 
   useEffect(() => {
     console.log(searchKeyWord);
@@ -22,7 +22,7 @@ const BuyTokensScreen = ({ navigation }) => {
   }
 
   const onHandleClick = (token) => {
-    selectedBuyToken = token;
+    dispatch({ type: 'SET_BUYTOKEN', buytoken: token.toUpperCase() });
     navigation.navigate("BuyTokenDetail");
   }
   return (
@@ -46,7 +46,7 @@ const BuyTokensScreen = ({ navigation }) => {
           </TokensContainer>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => onHandleClick("btc")}>
+        <TouchableOpacity onPress={() => onHandleClick("eth")}>
           <TokensContainer tokenImage={require("../assets/images/eth.png")}
             tokenName="Ethereum"
             tokenAmount="0"

@@ -19,6 +19,11 @@ const Reducer = (state, action) => {
                 ...state,
                 Swap2Token: action.swap2token,
             };
+        case 'SET_BUYTOKEN':
+            return {
+                ...state,
+                BuyToken: action.buytoken,
+            };
         case 'ADD_POST':
             return {
                 ...state,
