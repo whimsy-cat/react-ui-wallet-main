@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import TokensContainer from "../components/TokensContainer";
 import { useNavigation } from "@react-navigation/native";
+import { Context } from '../reducers/store'
 
 export var selectedToken = "eth";
 const SwapToken1Select = ({ navigation }) => {
   const [searchKeyWord, setSearchKeyWord] = React.useState("");
+  const [state, dispatch] = useContext(Context);
 
   useEffect(() => {
     console.log(searchKeyWord);
@@ -23,6 +25,7 @@ const SwapToken1Select = ({ navigation }) => {
 
   const selectToken = (token) => {
     selectedToken = token;
+    dispatch({ type: 'SET_SWAP1TOKEN', swap1token: selectedToken });
     navigation.navigate("SwapScreen");
   }
   return (

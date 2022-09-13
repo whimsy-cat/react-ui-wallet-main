@@ -1,15 +1,18 @@
-import React, { useState, useEffect, createContext } from "react";
+import React, { useState, useEffect, createContext, useContext } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { selectedToken } from "./SwapToken1Select";
+import { Context } from '../reducers/store'
 
 const imgUrl = `../assets/images/${selectedToken}.png`;
 const SwapScreen = ({ navigation }) => {
   const [token1, setToken1] = React.useState("");
+  const [state, dispatch] = useContext(Context);
+
   useEffect(() => {
     setToken1(selectedToken);
-    console.log(token1);
+    console.log(state.CoinImage[state.CoinSymbol.indexOf(state.Swap1Token)]);
   });
   return (
     <Container>
@@ -23,13 +26,13 @@ const SwapScreen = ({ navigation }) => {
               <BalanceInfo>
                 <Balance>Balance:</Balance>
                 <BalanceNumber>0</BalanceNumber>
-                <BalanceToken>{token1}</BalanceToken>
+                <BalanceToken>{state.Swap1Token}</BalanceToken>
               </BalanceInfo>
             </InputContainer>
             <TouchableOpacity onPress={() => navigation.navigate("SwapToken1Select")}>
               <TokenSelect>
-                <Image source={require("../assets/images/eth.png")} />
-                <TokenName>{token1}</TokenName>
+                <Image source={state.CoinImage[state.CoinSymbol.indexOf(state.Swap1Token)]} />
+                <TokenName>{state.Swap1Token}</TokenName>
                 <Ionicons
                   name={"chevron-forward"}
                   color="#979797"

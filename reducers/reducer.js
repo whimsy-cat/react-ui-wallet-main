@@ -10,6 +10,16 @@ const Reducer = (state, action) => {
                 CoinPrice: action.coinprice,
                 CoinDailyChange: action.coindailychange,
             };
+        case 'SET_SWAP1TOKEN':
+            return {
+                ...state,
+                Swap1Token: action.swap1token,
+            };
+        case 'SET_SWAP2TOKEN':
+            return {
+                ...state,
+                Swap2Token: action.swap2token,
+            };
         case 'ADD_POST':
             return {
                 ...state,
