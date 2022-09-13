@@ -19,6 +19,9 @@ const SwapScreen = ({ navigation }) => {
     console.log(getBalance);
   }, [getBalance]);
 
+  useEffect(() => {
+    setGetBalance(payBalance * state.CoinPrice[state.CoinSymbol.indexOf(state.Swap1Token)] / state.CoinPrice[state.CoinSymbol.indexOf(state.Swap2Token)]);
+  }, [state]);
   return (
     <Container>
       <Header>Swap</Header>
