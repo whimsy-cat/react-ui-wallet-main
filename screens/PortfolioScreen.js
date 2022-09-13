@@ -66,14 +66,14 @@ function FirstRoute() {
   return (
     <First>
       <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
-        {state.CoinFullName.map((coin, index) => (
+        {state.ImportedCoinFullName.map((coin, index) => (
           <TouchableOpacity
             key={index}
             onPress={() => navigation.navigate("TokenDetailScreen")}
           >
             <Token>
               <TokenDetails>
-                <Image source={state.CoinImage[index]} />
+                <Image source={state.CoinImage[state.CoinFullName.indexOf(state.ImportedCoinFullName[index])]} />
                 <TokenNamePrice>
                   <TokenName>{coin}</TokenName>
                   <TokenPriceAction>
@@ -84,7 +84,7 @@ function FirstRoute() {
               </TokenDetails>
               <TokenCol2>
                 <TokenAmount>0</TokenAmount>
-                <TokenSymbol>{state.CoinSymbol[index]}</TokenSymbol>
+                <TokenSymbol>{state.CoinSymbol[state.CoinFullName.indexOf(state.ImportedCoinFullName[index])]}</TokenSymbol>
               </TokenCol2>
             </Token>
           </TouchableOpacity>

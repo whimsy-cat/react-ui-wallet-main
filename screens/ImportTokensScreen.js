@@ -35,7 +35,7 @@ const ImportTokensScreen = ({ navigation }) => {
           tokenAmount=""
           tokenSymbol="BTC"
           hide={searchFilter("BitcoinBTC")}
-          isSwitch={state.CoinFullName.includes('Bitcoin') ? "show_check" : "show"}
+          isSwitch={state.ImportedCoinFullName.includes('Bitcoin') ? "show_check" : "show"}
         >
         </TokensContainer>
         <TokensContainer tokenImage={require("../assets/images/eth.png")}
@@ -43,7 +43,7 @@ const ImportTokensScreen = ({ navigation }) => {
           tokenAmount=""
           tokenSymbol="ETH"
           hide={searchFilter("Ethereum")}
-          isSwitch={state.CoinFullName.includes('Ethereum') ? "show_check" : "show"}
+          isSwitch={state.ImportedCoinFullName.includes('Ethereum') ? "show_check" : "show"}
         >
         </TokensContainer>
         <TokensContainer tokenImage={require("../assets/images/bnb2.png")}
@@ -51,7 +51,7 @@ const ImportTokensScreen = ({ navigation }) => {
           tokenAmount=""
           tokenSymbol="BNB"
           hide={searchFilter("BNBBeaconChainBNB")}
-          isSwitch={state.CoinFullName.includes('BNB Beacon Chain') ? "show_check" : "show"}
+          isSwitch={state.ImportedCoinFullName.includes('BNB Beacon Chain') ? "show_check" : "show"}
         >
         </TokensContainer>
         <TokensContainer tokenImage={require("../assets/images/bnb.png")}
@@ -59,7 +59,7 @@ const ImportTokensScreen = ({ navigation }) => {
           tokenAmount=""
           tokenSymbol="BNB"
           hide={searchFilter("BNBSmartChainBNB")}
-          isSwitch={state.CoinFullName.includes('BNB Smart Chain') ? "show_check" : "show"}
+          isSwitch={state.ImportedCoinFullName.includes('BNB Smart Chain') ? "show_check" : "show"}
         >
         </TokensContainer>
         <TokensContainer tokenImage={require("../assets/images/cardano.png")}
@@ -67,7 +67,7 @@ const ImportTokensScreen = ({ navigation }) => {
           tokenAmount=""
           tokenSymbol="ADA"
           hide={searchFilter("CardanoADA")}
-          isSwitch={state.CoinFullName.includes('Cardano') ? "show_check" : "show"}
+          isSwitch={state.ImportedCoinFullName.includes('Cardano') ? "show_check" : "show"}
         >
         </TokensContainer>
         <TokensContainer tokenImage={require("../assets/images/xrp.png")}
@@ -75,7 +75,7 @@ const ImportTokensScreen = ({ navigation }) => {
           tokenAmount=""
           tokenSymbol="XRP"
           hide={searchFilter("XRP")}
-          isSwitch={state.CoinFullName.includes('XRP') ? "show_check" : "show"}
+          isSwitch={state.ImportedCoinFullName.includes('XRP') ? "show_check" : "show"}
         >
         </TokensContainer>
         <TokensContainer tokenImage={require("../assets/images/solana.png")}
@@ -83,7 +83,7 @@ const ImportTokensScreen = ({ navigation }) => {
           tokenAmount=""
           tokenSymbol="SOL"
           hide={searchFilter("SolanaSOL")}
-          isSwitch={state.CoinFullName.includes('Solana') ? "show_check" : "show"}
+          isSwitch={state.ImportedCoinFullName.includes('Solana') ? "show_check" : "show"}
         >
         </TokensContainer>
         <TokensContainer tokenImage={require("../assets/images/doge.png")}
@@ -91,7 +91,7 @@ const ImportTokensScreen = ({ navigation }) => {
           tokenAmount=""
           tokenSymbol="DOGE"
           hide={searchFilter("DogeCoinDOGE")}
-          isSwitch={state.CoinFullName.includes('DogeCoin') ? "show_check" : "show"}
+          isSwitch={state.ImportedCoinFullName.includes('DogeCoin') ? "show_check" : "show"}
         >
         </TokensContainer>
         <TokensContainer tokenImage={require("../assets/images/polkadot.png")}
@@ -99,7 +99,7 @@ const ImportTokensScreen = ({ navigation }) => {
           tokenAmount=""
           tokenSymbol="DOT"
           hide={searchFilter("PolkadotDot")}
-          isSwitch={state.CoinFullName.includes('Polkadot') ? "show_check" : "show"}
+          isSwitch={state.ImportedCoinFullName.includes('Polkadot') ? "show_check" : "show"}
         >
         </TokensContainer>
       </Body>

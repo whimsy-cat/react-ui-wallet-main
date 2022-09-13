@@ -13,11 +13,10 @@ const TokensContainer = (props) => {
   const [state, dispatch] = useContext(Context);
 
   const toggleSwitch = () => {
-    console.log("image : " + tokenImage);
-    if (!state.CoinFullName.includes(tokenName))
-      dispatch({ type: 'ADD_POST', coinfullname: tokenName, coinsymbol: tokenSymbol, coinimage: tokenImage });
+    if (!state.ImportedCoinFullName.includes(tokenName))
+      dispatch({ type: 'ADD_POST', importedcoinfullname: tokenName });
     else
-      dispatch({ type: 'REMOVE_POST', coinfullname: tokenName, coinsymbol: tokenSymbol, coinimage: tokenImage });
+      dispatch({ type: 'REMOVE_POST', importedcoinfullname: tokenName });
   }
   if (hide) {
     return null;

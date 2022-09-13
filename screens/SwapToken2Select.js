@@ -6,7 +6,7 @@ import TokensContainer from "../components/TokensContainer";
 import { useNavigation } from "@react-navigation/native";
 import { Context } from '../reducers/store'
 
-const SwapToken1Select = ({ navigation }) => {
+const SwapToken2Select = ({ navigation }) => {
   const [searchKeyWord, setSearchKeyWord] = React.useState("");
   const [state, dispatch] = useContext(Context);
 
@@ -23,7 +23,7 @@ const SwapToken1Select = ({ navigation }) => {
   }
 
   const selectToken = (token) => {
-    dispatch({ type: 'SET_SWAP1TOKEN', swap1token: token });
+    dispatch({ type: 'SET_SWAP2TOKEN', swap2token: token });
     navigation.navigate("SwapScreen");
   }
   return (
@@ -122,7 +122,7 @@ const SwapToken1Select = ({ navigation }) => {
   );
 };
 
-export default SwapToken1Select;
+export default SwapToken2Select;
 
 const Container = styled.View`
   flex: 1;

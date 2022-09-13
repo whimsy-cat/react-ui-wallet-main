@@ -9,30 +9,40 @@ const LegalScreen = ({ navigation }) => {
   const [state, dispatch] = useContext(Context);
 
   const loadData = async () => {
-    const res = await fetch(
-      `https://api.poloniex.com/markets/btc_usdt/price`
-    );
-    const data = await res.json();
-    dispatch({ type: 'ADD_COINPRICE', coinprice: data.price });
-    dispatch({ type: 'ADD_COINDAILYCHANGE', coindailychange: data.dailyChange });
-    console.log("!!!!!!!!!" + data);
+    // var res = await fetch(
+    //   `https://api.poloniex.com/markets/btc_usdt/price`
+    // );
+    // var data = await res.json();
+    // dispatch({ type: 'ADD_COINPRICE', coinprice: data.price });
+    // dispatch({ type: 'ADD_COINDAILYCHANGE', coindailychange: data.dailyChange });
+    // console.log("!!!!!!!!!");
 
-    const res1 = await fetch(
-      `https://api.poloniex.com/markets/eth_usdt/price`
-    );
-    const data1 = await res1.json();
-    dispatch({ type: 'ADD_COINPRICE', coinprice: data1.price });
-    dispatch({ type: 'ADD_COINDAILYCHANGE', coindailychange: data1.dailyChange });
+    // res = await fetch(
+    //   `https://api.poloniex.com/markets/eth_usdt/price`
+    // );
+    // data = await res.json();
+    // dispatch({ type: 'ADD_COINPRICE', coinprice: data.price });
+    // dispatch({ type: 'ADD_COINDAILYCHANGE', coindailychange: data.dailyChange });
 
-    const res2 = await fetch(
-      `https://api.poloniex.com/markets/bnb_usdt/price`
-    );
-    const data2 = await res2.json();
-    dispatch({ type: 'ADD_COINPRICE', coinprice: data2.price });
-    dispatch({ type: 'ADD_COINDAILYCHANGE', coindailychange: data2.dailyChange });
+    // res = await fetch(
+    //   `https://api.poloniex.com/markets/bnb_usdt/price`
+    // );
+    // data = await res.json();
+    // dispatch({ type: 'ADD_COINPRICE', coinprice: data.price });
+    // dispatch({ type: 'ADD_COINDAILYCHANGE', coindailychange: data.dailyChange });
+    for (let i = 0; i < 9; i++) {
+      let res = await fetch(
+        `https://api.poloniex.com/markets/${state.CoinSymbol[i]}_usdt/price`
+      );
+      let data = await res.json();
+      dispatch({ type: 'ADD_COINPRICE', coinprice: data.price });
+      dispatch({ type: 'ADD_COINDAILYCHANGE', coindailychange: data.dailyChange });
+      console.log(data);
+    }
   };
 
   useEffect(() => {
+    console.log("loading...");
     loadData();
   }, []);
   return (

@@ -2,18 +2,23 @@ import React, { useState, useEffect, createContext, useContext } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { selectedToken } from "./SwapToken1Select";
 import { Context } from '../reducers/store'
 
-const imgUrl = `../assets/images/${selectedToken}.png`;
 const SwapScreen = ({ navigation }) => {
   const [token1, setToken1] = React.useState("");
   const [state, dispatch] = useContext(Context);
+  const [payBalance, setPayBalance] = React.useState(0.0);
+  const [getBalance, setGetBalance] = React.useState(0.0);
 
   useEffect(() => {
-    setToken1(selectedToken);
-    console.log(state.CoinImage[state.CoinSymbol.indexOf(state.Swap1Token)]);
-  });
+    setGetBalance(payBalance * state.CoinPrice[state.CoinSymbol.indexOf(state.Swap1Token)] / state.CoinPrice[state.CoinSymbol.indexOf(state.Swap2Token)]);
+    // value * state.CoinPrice[state.CoinSymbol.indexOf(state.Swap1Token)] / state.CoinPrice[state.CoinSymbol.indexOf(state.Swap2Token)]);
+  }, [payBalance]);
+
+  useEffect(() => {
+    console.log(getBalance);
+  }, [getBalance]);
+
   return (
     <Container>
       <Header>Swap</Header>
@@ -22,10 +27,10 @@ const SwapScreen = ({ navigation }) => {
           <Token1>
             <InputContainer>
               <SmallInfoText>You Pay</SmallInfoText>
-              <Input placeholder="0" keyboardType="numeric" />
+              <Input placeholder="0" keyboardType="numeric" value={payBalance.toString()} onChangeText={newText => setPayBalance(newText)} />
               <BalanceInfo>
                 <Balance>Balance:</Balance>
-                <BalanceNumber>0</BalanceNumber>
+                <BalanceNumber> 0</BalanceNumber>
                 <BalanceToken>{state.Swap1Token}</BalanceToken>
               </BalanceInfo>
             </InputContainer>
@@ -65,25 +70,27 @@ const SwapScreen = ({ navigation }) => {
           <Token2>
             <InputContainer>
               <SmallInfoText>You Get</SmallInfoText>
-              <Input placeholder="0" keyboardType="numeric" />
+              <Input placeholder="0" keyboardType="numeric" value={getBalance.toFixed(5).toString()} />
               <BalanceInfo>
                 <Balance>Balance:</Balance>
-                <BalanceNumber>0</BalanceNumber>
-                <BalanceToken>TWT</BalanceToken>
+                <BalanceNumber> 0 </BalanceNumber>
+                <BalanceToken>{state.Swap2Token}</BalanceToken>
               </BalanceInfo>
             </InputContainer>
-            <TokenSelect>
-              <Image source={require("../assets/images/twt.png")} />
-              <TokenName>TWT</TokenName>
-              <Ionicons
-                name={"chevron-forward"}
-                color="#979797"
-                size={28}
-                style={{
-                  marginLeft: 20,
-                }}
-              />
-            </TokenSelect>
+            <TouchableOpacity onPress={() => navigation.navigate("SwapToken2Select")}>
+              <TokenSelect>
+                <Image source={state.CoinImage[state.CoinSymbol.indexOf(state.Swap2Token)]} />
+                <TokenName>{state.Swap2Token}</TokenName>
+                <Ionicons
+                  name={"chevron-forward"}
+                  color="#979797"
+                  size={28}
+                  style={{
+                    marginLeft: 20,
+                  }}
+                />
+              </TokenSelect>
+            </TouchableOpacity>
           </Token2>
         </SwapContainer>
 
@@ -156,7 +163,7 @@ const Input = styled.TextInput`
   font-size: 28px;
   margin: 10px 0;
   overflow: hidden;
-  width: 150px;
+  width: 180px;
 `;
 const BalanceInfo = styled.View`
   flex-direction: row;
