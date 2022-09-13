@@ -61,7 +61,7 @@ const BuyTokenDetail = ({ navigation }) => {
         <Body>
           <Token>
             <TokenDetails>
-              <Image source={require("../assets/images/eth.png")} />
+              <Image source={38} />
               <TokenNamePrice>
                 <TokenName>{selectedBuyToken}</TokenName>
                 <TokenPriceAction>
@@ -101,18 +101,22 @@ const BuyTokenDetail = ({ navigation }) => {
 export default BuyTokenDetail;
 
 const CoinbaseImage = styled.Image`
+  margin-top: 30px;
   width: 350px;
   height: 150px;
 `;
 const Transak = styled.Image`
+  margin-top: 30px;
   width: 370px;
   height: 220px;
 `;
 const MoonPay = styled.Image`
+  margin-top: 30px;
   width: 370px;
   height: 220px;
 `;
 const Wire = styled.Image`
+  margin-top: 30px;
   width: 370px;
   height: 280px;
 `;
@@ -313,5 +317,5 @@ const Button = styled.Text`
   text-transform: uppercase;
   color: #fff;
   text-align: center;
-  margin: 30px auto 0 auto;
+  margin: 30px auto 30px auto;
 `;

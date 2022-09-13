@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import { Dimensions, SafeAreaView, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -6,6 +6,7 @@ import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import { useNavigation } from "@react-navigation/native";
 import { myCustomContractAdrress, myCustomSymbol, myCustomTokenName, myCustomTokenDecimals } from "./AddCustomTokenScreen";
+import { Context } from '../reducers/store'
 
 import "react-native-get-random-values"
 import "@ethersproject/shims"
@@ -39,8 +40,12 @@ function FirstRoute() {
   const [ethBalance, setEthBalance] = useState("0.0");
   const [ethCoins, setEthCoins] = useState([]);
   const [bitCoins, setBitCoins] = useState([]);
+  const [state, dispatch] = useContext(Context);
   const navigation = useNavigation();
 
+  useEffect(() => {
+    console.log(state);
+  })
   const getBalance = (address) => {
     // const balance = await provider.getBalance(address);
     // const balanceInEth = ethers.utils.formatEther(balance);
@@ -54,55 +59,37 @@ function FirstRoute() {
       setEthBalance(balanceInEth);
     })
   }
-  const getTestBalance = async (address) => {
-    const res = await fetch(
-      "https://api-ropsten.etherscan.io/api?module=account&action=balance&address=0x9381D7598F28fAbd2f94Aa9d01B4040C5F436197&tag=latest&apikey=SZH2FUBGJY2J2F85MHRVMSCSVXC7W7E5ST"
-    );
-    const data = await res.json();
-  };
-  const loadData = async () => {
-    const res = await fetch(
-      "https://api.poloniex.com/markets/eth_usdt/price"
-    );
-    const data = await res.json();
-    setEthCoins(data);
-
-    const res1 = await fetch(
-      "https://api.poloniex.com/markets/btc_usdt/price"
-    );
-    const data1 = await res1.json();
-    setBitCoins(data1);
-  };
 
   useEffect(() => {
     getBalance("0x9381D7598F28fAbd2f94Aa9d01B4040C5F436197"); // wallet.address
-    // getTestBalance("0x9381D7598F28fAbd2f94Aa9d01B4040C5F436197");
-    loadData();
   }, []);
   return (
     <First>
       <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("TokenDetailScreen")}
-        >
-          <Token>
-            <TokenDetails>
-              <Image source={require("../assets/images/btc.png")} />
-              <TokenNamePrice>
-                <TokenName>Bitcoin</TokenName>
-                <TokenPriceAction>
-                  <TokenPrice>${bitCoins.price}</TokenPrice>
-                  <TokenPercent>{bitCoins.dailyChange > 0 ? "+" : ""}{bitCoins.dailyChange} %</TokenPercent>
-                </TokenPriceAction>
-              </TokenNamePrice>
-            </TokenDetails>
-            <TokenCol2>
-              <TokenAmount>0</TokenAmount>
-              <TokenSymbol>BTC</TokenSymbol>
-            </TokenCol2>
-          </Token>
-        </TouchableOpacity>
-        <TouchableOpacity
+        {state.CoinFullName.map((coin, index) => (
+          <TouchableOpacity
+            key={index}
+            onPress={() => navigation.navigate("TokenDetailScreen")}
+          >
+            <Token>
+              <TokenDetails>
+                <Image source={state.CoinImage[index]} />
+                <TokenNamePrice>
+                  <TokenName>{coin}</TokenName>
+                  <TokenPriceAction>
+                    <TokenPrice>{state.CoinPrice[index]}</TokenPrice>
+                    <TokenPercent>{state.CoinDailyChange[index] > 0 ? "+" : ""}{state.CoinDailyChange[index]} %</TokenPercent>
+                  </TokenPriceAction>
+                </TokenNamePrice>
+              </TokenDetails>
+              <TokenCol2>
+                <TokenAmount>0</TokenAmount>
+                <TokenSymbol>{state.CoinSymbol[index]}</TokenSymbol>
+              </TokenCol2>
+            </Token>
+          </TouchableOpacity>
+        ))}
+        {/* <TouchableOpacity
           onPress={() => navigation.navigate("TokenDetailScreen")}
         >
           <Token>
@@ -141,7 +128,7 @@ function FirstRoute() {
               <TokenSymbol>BNB</TokenSymbol>
             </TokenCol2>
           </Token>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         {(myCustomTokenName != "") && (<Token>
           <TokenDetails>
             <Image source={require("../assets/images/cardano.png")} />

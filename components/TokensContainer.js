@@ -13,15 +13,11 @@ const TokensContainer = (props) => {
   const [state, dispatch] = useContext(Context);
 
   const toggleSwitch = () => {
-    if (!state.posts.includes(`${tokenName}`))
-      dispatch({ type: 'ADD_POST', payload: `${tokenName}` });
+    if (!state.CoinFullName.includes(`${tokenName}`))
+      dispatch({ type: 'ADD_POST', coinfullname: `${tokenName}`, coinsymbol: `${tokenSymbol}`, coinimage: `${tokenImage}` });
     else
-      dispatch({ type: 'REMOVE_POST', payload: `${tokenName}` });
+      dispatch({ type: 'REMOVE_POST', coinfullname: `${tokenName}`, coinsymbol: `${tokenSymbol}`, coinimage: `${tokenImage}` });
   }
-  useEffect(() => {
-    console.log(state);
-  }, [state]);
-
   if (hide) {
     return null;
   }

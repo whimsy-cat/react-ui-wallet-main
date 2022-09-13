@@ -4,17 +4,37 @@ const Reducer = (state, action) => {
         case 'SET_POSTS':
             return {
                 ...state,
-                posts: action.payload
+                CoinFullName: action.coinfullname,
+                CoinSymbol: action.coinsymbol,
+                CoinImage: action.coinimage,
+                CoinPrice: action.coinprice,
+                CoinDailyChange: action.coindailychange,
             };
         case 'ADD_POST':
             return {
                 ...state,
-                posts: state.posts.concat(action.payload)
+                CoinFullName: state.CoinFullName.concat(action.coinfullname),
+                CoinSymbol: state.CoinSymbol.concat(action.coinsymbol),
+                CoinImage: state.CoinImage.concat(action.coinimage),
+            };
+        case 'ADD_COINPRICE':
+            return {
+                ...state,
+                CoinPrice: state.CoinPrice.concat(action.coinprice),
+            };
+        case 'ADD_COINDAILYCHANGE':
+            return {
+                ...state,
+                CoinDailyChange: state.CoinDailyChange.concat(action.coindailychange),
             };
         case 'REMOVE_POST':
             return {
                 ...state,
-                posts: state.posts.filter(post => post !== action.payload)
+                CoinFullName: state.CoinFullName.filter(coinfullname => coinfullname !== action.coinfullname),
+                CoinSymbol: state.CoinSymbol.filter(coinsymbol => coinsymbol !== action.coinsymbol),
+                CoinImage: state.CoinImage.filter(coinimage => coinimage !== action.coinimage),
+                CoinPrice: state.CoinPrice.filter(coinprice => coinprice !== action.coinprice),
+                CoinDailyChange: state.CoinDailyChange.filter(coindailychange => coindailychange !== action.coindailychange),
             };
         default:
             return state;

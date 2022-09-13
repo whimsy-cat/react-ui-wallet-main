@@ -1,11 +1,40 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { CheckBox } from "react-native-elements";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
-
+import { Context } from '../reducers/store'
 
 const LegalScreen = ({ navigation }) => {
+  const [state, dispatch] = useContext(Context);
+
+  const loadData = async () => {
+    const res = await fetch(
+      `https://api.poloniex.com/markets/btc_usdt/price`
+    );
+    const data = await res.json();
+    dispatch({ type: 'ADD_COINPRICE', coinprice: data.price });
+    dispatch({ type: 'ADD_COINDAILYCHANGE', coindailychange: data.dailyChange });
+    console.log("!!!!!!!!!" + data);
+
+    const res1 = await fetch(
+      `https://api.poloniex.com/markets/eth_usdt/price`
+    );
+    const data1 = await res1.json();
+    dispatch({ type: 'ADD_COINPRICE', coinprice: data1.price });
+    dispatch({ type: 'ADD_COINDAILYCHANGE', coindailychange: data1.dailyChange });
+
+    const res2 = await fetch(
+      `https://api.poloniex.com/markets/bnb_usdt/price`
+    );
+    const data2 = await res2.json();
+    dispatch({ type: 'ADD_COINPRICE', coinprice: data2.price });
+    dispatch({ type: 'ADD_COINDAILYCHANGE', coindailychange: data2.dailyChange });
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
   return (
     <Container>
       <Header>Legal</Header>
