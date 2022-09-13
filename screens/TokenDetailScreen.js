@@ -42,7 +42,7 @@ const TokenDetailScreen = ({ navigation }) => {
       <Body>
         <CryptoDetailContainer>
           <CryptoCurrency>${price}</CryptoCurrency>
-          <CryptoChange>{dailyChange > 0 ? "$" : "-$"}{Math.abs(price * dailyChange).toFixed(2)}   -{dailyChange}%</CryptoChange>
+          <CryptoChange>{dailyChange > 0 ? "$" : "- $"}{Math.abs(price * dailyChange).toFixed(2)}  {dailyChange}%</CryptoChange>
           <ChartView>
             <LineChart
               data={{
@@ -75,12 +75,11 @@ const TokenDetailScreen = ({ navigation }) => {
                   borderRadius: 16
                 },
                 propsForDots: {
-                  r: "6",
+                  r: "4",
                   strokeWidth: "2",
                   stroke: "#80c796"
                 }
               }}
-              bezier
               style={{
                 marginVertical: 8,
                 borderRadius: 16
@@ -164,7 +163,7 @@ const HeaderText = styled.Text`
   text-align: center;
   color: #fff;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 26px;
 `;
 const Continue = styled.Text`
   text-transform: uppercase;
