@@ -3,12 +3,11 @@ import Reducer from './reducer'
 
 
 const initialState = {
-    CoinFullName: ["Bitcoin", "Ethereum", "BNB Smart Chain"],
-    CoinSymbol: ["BTC", "ETH", "BNB"],
+    CoinFullName: ["Bitcoin", "Ethereum"],
+    CoinSymbol: ["BTC", "ETH"],
     CoinImage: [
-        require("../assets/images/btc.png"),
-        require("../assets/images/eth.png"),
-        require("../assets/images/bnb.png"),
+        31,
+        29,
     ],
     CoinPrice: [],
     CoinDailyChange: [],
