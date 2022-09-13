@@ -24,6 +24,11 @@ const Reducer = (state, action) => {
                 ...state,
                 BuyToken: action.buytoken,
             };
+        case 'SET_DETAILTOKEN':
+            return {
+                ...state,
+                DetailToken: action.detailtoken,
+            };
         case 'ADD_POST':
             return {
                 ...state,

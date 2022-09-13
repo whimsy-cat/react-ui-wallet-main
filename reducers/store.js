@@ -22,6 +22,7 @@ const initialState = {
     Swap1Token: "ETH",
     Swap2Token: "BNB",
     BuyToken: "ETH",
+    DetailToken: "BTC",
 };
 
 const Store = ({ children }) => {

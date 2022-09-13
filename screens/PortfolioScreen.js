@@ -58,6 +58,10 @@ function FirstRoute() {
     })
   }
 
+  const onDetailToken = (coin) => {
+    dispatch({ type: 'SET_DETAILTOKEN', detailtoken: coin });
+    navigation.navigate("TokenDetailScreen");
+  }
   useEffect(() => {
     getBalance("0x9381D7598F28fAbd2f94Aa9d01B4040C5F436197"); // wallet.address
   }, []);
@@ -67,7 +71,7 @@ function FirstRoute() {
         {state.ImportedCoinFullName.map((coin, index) => (
           <TouchableOpacity
             key={index}
-            onPress={() => navigation.navigate("TokenDetailScreen")}
+            onPress={() => onDetailToken(coin)}
           >
             <Token>
               <TokenDetails>

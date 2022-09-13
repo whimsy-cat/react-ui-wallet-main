@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { Context } from '../reducers/store'
 import {
   LineChart,
   BarChart,
@@ -17,33 +18,44 @@ import {
   Dimensions,
 } from "react-native";
 import { Description } from "@ethersproject/properties";
+
 const TokenDetailScreen = ({ navigation }) => {
+  const [state, dispatch] = useContext(Context);
+  const [price, setPrice] = React.useState(0.0);
+  const [dailyChange, setDailyChange] = React.useState(0.0);
+
+  useEffect(() => {
+    setPrice(Number(state.CoinPrice[state.CoinFullName.indexOf(state.DetailToken)]));
+    setDailyChange(Number(state.CoinDailyChange[state.CoinFullName.indexOf(state.DetailToken)]))
+    console.log("price: " + price);
+    console.log("dailychage: " + dailyChange);
+  }, [])
   return (
     <Container>
       <Header>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name={"arrow-back"} color="#fff" size={28} />
         </TouchableOpacity>
-        <HeaderText>Bitcoin BTC</HeaderText>
+        <HeaderText>{state.DetailToken}</HeaderText>
         <Continue></Continue>
       </Header>
       <Body>
         <CryptoDetailContainer>
-          <CryptoCurrency>$22043.34</CryptoCurrency>
-          <CryptoChange>-$1,599.66 -6.62%</CryptoChange>
+          <CryptoCurrency>${price}</CryptoCurrency>
+          <CryptoChange>{dailyChange > 0 ? "$" : "-$"}{Math.abs(price * dailyChange).toFixed(2)}   -{dailyChange}%</CryptoChange>
           <ChartView>
             <LineChart
               data={{
-                labels: ["2022.1", "2022.2", "2022.3", "2022.4", "2022.5", "2022.6"],
+                labels: ["9/8", "9/9", "9/10", "9/11", "9/12", "9/13"],
                 datasets: [
                   {
                     data: [
-                      Math.random() * 100,
-                      Math.random() * 100,
-                      Math.random() * 100,
-                      Math.random() * 100,
-                      Math.random() * 100,
-                      Math.random() * 100
+                      price + (Math.random() - 1) * price * dailyChange,
+                      price + (Math.random() - 1) * price * dailyChange,
+                      price + (Math.random() - 1) * price * dailyChange,
+                      price + (Math.random() - 1) * price * dailyChange,
+                      price + (Math.random() - 1) * price * dailyChange,
+                      price + (Math.random() - 1) * price * dailyChange,
                     ]
                   }
                 ]
@@ -86,14 +98,14 @@ const TokenDetailScreen = ({ navigation }) => {
             </PriceAlertSwitch>
           </PriceAlert>
           <PriceDescription>
-            Bitcoin is a cryptocurrency and worldwide payment system. It is the first decentralized digital currency, as the system works without a central bank or single administrator.
+            {state.DetailToken} is a cryptocurrency and worldwide payment system. It is the first decentralized digital currency, as the system works without a central bank or single administrator.
           </PriceDescription>
           <PriceAlert>
             <PriceAlertLabel>
               Website
             </PriceAlertLabel>
             <PriceAlertLink>
-              bitcoin.org
+              {state.DetailToken}.org
             </PriceAlertLink>
           </PriceAlert>
           <PriceAlert>
@@ -101,7 +113,7 @@ const TokenDetailScreen = ({ navigation }) => {
               Explorer
             </PriceAlertLabel>
             <PriceAlertLink>
-              blockchain.info
+              {state.DetailToken}.info
             </PriceAlertLink>
           </PriceAlert>
         </CryptoSetting>
