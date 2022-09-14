@@ -11,41 +11,41 @@ const BuyTokenDetail = ({ navigation }) => {
 
   const handleCoinBaseClick = () => {
     console.log("opening...");
-    Linking.canOpenURL("https://pay.coinbase.com/buy/select-asset?appId=ab4b8829-a59d-44d3-accc-de77e4f18df2&attribution=extension&destinationWallets=%5B%7B%22address%22%3A%220x9381d7598f28fabd2f94aa9d01b4040c5f436197%22%2C%22assets%22%3A%5B%22ETH%22%2C%22USDC%22%2C%22DAI%22%5D%7D%5D").then(supported => {
+    Linking.canOpenURL("https://pay.coinbase.com/buy/select-asset?appId=ab4b8829-a59d-44d3-accc-de77e4f18df2&attribution=extension&destinationWallets=%5B%7B%22address%22%3A%220x35fD12f4ED2Eb8678710063795A7a20d32541aa0%22%2C%22assets%22%3A%5B%22ETH%22%2C%22USDC%22%2C%22DAI%22%5D%7D%5D").then(supported => {
       if (supported) {
-        Linking.openURL("https://pay.coinbase.com/buy/select-asset?appId=ab4b8829-a59d-44d3-accc-de77e4f18df2&attribution=extension&destinationWallets=%5B%7B%22address%22%3A%220x9381d7598f28fabd2f94aa9d01b4040c5f436197%22%2C%22assets%22%3A%5B%22ETH%22%2C%22USDC%22%2C%22DAI%22%5D%7D%5D");
+        Linking.openURL("https://pay.coinbase.com/buy/select-asset?appId=ab4b8829-a59d-44d3-accc-de77e4f18df2&attribution=extension&destinationWallets=%5B%7B%22address%22%3A%220x35fD12f4ED2Eb8678710063795A7a20d32541aa0%22%2C%22assets%22%3A%5B%22ETH%22%2C%22USDC%22%2C%22DAI%22%5D%7D%5D");
       } else {
-        console.log("Don't know how to open URI: " + "https://pay.coinbase.com/buy/select-asset?appId=ab4b8829-a59d-44d3-accc-de77e4f18df2&attribution=extension&destinationWallets=%5B%7B%22address%22%3A%220x9381d7598f28fabd2f94aa9d01b4040c5f436197%22%2C%22assets%22%3A%5B%22ETH%22%2C%22USDC%22%2C%22DAI%22%5D%7D%5D");
+        console.log("Don't know how to open URI: " + "https://pay.coinbase.com/buy/select-asset?appId=ab4b8829-a59d-44d3-accc-de77e4f18df2&attribution=extension&destinationWallets=%5B%7B%22address%22%3A%220x35fD12f4ED2Eb8678710063795A7a20d32541aa0%22%2C%22assets%22%3A%5B%22ETH%22%2C%22USDC%22%2C%22DAI%22%5D%7D%5D");
       }
     });
   };
   const handleTransakClick = () => {
     console.log("opening...");
-    Linking.canOpenURL("https://global.transak.com/?apiKey=25ac1309-a49b-4411-b20e-5e56c61a5b1c&hostURL=https%3A%2F%2Fmetamask.io&cryptoCurrencyList=ETH%2CUSDT%2CUSDC%2CDAI&defaultCryptoCurrency=ETH&networks=ethereum&walletAddress=0x9381d7598f28fabd2f94aa9d01b4040c5f436197").then(supported => {
+    Linking.canOpenURL("https://global.transak.com/?apiKey=25ac1309-a49b-4411-b20e-5e56c61a5b1c&hostURL=https%3A%2F%2Fmetamask.io&cryptoCurrencyList=ETH%2CUSDT%2CUSDC%2CDAI&defaultCryptoCurrency=ETH&networks=ethereum&walletAddress=0x35fD12f4ED2Eb8678710063795A7a20d32541aa0").then(supported => {
       if (supported) {
-        Linking.openURL("https://global.transak.com/?apiKey=25ac1309-a49b-4411-b20e-5e56c61a5b1c&hostURL=https%3A%2F%2Fmetamask.io&cryptoCurrencyList=ETH%2CUSDT%2CUSDC%2CDAI&defaultCryptoCurrency=ETH&networks=ethereum&walletAddress=0x9381d7598f28fabd2f94aa9d01b4040c5f436197");
+        Linking.openURL("https://global.transak.com/?apiKey=25ac1309-a49b-4411-b20e-5e56c61a5b1c&hostURL=https%3A%2F%2Fmetamask.io&cryptoCurrencyList=ETH%2CUSDT%2CUSDC%2CDAI&defaultCryptoCurrency=ETH&networks=ethereum&walletAddress=0x35fD12f4ED2Eb8678710063795A7a20d32541aa0");
       } else {
-        console.log("Don't know how to open URI: " + "https://global.transak.com/?apiKey=25ac1309-a49b-4411-b20e-5e56c61a5b1c&hostURL=https%3A%2F%2Fmetamask.io&cryptoCurrencyList=ETH%2CUSDT%2CUSDC%2CDAI&defaultCryptoCurrency=ETH&networks=ethereum&walletAddress=0x9381d7598f28fabd2f94aa9d01b4040c5f436197");
+        console.log("Don't know how to open URI: " + "https://global.transak.com/?apiKey=25ac1309-a49b-4411-b20e-5e56c61a5b1c&hostURL=https%3A%2F%2Fmetamask.io&cryptoCurrencyList=ETH%2CUSDT%2CUSDC%2CDAI&defaultCryptoCurrency=ETH&networks=ethereum&walletAddress=0x35fD12f4ED2Eb8678710063795A7a20d32541aa0");
       }
     });
   };
   const handleMoonPayClick = () => {
     console.log("opening...");
-    Linking.canOpenURL("https://pay.sendwyre.com/purchase?accountId=AC-7AG3W4XH4N2&utm_campaign=AC-7AG3W4XH4N2&destCurrency=ETH&utm_medium=widget&paymentMethod=debit-card&reservation=3JF2YNPNBDALQX2UVR27&autoRedirect=false&dest=ethereum%3A0x9381d7598f28fabd2f94aa9d01b4040c5f436197&utm_source=checkout").then(supported => {
+    Linking.canOpenURL("https://pay.sendwyre.com/purchase?accountId=AC-7AG3W4XH4N2&utm_campaign=AC-7AG3W4XH4N2&destCurrency=ETH&utm_medium=widget&paymentMethod=debit-card&reservation=3JF2YNPNBDALQX2UVR27&autoRedirect=false&dest=ethereum%3A0x35fD12f4ED2Eb8678710063795A7a20d32541aa0&utm_source=checkout").then(supported => {
       if (supported) {
-        Linking.openURL("https://pay.sendwyre.com/purchase?accountId=AC-7AG3W4XH4N2&utm_campaign=AC-7AG3W4XH4N2&destCurrency=ETH&utm_medium=widget&paymentMethod=debit-card&reservation=3JF2YNPNBDALQX2UVR27&autoRedirect=false&dest=ethereum%3A0x9381d7598f28fabd2f94aa9d01b4040c5f436197&utm_source=checkout");
+        Linking.openURL("https://pay.sendwyre.com/purchase?accountId=AC-7AG3W4XH4N2&utm_campaign=AC-7AG3W4XH4N2&destCurrency=ETH&utm_medium=widget&paymentMethod=debit-card&reservation=3JF2YNPNBDALQX2UVR27&autoRedirect=false&dest=ethereum%3A0x35fD12f4ED2Eb8678710063795A7a20d32541aa0&utm_source=checkout");
       } else {
-        console.log("Don't know how to open URI: " + "https://pay.sendwyre.com/purchase?accountId=AC-7AG3W4XH4N2&utm_campaign=AC-7AG3W4XH4N2&destCurrency=ETH&utm_medium=widget&paymentMethod=debit-card&reservation=3JF2YNPNBDALQX2UVR27&autoRedirect=false&dest=ethereum%3A0x9381d7598f28fabd2f94aa9d01b4040c5f436197&utm_source=checkout");
+        console.log("Don't know how to open URI: " + "https://pay.sendwyre.com/purchase?accountId=AC-7AG3W4XH4N2&utm_campaign=AC-7AG3W4XH4N2&destCurrency=ETH&utm_medium=widget&paymentMethod=debit-card&reservation=3JF2YNPNBDALQX2UVR27&autoRedirect=false&dest=ethereum%3A0x35fD12f4ED2Eb8678710063795A7a20d32541aa0&utm_source=checkout");
       }
     });
   };
   const handleWireClick = () => {
     console.log("opening...");
-    Linking.canOpenURL("https://pay.sendwyre.com/purchase?accountId=AC-7AG3W4XH4N2&utm_campaign=AC-7AG3W4XH4N2&destCurrency=ETH&utm_medium=widget&paymentMethod=debit-card&reservation=EAXZNRULNJRMYZZVM2EZ&autoRedirect=false&dest=ethereum%3A0x9381d7598f28fabd2f94aa9d01b4040c5f436197&utm_source=checkout").then(supported => {
+    Linking.canOpenURL("https://pay.sendwyre.com/purchase?accountId=AC-7AG3W4XH4N2&utm_campaign=AC-7AG3W4XH4N2&destCurrency=ETH&utm_medium=widget&paymentMethod=debit-card&reservation=EAXZNRULNJRMYZZVM2EZ&autoRedirect=false&dest=ethereum%3A0x35fD12f4ED2Eb8678710063795A7a20d32541aa0&utm_source=checkout").then(supported => {
       if (supported) {
-        Linking.openURL("https://pay.sendwyre.com/purchase?accountId=AC-7AG3W4XH4N2&utm_campaign=AC-7AG3W4XH4N2&destCurrency=ETH&utm_medium=widget&paymentMethod=debit-card&reservation=EAXZNRULNJRMYZZVM2EZ&autoRedirect=false&dest=ethereum%3A0x9381d7598f28fabd2f94aa9d01b4040c5f436197&utm_source=checkout");
+        Linking.openURL("https://pay.sendwyre.com/purchase?accountId=AC-7AG3W4XH4N2&utm_campaign=AC-7AG3W4XH4N2&destCurrency=ETH&utm_medium=widget&paymentMethod=debit-card&reservation=EAXZNRULNJRMYZZVM2EZ&autoRedirect=false&dest=ethereum%3A0x35fD12f4ED2Eb8678710063795A7a20d32541aa0&utm_source=checkout");
       } else {
-        console.log("Don't know how to open URI: " + "https://pay.sendwyre.com/purchase?accountId=AC-7AG3W4XH4N2&utm_campaign=AC-7AG3W4XH4N2&destCurrency=ETH&utm_medium=widget&paymentMethod=debit-card&reservation=EAXZNRULNJRMYZZVM2EZ&autoRedirect=false&dest=ethereum%3A0x9381d7598f28fabd2f94aa9d01b4040c5f436197&utm_source=checkout");
+        console.log("Don't know how to open URI: " + "https://pay.sendwyre.com/purchase?accountId=AC-7AG3W4XH4N2&utm_campaign=AC-7AG3W4XH4N2&destCurrency=ETH&utm_medium=widget&paymentMethod=debit-card&reservation=EAXZNRULNJRMYZZVM2EZ&autoRedirect=false&dest=ethereum%3A0x35fD12f4ED2Eb8678710063795A7a20d32541aa0&utm_source=checkout");
       }
     });
   };

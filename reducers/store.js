@@ -34,6 +34,7 @@ const initialState = {
         "0x8b9C35C79AF5319C70dd9A3E3850F368822ED64E",
         "0x3BfC20f0B9aFcAcE800D73D2191166FF16540258",
     ],
+    CurrentETHBalance: ["0.0"],
 };
 
 const Store = ({ children }) => {

@@ -41,9 +41,10 @@ function FirstRoute() {
   const [state, dispatch] = useContext(Context);
   const navigation = useNavigation();
 
-  useEffect(() => {
-    console.log(state);
-  })
+  const onDetailToken = (coin) => {
+    dispatch({ type: 'SET_DETAILTOKEN', detailtoken: coin });
+    navigation.navigate("TokenDetailScreen");
+  }
   const getBalance = (address) => {
     // const balance = await provider.getBalance(address);
     // const balanceInEth = ethers.utils.formatEther(balance);
@@ -55,15 +56,19 @@ function FirstRoute() {
       const balanceInEth = ethers.utils.formatEther(balance)
       console.log(`balance: ${balanceInEth} ETH`)
       setEthBalance(balanceInEth);
+
     })
   }
-
-  const onDetailToken = (coin) => {
-    dispatch({ type: 'SET_DETAILTOKEN', detailtoken: coin });
-    navigation.navigate("TokenDetailScreen");
-  }
   useEffect(() => {
-    getBalance("0x9381D7598F28fAbd2f94Aa9d01B4040C5F436197"); // wallet.address
+    dispatch({ type: 'SET_BALANCE', currentethbalance: ethBalance });
+  }, [ethBalance])
+
+  useEffect(() => {
+    console.log(state);
+  }, [state])
+
+  useEffect(() => {
+    getBalance("0x35fD12f4ED2Eb8678710063795A7a20d32541aa0"); // wallet.address
   }, []);
   return (
     <First>
@@ -85,7 +90,7 @@ function FirstRoute() {
                 </TokenNamePrice>
               </TokenDetails>
               <TokenCol2>
-                <TokenAmount>{coin == "Ethereum" ? ethBalance : 0.0}</TokenAmount>
+                <TokenAmount>{coin == "Ethereum" ? state.CurrentETHBalance : 0.0}</TokenAmount>
                 <TokenSymbol>{state.CoinSymbol[state.CoinFullName.indexOf(state.ImportedCoinFullName[index])]}</TokenSymbol>
               </TokenCol2>
             </Token>

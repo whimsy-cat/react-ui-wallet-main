@@ -21,10 +21,6 @@ const SwapScreen = ({ navigation }) => {
   }, [getBalance]);
 
   useEffect(() => {
-    setGetBalance(payBalance * state.CoinPrice[state.CoinSymbol.indexOf(state.Swap1Token)] / state.CoinPrice[state.CoinSymbol.indexOf(state.Swap2Token)]);
-  }, [state]);
-
-  useEffect(() => {
     console.log(swapAPI);
     if (swapAPI != "") {
       doSwap();
@@ -39,14 +35,18 @@ const SwapScreen = ({ navigation }) => {
     let data = await res.json();
     console.log(data);
     if (data.statusCode == "400") {
-      alert("Not enough balance to swap!");
+      alert(data.description);
     }
     else {
       alert("Finish to swap");
     }
   }
   const onSwapHandle = () => {
-    setSwapAPI("https://api.1inch.io/v4.0/1/swap?fromTokenAddress=0x2170ed0880ac9a755fd29b2688956bd959f933f8&toTokenAddress=0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c&amount=1&fromAddress=0x35fD12f4ED2Eb8678710063795A7a20d32541aa0&slippage=20");
+    if (state.CurrentETHBalance < payBalance) {
+      alert("Not Enough Balance to Swap!");
+      return;
+    }
+    setSwapAPI(`https://api.1inch.io/v4.0/1/swap?fromTokenAddress=${state.ContractAddress[state.CoinSymbol.indexOf(state.Swap1Token)]}&toTokenAddress=${state.ContractAddress[state.CoinSymbol.indexOf(state.Swap2Token)]}&amount=${payBalance}&fromAddress=0x35fD12f4ED2Eb8678710063795A7a20d32541aa0&slippage=20`);
   }
   return (
     <Container>

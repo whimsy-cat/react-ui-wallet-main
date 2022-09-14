@@ -11,7 +11,7 @@ import { selectedSendToken } from "./SendTokenChoose";
 
 var contract_address = "";
 var send_abi = "";
-const send_address = "0x9381D7598F28fAbd2f94Aa9d01B4040C5F436197"
+const send_address = "0x35fD12f4ED2Eb8678710063795A7a20d32541aa0"
 const private_key = "69b2ce785561f97e2aa896e67f6f61e9c8442a9f11b3cbb476439219141db91f";
 const gas_limit = "0x100000";
 

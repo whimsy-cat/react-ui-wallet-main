@@ -29,6 +29,11 @@ const Reducer = (state, action) => {
                 ...state,
                 DetailToken: action.detailtoken,
             };
+        case 'SET_BALANCE':
+            return {
+                ...state,
+                CurrentETHBalance: action.currentethbalance,
+            }
         case 'ADD_POST':
             return {
                 ...state,
