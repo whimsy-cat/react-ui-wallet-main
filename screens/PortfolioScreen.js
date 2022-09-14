@@ -79,7 +79,7 @@ function FirstRoute() {
                 <TokenNamePrice>
                   <TokenName>{coin}</TokenName>
                   <TokenPriceAction>
-                    <TokenPrice>{state.CoinPrice[index]}</TokenPrice>
+                    <TokenPrice>{state.CoinPrice[state.CoinFullName.indexOf(state.ImportedCoinFullName[index])]}</TokenPrice>
                     <TokenPercent>{state.CoinDailyChange[index] > 0 ? "+" : ""}{state.CoinDailyChange[index]} %</TokenPercent>
                   </TokenPriceAction>
                 </TokenNamePrice>

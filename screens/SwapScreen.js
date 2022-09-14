@@ -3,14 +3,13 @@ import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Context } from '../reducers/store'
-import { providers, ethers } from 'ethers';
-import detectEthereumProvider from '@metamask/detect-provider';
 
 const SwapScreen = ({ navigation }) => {
   const [token1, setToken1] = React.useState("");
   const [state, dispatch] = useContext(Context);
   const [payBalance, setPayBalance] = React.useState(0.0);
   const [getBalance, setGetBalance] = React.useState(0.0);
+  const [swapAPI, setSwapAPI] = React.useState("");
 
   useEffect(() => {
     setGetBalance(payBalance * state.CoinPrice[state.CoinSymbol.indexOf(state.Swap1Token)] / state.CoinPrice[state.CoinSymbol.indexOf(state.Swap2Token)]);
@@ -24,6 +23,31 @@ const SwapScreen = ({ navigation }) => {
   useEffect(() => {
     setGetBalance(payBalance * state.CoinPrice[state.CoinSymbol.indexOf(state.Swap1Token)] / state.CoinPrice[state.CoinSymbol.indexOf(state.Swap2Token)]);
   }, [state]);
+
+  useEffect(() => {
+    console.log(swapAPI);
+    if (swapAPI != "") {
+      doSwap();
+    }
+  }, [swapAPI])
+
+  const doSwap = async () => {
+    console.log("Start swapping...");
+    let res = await fetch(
+      `${swapAPI}`
+    );
+    let data = await res.json();
+    console.log(data);
+    if (data.statusCode == "400") {
+      alert("Not enough balance to swap!");
+    }
+    else {
+      alert("Finish to swap");
+    }
+  }
+  const onSwapHandle = () => {
+    setSwapAPI("https://api.1inch.io/v4.0/1/swap?fromTokenAddress=0x2170ed0880ac9a755fd29b2688956bd959f933f8&toTokenAddress=0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c&amount=1&fromAddress=0x35fD12f4ED2Eb8678710063795A7a20d32541aa0&slippage=20");
+  }
   return (
     <Container>
       <Header>Swap</Header>
@@ -107,16 +131,18 @@ const SwapScreen = ({ navigation }) => {
         </Slippage>
         <Conversion>
           <TokenOne>
-            <One>1</One>
-            <PayToken>BNB</PayToken>
+            <One>{payBalance > 0 ? payBalance : "0"}</One>
+            <PayToken>{state.Swap1Token}</PayToken>
           </TokenOne>
           <Equals>=</Equals>
           <TokenTwo>
-            <TokenTwoConverted>309.441719979</TokenTwoConverted>
-            <GetToken>TWT</GetToken>
+            <TokenTwoConverted>{getBalance}</TokenTwoConverted>
+            <GetToken>{state.Swap2Token}</GetToken>
           </TokenTwo>
         </Conversion>
-        <Button>Swap</Button>
+        <TouchableOpacity onPress={() => onSwapHandle()}>
+          <Button>Swap</Button>
+        </TouchableOpacity>
       </Body>
     </Container>
   );
