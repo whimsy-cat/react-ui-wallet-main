@@ -3,8 +3,6 @@ import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Context } from '../reducers/store'
-import { providers, ethers } from 'ethers';
-import detectEthereumProvider from '@metamask/detect-provider';
 
 const SwapScreen = ({ navigation }) => {
   const [token1, setToken1] = React.useState("");
