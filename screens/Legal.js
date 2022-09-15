@@ -3,7 +3,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { CheckBox } from "react-native-elements";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { Context } from '../reducers/store'
+import { Context } from '../reducers/store';
 
 const LegalScreen = ({ navigation }) => {
   const [state, dispatch] = useContext(Context);

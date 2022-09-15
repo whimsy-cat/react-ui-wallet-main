@@ -3,6 +3,8 @@ import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Context } from '../reducers/store'
+import { ActivityIndicator, StyleSheet } from 'react-native';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 const SwapScreen = ({ navigation }) => {
   const [token1, setToken1] = React.useState("");
@@ -10,6 +12,7 @@ const SwapScreen = ({ navigation }) => {
   const [payBalance, setPayBalance] = React.useState(0.0);
   const [getBalance, setGetBalance] = React.useState(0.0);
   const [swapAPI, setSwapAPI] = React.useState("");
+  const [spinner, setSpinner] = React.useState(false);
 
   useEffect(() => {
     setGetBalance(payBalance * state.CoinPrice[state.CoinSymbol.indexOf(state.Swap1Token)] / state.CoinPrice[state.CoinSymbol.indexOf(state.Swap2Token)]);
@@ -34,24 +37,36 @@ const SwapScreen = ({ navigation }) => {
     );
     let data = await res.json();
     console.log(data);
+    setSpinner(false);
     if (data.statusCode == "400") {
-      alert(data.description);
+      if (data.description.includes("sync")) {
+        alert("Cannot swap these tokens");
+      }
+      else alert(data.description);
     }
     else {
       alert("Finish to swap");
     }
   }
   const onSwapHandle = () => {
-    if (state.CurrentETHBalance < payBalance) {
+    if (state.CurrentETHBalance * (10 ** 18) < payBalance) {
       alert("Not Enough Balance to Swap!");
       return;
     }
-    setSwapAPI(`https://api.1inch.io/v4.0/1/swap?fromTokenAddress=${state.ContractAddress[state.CoinSymbol.indexOf(state.Swap1Token)]}&toTokenAddress=${state.ContractAddress[state.CoinSymbol.indexOf(state.Swap2Token)]}&amount=${payBalance}&fromAddress=0x35fD12f4ED2Eb8678710063795A7a20d32541aa0&slippage=20`);
+    setSwapAPI(`https://api.1inch.io/v4.0/1/swap?fromTokenAddress=${state.ContractAddress[state.CoinSymbol.indexOf(state.Swap1Token)]}&toTokenAddress=${state.ContractAddress[state.CoinSymbol.indexOf(state.Swap2Token)]}&amount=${payBalance * 10 ** 18}&fromAddress=0x35fD12f4ED2Eb8678710063795A7a20d32541aa0&slippage=20`);
+    setSpinner(true);
   }
   return (
     <Container>
       <Header>Swap</Header>
       <Body>
+        <Spinner
+          visible={spinner}
+          textContent={'Wait a few minutes...'}
+          textStyle={styles.spinnerTextStyle}
+          color="#3275bb"
+          size="large"
+        />
         <SwapContainer>
           <Token1>
             <InputContainer>
@@ -150,6 +165,11 @@ const SwapScreen = ({ navigation }) => {
 
 export default SwapScreen;
 
+const styles = StyleSheet.create({
+  spinnerTextStyle: {
+    color: '#fff'
+  },
+});
 const Container = styled.View`
   flex: 1;
   background: #fff;
