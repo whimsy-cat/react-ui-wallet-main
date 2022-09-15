@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
-
+import { Clipboard } from "react-native";
 import "react-native-get-random-values"
 import "@ethersproject/shims"
 import { ethers } from "ethers";
 import { selectedSendToken } from "./SendTokenChoose";
+import { Context } from '../reducers/store'
 // const provider = ethers.getDefaultProvider("ropsten");
 
 var contract_address = "";
@@ -19,6 +20,7 @@ window.ethersProvider = new ethers.providers.InfuraProvider("ropsten")
 const SendTokenFormScreen = ({ navigation }) => {
   const [recipentAddress, setRecipentAddress] = React.useState(null);
   const [send_token_amount, setAmount] = React.useState('0.0');
+  const [state, dispatch] = useContext(Context);
 
   useEffect(() => {
     if (selectedSendToken == "btc") {
@@ -98,6 +100,16 @@ const SendTokenFormScreen = ({ navigation }) => {
       }
     })
   }
+
+  const onHandlePaste = async () => {
+    const text = await Clipboard.getString()
+    setRecipentAddress(text)
+  }
+  const onHandleMaxBalance = () => {
+    if (selectedSendToken == "eth") {
+      setAmount(state.CurrentETHBalance);
+    }
+  }
   return (
     <Container>
       <Header>
@@ -113,15 +125,19 @@ const SendTokenFormScreen = ({ navigation }) => {
             <RecipientAddress placeholder="Recipient Address" value={recipentAddress} onChangeText={setRecipentAddress} />
             <Paste>
               <Ionicons name={"clipboard-outline"} color="#3275bb" size={24} />
-              <PasteText>Paste</PasteText>
+              <TouchableOpacity onPress={() => onHandlePaste()}>
+                <PasteText>Paste</PasteText>
+              </TouchableOpacity>
             </Paste>
           </Recipient>
           <AmountContainer>
             <Amount placeholder="Amount BTC" value={send_token_amount} onChangeText={setAmount} />
-            <MaxContainer>
-              <Max>Max</Max>
-              <TokenName>{selectedSendToken.toUpperCase()}</TokenName>
-            </MaxContainer>
+            <TouchableOpacity onPress={() => onHandleMaxBalance()}>
+              <MaxContainer>
+                <Max>Max</Max>
+                <TokenName>{selectedSendToken.toUpperCase()}</TokenName>
+              </MaxContainer>
+            </TouchableOpacity>
           </AmountContainer>
           <AmountInUSD>~$146,577,914.13</AmountInUSD>
         </RecipientInfoContainer>
@@ -175,6 +191,8 @@ const Recipient = styled.View`
 const RecipientAddress = styled.TextInput`
   height: 60px;
   font-size: 16px;
+  overflow: hidden;
+  width: 200px;
 `;
 const Paste = styled.View`
   flex-direction: row;

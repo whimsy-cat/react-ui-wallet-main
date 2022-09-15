@@ -35,6 +35,9 @@ const initialState = {
         "0x3BfC20f0B9aFcAcE800D73D2191166FF16540258",
     ],
     CurrentETHBalance: ["0.0"],
+    WalletMnemonic: "",
+    WalletAddress: "",
+    WalletPrivateKey: "",
 };
 
 const Store = ({ children }) => {

@@ -2,10 +2,12 @@ import "react-native-gesture-handler";
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import MainStackNavigator from "./navigator/AppNavigator";
+import MainStackNavigator, { PortfolioStackNavigator } from "./navigator/AppNavigator";
 import Store from "./reducers/store"
 
 const App = () => {
+
+
   return (
     <Store>
       <NavigationContainer>

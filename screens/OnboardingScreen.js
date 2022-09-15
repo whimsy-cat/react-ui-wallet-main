@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
   SafeAreaView,
@@ -9,6 +9,7 @@ import {
   Text,
   TouchableOpacity,
   Dimensions,
+  AsyncStorage,
 } from "react-native";
 
 
@@ -21,6 +22,7 @@ const { width, height } = Dimensions.get("window");
 const COLORS = { primary: "#3275BB", white: "#fff" };
 
 const Slide = ({ item }) => {
+
   return (
     <View style={{ alignItems: "center" }}>
       <Image
@@ -38,6 +40,7 @@ const Slide = ({ item }) => {
 const OnboardingScreen = ({ navigation }) => {
   const [currentSlideIndex, setCurrentSlideIndex] = React.useState(0);
   const ref = React.useRef();
+
   const updateCurrentSlideIndex = (e) => {
     const contentOffsetX = e.nativeEvent.contentOffset.x;
     const currentIndex = Math.round(contentOffsetX / width);

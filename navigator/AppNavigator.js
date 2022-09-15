@@ -28,6 +28,8 @@ import WalletEditScreen from "../screens/WalletEditScreen";
 import SwapToken1Select from "../screens/SwapToken1Select";
 import SwapToken2Select from "../screens/SwapToken2Select";
 import SendTokenChoose from "../screens/SendTokenChoose";
+import Welcome from "../screens/Welcome";
+import PasscodeScreen from "../screens/PasscodeScreen";
 
 import BottomTabNavigator from "./TabNavigator";
 
@@ -35,7 +37,9 @@ const Stack = createStackNavigator();
 
 const Onboarding = () => {
   return (
+
     <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Welcome" component={Welcome} />
       <Stack.Screen
         name="OnboardingScreen"
         component={OnboardingScreen}
@@ -44,9 +48,11 @@ const Onboarding = () => {
       <Stack.Screen name="LegalScreen" component={LegalScreen} />
       <Stack.Screen name="PhraseScreen" component={PhraseScreen} />
       <Stack.Screen name="VerifyPhraseScreen" component={VerifyPhraseScreen} />
+      <Stack.Screen name="PasscodeScreen" component={PasscodeScreen} />
     </Stack.Navigator>
   );
 };
+
 
 const PortfolioStackNavigator = () => {
   return (

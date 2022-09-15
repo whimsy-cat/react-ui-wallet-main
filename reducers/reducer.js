@@ -34,6 +34,13 @@ const Reducer = (state, action) => {
                 ...state,
                 CurrentETHBalance: action.currentethbalance,
             }
+        case 'SET_WALLETINFO':
+            return {
+                ...state,
+                WalletMnemonic: action.walletmnemonic,
+                WalletAddress: action.walletaddress,
+                WalletPrivateKey: action.walletprivatekey,
+            }
         case 'ADD_POST':
             return {
                 ...state,

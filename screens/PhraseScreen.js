@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import PhraseWord from "../components/PhraseWord";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { wallet } from "./OnboardingScreen";
 import { Clipboard } from "react-native";
+import { Context } from '../reducers/store';
 export var Seed = [];
 
 
 const PhraseScreen = ({ navigation }) => {
   const [randomWords, setRandomWords] = useState([]);
+  const [state, dispatch] = useContext(Context);
   useEffect(() => {
     let mnemonicTmp = [];
-    mnemonicTmp = wallet.mnemonic.phrase.split(" ");
+    mnemonicTmp = state.WalletMnemonic.split(" ");
     // let tmpArray = [];
     // for (let i = 0; i < 12; i++) {
     //   const newWord = EnWords[Math.floor(Math.random() * EnWords.length)];

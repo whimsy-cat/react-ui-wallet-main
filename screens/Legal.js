@@ -3,71 +3,9 @@ import { Ionicons } from "@expo/vector-icons";
 import { CheckBox } from "react-native-elements";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { Context } from '../reducers/store';
-// import AsyncStorage from '@react-native-community/async-storage';
-import { AsyncStorage, LogBox } from 'react-native';
 
-LogBox.ignoreAllLogs();
 
 const LegalScreen = ({ navigation }) => {
-  const [state, dispatch] = useContext(Context);
-
-  const loadData = async () => {
-    // var res = await fetch(
-    //   `https://api.poloniex.com/markets/btc_usdt/price`
-    // );
-    // var data = await res.json();
-    // dispatch({ type: 'ADD_COINPRICE', coinprice: data.price });
-    // dispatch({ type: 'ADD_COINDAILYCHANGE', coindailychange: data.dailyChange });
-    // console.log("!!!!!!!!!");
-
-    // res = await fetch(
-    //   `https://api.poloniex.com/markets/eth_usdt/price`
-    // );
-    // data = await res.json();
-    // dispatch({ type: 'ADD_COINPRICE', coinprice: data.price });
-    // dispatch({ type: 'ADD_COINDAILYCHANGE', coindailychange: data.dailyChange });
-
-    // res = await fetch(
-    //   `https://api.poloniex.com/markets/bnb_usdt/price`
-    // );
-    // data = await res.json();
-    // dispatch({ type: 'ADD_COINPRICE', coinprice: data.price });
-    // dispatch({ type: 'ADD_COINDAILYCHANGE', coindailychange: data.dailyChange });
-    for (let i = 0; i < 9; i++) {
-      let res = await fetch(
-        `https://api.poloniex.com/markets/${state.CoinSymbol[i]}_usdt/price`
-      );
-      let data = await res.json();
-      dispatch({ type: 'ADD_COINPRICE', coinprice: data.price });
-      dispatch({ type: 'ADD_COINDAILYCHANGE', coindailychange: data.dailyChange });
-      console.log(data);
-    }
-    getData();
-  };
-  const storeData = async (value) => {
-    try {
-      await AsyncStorage.setItem('@storage_Key', value)
-    } catch (e) {
-      console.log(e);
-    }
-  }
-  const getData = async () => {
-    try {
-      const value = await AsyncStorage.getItem('@storage_Key')
-      if (value !== null) {
-        console.log("Stored Value : " + value);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }
-  useEffect(() => {
-    console.log("loading...");
-    // storeData("LocalStorage");
-    getData();
-    loadData();
-  }, []);
   return (
     <Container>
       <Header>Legal</Header>
