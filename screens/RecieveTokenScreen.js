@@ -1,17 +1,17 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { CheckBox } from "react-native-elements";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { wallet } from "./OnboardingScreen";
 import { Clipboard } from "react-native";
+import { Context } from '../reducers/store';
 
-const qrUrl = `https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=${wallet.address}`;
-console.log(qrUrl);
 const RecieveTokenScreen = ({ navigation }) => {
+  const [state, dispatch] = useContext(Context);
 
   const onHandleCopy = () => {
-    Clipboard.setString(wallet.address);
+    Clipboard.setString(state.WalletAddress);
   }
   return (
     <Container>
@@ -23,9 +23,9 @@ const RecieveTokenScreen = ({ navigation }) => {
       </Header>
       <Body>
         <QRContainer elevation={1}>
-          <Image source={{ uri: qrUrl }} />
+          <Image source={{ uri: `https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=${state.WalletAddress}` }} />
           <WalletAddress>
-            {wallet.address}
+            {state.WalletAddress}
           </WalletAddress>
         </QRContainer>
         <WarningText>

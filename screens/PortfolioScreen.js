@@ -10,34 +10,8 @@ import { Context } from '../reducers/store'
 
 import "react-native-get-random-values"
 import "@ethersproject/shims"
-import { ethers } from "ethers";
-const provider = ethers.getDefaultProvider('ropsten');
-
-//var url = 'HTTP://127.0.0.1:7545';
-//const provider = new ethers.providers.JsonRpcProvider(url, { chainId: 1337 });
-// import { Web3Auth } from "@web3auth/web3auth";
-// import Web3 from "web3";
-
-// const web3auth = new Web3Auth({
-//   clientId: "YOUR_WEB3AUTH_CLIENT_ID", // get it from Web3Auth Dashboard
-//   chainConfig: {
-//     chainNamespace: "eip155",
-//     chainId: "0x3", // "0x4", "Ox5"
-//     rpcTarget: "https://rpc.ankr.com/eth_ropsten", // eth_rinkeby, eth_goerli
-//     displayName: "Ropsten Testnet",
-//     blockExplorer: "https://ropsten.etherscan.io", // rinkeby, goerli
-//     ticker: "ETH",
-//     tickerName: "Ethereum",
-//   },
-// });
-// await web3auth.initModal();
-
-// const web3authProvider = web3auth.connect();
-
-// const web3 = new Web3(web3authProvider); // web3auth.provider
 
 function FirstRoute() {
-  const [ethBalance, setEthBalance] = useState("0.0");
   const [state, dispatch] = useContext(Context);
   const navigation = useNavigation();
 
@@ -45,31 +19,7 @@ function FirstRoute() {
     dispatch({ type: 'SET_DETAILTOKEN', detailtoken: coin });
     navigation.navigate("TokenDetailScreen");
   }
-  const getBalance = (address) => {
-    // const balance = await provider.getBalance(address);
-    // const balanceInEth = ethers.utils.formatEther(balance);
-    // setEthBalance(balanceInEth);
-    // console.log(balanceInEth);
 
-    provider.getBalance(address).then((balance) => {
-      // convert a currency unit from wei to ether
-      const balanceInEth = ethers.utils.formatEther(balance)
-      console.log(`balance: ${balanceInEth} ETH`)
-      setEthBalance(balanceInEth);
-
-    })
-  }
-  useEffect(() => {
-    dispatch({ type: 'SET_BALANCE', currentethbalance: ethBalance });
-  }, [ethBalance])
-
-  useEffect(() => {
-    console.log(state);
-  }, [state])
-
-  useEffect(() => {
-    getBalance("0x35fD12f4ED2Eb8678710063795A7a20d32541aa0"); // wallet.address
-  }, []);
   return (
     <First>
       <ScrollView showsVerticalScrollIndicator={false} bounces={true}>

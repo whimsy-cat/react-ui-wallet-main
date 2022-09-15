@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { Switch } from "react-native";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { wallet } from "./OnboardingScreen";
+import { Context } from '../reducers/store';
 
 const WalletEditScreen = ({ navigation }) => {
+  const [state, dispatch] = useContext(Context);
   const [secretPhrase, setSecretPhrase] = React.useState("");
+
   const onShowSecretPhrase = () => {
-    setSecretPhrase(wallet.mnemonic.phrase);
+    setSecretPhrase(state.WalletMnemonic);
   }
   return (
     <Container>

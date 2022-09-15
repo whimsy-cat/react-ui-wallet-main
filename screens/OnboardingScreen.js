@@ -9,10 +9,7 @@ import {
   Text,
   TouchableOpacity,
   Dimensions,
-  AsyncStorage,
 } from "react-native";
-
-
 import "react-native-get-random-values"
 import "@ethersproject/shims"
 import { ethers } from "ethers";

@@ -6,8 +6,6 @@ import MainStackNavigator, { PortfolioStackNavigator } from "./navigator/AppNavi
 import Store from "./reducers/store"
 
 const App = () => {
-
-
   return (
     <Store>
       <NavigationContainer>

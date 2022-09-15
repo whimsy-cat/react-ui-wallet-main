@@ -1,24 +1,29 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import Spinner from 'react-native-loading-spinner-overlay';
 import { StyleSheet } from 'react-native';
 import { AsyncStorage, LogBox } from "react-native";
 import { Context } from '../reducers/store';
+
+import "react-native-get-random-values"
+import "@ethersproject/shims"
+import { ethers } from "ethers";
+const provider = ethers.getDefaultProvider('ropsten');
 
 LogBox.ignoreAllLogs();
 
 const Welcome = ({ navigation }) => {
   const [isNew, setIsNew] = useState("");
+  const [myWalletAddress, setMyWalletAddress] = useState("");
   const [state, dispatch] = useContext(Context);
 
   useEffect(() => {
     console.log('Welcome Trust Wallet!');
+    //    clearAsyncStorage();
     getStoredData();
     getMarketData();
   }, []);
 
+  // Navigate on New and Old User
   useEffect(() => {
     if (isNew == "") return;
     if (isNew == "true") {
@@ -27,8 +32,12 @@ const Welcome = ({ navigation }) => {
     else {
       navigation.navigate("PasscodeScreen");
     }
-
   }, [isNew]);
+
+  useEffect(() => {
+    if (myWalletAddress == "") return;
+    getETHBalance(myWalletAddress);
+  }, [myWalletAddress]);
 
   // Get Data From LocalStorage. Check New or Old User.
   const getStoredData = async () => {
@@ -37,8 +46,12 @@ const Welcome = ({ navigation }) => {
       const mnemonic = await AsyncStorage.getItem('@mnemonic');
       const address = await AsyncStorage.getItem('@address');
       const privatekey = await AsyncStorage.getItem('@privatekey');
+      console.log("mnemonic : " + mnemonic);
+      console.log("address : " + address);
+      console.log("privatekey : " + privatekey);
       if (mnemonic !== null) {
         dispatch({ type: 'SET_WALLETINFO', walletmnemonic: mnemonic, walletaddress: address, walletprivatekey: privatekey });
+        setMyWalletAddress(address);
         setIsNew("false");
       }
       else {
@@ -61,6 +74,22 @@ const Welcome = ({ navigation }) => {
       dispatch({ type: 'ADD_COINDAILYCHANGE', coindailychange: data.dailyChange });
     }
   };
+
+  // Clear AsyncStorage. Test !!!!
+  const clearAsyncStorage = async () => {
+    AsyncStorage.clear();
+  }
+
+  // Get ETH Balance from My Wallet Address
+  const getETHBalance = (address) => {
+    console.log(address);
+    provider.getBalance(address).then((balance) => {
+      // convert a currency unit from wei to ether
+      const ethBalance = ethers.utils.formatEther(balance);
+      dispatch({ type: 'SET_BALANCE', currentethbalance: ethBalance });
+    })
+  }
+
   return (
     <Container>
       <Body>
@@ -74,7 +103,7 @@ export default Welcome;
 
 const Image = styled.Image`
   width: 200px;
-  height: 180px;
+  height: 200px;
   position: absolute;
   top: 300px;
 `;

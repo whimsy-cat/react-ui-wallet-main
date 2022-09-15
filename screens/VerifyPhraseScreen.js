@@ -8,12 +8,13 @@ import { Seed } from "./PhraseScreen";
 var tmpSeed = [];
 var secretPhrase = "";
 var currentSeed = "";
+
 const VerifyPhraseScreen = ({ navigation }) => {
   const [seed, setSeed] = useState("");
   const [words, setWords] = useState([]);
-  const [disabled, setDisabled] = useState(false);
   const [selectedWords, setSelectedWords] = useState([]);
 
+  // Mix Mnemonic Words in Random Order.
   const mixOrder = () => {
     let i1 = 0, i2 = 0, tmp;
     for (let i = 0; i < 100; i++) {
@@ -23,6 +24,7 @@ const VerifyPhraseScreen = ({ navigation }) => {
       tmp = Seed[i1], Seed[i1] = Seed[i2], Seed[i2] = tmp;
     }
   }
+
   const onPress = (word) => {
     if (selectedWords.includes(word) == false) {
       setSeed((prevSeed) => prevSeed + word + " ");
@@ -30,10 +32,6 @@ const VerifyPhraseScreen = ({ navigation }) => {
       let tmpArray = selectedWords;
       tmpArray = [...tmpArray, word];
       setSelectedWords(tmpArray);
-      // setDisabled(disabled === false ? true : false);
-    }
-    else {
-
     }
   }
 

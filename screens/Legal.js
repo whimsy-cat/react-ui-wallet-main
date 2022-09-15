@@ -3,9 +3,50 @@ import { Ionicons } from "@expo/vector-icons";
 import { CheckBox } from "react-native-elements";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { wallet } from './OnboardingScreen';
+import { Context } from '../reducers/store';
+import { AsyncStorage } from "react-native";
 
+import "react-native-get-random-values"
+import "@ethersproject/shims"
+import { ethers } from "ethers";
+const provider = ethers.getDefaultProvider('ropsten');
 
 const LegalScreen = ({ navigation }) => {
+  const [state, dispatch] = useContext(Context);
+
+  useEffect(() => {
+    createNewWallet();
+    getETHBalance(wallet.address);
+  }, []);
+
+  // Create a new wallet. Mnemonic, Address, PrivateKey.
+  const createNewWallet = () => {
+    console.log("Creating a new wallet ...");
+    dispatch({ type: 'SET_WALLETINFO', walletmnemonic: wallet.mnemonic.phrase, walletaddress: wallet.address, walletprivatekey: wallet.privateKey });
+    setStorageData();
+  }
+
+  // Set Wallet Info to Local Storage.
+  const setStorageData = async () => {
+    try {
+      await AsyncStorage.setItem("@mnemonic", wallet.mnemonic.phrase);
+      await AsyncStorage.setItem("@address", wallet.address);
+      await AsyncStorage.setItem("@privatekey", wallet.privateKey);
+      console.log('Wallet Info Successfuly Saved to Local Storage.')
+    } catch (e) {
+      console.log('Failed To Save Data to Local Storage!!!');
+    }
+  }
+
+  // Get ETH Balance from My Wallet Address
+  const getETHBalance = (address) => {
+    provider.getBalance(address).then((balance) => {
+      // convert a currency unit from wei to ether
+      const ethBalance = ethers.utils.formatEther(balance);
+      dispatch({ type: 'SET_BALANCE', currentethbalance: ethBalance });
+    })
+  }
   return (
     <Container>
       <Header>Legal</Header>

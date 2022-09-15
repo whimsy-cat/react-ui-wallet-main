@@ -7,43 +7,21 @@ import { Clipboard } from "react-native";
 import { Context } from '../reducers/store';
 export var Seed = [];
 
-
 const PhraseScreen = ({ navigation }) => {
   const [randomWords, setRandomWords] = useState([]);
   const [state, dispatch] = useContext(Context);
   useEffect(() => {
     let mnemonicTmp = [];
     mnemonicTmp = state.WalletMnemonic.split(" ");
-    // let tmpArray = [];
-    // for (let i = 0; i < 12; i++) {
-    //   const newWord = EnWords[Math.floor(Math.random() * EnWords.length)];
-    //   tmpArray = [...tmpArray, newWord];
-    // }
     setRandomWords(mnemonicTmp);
-    //    localStorage.setItem("security", JSON.stringify(tmpArray));
-
   }, []);
 
   useEffect(() => {
     Seed = randomWords;
-    //    console.log(Seed);
-    // _storeData = async () => {
-    //   try {
-    //     await AsyncStorage.setItem(
-    //       'security_words',
-    //       JSON.stringify(randomWords),
-    //     );
-    //     const value = await AsyncStorage.getItem('key');
-    //     console.log(value);
-
-    //   } catch (error) {
-    //     // Error saving data
-    //   }
-    // };
   }, [randomWords]);
 
   const onHandleCopy = () => {
-    Clipboard.setString(wallet.mnemonic.phrase);
+    Clipboard.setString(state.WalletMnemonic);
   }
 
   return (
