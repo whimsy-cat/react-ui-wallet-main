@@ -49,7 +49,7 @@ const SwapScreen = ({ navigation }) => {
     }
   }
   const onSwapHandle = () => {
-    if (state.CurrentETHBalance * (10 ** 18) < payBalance) {
+    if (state.CurrentETHBalance * (10 ** 18) < payBalance || state.Swap1Token != "ETH") {
       alert("Not Enough Balance to Swap!");
       return;
     }

@@ -22,14 +22,32 @@ import { Description } from "@ethersproject/properties";
 const TokenDetailScreen = ({ navigation }) => {
   const [state, dispatch] = useContext(Context);
   const [price, setPrice] = React.useState(0.0);
+  const [chart, setChart] = React.useState(["100", "200"]);
   const [dailyChange, setDailyChange] = React.useState(0.0);
+
+  let min = 9999;
 
   useEffect(() => {
     setPrice(Number(state.CoinPrice[state.CoinFullName.indexOf(state.DetailToken)]));
-    setDailyChange(Number(state.CoinDailyChange[state.CoinFullName.indexOf(state.DetailToken)]))
+    setDailyChange(Number(state.CoinDailyChange[state.CoinFullName.indexOf(state.DetailToken)]));
     console.log("price: " + price);
     console.log("dailychage: " + dailyChange);
+    let tPrice = Number(state.CoinPrice[state.CoinFullName.indexOf(state.DetailToken)]);
+    let tDailyChange = Number(state.CoinDailyChange[state.CoinFullName.indexOf(state.DetailToken)]);
+    let tmpArray = [];
+    for (var i = 0; i < 10; i++) {
+      tmpArray[i] = tPrice + (Math.random() - 1) * tPrice * tDailyChange;
+      if (min > tmpArray[i])
+        min = tmpArray[i];
+    }
+    setChart(tmpArray);
   }, [])
+
+  useEffect(() => {
+    console.log(chart);
+  }, [chart]);
+
+
   return (
     <Container>
       <Header>
@@ -42,28 +60,22 @@ const TokenDetailScreen = ({ navigation }) => {
       <Body>
         <CryptoDetailContainer>
           <CryptoCurrency>${price}</CryptoCurrency>
-          <CryptoChange>{dailyChange > 0 ? "$" : "- $"}{Math.abs(price * dailyChange).toFixed(2)}  {dailyChange}%</CryptoChange>
+          <CryptoChange>{dailyChange > 0 ? "$" : "- $"}{Math.abs(price * dailyChange).toFixed(2)}  {dailyChange > 0 ? `+${dailyChange}` : `-${dailyChange}`}%</CryptoChange>
           <ChartView>
             <LineChart
               data={{
-                labels: ["9/8", "9/9", "9/10", "9/11", "9/12", "9/13"],
+                labels: [],
                 datasets: [
                   {
-                    data: [
-                      price + (Math.random() - 1) * price * dailyChange,
-                      price + (Math.random() - 1) * price * dailyChange,
-                      price + (Math.random() - 1) * price * dailyChange,
-                      price + (Math.random() - 1) * price * dailyChange,
-                      price + (Math.random() - 1) * price * dailyChange,
-                      price + (Math.random() - 1) * price * dailyChange,
-                    ]
+                    data: chart
                   }
                 ]
               }}
+              segments={5}
               width={Dimensions.get("window").width * 0.85} // from react-native
               height={220}
               yAxisLabel="$"
-              yAxisInterval={1} // optional, defaults to 1
+              yAxisInterval={10} // optional, defaults to 1
               chartConfig={{
                 backgroundColor: "#ffffff",
                 backgroundGradientFrom: "#ffffff",
@@ -75,11 +87,12 @@ const TokenDetailScreen = ({ navigation }) => {
                   borderRadius: 16
                 },
                 propsForDots: {
-                  r: "4",
+                  r: "0",
                   strokeWidth: "2",
                   stroke: "#80c796"
                 }
               }}
+              bezier
               style={{
                 marginVertical: 8,
                 borderRadius: 16

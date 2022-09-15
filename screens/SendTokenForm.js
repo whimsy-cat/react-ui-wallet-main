@@ -35,6 +35,10 @@ const SendTokenFormScreen = ({ navigation }) => {
     }
   })
   const sendToken = () => {
+    if (selectedSendToken != "eth") {
+      alert(`You have no enough ${selectedSendToken.toUpperCase()} to send!`);
+      return;
+    }
     send_token(contract_address, send_token_amount, recipentAddress, send_address, private_key);
   }
   function send_token(

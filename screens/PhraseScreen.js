@@ -3,6 +3,7 @@ import styled from "styled-components";
 import PhraseWord from "../components/PhraseWord";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { wallet } from "./OnboardingScreen";
+import { Clipboard } from "react-native";
 export var Seed = [];
 
 
@@ -39,6 +40,10 @@ const PhraseScreen = ({ navigation }) => {
     // };
   }, [randomWords]);
 
+  const onHandleCopy = () => {
+    Clipboard.setString(wallet.mnemonic.phrase);
+  }
+
   return (
     <Container>
       <Body>
@@ -52,7 +57,9 @@ const PhraseScreen = ({ navigation }) => {
             <PhraseWord key={index} number={index + 1} word={word} />
           ))}
         </SeedPhrase>
-        <Copy>Copy</Copy>
+        <TouchableOpacity onPress={() => onHandleCopy()}>
+          <Copy>Copy</Copy>
+        </TouchableOpacity>
       </Body>
       <Footer>
         <WarningContainer>

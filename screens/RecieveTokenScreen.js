@@ -4,10 +4,15 @@ import { CheckBox } from "react-native-elements";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { wallet } from "./OnboardingScreen";
+import { Clipboard } from "react-native";
 
 const qrUrl = `https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=${wallet.address}`;
 console.log(qrUrl);
 const RecieveTokenScreen = ({ navigation }) => {
+
+  const onHandleCopy = () => {
+    Clipboard.setString(wallet.address);
+  }
   return (
     <Container>
       <Header>
@@ -29,6 +34,7 @@ const RecieveTokenScreen = ({ navigation }) => {
         </WarningText>
         <Actions>
           <TouchableOpacity
+            onPress={() => onHandleCopy()}
           >
             <Action>
               <Ionicons

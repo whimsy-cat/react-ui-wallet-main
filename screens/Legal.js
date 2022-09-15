@@ -4,6 +4,10 @@ import { CheckBox } from "react-native-elements";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Context } from '../reducers/store';
+// import AsyncStorage from '@react-native-community/async-storage';
+import { AsyncStorage, LogBox } from 'react-native';
+
+LogBox.ignoreAllLogs();
 
 const LegalScreen = ({ navigation }) => {
   const [state, dispatch] = useContext(Context);
@@ -39,10 +43,29 @@ const LegalScreen = ({ navigation }) => {
       dispatch({ type: 'ADD_COINDAILYCHANGE', coindailychange: data.dailyChange });
       console.log(data);
     }
+    getData();
   };
-
+  const storeData = async (value) => {
+    try {
+      await AsyncStorage.setItem('@storage_Key', value)
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('@storage_Key')
+      if (value !== null) {
+        console.log("Stored Value : " + value);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
   useEffect(() => {
     console.log("loading...");
+    // storeData("LocalStorage");
+    getData();
     loadData();
   }, []);
   return (
@@ -136,7 +159,7 @@ const Footer = styled.View`
   background: #fff;
   position: absolute;
   bottom: 50px;
-  left: 0;
+  left: 20px;
 `;
 const AcceptContainer = styled.View``;
 const AcceptText = styled.Text``;
