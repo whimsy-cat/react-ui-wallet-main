@@ -24,8 +24,8 @@ const initialState = {
     BuyToken: "ETH",
     DetailToken: "BTC",
     ContractAddress: [
-        "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
-        "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599", // Bitcoin -> WBTC(Ethereum Chain)
+        "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2", // Ethereum(Native) -> WETH(Ethereum Chain)
         "0x250632378e573c6be1ac2f97fcdf00515d0aa91b",
         "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",
         "0xc14777c94229582e5758c5a79b83dde876b9be98",

@@ -9,33 +9,29 @@ import { Context } from '../reducers/store';
 
 LogBox.ignoreAllLogs();
 
-const PasscodeScreen = ({ navigation }) => {
-  const [inputPassword, setInputPassword] = React.useState("");
-  const [walletPassword, setWalletPassword] = React.useState("");
+const PasswordSettingScreen = ({ navigation }) => {
+  const [newPassword, setNewPassword] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState("");
 
-  useEffect(() => {
-    getStoredData();
-  }, []);
   const onHandleUnlock = () => {
-    console.log("inputpassword : " + inputPassword);
-    console.log("walletpassword : " + walletPassword);
-    if (inputPassword != walletPassword) {
-      alert("Password incorrect!");
+    if (newPassword != confirmPassword) {
+      alert("Password not match!");
+    }
+    else if (newPassword.length < 8) {
+      alert("Your password is too short. Please enter more than 8 charactors.")
     }
     else {
-      navigation.navigate("TabNavigator", {
-        screen: "PortfolioScreen",
-      })
+      alert("Password Successfully Changed!");
+      setStorageData();
     }
   }
-  const getStoredData = async () => {
-    console.log("Getting data from localstorage ...");
+  const setStorageData = async () => {
     try {
-      const password = await AsyncStorage.getItem('@walletpassword');
-      console.log("wallet password : " + password);
-      setWalletPassword(password);
+      await AsyncStorage.setItem("@walletpassword", newPassword);
+      console.log('Password Successfuly Saved to Local Storage.');
+      navigation.navigate("SecurityScreen");
     } catch (e) {
-      console.log(e);
+      console.log('Failed To Save Data to Local Storage!!!');
     }
   }
   return (
@@ -43,21 +39,22 @@ const PasscodeScreen = ({ navigation }) => {
       <Body>
         <Image source={require("../assets/images/splash.png")} />
         <Text>Secure and trusted multi-chain crypto wallet.</Text>
-        <Input secureTextEntry={true} placeholder="Password" value={inputPassword} onChangeText={newText => setInputPassword(newText)} />
+        <Input secureTextEntry={true} placeholder="New Password" value={newPassword} onChangeText={newText => setNewPassword(newText)} />
+        <Input secureTextEntry={true} placeholder="Confirm Password" value={confirmPassword} onChangeText={newText => setConfirmPassword(newText)} />
         <TouchableOpacity onPress={() => onHandleUnlock()}>
-          <Button>Unlock</Button>
+          <Button>Set Password</Button>
         </TouchableOpacity>
       </Body>
     </Container >
   );
 };
 
-export default PasscodeScreen;
+export default PasswordSettingScreen;
 
 const Input = styled.TextInput`
   font-size: 20px;
   padding: 10px 20px;
-  margin: 30px 0;
+  margin-top: 20px;
   width: 330px;
   border:1px solid #ccc;
   border-radius:5px;
@@ -112,6 +109,6 @@ const Button = styled.Text`
   text-transform: uppercase;
   color: #fff;
   text-align: center;
-  margin: 0 auto;
+  margin: 20px auto;
   border-radius:5px;
 `;

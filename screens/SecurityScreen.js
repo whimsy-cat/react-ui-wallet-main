@@ -5,6 +5,11 @@ import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 const SecurityScreen = ({ navigation }) => {
+  const [pass, setPass] = React.useState(false);
+  const onHandleChange = () => {
+    setPass(!pass);
+    navigation.navigate("PasswordSettingScreen");
+  }
   return (
     <Container>
       <Header>
@@ -20,7 +25,7 @@ const SecurityScreen = ({ navigation }) => {
         <Setting>
           <Row>
             <Title>Passcode</Title>
-            <Switch />
+            <Switch value={pass} onChange={() => onHandleChange()} />
           </Row>
         </Setting>
         <Setting>

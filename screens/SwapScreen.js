@@ -40,7 +40,7 @@ const SwapScreen = ({ navigation }) => {
     setSpinner(false);
     if (data.statusCode == "400") {
       if (data.description.includes("sync")) {
-        alert("Cannot swap these tokens");
+        alert("Not Enough Balance to Swap!");
       }
       else alert(data.description);
     }

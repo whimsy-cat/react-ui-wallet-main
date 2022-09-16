@@ -21,7 +21,7 @@ import SendTokenFormScreen from "../screens/SendTokenForm";
 import PriceAlertsScreen from "../screens/PriceAlertsScreen";
 import SecurityScreen from "../screens/SecurityScreen";
 import PushNotificationsScreen from "../screens/PushNotificationsScreen";
-import WalletConnectScreen from "../screens/WalletConnectScreen";
+import WalletConnectScreen from "../screens/PasswordSettingScreen";
 import PreferencesScreen from "../screens/PreferencesScreen";
 import WalletsScreen from "../screens/WalletsScreen";
 import WalletEditScreen from "../screens/WalletEditScreen";
@@ -30,6 +30,7 @@ import SwapToken2Select from "../screens/SwapToken2Select";
 import SendTokenChoose from "../screens/SendTokenChoose";
 import Welcome from "../screens/Welcome";
 import PasscodeScreen from "../screens/PasscodeScreen";
+import PasswordSettingScreen from "../screens/PasswordSettingScreen";
 
 import BottomTabNavigator from "./TabNavigator";
 
@@ -118,6 +119,7 @@ const SettingsStackNavigator = () => {
       <Stack.Screen name="PreferencesScreen" component={PreferencesScreen} />
       <Stack.Screen name="WalletConnectScreen" component={WalletConnectScreen} />
       <Stack.Screen name="PushNotificationsScreen" component={PushNotificationsScreen} />
+      <Stack.Screen name="PasswordSettingScreen" component={PasswordSettingScreen} />
     </Stack.Navigator>
   );
 };
