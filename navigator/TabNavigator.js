@@ -48,7 +48,8 @@ const BottomTabNavigator = () => {
               routeName === "SendTokenFormScreen" ||
               routeName === "SwapScreen" ||
               routeName === "ImportTokensScreen" ||
-              routeName === "BuyTokensScreen"
+              routeName === "BuyTokensScreen" ||
+              routeName === "BuyTokenDetailScreen"
             ) {
               return { display: "none" };
             }

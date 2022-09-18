@@ -23,7 +23,7 @@ const BuyTokensScreen = ({ navigation }) => {
 
   const onHandleClick = (token) => {
     dispatch({ type: 'SET_BUYTOKEN', buytoken: token.toUpperCase() });
-    navigation.navigate("BuyTokenDetail");
+    navigation.navigate("BuyTokenDetailScreen");
   }
   return (
 
@@ -47,6 +47,7 @@ const BuyTokensScreen = ({ navigation }) => {
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => onHandleClick("eth")}>
+
           <TokensContainer tokenImage={require("../assets/images/eth.png")}
             tokenName="Ethereum"
             tokenAmount="0"

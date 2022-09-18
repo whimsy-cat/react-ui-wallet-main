@@ -12,7 +12,7 @@ import SettingsScreen from "../screens/SettingsScreen";
 import ImportTokensScreen from "../screens/ImportTokensScreen";
 import AddCustomTokenScreen from "../screens/AddCustomTokenScreen";
 import BuyTokensScreen from "../screens/BuyTokensScreen";
-import BuyTokenDetail from "../screens/BuyTokenDetail";
+import BuyTokenDetailScreen from "../screens/BuyTokenDetailScreen";
 import TokenDetailScreen from "../screens/TokenDetailScreen"
 import RecieveTokenScreen from "../screens/RecieveTokenScreen";
 import SearchRecieveTokensScreen from "../screens/SearchRecieveTokensScreen";
@@ -66,7 +66,7 @@ const PortfolioStackNavigator = () => {
       <Stack.Screen name="ImportTokensScreen" component={ImportTokensScreen} />
       <Stack.Screen name="AddCustomTokenScreen" component={AddCustomTokenScreen} />
       <Stack.Screen name="BuyTokensScreen" component={BuyTokensScreen} />
-      <Stack.Screen name="BuyTokenDetail" component={BuyTokenDetail} />
+      <Stack.Screen name="BuyTokenDetailScreen" component={BuyTokenDetailScreen} />
       <Stack.Screen name="RecieveTokenScreen" component={RecieveTokenScreen} />
       <Stack.Screen name="SearchRecieveTokensScreen" component={SearchRecieveTokensScreen} />
       <Stack.Screen name="SwapScreen" component={SwapScreen} />

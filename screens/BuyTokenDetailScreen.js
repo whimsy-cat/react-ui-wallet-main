@@ -5,7 +5,7 @@ import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { Linking } from 'react-native';
 import { Context } from '../reducers/store'
 
-const BuyTokenDetail = ({ navigation }) => {
+const BuyTokenDetailScreen = ({ navigation }) => {
   const [buyAmount, setBuyAmount] = React.useState(100);
   const [state, dispatch] = useContext(Context);
 
@@ -99,7 +99,7 @@ const BuyTokenDetail = ({ navigation }) => {
   );
 };
 
-export default BuyTokenDetail;
+export default BuyTokenDetailScreen;
 
 const CoinbaseImage = styled.Image`
   margin-top: 30px;

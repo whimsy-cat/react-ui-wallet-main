@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import NumericInput from 'react-native-numeric-input'
 
-const BuyTokenDetail = ({ navigation }) => {
+const BuyTokenDetailScreen = ({ navigation }) => {
   const [buyAmount, setBuyAmount] = React.useState(100);
   return (
     <Container>
@@ -63,7 +63,7 @@ const BuyTokenDetail = ({ navigation }) => {
   );
 };
 
-export default BuyTokenDetail;
+export default BuyTokenDetailScreen;
 
 const Container = styled.View`
   flex: 1;
