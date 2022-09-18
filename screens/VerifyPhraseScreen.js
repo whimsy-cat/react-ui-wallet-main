@@ -1,21 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import PhraseWord from "../components/PhraseWord";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Text } from "react-native";
 import { Seed } from "./PhraseScreen";
+import { Context } from '../reducers/store';
 
 var tmpSeed = [];
 var secretPhrase = "";
-var currentSeed = "";
 
 const VerifyPhraseScreen = ({ navigation }) => {
   const [seed, setSeed] = useState("");
   const [words, setWords] = useState([]);
+  const [state, dispatch] = useContext(Context);
   const [selectedWords, setSelectedWords] = useState([]);
 
   // Mix Mnemonic Words in Random Order.
   const mixOrder = () => {
+    console.log("Mixing...");
     let i1 = 0, i2 = 0, tmp;
     for (let i = 0; i < 100; i++) {
       i1 = Math.floor(Math.random() * 12);
@@ -40,7 +42,13 @@ const VerifyPhraseScreen = ({ navigation }) => {
     setSelectedWords(tmpArray);
   }
   const onNextScene = () => {
-    if (secretPhrase != seed) { // ********************************************************************** I have to change this like '=='
+    console.log("selected words : " + selectedWords);
+    console.log("wallet mne : " + state.WalletMnemonic);
+    let compareSeed = "";
+    compareSeed = selectedWords.join(" ");
+    console.log("compare : " + compareSeed);
+
+    if (compareSeed === state.WalletMnemonic) {
       navigation.navigate("TabNavigator", {
         screen: "PortfolioScreen",
       })

@@ -10,7 +10,7 @@ import { AsyncStorage } from "react-native";
 import "react-native-get-random-values"
 import "@ethersproject/shims"
 import { ethers } from "ethers";
-const provider = ethers.getDefaultProvider('ropsten');
+const provider = ethers.getDefaultProvider();
 
 const LegalScreen = ({ navigation }) => {
   const [state, dispatch] = useContext(Context);

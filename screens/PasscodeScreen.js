@@ -34,6 +34,11 @@ const PasscodeScreen = ({ navigation }) => {
       const password = await AsyncStorage.getItem('@walletpassword');
       console.log("wallet password : " + password);
       setWalletPassword(password);
+      if (password == null) {
+        navigation.navigate("TabNavigator", {
+          screen: "PortfolioScreen",
+        })
+      }
     } catch (e) {
       console.log(e);
     }

@@ -7,7 +7,7 @@ import { Context } from '../reducers/store';
 import "react-native-get-random-values"
 import "@ethersproject/shims"
 import { ethers } from "ethers";
-const provider = ethers.getDefaultProvider('ropsten');
+const provider = ethers.getDefaultProvider();
 LogBox.ignoreAllLogs();
 
 const Welcome = ({ navigation }) => {
@@ -17,7 +17,7 @@ const Welcome = ({ navigation }) => {
 
   useEffect(() => {
     console.log('Welcome Trust Wallet!');
-    //    clearAsyncStorage();
+    // clearAsyncStorage();
     getStoredData();
     getMarketData();
   }, []);

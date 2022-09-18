@@ -16,7 +16,7 @@ var send_address = "0x9381D7598F28fAbd2f94Aa9d01B4040C5F436197"
 var private_key = "69b2ce785561f97e2aa896e67f6f61e9c8442a9f11b3cbb476439219141db91f";
 const gas_limit = "0x100000";
 
-window.ethersProvider = new ethers.providers.InfuraProvider("ropsten")
+window.ethersProvider = new ethers.getDefaultProvider() //ethers.providers.InfuraProvider("ropsten")
 const SendTokenFormScreen = ({ navigation }) => {
   const [recipentAddress, setRecipentAddress] = React.useState(null);
   const [send_token_amount, setAmount] = React.useState('0.0');
