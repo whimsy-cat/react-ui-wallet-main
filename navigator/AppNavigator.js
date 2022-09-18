@@ -54,76 +54,6 @@ const Onboarding = () => {
   );
 };
 
-
-const PortfolioStackNavigator = () => {
-  return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen
-        name="PortfolioScreen"
-        component={PortfolioScreen}
-        options={{ headerLeft: (props) => null }}
-      />
-      <Stack.Screen name="ImportTokensScreen" component={ImportTokensScreen} />
-      <Stack.Screen name="AddCustomTokenScreen" component={AddCustomTokenScreen} />
-      <Stack.Screen name="BuyTokensScreen" component={BuyTokensScreen} />
-      <Stack.Screen name="BuyTokenDetailScreen" component={BuyTokenDetailScreen} />
-      <Stack.Screen name="RecieveTokenScreen" component={RecieveTokenScreen} />
-      <Stack.Screen name="SearchRecieveTokensScreen" component={SearchRecieveTokensScreen} />
-      <Stack.Screen name="SwapScreen" component={SwapScreen} />
-      <Stack.Screen name="TokenDetailScreen" component={TokenDetailScreen} />
-      <Stack.Screen name="SendTokenFormScreen" component={SendTokenFormScreen} />
-      <Stack.Screen name="SwapToken1Select" component={SwapToken1Select} />
-      <Stack.Screen name="SwapToken2Select" component={SwapToken2Select} />
-      <Stack.Screen name="SendTokenChoose" component={SendTokenChoose} />
-
-    </Stack.Navigator>
-  );
-};
-
-const DiscoverStackNavigator = () => {
-  return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen
-        name="DiscoverScreen"
-        component={DiscoverScreen}
-        options={{ headerLeft: (props) => null }}
-      />
-    </Stack.Navigator>
-  );
-};
-
-const DAppsStackNavigator = () => {
-  return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen
-        name="DAppsScreen"
-        component={DAppsScreen}
-        options={{ headerLeft: (props) => null }}
-      />
-    </Stack.Navigator>
-  );
-};
-
-const SettingsStackNavigator = () => {
-  return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen
-        name="SettingsScreen"
-        component={SettingsScreen}
-        options={{ headerLeft: (props) => null }}
-      />
-      <Stack.Screen name="PriceAlertsScreen" component={PriceAlertsScreen} />
-      <Stack.Screen name="SecurityScreen" component={SecurityScreen} />
-      <Stack.Screen name="WalletsScreen" component={WalletsScreen} />
-      <Stack.Screen name="WalletEditScreen" component={WalletEditScreen} />
-      <Stack.Screen name="PreferencesScreen" component={PreferencesScreen} />
-      <Stack.Screen name="WalletConnectScreen" component={WalletConnectScreen} />
-      <Stack.Screen name="PushNotificationsScreen" component={PushNotificationsScreen} />
-      <Stack.Screen name="PasswordSettingScreen" component={PasswordSettingScreen} />
-    </Stack.Navigator>
-  );
-};
-
 export default MainStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -135,8 +65,4 @@ export default MainStackNavigator = () => {
 
 export {
   Onboarding,
-  PortfolioStackNavigator,
-  DiscoverStackNavigator,
-  DAppsStackNavigator,
-  SettingsStackNavigator,
 };

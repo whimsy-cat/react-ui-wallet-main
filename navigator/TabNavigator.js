@@ -8,7 +8,7 @@ import {
   DiscoverStackNavigator,
   DAppsStackNavigator,
   SettingsStackNavigator,
-} from "./AppNavigator";
+} from "./MainNavigator";
 
 const Tab = createBottomTabNavigator();
 
