@@ -8,7 +8,6 @@ import "react-native-get-random-values"
 import "@ethersproject/shims"
 import { ethers } from "ethers";
 const provider = ethers.getDefaultProvider('ropsten');
-
 LogBox.ignoreAllLogs();
 
 const Welcome = ({ navigation }) => {
@@ -37,10 +36,12 @@ const Welcome = ({ navigation }) => {
   useEffect(() => {
     if (myWalletAddress == "") return;
     getETHBalance(myWalletAddress);
+    getBTCBalance(myWalletAddress);
   }, [myWalletAddress]);
 
   // Get Data From LocalStorage. Check New or Old User.
   const getStoredData = async () => {
+
     console.log("Getting data from localstorage ...");
     try {
       const mnemonic = await AsyncStorage.getItem('@mnemonic');
@@ -88,6 +89,10 @@ const Welcome = ({ navigation }) => {
       const ethBalance = ethers.utils.formatEther(balance);
       dispatch({ type: 'SET_BALANCE', currentethbalance: ethBalance });
     })
+  }
+
+  const getBTCBalance = (address) => {
+
   }
 
   return (

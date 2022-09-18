@@ -40,7 +40,7 @@ function FirstRoute() {
                 </TokenNamePrice>
               </TokenDetails>
               <TokenCol2>
-                <TokenAmount>{coin == "Ethereum" ? state.CurrentETHBalance : 0.0}</TokenAmount>
+                <TokenAmount>{coin == "Ethereum" ? Number(state.CurrentETHBalance).toFixed(4) : "0.0"}</TokenAmount>
                 <TokenSymbol>{state.CoinSymbol[state.CoinFullName.indexOf(state.ImportedCoinFullName[index])]}</TokenSymbol>
               </TokenCol2>
             </Token>

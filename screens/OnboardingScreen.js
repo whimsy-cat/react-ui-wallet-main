@@ -13,6 +13,8 @@ import {
 import "react-native-get-random-values"
 import "@ethersproject/shims"
 import { ethers } from "ethers";
+
+
 export const wallet = ethers.Wallet.createRandom();
 
 const { width, height } = Dimensions.get("window");
