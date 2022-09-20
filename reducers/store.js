@@ -36,8 +36,11 @@ const initialState = {
     ],
     CurrentETHBalance: ["0.0"],
     WalletMnemonic: "",
-    WalletAddress: "",
-    WalletPrivateKey: "",
+    WalletAddress: "", // Ethereum
+    WalletPrivateKey: "", // Ethereum
+    BTCAddress: "", // BTC
+    BTCPrivateKey: "", // BTC
+    BTCPublicKey: "", // BTC
 };
 
 const Store = ({ children }) => {

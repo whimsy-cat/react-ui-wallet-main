@@ -47,6 +47,7 @@ const LegalScreen = ({ navigation }) => {
       dispatch({ type: 'SET_BALANCE', currentethbalance: ethBalance });
     })
   }
+
   return (
     <Container>
       <Header>Legal</Header>

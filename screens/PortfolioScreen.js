@@ -20,6 +20,9 @@ function FirstRoute() {
     navigation.navigate("TokenDetailScreen");
   }
 
+  useEffect(() => {
+    console.log("BitCoin Address : " + state.BTCAddress);
+  }, []);
   return (
     <First>
       <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
@@ -37,6 +40,7 @@ function FirstRoute() {
                     <TokenPrice>{state.CoinPrice[state.CoinFullName.indexOf(state.ImportedCoinFullName[index])]}</TokenPrice>
                     <TokenPercent>{state.CoinDailyChange[index] > 0 ? "+" : ""}{state.CoinDailyChange[index]} %</TokenPercent>
                   </TokenPriceAction>
+                  <TokenAddress>{coin == "Ethereum" ? state.WalletAddress.toString().substring(0, 25).concat(" . . . ") : state.BTCAddress.toString().substring(0, 25).concat(" . . .")}</TokenAddress>
                 </TokenNamePrice>
               </TokenDetails>
               <TokenCol2>
@@ -382,6 +386,10 @@ const TokenPrice = styled.Text`
   font-size: 12px;
   color: #979797;
 `;
+const TokenAddress = styled.Text`
+  font-size: 12px;
+  color:#222222;
+`
 const TokenPercent = styled.Text`
   font-size: 12px;
   color: #6eb8aa;

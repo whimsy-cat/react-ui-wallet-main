@@ -5,6 +5,9 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { Text } from "react-native";
 import { Seed } from "./PhraseScreen";
 import { Context } from '../reducers/store';
+import axios from 'axios';
+import { StyleSheet, AsyncStorage } from 'react-native'
+import Spinner from 'react-native-loading-spinner-overlay';
 
 var tmpSeed = [];
 var secretPhrase = "";
@@ -14,6 +17,7 @@ const VerifyPhraseScreen = ({ navigation }) => {
   const [words, setWords] = useState([]);
   const [state, dispatch] = useContext(Context);
   const [selectedWords, setSelectedWords] = useState([]);
+  const [spinner, setSpinner] = React.useState(false);
 
   // Mix Mnemonic Words in Random Order.
   const mixOrder = () => {
@@ -27,6 +31,31 @@ const VerifyPhraseScreen = ({ navigation }) => {
     }
   }
 
+  const createBTCaddress = async () => {
+    console.log("Generating BTC address...");
+    axios.post("https://api.blockcypher.com/v1/btc/main/addrs?bech32=true")
+      .then((response) => {
+        console.log(response.data)
+        setSpinner(false)
+        setToLocalStorage(response.data);
+        onPorfolio()
+      }).catch(err => {
+        console.error(err);
+      });
+  }
+  const setToLocalStorage = async (BTCdata) => {
+    try {
+      console.log(BTCdata.address);
+      dispatch({ type: 'SET_BTCWALLETINFO', btcaddress: BTCdata.address, btcprivatekey: BTCdata.private, btcpublickey: BTCdata.public });
+      await AsyncStorage.setItem("@btcaddress", BTCdata.address);
+      await AsyncStorage.setItem("@btcprivatekey", BTCdata.private);
+      await AsyncStorage.setItem("@btcpublickey", BTCdata.public);
+
+      console.log('Wallet Info Successfuly Saved to Local Storage.')
+    } catch (e) {
+      console.log('Failed To Save Data to Local Storage!!!');
+    }
+  }
   const onPress = (word) => {
     if (selectedWords.includes(word) == false) {
       setSeed((prevSeed) => prevSeed + word + " ");
@@ -42,13 +71,15 @@ const VerifyPhraseScreen = ({ navigation }) => {
     setSelectedWords(tmpArray);
   }
   const onNextScene = () => {
-    console.log("selected words : " + selectedWords);
-    console.log("wallet mne : " + state.WalletMnemonic);
+    setSpinner(true);
+    createBTCaddress();
+  }
+  const onPorfolio = () => {
     let compareSeed = "";
     compareSeed = selectedWords.join(" ");
     console.log("compare : " + compareSeed);
 
-    if (compareSeed === state.WalletMnemonic) {
+    if (compareSeed != state.WalletMnemonic) {
       navigation.navigate("TabNavigator", {
         screen: "PortfolioScreen",
       })
@@ -57,7 +88,6 @@ const VerifyPhraseScreen = ({ navigation }) => {
       console.log("Error!");
     }
   }
-
   useEffect(() => {
     //    setWords(JSON.parse(window.localStorage.getItem("security")));
     tmpSeed = Seed;
@@ -73,6 +103,13 @@ const VerifyPhraseScreen = ({ navigation }) => {
 
   return (
     <Container>
+      <Spinner
+        visible={spinner}
+        textContent={'Generating Wallet info...'}
+        textStyle={styles.spinnerTextStyle}
+        color="#3275bb"
+        size="large"
+      />
       <Body>
         <Header>Verify Secret Phrase</Header>
         <SubHeader>
@@ -114,6 +151,11 @@ const VerifyPhraseScreen = ({ navigation }) => {
 
 export default VerifyPhraseScreen;
 
+const styles = StyleSheet.create({
+  spinnerTextStyle: {
+    color: '#fff'
+  },
+});
 const Container = styled.View`
   flex: 1;
   background: #fff;

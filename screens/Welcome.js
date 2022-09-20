@@ -1,23 +1,25 @@
 import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import { StyleSheet } from 'react-native';
-import { AsyncStorage, LogBox } from "react-native";
+import { AsyncStorage, LogBox, Alert } from "react-native";
 import { Context } from '../reducers/store';
 
 import "react-native-get-random-values"
 import "@ethersproject/shims"
 import { ethers } from "ethers";
+
 const provider = ethers.getDefaultProvider();
 LogBox.ignoreAllLogs();
 
 const Welcome = ({ navigation }) => {
   const [isNew, setIsNew] = useState("");
   const [myWalletAddress, setMyWalletAddress] = useState("");
+  const [myBTCWalletAddress, setMyBTCWalletAddress] = useState("");
   const [state, dispatch] = useContext(Context);
 
   useEffect(() => {
     console.log('Welcome Trust Wallet!');
-    // clearAsyncStorage();
+    //  clearAsyncStorage();
     getStoredData();
     getMarketData();
   }, []);
@@ -36,8 +38,12 @@ const Welcome = ({ navigation }) => {
   useEffect(() => {
     if (myWalletAddress == "") return;
     getETHBalance(myWalletAddress);
-    getBTCBalance(myWalletAddress);
   }, [myWalletAddress]);
+
+  useEffect(() => {
+    if (myBTCWalletAddress == "") return;
+    getBTCBalance(myBTCWalletAddress);
+  }, [myBTCWalletAddress]);
 
   // Get Data From LocalStorage. Check New or Old User.
   const getStoredData = async () => {
@@ -47,12 +53,18 @@ const Welcome = ({ navigation }) => {
       const mnemonic = await AsyncStorage.getItem('@mnemonic');
       const address = await AsyncStorage.getItem('@address');
       const privatekey = await AsyncStorage.getItem('@privatekey');
+      const btcaddress = await AsyncStorage.getItem('@btcaddress');
+      const btcprivatekey = await AsyncStorage.getItem('@btcprivatekey');
+      const btcpublickey = await AsyncStorage.getItem('@btcpublickey');
       console.log("mnemonic : " + mnemonic);
       console.log("address : " + address);
       console.log("privatekey : " + privatekey);
+      console.log("btcaddress : " + btcaddress);
       if (mnemonic !== null) {
         dispatch({ type: 'SET_WALLETINFO', walletmnemonic: mnemonic, walletaddress: address, walletprivatekey: privatekey });
+        dispatch({ type: 'SET_BTCWALLETINFO', btcaddress: btcaddress, btcprivatekey: btcprivatekey, btcpublickey: btcpublickey });
         setMyWalletAddress(address);
+        setMyBTCWalletAddress(btcaddress);
         setIsNew("false");
       }
       else {
@@ -62,7 +74,6 @@ const Welcome = ({ navigation }) => {
       console.log(e);
     }
   }
-
   // Get Crypto Market Info. Price, DailyChange, etc. 
   const getMarketData = async () => {
     console.log("Getting market data ...");
@@ -92,7 +103,7 @@ const Welcome = ({ navigation }) => {
   }
 
   const getBTCBalance = (address) => {
-
+    console.log("Bitcoin Bitcoin Bitcoin Bitcoin Bitcoin ...");
   }
 
   return (
