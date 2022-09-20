@@ -22,6 +22,7 @@ function FirstRoute() {
 
   useEffect(() => {
     console.log("BitCoin Address : " + state.BTCAddress);
+    console.log("Bitcoin Balance : " + state.CurrentBTCBalance);
   }, []);
   return (
     <First>
@@ -40,11 +41,22 @@ function FirstRoute() {
                     <TokenPrice>{state.CoinPrice[state.CoinFullName.indexOf(state.ImportedCoinFullName[index])]}</TokenPrice>
                     <TokenPercent>{state.CoinDailyChange[index] > 0 ? "+" : ""}{state.CoinDailyChange[index]} %</TokenPercent>
                   </TokenPriceAction>
-                  <TokenAddress>{coin == "Ethereum" ? state.WalletAddress.toString().substring(0, 25).concat(" . . . ") : state.BTCAddress.toString().substring(0, 25).concat(" . . .")}</TokenAddress>
+                  <TokenAddress>{coin == "Ethereum" ||
+                    coin == "BNB Beacon Chain" ||
+                    coin == "BNB Smart Chain" ?
+                    state.WalletAddress.toString().substring(0, 25).concat(" . . . ") :
+                    coin == "Bitcoin" ?
+                      state.BTCAddress.toString().substring(0, 25).concat(" . . .") :
+                      state.DOGEAddress.toString().substring(0, 25).concat(" . . .")}
+                  </TokenAddress>
                 </TokenNamePrice>
               </TokenDetails>
               <TokenCol2>
-                <TokenAmount>{coin == "Ethereum" ? Number(state.CurrentETHBalance).toFixed(4) : "0.0"}</TokenAmount>
+                <TokenAmount>{coin == "Ethereum" ?
+                  Number(state.CurrentETHBalance).toFixed(4) :
+                  coin == "Bitcoin" ?
+                    Number(state.CurrentBTCBalance).toFixed(4) :
+                    Number(state.CurrentDOGEBalance).toFixed(4)}</TokenAmount>
                 <TokenSymbol>{state.CoinSymbol[state.CoinFullName.indexOf(state.ImportedCoinFullName[index])]}</TokenSymbol>
               </TokenCol2>
             </Token>
@@ -388,7 +400,7 @@ const TokenPrice = styled.Text`
 `;
 const TokenAddress = styled.Text`
   font-size: 12px;
-  color:#222222;
+  color:#777777;
 `
 const TokenPercent = styled.Text`
   font-size: 12px;

@@ -35,6 +35,11 @@ const Reducer = (state, action) => {
                 ...state,
                 CurrentETHBalance: action.currentethbalance,
             }
+        case 'SET_BTCBALANCE':
+            return {
+                ...state,
+                CurrentBTCBalance: action.currentbtcbalance,
+            }
         case 'SET_WALLETINFO': // ETH
             return {
                 ...state,
@@ -48,6 +53,13 @@ const Reducer = (state, action) => {
                 BTCAddress: action.btcaddress,
                 BTCPublicKey: action.btcpublickey,
                 BTCPrivateKey: action.btcprivatekey,
+            }
+        case 'SET_DOGEWALLETINFO': // DOGE
+            return {
+                ...state,
+                DOGEAddress: action.dogeaddress,
+                DOGEPublicKey: action.dogepublickey,
+                DOGEPrivateKey: action.dogeprivatekey,
             }
         case 'ADD_POST':
             return {

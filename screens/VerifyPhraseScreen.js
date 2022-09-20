@@ -37,13 +37,23 @@ const VerifyPhraseScreen = ({ navigation }) => {
       .then((response) => {
         console.log(response.data)
         setSpinner(false)
-        setToLocalStorage(response.data);
-        onPorfolio()
+        setBTCToLocalStorage(response.data);
       }).catch(err => {
         console.error(err);
       });
   }
-  const setToLocalStorage = async (BTCdata) => {
+  const createDOGEaddress = async () => {
+    console.log("Generating DOGE address...");
+    axios.post("https://api.blockcypher.com/v1/doge/main/addrs")
+      .then((response) => {
+        console.log(response.data)
+        setDOGEToLocalStorage(response.data);
+        //        onPorfolio()
+      }).catch(err => {
+        console.error(err);
+      });
+  }
+  const setBTCToLocalStorage = async (BTCdata) => {
     try {
       console.log(BTCdata.address);
       dispatch({ type: 'SET_BTCWALLETINFO', btcaddress: BTCdata.address, btcprivatekey: BTCdata.private, btcpublickey: BTCdata.public });
@@ -51,7 +61,20 @@ const VerifyPhraseScreen = ({ navigation }) => {
       await AsyncStorage.setItem("@btcprivatekey", BTCdata.private);
       await AsyncStorage.setItem("@btcpublickey", BTCdata.public);
 
-      console.log('Wallet Info Successfuly Saved to Local Storage.')
+      console.log('BTC Info Successfuly Saved to Local Storage.')
+    } catch (e) {
+      console.log('Failed To Save Data to Local Storage!!!');
+    }
+  }
+  const setDOGEToLocalStorage = async (DOGEdata) => {
+    try {
+      console.log(DOGEdata.address);
+      dispatch({ type: 'SET_DOGEWALLETINFO', dogeaddress: DOGEdata.address, dogeprivatekey: DOGEdata.private, dogepublickey: DOGEdata.public });
+      await AsyncStorage.setItem("@dogeaddress", DOGEdata.address);
+      await AsyncStorage.setItem("@dogeprivatekey", DOGEdata.private);
+      await AsyncStorage.setItem("@dogepublickey", DOGEdata.public);
+
+      console.log('DOGE Info Successfuly Saved to Local Storage.')
     } catch (e) {
       console.log('Failed To Save Data to Local Storage!!!');
     }
@@ -73,6 +96,7 @@ const VerifyPhraseScreen = ({ navigation }) => {
   const onNextScene = () => {
     setSpinner(true);
     createBTCaddress();
+    createDOGEaddress();
   }
   const onPorfolio = () => {
     let compareSeed = "";

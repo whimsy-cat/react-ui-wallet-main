@@ -15,6 +15,7 @@ const Welcome = ({ navigation }) => {
   const [isNew, setIsNew] = useState("");
   const [myWalletAddress, setMyWalletAddress] = useState("");
   const [myBTCWalletAddress, setMyBTCWalletAddress] = useState("");
+  const [myDOGEWalletAddress, setMyDOGEWalletAddress] = useState("");
   const [state, dispatch] = useContext(Context);
 
   useEffect(() => {
@@ -45,6 +46,11 @@ const Welcome = ({ navigation }) => {
     getBTCBalance(myBTCWalletAddress);
   }, [myBTCWalletAddress]);
 
+  useEffect(() => {
+    if (myDOGEWalletAddress == "") return;
+    getDOGEBalance(myDOGEWalletAddress);
+  }, [myDOGEWalletAddress]);
+
   // Get Data From LocalStorage. Check New or Old User.
   const getStoredData = async () => {
 
@@ -56,15 +62,19 @@ const Welcome = ({ navigation }) => {
       const btcaddress = await AsyncStorage.getItem('@btcaddress');
       const btcprivatekey = await AsyncStorage.getItem('@btcprivatekey');
       const btcpublickey = await AsyncStorage.getItem('@btcpublickey');
-      console.log("mnemonic : " + mnemonic);
-      console.log("address : " + address);
-      console.log("privatekey : " + privatekey);
+      const dogeaddress = await AsyncStorage.getItem('@dogeaddress');
+      const dogeprivatekey = await AsyncStorage.getItem('@dogeprivatekey');
+      const dogepublickey = await AsyncStorage.getItem('@dogepublickey');
       console.log("btcaddress : " + btcaddress);
+      console.log("dogeaddress : " + dogeaddress);
       if (mnemonic !== null) {
         dispatch({ type: 'SET_WALLETINFO', walletmnemonic: mnemonic, walletaddress: address, walletprivatekey: privatekey });
         dispatch({ type: 'SET_BTCWALLETINFO', btcaddress: btcaddress, btcprivatekey: btcprivatekey, btcpublickey: btcpublickey });
+        dispatch({ type: 'SET_DOGEWALLETINFO', dogeaddress: dogeaddress, dogeprivatekey: dogeprivatekey, dogepublickey: dogepublickey });
+
         setMyWalletAddress(address);
         setMyBTCWalletAddress(btcaddress);
+        setMyDOGEWalletAddress(dogeaddress);
         setIsNew("false");
       }
       else {
@@ -103,7 +113,32 @@ const Welcome = ({ navigation }) => {
   }
 
   const getBTCBalance = (address) => {
-    console.log("Bitcoin Bitcoin Bitcoin Bitcoin Bitcoin ...");
+    console.log(address);
+    var btcAddress = "1LSxFbKWcRghQaFkjg4m7XAs9gSU5GNUWG";
+
+    fetch("https://blockchain.info/q/addressbalance/" + btcAddress)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (json) {
+        var btcBalance = parseInt(json, 10);
+        console.log("WWbtcbalance : " + btcBalance / 100000000);
+        dispatch({ type: 'SET_BTCBALANCE', currentbtcbalance: btcBalance / 100000000 });
+      });
+  }
+
+  const getDOGEBalance = (address) => {
+    console.log(address);
+    var dogeAddress = address;
+    fetch("https://dogechain.info/chain/Dogecoin/q/addressbalance/" + dogeAddress)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (json) {
+        console.log("WWdogebalance : " + json);
+        var dogeBalance = json;
+        dispatch({ type: 'SET_DOGEBALANCE', currentdogebalance: dogeBalance });
+      });
   }
 
   return (

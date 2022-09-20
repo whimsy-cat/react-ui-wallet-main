@@ -5,7 +5,7 @@ import Reducer from './reducer'
 const initialState = {
     CoinFullName: ["Bitcoin", "Ethereum", "BNB Beacon Chain", "BNB Smart Chain", "Cardano", "XRP", "Solana", "DogeCoin", "Polkadot"],
     CoinSymbol: ["BTC", "ETH", "BNB", "BNB", "ADA", "XRP", "SOL", "DOGE", "DOT"],
-    ImportedCoinFullName: ["Bitcoin", "Ethereum"],
+    ImportedCoinFullName: ["Bitcoin", "Ethereum", "BNB Beacon Chain", "BNB Smart Chain", "DogeCoin"],
     CoinImage: [
         require("../assets/images/btc.png"),
         require("../assets/images/eth.png"),
@@ -35,12 +35,23 @@ const initialState = {
         "0x3BfC20f0B9aFcAcE800D73D2191166FF16540258",
     ],
     CurrentETHBalance: ["0.0"],
+    CurrentBTCBalance: ["0.0"],
+    CurrentBNBBBalance: ["0.0"],
+    CurrentBNBSBalance: ["0.0"],
+    CurrentDOGEBalance: ["0.0"],
+    CurrentSOLBalance: ["0.0"],
+    CurrentXRPBalance: ["0.0"],
+    CurrentADABalance: ["0.0"],
+    CurrentDOTBalance: ["0.0"],
     WalletMnemonic: "",
     WalletAddress: "", // Ethereum
     WalletPrivateKey: "", // Ethereum
     BTCAddress: "", // BTC
     BTCPrivateKey: "", // BTC
     BTCPublicKey: "", // BTC
+    DOGEAddress: "", // DOGE
+    DOGEPrivateKey: "", // DOGE
+    DOGEPublicKey: "", // DOGE
 };
 
 const Store = ({ children }) => {
