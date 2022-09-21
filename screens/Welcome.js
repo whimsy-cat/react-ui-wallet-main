@@ -16,10 +16,13 @@ const Welcome = ({ navigation }) => {
   const [myWalletAddress, setMyWalletAddress] = useState("");
   const [myBTCWalletAddress, setMyBTCWalletAddress] = useState("");
   const [myDOGEWalletAddress, setMyDOGEWalletAddress] = useState("");
+  const [myXRPWalletAddress, setMyXRPWalletAddress] = useState("");
+  const [mySOLWalletAddress, setMySOLWalletAddress] = useState("");
+  const [myADAWalletAddress, setMyADAWalletAddress] = useState("");
+  const [myDOTWalletAddress, setMyDOTWalletAddress] = useState("");
   const [state, dispatch] = useContext(Context);
 
   useEffect(() => {
-    console.log('Welcome Trust Wallet!');
     //  clearAsyncStorage();
     getStoredData();
     getMarketData();
@@ -51,6 +54,26 @@ const Welcome = ({ navigation }) => {
     getDOGEBalance(myDOGEWalletAddress);
   }, [myDOGEWalletAddress]);
 
+  useEffect(() => {
+    if (myXRPWalletAddress == "") return;
+    getXRPBalance(myXRPWalletAddress);
+  }, [myXRPWalletAddress]);
+
+  useEffect(() => {
+    if (mySOLWalletAddress == "") return;
+    getSOLBalance(mySOLWalletAddress);
+  }, [mySOLWalletAddress]);
+
+  useEffect(() => {
+    if (myADAWalletAddress == "") return;
+    getADABalance(myADAWalletAddress);
+  }, [myADAWalletAddress]);
+
+  useEffect(() => {
+    if (myDOTWalletAddress == "") return;
+    getDOTBalance(myDOTWalletAddress);
+  }, [myDOTWalletAddress]);
+
   // Get Data From LocalStorage. Check New or Old User.
   const getStoredData = async () => {
 
@@ -59,22 +82,48 @@ const Welcome = ({ navigation }) => {
       const mnemonic = await AsyncStorage.getItem('@mnemonic');
       const address = await AsyncStorage.getItem('@address');
       const privatekey = await AsyncStorage.getItem('@privatekey');
+
       const btcaddress = await AsyncStorage.getItem('@btcaddress');
       const btcprivatekey = await AsyncStorage.getItem('@btcprivatekey');
       const btcpublickey = await AsyncStorage.getItem('@btcpublickey');
+
       const dogeaddress = await AsyncStorage.getItem('@dogeaddress');
       const dogeprivatekey = await AsyncStorage.getItem('@dogeprivatekey');
       const dogepublickey = await AsyncStorage.getItem('@dogepublickey');
-      console.log("btcaddress : " + btcaddress);
-      console.log("dogeaddress : " + dogeaddress);
+
+      const xrpaddress = await AsyncStorage.getItem('@xrpaddress');
+      const xrpprivatekey = await AsyncStorage.getItem('@xrpprivatekey');
+      const xrppublickey = await AsyncStorage.getItem('@xrppublickey');
+
+      const soladdress = await AsyncStorage.getItem('@soladdress');
+      const solprivatekey = await AsyncStorage.getItem('@solprivatekey');
+      const solpublickey = await AsyncStorage.getItem('@solpublickey');
+
+      const adaaddress = await AsyncStorage.getItem('@adaaddress');
+      const adaprivatekey = await AsyncStorage.getItem('@adaprivatekey');
+      const adapublickey = await AsyncStorage.getItem('@adapublickey');
+
+      const dotaddress = await AsyncStorage.getItem('@dotaddress');
+      const dotprivatekey = await AsyncStorage.getItem('@dotprivatekey');
+      const dotpublickey = await AsyncStorage.getItem('@dotpublickey');
+
       if (mnemonic !== null) {
         dispatch({ type: 'SET_WALLETINFO', walletmnemonic: mnemonic, walletaddress: address, walletprivatekey: privatekey });
-        dispatch({ type: 'SET_BTCWALLETINFO', btcaddress: btcaddress, btcprivatekey: btcprivatekey, btcpublickey: btcpublickey });
-        dispatch({ type: 'SET_DOGEWALLETINFO', dogeaddress: dogeaddress, dogeprivatekey: dogeprivatekey, dogepublickey: dogepublickey });
+        if (btcaddress != null) dispatch({ type: 'SET_BTCWALLETINFO', btcaddress: btcaddress, btcprivatekey: btcprivatekey, btcpublickey: btcpublickey });
+        if (dogeaddress != null) dispatch({ type: 'SET_DOGEWALLETINFO', dogeaddress: dogeaddress, dogeprivatekey: dogeprivatekey, dogepublickey: dogepublickey });
+        if (xrpaddress != null) dispatch({ type: 'SET_XRPWALLETINFO', xrpaddress: xrpaddress, xrpprivatekey: xrpprivatekey, xrppublickey: xrppublickey });
+        if (soladdress != null) dispatch({ type: 'SET_SOLWALLETINFO', soladdress: soladdress, solprivatekey: solprivatekey, solpublickey: solpublickey });
+        if (adaaddress != null) dispatch({ type: 'SET_ADAWALLETINFO', adaaddress: adaaddress, adaprivatekey: adaprivatekey, adapublickey: adapublickey });
+        if (dotaddress != null) dispatch({ type: 'SET_DOTWALLETINFO', dotaddress: dotaddress, dotprivatekey: dotprivatekey, dotpublickey: dotpublickey });
+
 
         setMyWalletAddress(address);
         setMyBTCWalletAddress(btcaddress);
         setMyDOGEWalletAddress(dogeaddress);
+        setMyXRPWalletAddress(xrpaddress);
+        setMySOLWalletAddress(soladdress);
+        setMyADAWalletAddress(adaaddress);
+        setMyDOTWalletAddress(dotaddress);
         setIsNew("false");
       }
       else {
@@ -113,7 +162,7 @@ const Welcome = ({ navigation }) => {
   }
 
   const getBTCBalance = (address) => {
-    console.log(address);
+    //    console.log(address);
     var btcAddress = "1LSxFbKWcRghQaFkjg4m7XAs9gSU5GNUWG";
 
     fetch("https://blockchain.info/q/addressbalance/" + btcAddress)
@@ -128,7 +177,7 @@ const Welcome = ({ navigation }) => {
   }
 
   const getDOGEBalance = (address) => {
-    console.log(address);
+    //    console.log(address);
     var dogeAddress = address;
     fetch("https://dogechain.info/chain/Dogecoin/q/addressbalance/" + dogeAddress)
       .then(function (response) {
@@ -139,6 +188,19 @@ const Welcome = ({ navigation }) => {
         var dogeBalance = json;
         dispatch({ type: 'SET_DOGEBALANCE', currentdogebalance: dogeBalance });
       });
+  }
+
+  const getXRPBalance = (address) => {
+    //    console.log(address);
+  }
+  const getSOLBalance = (address) => {
+    //    console.log(address);
+  }
+  const getADABalance = (address) => {
+    //    console.log(address);
+  }
+  const getDOTBalance = (address) => {
+    //    console.log(address);
   }
 
   return (

@@ -7,6 +7,11 @@ import { wallet } from './OnboardingScreen';
 import { Context } from '../reducers/store';
 import { AsyncStorage } from "react-native";
 
+const bip39 = require("bip39");
+const bip32 = require("ripple-bip32");
+const ripple = require('ripplelib')
+const sign = require('ripple-sign-keypairs')
+
 import "react-native-get-random-values"
 import "@ethersproject/shims"
 import { ethers } from "ethers";
@@ -16,28 +21,54 @@ const LegalScreen = ({ navigation }) => {
   const [state, dispatch] = useContext(Context);
 
   useEffect(() => {
-    createNewWallet();
+    createNewWallet(); // Eth
+    createXRPWallet(); // XRP
     getETHBalance(wallet.address);
   }, []);
 
-  // Create a new wallet. Mnemonic, Address, PrivateKey.
+  // Create a new wallet. Mnemonic, Address, PrivateKey. (ETH, BNB)
   const createNewWallet = () => {
     console.log("Creating a new wallet ...");
     dispatch({ type: 'SET_WALLETINFO', walletmnemonic: wallet.mnemonic.phrase, walletaddress: wallet.address, walletprivatekey: wallet.privateKey });
-    setStorageData();
+    setETHStorageData(); // ETH
+  }
+
+  // Create XRP Wallet. 
+  const createXRPWallet = () => {
+    var mnemonic = bip39.generateMnemonic()
+    const seed = bip39.mnemonicToSeedSync(mnemonic)
+    // console.log(seed);
+    const m = bip32.fromSeedBuffer(seed)
+    // console.log(m)
+    const keyPair = m.derivePath("m/44'/144'/0'/0/0").keyPair.getKeyPairs()
+    const key = ripple.KeyPair.from_json(keyPair.privateKey.substring(2))
+    dispatch({ type: 'SET_XRPWALLETINFO', xrpaddress: key.to_address_string(), xrppublickey: keyPair.publicKey, xrpprivatekey: keyPair.privateKey });
+    setXRPStorageData(key.to_address_string(), keyPair.publicKey, keyPair.privateKey);
   }
 
   // Set Wallet Info to Local Storage.
-  const setStorageData = async () => {
+  const setETHStorageData = async () => {
     try {
       await AsyncStorage.setItem("@mnemonic", wallet.mnemonic.phrase);
       await AsyncStorage.setItem("@address", wallet.address);
       await AsyncStorage.setItem("@privatekey", wallet.privateKey);
-      console.log('Wallet Info Successfuly Saved to Local Storage.')
+      console.log('ETH Wallet Info Successfuly Saved to Local Storage.')
     } catch (e) {
       console.log('Failed To Save Data to Local Storage!!!');
     }
   }
+
+  const setXRPStorageData = async (address, publickey, privatekey) => {
+    try {
+      await AsyncStorage.setItem("@xrpaddress", address);
+      await AsyncStorage.setItem("@xrppublickey", publickey);
+      await AsyncStorage.setItem("@xrpprivatekey", privatekey);
+      console.log('XRP Wallet Info Successfuly Saved to Local Storage.')
+    } catch (e) {
+      console.log('Failed To Save Data to Local Storage!!!');
+    }
+  }
+
 
   // Get ETH Balance from My Wallet Address
   const getETHBalance = (address) => {

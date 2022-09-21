@@ -5,7 +5,7 @@ import Reducer from './reducer'
 const initialState = {
     CoinFullName: ["Bitcoin", "Ethereum", "BNB Beacon Chain", "BNB Smart Chain", "Cardano", "XRP", "Solana", "DogeCoin", "Polkadot"],
     CoinSymbol: ["BTC", "ETH", "BNB", "BNB", "ADA", "XRP", "SOL", "DOGE", "DOT"],
-    ImportedCoinFullName: ["Bitcoin", "Ethereum", "BNB Beacon Chain", "BNB Smart Chain", "DogeCoin"],
+    ImportedCoinFullName: ["Bitcoin", "Ethereum", "BNB Beacon Chain", "BNB Smart Chain", "DogeCoin", "XRP"],
     CoinImage: [
         require("../assets/images/btc.png"),
         require("../assets/images/eth.png"),
@@ -43,15 +43,34 @@ const initialState = {
     CurrentXRPBalance: ["0.0"],
     CurrentADABalance: ["0.0"],
     CurrentDOTBalance: ["0.0"],
+
     WalletMnemonic: "",
-    WalletAddress: "", // Ethereum
-    WalletPrivateKey: "", // Ethereum
+    WalletAddress: "", // Ethereum, BNB Smart Chain, BNB Beacon Chain
+    WalletPrivateKey: "", // Ethereum, BNB Smart Chain, BNB Beacon Chain
+
     BTCAddress: "", // BTC
     BTCPrivateKey: "", // BTC
     BTCPublicKey: "", // BTC
+
     DOGEAddress: "", // DOGE
     DOGEPrivateKey: "", // DOGE
     DOGEPublicKey: "", // DOGE
+
+    XRPAddress: "", // XRP
+    XRPPrivateKey: "", // XRP
+    XRPPublicKey: "", // XRP
+
+    SOLAddress: "", // SOL
+    SOLPrivateKey: "", // SOL
+    SOLPublicKey: "", // SOL
+
+    ADAAddress: "", // ADA
+    ADAPrivateKey: "", // ADA
+    ADAPublicKey: "", // ADA
+
+    DOTAddress: "", // DOT
+    DOTPrivateKey: "", // DOT
+    DOTPublicKey: "", // DOT
 };
 
 const Store = ({ children }) => {

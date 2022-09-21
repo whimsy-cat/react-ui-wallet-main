@@ -47,7 +47,15 @@ function FirstRoute() {
                     state.WalletAddress.toString().substring(0, 25).concat(" . . . ") :
                     coin == "Bitcoin" ?
                       state.BTCAddress.toString().substring(0, 25).concat(" . . .") :
-                      state.DOGEAddress.toString().substring(0, 25).concat(" . . .")}
+                      coin == "DogeCoin" ?
+                        state.DOGEAddress.toString().substring(0, 25).concat(" . . .") :
+                        coin == "XRP" ?
+                          state.XRPAddress.toString().substring(0, 25).concat(" . . .") :
+                          coin == "Solana" ?
+                            state.SOLAddress.toString().substring(0, 25).concat(" . . .") :
+                            coin == "Cardano" ?
+                              state.ADAAddress.toString().substring(0, 25).concat(" . . .") :
+                              state.DOTAddress.toString().substring(0, 25).concat(" . . .")}
                   </TokenAddress>
                 </TokenNamePrice>
               </TokenDetails>

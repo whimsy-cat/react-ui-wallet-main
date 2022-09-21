@@ -61,6 +61,34 @@ const Reducer = (state, action) => {
                 DOGEPublicKey: action.dogepublickey,
                 DOGEPrivateKey: action.dogeprivatekey,
             }
+        case 'SET_XRPWALLETINFO': // DOGE
+            return {
+                ...state,
+                XRPAddress: action.xrpaddress,
+                XRPPublicKey: action.xrppublickey,
+                XRPPrivateKey: action.xrpprivatekey,
+            }
+        case 'SET_SOLWALLETINFO': // DOGE
+            return {
+                ...state,
+                SOLAddress: action.soladdress,
+                SOLPublicKey: action.solpublickey,
+                SOLPrivateKey: action.solprivatekey,
+            }
+        case 'SET_ADAWALLETINFO': // DOGE
+            return {
+                ...state,
+                ADAAddress: action.adaaddress,
+                ADAPublicKey: action.adapublickey,
+                ADAPrivateKey: action.adaprivatekey,
+            }
+        case 'SET_DOTWALLETINFO': // DOGE
+            return {
+                ...state,
+                DOTAddress: action.dotaddress,
+                DOTPublicKey: action.dotpublickey,
+                DOTPrivateKey: action.dotprivatekey,
+            }
         case 'ADD_POST':
             return {
                 ...state,

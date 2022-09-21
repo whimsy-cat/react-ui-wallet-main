@@ -19,6 +19,15 @@ const VerifyPhraseScreen = ({ navigation }) => {
   const [selectedWords, setSelectedWords] = useState([]);
   const [spinner, setSpinner] = React.useState(false);
 
+  useEffect(() => {
+    tmpSeed = Seed;
+    for (let i = 0; i < 12; i++) {
+      secretPhrase += tmpSeed[i] + " ";
+    }
+    mixOrder();
+    setWords(Seed);
+  }, [])
+
   // Mix Mnemonic Words in Random Order.
   const mixOrder = () => {
     console.log("Mixing...");
@@ -53,9 +62,61 @@ const VerifyPhraseScreen = ({ navigation }) => {
         console.error(err);
       });
   }
+
+  const createSOLaddress = async () => {
+    console.log("Generating SOL address...");
+    const resp = await fetch(
+      `https://api-eu1.tatum.io/v3/solana/wallet`,
+      {
+        method: 'GET',
+        headers: {
+          'x-api-key': 'c9c6adb3-7590-4b63-9548-95dac35500bf'
+        }
+      }
+    );
+
+    const data = await resp.json();
+    console.log("SOLANA : " + data);
+    setSOLToLocalStorage(data);
+  }
+
+  const createADAaddress = async () => {
+    console.log("Generating ADA address...");
+    const resp = await fetch(
+      `https://api-eu1.tatum.io/v3/algorand/wallet`,
+      {
+        method: 'GET',
+        headers: {
+          'x-api-key': 'c9c6adb3-7590-4b63-9548-95dac35500bf'
+        }
+      }
+    );
+
+    const data = await resp.json();
+    console.log("CARDANO : " + data);
+    setADAToLocalStorage(data);
+  }
+
+  const createDOTaddress = async () => {
+    console.log("Generating DOT address...");
+    const resp = await fetch(
+      `https://api-eu1.tatum.io/v3/xlm/account`,
+      {
+        method: 'GET',
+        headers: {
+          'x-api-key': 'c9c6adb3-7590-4b63-9548-95dac35500bf'
+        }
+      }
+    );
+
+    const data = await resp.json();
+    console.log("POLKADOT : " + data);
+    setDOTToLocalStorage(data);
+  }
+
   const setBTCToLocalStorage = async (BTCdata) => {
     try {
-      console.log(BTCdata.address);
+      console.log("Bitcoin address : " + BTCdata.address);
       dispatch({ type: 'SET_BTCWALLETINFO', btcaddress: BTCdata.address, btcprivatekey: BTCdata.private, btcpublickey: BTCdata.public });
       await AsyncStorage.setItem("@btcaddress", BTCdata.address);
       await AsyncStorage.setItem("@btcprivatekey", BTCdata.private);
@@ -66,9 +127,10 @@ const VerifyPhraseScreen = ({ navigation }) => {
       console.log('Failed To Save Data to Local Storage!!!');
     }
   }
+
   const setDOGEToLocalStorage = async (DOGEdata) => {
     try {
-      console.log(DOGEdata.address);
+      console.log("Doge address : " + DOGEdata.address);
       dispatch({ type: 'SET_DOGEWALLETINFO', dogeaddress: DOGEdata.address, dogeprivatekey: DOGEdata.private, dogepublickey: DOGEdata.public });
       await AsyncStorage.setItem("@dogeaddress", DOGEdata.address);
       await AsyncStorage.setItem("@dogeprivatekey", DOGEdata.private);
@@ -79,6 +141,49 @@ const VerifyPhraseScreen = ({ navigation }) => {
       console.log('Failed To Save Data to Local Storage!!!');
     }
   }
+
+  const setSOLToLocalStorage = async (SOLdata) => {
+    try {
+      console.log("Solana address : " + SOLdata.address);
+      dispatch({ type: 'SET_SOLWALLETINFO', soladdress: SOLdata.address, solprivatekey: SOLdata.privateKey, solpublickey: "SOL_PUB" });
+      await AsyncStorage.setItem("@soladdress", SOLdata.address);
+      await AsyncStorage.setItem("@solprivatekey", SOLdata.privateKey);
+      await AsyncStorage.setItem("@solpublickey", "SOL_PUB");
+
+      console.log('SOL Info Successfuly Saved to Local Storage.')
+    } catch (e) {
+      console.log('Failed To Save Data to Local Storage!!!');
+    }
+  }
+
+  const setADAToLocalStorage = async (ADAdata) => {
+    try {
+      console.log("Cadano address : " + ADAdata.address);
+      dispatch({ type: 'SET_ADAWALLETINFO', adaaddress: ADAdata.address, adaprivatekey: ADAdata.secret, adapublickey: "ADA_PUB" });
+      await AsyncStorage.setItem("@adaaddress", ADAdata.address);
+      await AsyncStorage.setItem("@adaprivatekey", ADAdata.secret);
+      await AsyncStorage.setItem("@adapublickey", "ADA_PUB");
+
+      console.log('ADA Info Successfuly Saved to Local Storage.')
+    } catch (e) {
+      console.log('Failed To Save Data to Local Storage!!!');
+    }
+  }
+
+  const setDOTToLocalStorage = async (DOTdata) => {
+    try {
+      console.log("Pokadot address : " + DOTdata.address);
+      dispatch({ type: 'SET_DOTWALLETINFO', dotaddress: DOTdata.address, dotprivatekey: DOTdata.secret, dotpublickey: "DOT_PUB" });
+      await AsyncStorage.setItem("@dotaddress", DOTdata.address);
+      await AsyncStorage.setItem("@dotprivatekey", DOTdata.secret);
+      await AsyncStorage.setItem("@dotpublickey", "DOT_PUB");
+
+      console.log('DOT Info Successfuly Saved to Local Storage.')
+    } catch (e) {
+      console.log('Failed To Save Data to Local Storage!!!');
+    }
+  }
+
   const onPress = (word) => {
     if (selectedWords.includes(word) == false) {
       setSeed((prevSeed) => prevSeed + word + " ");
@@ -93,11 +198,16 @@ const VerifyPhraseScreen = ({ navigation }) => {
     const tmpArray = selectedWords.filter((word) => selectedWords.indexOf(word) !== deletedIndex)
     setSelectedWords(tmpArray);
   }
+
   const onNextScene = () => {
     setSpinner(true);
     createBTCaddress();
     createDOGEaddress();
+    createSOLaddress();
+    createADAaddress();
+    createDOTaddress();
   }
+
   const onPorfolio = () => {
     let compareSeed = "";
     compareSeed = selectedWords.join(" ");
@@ -112,18 +222,6 @@ const VerifyPhraseScreen = ({ navigation }) => {
       console.log("Error!");
     }
   }
-  useEffect(() => {
-    //    setWords(JSON.parse(window.localStorage.getItem("security")));
-    tmpSeed = Seed;
-    for (let i = 0; i < 12; i++) {
-      secretPhrase += tmpSeed[i] + " ";
-    }
-    mixOrder();
-    setWords(Seed);
-  }, [])
-
-  useEffect(() => {
-  }, [selectedWords]);
 
   return (
     <Container>
