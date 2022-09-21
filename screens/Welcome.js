@@ -153,7 +153,6 @@ const Welcome = ({ navigation }) => {
 
   // Get ETH Balance from My Wallet Address
   const getETHBalance = (address) => {
-    console.log(address);
     provider.getBalance(address).then((balance) => {
       // convert a currency unit from wei to ether
       const ethBalance = ethers.utils.formatEther(balance);
@@ -165,7 +164,7 @@ const Welcome = ({ navigation }) => {
     //    console.log(address);
     var btcAddress = "1LSxFbKWcRghQaFkjg4m7XAs9gSU5GNUWG";
 
-    fetch("https://blockchain.info/q/addressbalance/" + btcAddress)
+    fetch("https://blockchain.info/q/addressbalance/" + address)
       .then(function (response) {
         return response.json();
       })

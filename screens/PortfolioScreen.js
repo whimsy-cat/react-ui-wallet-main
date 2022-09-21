@@ -200,7 +200,7 @@ export default function PortfolioScreen({ navigation }) {
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => navigation.navigate("RecieveTokenScreen")}
+            onPress={() => navigation.navigate("SearchRecieveTokensScreen")}
           >
             <Action>
               <Ionicons

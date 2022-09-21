@@ -11,25 +11,69 @@ const RecieveTokenScreen = ({ navigation }) => {
   const [state, dispatch] = useContext(Context);
 
   const onHandleCopy = () => {
-    Clipboard.setString(state.WalletAddress);
+    Clipboard.setString(state.RecieveToken == "ETH" ||
+      state.RecieveToken == "BNB" ?
+      state.WalletAddress :
+      state.RecieveToken == "BTC" ?
+        state.BTCAddress :
+        state.RecieveToken == "DOGE" ?
+          state.DOGEAddress :
+          state.RecieveToken == "XRP" ?
+            state.XRPAddress :
+            state.RecieveToken == "SOL" ?
+              state.SOLAddress :
+              state.RecieveToken == "ADA" ?
+                state.ADAAddress :
+                state.DOTAddress);
   }
+  useEffect(() => {
+    console.log(state.RecieveToken);
+  }, []);
   return (
     <Container>
       <Header>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name="arrow-back" color="#fff" size={24} />
         </TouchableOpacity>
-        <Title>Recieve ETH</Title>
+        <Title>Recieve {state.RecieveToken}</Title>
       </Header>
       <Body>
         <QRContainer elevation={1}>
-          <Image source={{ uri: `https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=${state.WalletAddress}` }} />
+          <Image source={{
+            uri: `https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=${state.RecieveToken == "ETH" ||
+              state.RecieveToken == "BNB" ?
+              state.WalletAddress :
+              state.RecieveToken == "BTC" ?
+                state.BTCAddress :
+                state.RecieveToken == "DOGE" ?
+                  state.DOGEAddress :
+                  state.RecieveToken == "XRP" ?
+                    state.XRPAddress :
+                    state.RecieveToken == "SOL" ?
+                      state.SOLAddress :
+                      state.RecieveToken == "ADA" ?
+                        state.ADAAddress :
+                        state.DOTAddress}`
+          }} />
           <WalletAddress>
-            {state.WalletAddress}
+            {state.RecieveToken == "ETH" ||
+              state.RecieveToken == "BNB" ?
+              state.WalletAddress.toString() :
+              state.RecieveToken == "BTC" ?
+                state.BTCAddress.toString() :
+                state.RecieveToken == "DOGE" ?
+                  state.DOGEAddress.toString() :
+                  state.RecieveToken == "XRP" ?
+                    state.XRPAddress.toString() :
+                    state.RecieveToken == "SOL" ?
+                      state.SOLAddress.toString() :
+                      state.RecieveToken == "ADA" ?
+                        state.ADAAddress.toString() :
+                        state.DOTAddress.toString()}
           </WalletAddress>
         </QRContainer>
         <WarningText>
-          Send only Ethereum (ETH) to this address. Sending any other coins may
+          Send only Ethereum ({state.RecieveToken}) to this address. Sending any other coins may
           result in permanent loss.
         </WarningText>
         <Actions>
