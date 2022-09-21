@@ -179,6 +179,7 @@ const VerifyPhraseScreen = ({ navigation }) => {
       await AsyncStorage.setItem("@dotpublickey", "DOT_PUB");
 
       console.log('DOT Info Successfuly Saved to Local Storage.')
+      onPorfolio();
     } catch (e) {
       console.log('Failed To Save Data to Local Storage!!!');
     }
