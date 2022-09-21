@@ -214,7 +214,7 @@ const VerifyPhraseScreen = ({ navigation }) => {
     compareSeed = selectedWords.join(" ");
     console.log("compare : " + compareSeed);
 
-    if (compareSeed != state.WalletMnemonic) {
+    if (compareSeed == state.WalletMnemonic) {
       navigation.navigate("TabNavigator", {
         screen: "PortfolioScreen",
       })
