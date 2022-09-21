@@ -56,7 +56,7 @@ const SendTokenChoose = ({ navigation }) => {
           </TokensContainer>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => onHandleClick("bnb")}>
+        <TouchableOpacity onPress={() => onHandleClick("bnbb")}>
           <TokensContainer tokenImage={require("../assets/images/bnb2.png")}
             tokenName="BNB Beacon Chain"
             tokenAmount="0"
@@ -66,7 +66,7 @@ const SendTokenChoose = ({ navigation }) => {
           </TokensContainer>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => onHandleClick("bnb")}>
+        <TouchableOpacity onPress={() => onHandleClick("bnbs")}>
           <TokensContainer tokenImage={require("../assets/images/bnb.png")}
             tokenName="BNB Smart Chain"
             tokenAmount="0"

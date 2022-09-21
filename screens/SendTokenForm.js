@@ -24,18 +24,199 @@ const SendTokenFormScreen = ({ navigation }) => {
 
   useEffect(() => {
   })
-  const sendToken = () => {
-    if (selectedSendToken != "eth") {
-      alert(`You have no enough ${selectedSendToken.toUpperCase()} to send!`);
-      return;
+  const sendToken = async () => {
+    if (selectedSendToken == "eth" || selectedSendToken == "bnbb" || selectedSendToken == "bnbs") {
+      if (state.CurrentBTCBalance <= send_token_amount) {
+        alert(`You have no enough ${selectedSendToken.toUpperCase()} to send!`);
+        return;
+      }
+      send_address = state.WalletAddress;
+      private_key = state.WalletPrivateKey;
+      console.log("Sender : " + send_address)
+      console.log("Sender Key : " + private_key);
+      console.log("Receive : " + recipentAddress);
+      console.log("Amount : " + send_token_amount);
+      if (selectedSendToken == "bnbb") contract_address = "0x250632378e573c6be1ac2f97fcdf00515d0aa91b";
+      if (selectedSendToken == "bnbs") contract_address = "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c";
+      send_token(contract_address, send_token_amount, recipentAddress, send_address, private_key);
     }
-    send_address = state.WalletAddress;
-    private_key = state.WalletPrivateKey;
-    console.log("Sender : " + send_address)
-    console.log("Sender Key : " + private_key);
-    console.log("Receive : " + recipentAddress);
-    console.log("Amount : " + send_token_amount);
-    send_token(contract_address, send_token_amount, recipentAddress, send_address, private_key);
+    else {
+      if (selectedSendToken == "btc") {
+        if (state.CurrentBTCBalance <= send_token_amount) {
+          alert(`You have no enough ${selectedSendToken.toUpperCase()} to send!`);
+        }
+        else {
+          const resp = await fetch(
+            `https://api-eu1.tatum.io/v3/bitcoin/transaction`,
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'x-api-key': 'c9c6adb3-7590-4b63-9548-95dac35500bf'
+              },
+              body: JSON.stringify({
+                fromAddress: [
+                  {
+                    address: state.BTCAddress,
+                    privateKey: state.BTCPrivateKey
+                  }
+                ],
+                to: [
+                  {
+                    address: recipentAddress,
+                    value: send_token_amount
+                  }
+                ]
+              })
+            }
+          );
+          const data = await resp.json();
+          alert("Successfuly Sent!");
+        }
+      }
+      else if (selectedSendToken == "ada") {
+        if (state.CurrentADABalance <= send_token_amount) {
+          alert(`You have no enough ${selectedSendToken.toUpperCase()} to send!`);
+        }
+        else {
+          const resp = await fetch(
+            `https://api-eu1.tatum.io/v3/algorand/transaction`,
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'x-api-key': 'c9c6adb3-7590-4b63-9548-95dac35500bf'
+              },
+              body: JSON.stringify({
+                from: state.ADAAddress,
+                to: recipentAddress,
+                amount: send_token_amount,
+                fromPrivateKey: state.ADAPrivateKey
+              })
+            }
+          );
+          const data = await resp.json();
+          alert("Successfuly Sent!");
+        }
+      }
+      else if (selectedSendToken == "xrp") {
+        if (state.CurrentXRPBalance <= send_token_amount) {
+          alert(`You have no enough ${selectedSendToken.toUpperCase()} to send!`);
+        }
+        else {
+          const resp = await fetch(
+            `https://api-eu1.tatum.io/v3/xrp/transaction`,
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'x-api-key': 'c9c6adb3-7590-4b63-9548-95dac35500bf'
+              },
+              body: JSON.stringify({
+                fromAccount: state.XRPAddress,
+                to: recipentAddress,
+                amount: send_token_amount,
+                fromSecret: state.XRPPrivateKey
+              })
+            }
+          );
+
+          const data = await resp.json();
+          alert("Successfuly Sent!");
+        }
+      }
+      else if (selectedSendToken == "sol") {
+        if (state.CurrentSOLBalance <= send_token_amount) {
+          alert(`You have no enough ${selectedSendToken.toUpperCase()} to send!`);
+        }
+        else {
+          const resp = await fetch(
+            `https://api-eu1.tatum.io/v3/solana/transaction`,
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'x-api-key': 'c9c6adb3-7590-4b63-9548-95dac35500bf'
+              },
+              body: JSON.stringify({
+                from: state.SOLAddress,
+                to: recipentAddress,
+                amount: send_token_amount,
+                fromPrivateKey: state.SOLPrivateKey
+              })
+            }
+          );
+
+          const data = await resp.json();
+          alert("Successfuly Sent!");
+        }
+      }
+      else if (selectedSendToken == "doge") {
+        if (state.CurrentDOGEBalance <= send_token_amount) {
+          alert(`You have no enough ${selectedSendToken.toUpperCase()} to send!`);
+        }
+        else {
+          const resp = await fetch(
+            `https://api-eu1.tatum.io/v3/dogecoin/transaction`,
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'x-api-key': 'c9c6adb3-7590-4b63-9548-95dac35500bf'
+              },
+              body: JSON.stringify({
+                fee: '0.0015',
+                changeAddress: state.DOGEAddress,
+                fromUTXO: [
+                  {
+                    txHash: '53faa103e8217e1520f5149a4e8c84aeb58e55bdab11164a95e69a8ca50f8fcc',
+                    value: '0.0015',
+                    address: state.DOGEAddress,
+                    index: 0,
+                    privateKey: state.DOGEPrivateKey
+                  }
+                ],
+                to: [
+                  {
+                    address: recipentAddress,
+                    value: send_token_amount
+                  }
+                ]
+              })
+            }
+          );
+
+          const data = await resp.json();
+          alert("Successfuly Sent!");
+        }
+      }
+      else if (selectedSendToken == "dot") {
+        if (state.CurrentDOTBalance <= send_token_amount) {
+          alert(`You have no enough ${selectedSendToken.toUpperCase()} to send!`);
+        }
+        else {
+          const resp = await fetch(
+            `https://api-eu1.tatum.io/v3/xlm/transaction`,
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'x-api-key': 'c9c6adb3-7590-4b63-9548-95dac35500bf'
+              },
+              body: JSON.stringify({
+                fromAccount: state.DOTAddress,
+                to: recipentAddress,
+                amount: send_token_amount,
+                fromSecret: state.DOTPrivateKey
+              })
+            }
+          );
+
+          const data = await resp.json();
+          alert("Successfuly Sent!");
+        }
+      }
+    }
   }
   function send_token(
     contract_address,
