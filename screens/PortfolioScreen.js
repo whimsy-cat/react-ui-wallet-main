@@ -21,8 +21,6 @@ function FirstRoute() {
   }
 
   useEffect(() => {
-    console.log("BitCoin Address : " + state.BTCAddress);
-    console.log("Bitcoin Balance : " + state.CurrentBTCBalance);
   }, []);
   return (
     <First>
@@ -418,7 +416,7 @@ const TokenPercent = styled.Text`
 const AddToken = styled.View`
   flex-direction: row;
   align-items: center;
-  margin: 30px auto 0 auto;
+  margin: 30px auto 30px auto;
 `;
 const AddTokenText = styled.Text`
   color: #979797;

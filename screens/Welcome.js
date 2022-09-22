@@ -161,7 +161,7 @@ const Welcome = ({ navigation }) => {
   }
 
   const getBTCBalance = (address) => {
-    //    console.log(address);
+    console.log(address);
     var btcAddress = "1LSxFbKWcRghQaFkjg4m7XAs9gSU5GNUWG";
 
     fetch("https://blockchain.info/q/addressbalance/" + address)
@@ -170,36 +170,86 @@ const Welcome = ({ navigation }) => {
       })
       .then(function (json) {
         var btcBalance = parseInt(json, 10);
-        console.log("WWbtcbalance : " + btcBalance / 100000000);
+        console.log("bitcoin balance : " + btcBalance / 100000000);
         dispatch({ type: 'SET_BTCBALANCE', currentbtcbalance: btcBalance / 100000000 });
       });
   }
 
   const getDOGEBalance = (address) => {
-    //    console.log(address);
+    console.log(address);
     var dogeAddress = address;
     fetch("https://dogechain.info/chain/Dogecoin/q/addressbalance/" + dogeAddress)
       .then(function (response) {
         return response.json();
       })
       .then(function (json) {
-        console.log("WWdogebalance : " + json);
+        console.log("doge balance : " + json);
         var dogeBalance = json;
         dispatch({ type: 'SET_DOGEBALANCE', currentdogebalance: dogeBalance });
       });
   }
 
-  const getXRPBalance = (address) => {
-    //    console.log(address);
+  const getXRPBalance = async (address) => {
+    console.log(address);
+    const resp = await fetch(
+      `https://api-eu1.tatum.io/v3/xrp/account/${address}/balance`,
+      {
+        method: 'GET',
+        headers: {
+          'x-api-key': 'c9c6adb3-7590-4b63-9548-95dac35500bf'
+        }
+      }
+    );
+    const data = await resp.json();
+    console.log("XRP balance : " + data.balance);
+    dispatch({ type: 'SET_XRPBALANCE', currentdogebalance: data.balance });
   }
-  const getSOLBalance = (address) => {
-    //    console.log(address);
+  const getSOLBalance = async (address) => {
+    console.log(address);
+    const resp = await fetch(
+      `https://api-eu1.tatum.io/v3/solana/account/balance/${address}`,
+      {
+        method: 'GET',
+        headers: {
+          'x-api-key': 'c9c6adb3-7590-4b63-9548-95dac35500bf'
+        }
+      }
+    );
+
+    const data = await resp.json();
+    console.log("Solana balance : " + data.balance);
+    dispatch({ type: 'SET_SOLBALANCE', currentdogebalance: data.balance });
   }
-  const getADABalance = (address) => {
-    //    console.log(address);
+  const getADABalance = async (address) => {
+    console.log(address);
+    const resp = await fetch(
+      `https://api-eu1.tatum.io/v3/algorand/account/balance/${address}`,
+      {
+        method: 'GET',
+        headers: {
+          'x-api-key': 'c9c6adb3-7590-4b63-9548-95dac35500bf'
+        }
+      }
+    );
+
+    const data = await resp.json();
+    console.log("Cardano balance : " + data.balance);
+    dispatch({ type: 'SET_ADABALANCE', currentdogebalance: data.balance });
   }
-  const getDOTBalance = (address) => {
-    //    console.log(address);
+  const getDOTBalance = async (address) => {
+    console.log(address);
+    const resp = await fetch(
+      `https://api-eu1.tatum.io/v3/xlm/account/${address}`,
+      {
+        method: 'GET',
+        headers: {
+          'x-api-key': 'c9c6adb3-7590-4b63-9548-95dac35500bf'
+        }
+      }
+    );
+
+    const data = await resp.json();
+    console.log("Dot Balance : " + data);
   }
 
   return (

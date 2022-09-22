@@ -5,7 +5,7 @@ import Reducer from './reducer'
 const initialState = {
     CoinFullName: ["Bitcoin", "Ethereum", "BNB Beacon Chain", "BNB Smart Chain", "Cardano", "XRP", "Solana", "DogeCoin", "Polkadot"],
     CoinSymbol: ["BTC", "ETH", "BNB", "BNB", "ADA", "XRP", "SOL", "DOGE", "DOT"],
-    ImportedCoinFullName: ["Bitcoin", "Ethereum", "BNB Beacon Chain", "BNB Smart Chain", "DogeCoin", "XRP"],
+    ImportedCoinFullName: ["Bitcoin", "Ethereum", "BNB Smart Chain", "DogeCoin", "XRP"],
     CoinImage: [
         require("../assets/images/btc.png"),
         require("../assets/images/eth.png"),
