@@ -5,6 +5,11 @@ import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 const PriceAlertsScreen = ({ navigation }) => {
+  const [priceAlert, setPriceAlert] = React.useState(false);
+
+  const onHandleChange = () => {
+    setPriceAlert(!priceAlert);
+  }
   return (
     <Container>
       <Header>
@@ -17,7 +22,7 @@ const PriceAlertsScreen = ({ navigation }) => {
         <Setting>
           <Row>
             <Title>Price Alerts</Title>
-            <Switch />
+            <Switch value={priceAlert} onValueChange={() => onHandleChange()} />
           </Row>
           <Description>
             Get alerts for significant price changes of your favorite

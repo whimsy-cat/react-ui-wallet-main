@@ -94,6 +94,11 @@ const Reducer = (state, action) => {
                 DOTPublicKey: action.dotpublickey,
                 DOTPrivateKey: action.dotprivatekey,
             }
+        case 'SET_DARKMODE': // Dark Mode
+            return {
+                ...state,
+                DarkMode: action.darkmode,
+            }
         case 'ADD_POST':
             return {
                 ...state,

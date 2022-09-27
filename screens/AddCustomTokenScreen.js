@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components";
+import { Context } from '../reducers/store'
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 export var myCustomContractAdrress = "";
@@ -8,6 +9,7 @@ export var myCustomTokenName = "";
 export var myCustomSymbol = "";
 export var myCustomDecimals = "";
 const AddCustomTokenScreen = ({ navigation }) => {
+  const [state, dispatch] = useContext(Context);
   const [customContractAddress, setCustomContractAddress] = React.useState("");
   const [customTokenName, setCustomTokenName] = React.useState("");
   const [customSymbol, setCustomSymbol] = React.useState("");
@@ -21,36 +23,36 @@ const AddCustomTokenScreen = ({ navigation }) => {
     navigation.navigate("PortfolioScreen")
   }
   return (
-    <Container>
-      <Header>
+    <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
+      <Header style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name={"arrow-back"} color="#3275bb" size={28} />
         </TouchableOpacity>
-        <HeaderText>Add Custom Token</HeaderText>
+        <HeaderText style={state.DarkMode && { color: "#ffffff" }}>Add Custom Token</HeaderText>
 
         <TouchableOpacity onPress={() => onAddDone()}>
           <Done>Done</Done>
         </TouchableOpacity>
       </Header>
       <Body>
-        <TokenInfoContainer>
+        <TokenInfoContainer style={state.DarkMode && { borderColor: "#343434" }}>
           <TokenNetwork>
-            <Network>Network</Network>
+            <Network style={state.DarkMode && { color: "#fff" }}>Network</Network>
             <Token>
-              <TokenName>Ethereum</TokenName>
+              <TokenName style={state.DarkMode && { color: "#ccc" }}>Ethereum</TokenName>
               <Ionicons name={"chevron-forward"} color="#979797" size={28} />
             </Token>
           </TokenNetwork>
-          <CA>
-            <CAInput placeholder="Contract Address" value={customContractAddress} onChangeText={(value) => setCustomContractAddress(value)} />
+          <CA style={state.DarkMode && { borderColor: "#343434" }}>
+            <CAInput style={state.DarkMode && { color: "#fff" }} placeholderTextColor={state.DarkMode && "#999"} placeholder="Contract Address" value={customContractAddress} onChangeText={(value) => setCustomContractAddress(value)} />
             <Paste>
               <PasteText>Paste</PasteText>
               <Ionicons name={"clipboard-outline"} color="#3275bb" size={24} />
             </Paste>
           </CA>
-          <Name placeholder="Name" value={customTokenName} onChangeText={(value) => setCustomTokenName(value)} />
-          <Symbol placeholder="Symbol" value={customSymbol} onChangeText={(value) => setCustomSymbol(value)} />
-          <Decimals placeholder="Decimals" value={customDecimals} onChangeText={(value) => setCustomDecimals(value)} />
+          <Name style={state.DarkMode && { borderColor: "#343434", color: "#fff" }} placeholderTextColor={state.DarkMode && "#999"} placeholder="Name" value={customTokenName} onChangeText={(value) => setCustomTokenName(value)} />
+          <Symbol style={state.DarkMode && { borderColor: "#343434", color: "#fff" }} placeholderTextColor={state.DarkMode && "#999"} placeholder="Symbol" value={customSymbol} onChangeText={(value) => setCustomSymbol(value)} />
+          <Decimals style={state.DarkMode && { borderColor: "#343434", color: "#fff" }} placeholderTextColor={state.DarkMode && "#999"} placeholder="Decimals" value={customDecimals} onChangeText={(value) => setCustomDecimals(value)} />
         </TokenInfoContainer>
         <Warning>
           <Ionicons name={"warning-outline"} color="#c87527" size={24} />

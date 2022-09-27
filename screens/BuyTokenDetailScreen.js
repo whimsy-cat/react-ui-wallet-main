@@ -52,8 +52,8 @@ const BuyTokenDetailScreen = ({ navigation }) => {
   return (
 
     <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
-      <Container>
-        <Header>
+      <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
+        <Header style={state.DarkMode && { backgroundColor: "#090909" }}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Ionicons name={"arrow-back"} color="#fff" size={28} />
           </TouchableOpacity>
@@ -64,7 +64,7 @@ const BuyTokenDetailScreen = ({ navigation }) => {
             <TokenDetails>
               <Image source={state.CoinImage[state.CoinSymbol.indexOf(state.BuyToken)]} />
               <TokenNamePrice>
-                <TokenName>{state.BuyToken}</TokenName>
+                <TokenName style={state.DarkMode && { color: "#ccc" }}>{state.BuyToken}</TokenName>
                 <TokenPriceAction>
                   <TokenPrice>$1597</TokenPrice>
                   <TokenPercent>+0.0997 %</TokenPercent>
@@ -72,8 +72,8 @@ const BuyTokenDetailScreen = ({ navigation }) => {
               </TokenNamePrice>
             </TokenDetails>
             <TokenCol2>
-              <TokenAmount>0</TokenAmount>
-              <TokenSymbol>{state.BuyToken}</TokenSymbol>
+              <TokenAmount style={state.DarkMode && { color: "#fff" }}>0</TokenAmount>
+              <TokenSymbol style={state.DarkMode && { color: "#fff" }}>{state.BuyToken}</TokenSymbol>
             </TokenCol2>
           </Token>
           <CoinbaseImage source={require("../assets/images/coinbase.png")}></CoinbaseImage>

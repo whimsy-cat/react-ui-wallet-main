@@ -1,4 +1,5 @@
-import * as React from "react";
+import React, { useContext } from "react";
+import { Context } from '../reducers/store'
 import styled from "styled-components";
 
 const DAppsCard = (props) => (

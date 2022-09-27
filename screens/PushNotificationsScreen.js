@@ -5,6 +5,11 @@ import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 const PushNotificationsScreen = ({ navigation }) => {
+  const [pushNotification, setPushNotification] = React.useState(false);
+
+  const onHandlePushNotification = () => {
+    setPushNotification(!pushNotification);
+  }
   return (
     <Container>
       <Header>
@@ -17,7 +22,7 @@ const PushNotificationsScreen = ({ navigation }) => {
         <Setting>
           <Row>
             <Title>Allow Push Notifications</Title>
-            <Switch />
+            <Switch value={pushNotification} onValueChange={() => onHandlePushNotification()} />
           </Row>
         </Setting>
       </Body>

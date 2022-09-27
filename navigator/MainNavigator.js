@@ -21,7 +21,7 @@ import SendTokenFormScreen from "../screens/SendTokenForm";
 import PriceAlertsScreen from "../screens/PriceAlertsScreen";
 import SecurityScreen from "../screens/SecurityScreen";
 import PushNotificationsScreen from "../screens/PushNotificationsScreen";
-import WalletConnectScreen from "../screens/PasswordSettingScreen";
+import WalletConnectScreen from "../screens/WalletConnectScreen";
 import PreferencesScreen from "../screens/PreferencesScreen";
 import WalletsScreen from "../screens/WalletsScreen";
 import WalletEditScreen from "../screens/WalletEditScreen";

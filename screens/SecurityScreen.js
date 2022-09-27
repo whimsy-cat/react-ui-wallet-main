@@ -6,9 +6,15 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 const SecurityScreen = ({ navigation }) => {
   const [pass, setPass] = React.useState(false);
+  const [transactionSigning, setTransactionSigning] = React.useState(false);
+
   const onHandleChange = () => {
     setPass(!pass);
     navigation.navigate("PasswordSettingScreen");
+  }
+
+  const onHandleTransaction = () => {
+    setTransactionSigning(!transactionSigning);
   }
   return (
     <Container>
@@ -28,21 +34,26 @@ const SecurityScreen = ({ navigation }) => {
             <Switch value={pass} onChange={() => onHandleChange()} />
           </Row>
         </Setting>
-        <Setting>
-          <Title>Auto-Lock</Title>
+        <TouchableOpacity>
+          <Setting>
+            <Title>Auto-Lock</Title>
 
-          <Description>Immediate</Description>
-        </Setting>
-        <Setting>
-          <Title>Lock Method</Title>
+            <Description>Immediate</Description>
+          </Setting>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Setting>
+            <Title>Lock Method</Title>
 
-          <Description>Passcode / Biometric</Description>
-        </Setting>
+            <Description>Passcode / Biometric</Description>
+          </Setting>
+        </TouchableOpacity>
         <AuthText>Ask authentication for</AuthText>
         <Setting>
+
           <Row>
             <Title>Transaction Signing</Title>
-            <Switch />
+            <Switch value={transactionSigning} onValueChange={() => onHandleTransaction()} />
           </Row>
         </Setting>
       </Body>

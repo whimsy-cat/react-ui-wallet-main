@@ -23,17 +23,19 @@ const TokensContainer = (props) => {
   }
   if (isSwitch != false) {
     return (
-      <View style={{ width: "109%", paddingRight: 30, flexDirection: "row", alignItems: "center", justifyContent: "space-between", borderBottomWidth: 1, borderBottomColor: "#eee" }}>
+      <View style={state.DarkMode ?
+        { width: "109%", paddingRight: 30, flexDirection: "row", alignItems: "center", justifyContent: "space-between", borderBottomWidth: 1, borderBottomColor: "#222" } :
+        { width: "109%", paddingRight: 30, flexDirection: "row", alignItems: "center", justifyContent: "space-between", borderBottomWidth: 1, borderBottomColor: "#eee" }}>
         <TokenLeft>
           <TokenName>
             <Image source={tokenImage} />
             <Token>
-              <Name>{tokenName}</Name>
+              <Name style={state.DarkMode && { color: "#fff" }}>{tokenName}</Name>
             </Token>
           </TokenName>
           <TokenCol2>
-            <TokenAmount>{tokenAmount}</TokenAmount>
-            <TokenSymbol1>{tokenSymbol}</TokenSymbol1>
+            <TokenAmount style={state.DarkMode && { color: "#fff" }}>{tokenAmount}</TokenAmount>
+            <TokenSymbol1 style={state.DarkMode && { color: "#fff" }}>{tokenSymbol}</TokenSymbol1>
           </TokenCol2>
         </TokenLeft>
         <TokenRight>
@@ -45,18 +47,20 @@ const TokensContainer = (props) => {
     );
   }
   return (
-    <View style={{ width: "109%", paddingRight: 30, flexDirection: "row", alignItems: "center", justifyContent: "space-between", borderBottomWidth: 1, borderBottomColor: "#eee" }}>
+    <View style={state.DarkMode ?
+      { width: "109%", paddingRight: 30, flexDirection: "row", alignItems: "center", justifyContent: "space-between", borderBottomWidth: 1, borderBottomColor: "#222" } :
+      { width: "109%", paddingRight: 30, flexDirection: "row", alignItems: "center", justifyContent: "space-between", borderBottomWidth: 1, borderBottomColor: "#eee" }}>
       <TokenName>
         <Image source={tokenImage} />
         <Token>
-          <Name>{tokenName}</Name>
+          <Name style={state.DarkMode && { color: "#fff" }}>{tokenName}</Name>
         </Token>
       </TokenName>
       <TokenCol2>
-        <TokenAmount>{tokenAmount}</TokenAmount>
-        <TokenSymbol>{tokenSymbol}</TokenSymbol>
+        <TokenAmount style={state.DarkMode && { color: "#fff" }}>{tokenAmount}</TokenAmount>
+        <TokenSymbol style={state.DarkMode && { color: "#fff" }}>{tokenSymbol}</TokenSymbol>
       </TokenCol2>
-    </View>
+    </View >
   );
 };
 

@@ -72,6 +72,8 @@ const initialState = {
     DOTAddress: "", // DOT
     DOTPrivateKey: "", // DOT
     DOTPublicKey: "", // DOT
+
+    DarkMode: false, // Dark Screen Mode
 };
 
 const Store = ({ children }) => {

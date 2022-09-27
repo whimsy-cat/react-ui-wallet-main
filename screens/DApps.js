@@ -1,19 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ScrollView } from "react-native";
 import styled from "styled-components";
+import { Context } from '../reducers/store'
 import DAppsCard from "../components/DAppsCard";
+
 const DAppsScreen = () => {
+  const [state, dispatch] = useContext(Context);
   return (
     <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
-      <Container>
-        <Header>
+      <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
+        <Header style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }}>
           <SearchBar placeholder="Search or enter website url" />
         </Header>
         <Body>
           <NewDApps>
             <DAppsHead>
-              <DAppsSubHead>Staking</DAppsSubHead>
-              <SeeAll>See All</SeeAll>
+              <DAppsSubHead style={state.DarkMode && { color: "#fff" }}>Staking</DAppsSubHead>
+              <SeeAll style={state.DarkMode && { color: "#eee" }}>See All</SeeAll>
             </DAppsHead>
             <ScrollView
               showsHorizontalScrollIndicator={false}

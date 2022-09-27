@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useContext } from "react";
 import { View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
@@ -9,18 +9,34 @@ import {
   DAppsStackNavigator,
   SettingsStackNavigator,
 } from "./MainNavigator";
+import { Context } from '../reducers/store'
 
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
+  const [state, dispatch] = useContext(Context);
+
   return (
     <Tab.Navigator
+      tabBarOptions={state.DarkMode ? {
+        activeTintColor: '#fff',
+        inactiveTintColor: 'lightgray',
+        activeBackgroundColor: '#151515',
+        inactiveBackgroundColor: '#202020',
+      } : {
+        activeTintColor: '#030303',
+        inactiveTintColor: '#030303',
+        activeBackgroundColor: '#ffffff',
+        inactiveBackgroundColor: '#f2f2f2',
+      }
+      }
       screenOptions={({ route, navigation }) => {
         return {
           headerShown: false,
           // tabBarLabel: navigation.isFocused() ? route.name : "",
         };
       }}
+
     >
       <Tab.Screen
         name="Wallet"
@@ -130,7 +146,7 @@ const BottomTabNavigator = () => {
           })(route),
         })}
       />
-    </Tab.Navigator>
+    </Tab.Navigator >
   );
 };
 

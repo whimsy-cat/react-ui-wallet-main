@@ -21,22 +21,23 @@ function FirstRoute() {
   }
 
   useEffect(() => {
+    console.log(state.DarkMode);
   }, []);
   return (
-    <First>
+    <First style={state.DarkMode && { backgroundColor: "#0c0c0c" }}>
       <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
         {state.ImportedCoinFullName.map((coin, index) => (
           <TouchableOpacity
             key={index}
             onPress={() => onDetailToken(coin)}
           >
-            <Token>
+            <Token style={state.DarkMode && { borderBottomColor: "#191919" }}>
               <TokenDetails>
                 <Image source={state.CoinImage[state.CoinFullName.indexOf(state.ImportedCoinFullName[index])]} />
                 <TokenNamePrice>
-                  <TokenName>{coin}</TokenName>
+                  <TokenName style={state.DarkMode && { color: "#fff" }}>{coin}</TokenName>
                   <TokenPriceAction>
-                    <TokenPrice>{state.CoinPrice[state.CoinFullName.indexOf(state.ImportedCoinFullName[index])]}</TokenPrice>
+                    <TokenPrice style={state.DarkMode && { color: "#c3c3c3" }}>{state.CoinPrice[state.CoinFullName.indexOf(state.ImportedCoinFullName[index])]}</TokenPrice>
                     <TokenPercent>{state.CoinDailyChange[index] > 0 ? "+" : ""}{state.CoinDailyChange[index]} %</TokenPercent>
                   </TokenPriceAction>
                   <TokenAddress>{coin == "Ethereum" ||
@@ -58,12 +59,12 @@ function FirstRoute() {
                 </TokenNamePrice>
               </TokenDetails>
               <TokenCol2>
-                <TokenAmount>{coin == "Ethereum" ?
+                <TokenAmount style={state.DarkMode && { color: "#eee" }}>{coin == "Ethereum" ?
                   Number(state.CurrentETHBalance).toFixed(4) :
                   coin == "Bitcoin" ?
                     Number(state.CurrentBTCBalance).toFixed(4) :
                     Number(state.CurrentDOGEBalance).toFixed(4)}</TokenAmount>
-                <TokenSymbol>{state.CoinSymbol[state.CoinFullName.indexOf(state.ImportedCoinFullName[index])]}</TokenSymbol>
+                <TokenSymbol style={state.DarkMode && { color: "#eee" }}>{state.CoinSymbol[state.CoinFullName.indexOf(state.ImportedCoinFullName[index])]}</TokenSymbol>
               </TokenCol2>
             </Token>
           </TouchableOpacity>
@@ -137,16 +138,19 @@ function FirstRoute() {
   );
 }
 
-const SecondRoute = () => (
-  <Second>
-    <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
-      <NftImage source={require("../assets/images/nft.png")} />
-      <NftSubtext>Collectibles will appear here</NftSubtext>
-      <NftRecieve>Recieve</NftRecieve>
-      <OpenSeaCTA>Open on Opensea.io</OpenSeaCTA>
-    </ScrollView>
-  </Second>
-);
+function SecondRoute() {
+  const [state, dispatch] = useContext(Context);
+  return (
+    <Second style={state.DarkMode && { backgroundColor: "#0c0c0c" }}>
+      <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
+        <NftImage source={require("../assets/images/nft.png")} />
+        <NftSubtext style={state.DarkMode && { color: "#eee" }}>Collectibles will appear here</NftSubtext>
+        <NftRecieve>Recieve</NftRecieve>
+        <OpenSeaCTA>Open on Opensea.io</OpenSeaCTA>
+      </ScrollView>
+    </Second>
+  )
+}
 
 const initialLayout = { width: Dimensions.get("window").width };
 
@@ -162,9 +166,10 @@ export default function PortfolioScreen({ navigation }) {
     { key: "first", title: "Tokens" },
     { key: "second", title: "NFTs" },
   ]);
+  const [state, dispatch] = useContext(Context);
   return (
-    <Container>
-      <Header>
+    <Container style={state.DarkMode && { backgroundColor: "#151515" }} >
+      <Header style={state.DarkMode && { backgroundColor: "#151515" }}>
         <WalletBalance>
           <Ionicons name={"notifications-outline"} color="#fff" size={28} />
           <Balance>$0.00</Balance>
@@ -260,30 +265,40 @@ export default function PortfolioScreen({ navigation }) {
         </HeaderActions>
       </Header>
 
-      <Body>
+      <Body style={state.DarkMode && { backgroundColor: "#151515" }}>
         <TabView
           navigationState={{ index, routes }}
           renderScene={renderScene}
           onIndexChange={setIndex}
           initialLayout={initialLayout}
-          style={{
+          style={!state.DarkMode ? {
             marginTop: 3,
             backgroundColor: "#ffffff",
             borderTopLeftRadius: 20,
             borderTopRightRadius: 20,
-          }}
+          } : {
+            marginTop: 3,
+            backgroundColor: "#000",
+            borderTopLeftRadius: 20,
+            borderTopRightRadius: 20,
+          }
+          }
           renderTabBar={(props) => (
             <TabBar
               {...props}
               // indicatorStyle={{ backgroundColor: '#695CFF' }}
               // style={{ backgroundColor: '#695CFF' }}
-              tabStyle={{ backgroundColor: "#fff", minHeight: 30 }} // here
+              tabStyle={state.DarkMode ? { backgroundColor: "#0c0c0c", minHeight: 30 } : { backgroundColor: "#fff", minHeight: 30 }} // here
               renderLabel={({ route, focused }) => (
                 <Text
-                  style={{
-                    color: "#000",
+                  style={state.DarkMode ? {
+                    color: "#fff",
                     margin: 8,
-                  }}
+                  } : {
+                    color: "#050505",
+                    margin: 8,
+                  }
+                  }
                 >
                   {route.title}
                 </Text>
@@ -301,6 +316,10 @@ export default function PortfolioScreen({ navigation }) {
 const Container = styled.View`
   flex: 1;
   background: #3275bb;
+`;
+const DarkContainer = styled.View`
+  flex: 1;
+  background: #222222;
 `;
 const Body = styled.View`
   flex: 2.5;

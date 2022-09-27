@@ -24,6 +24,8 @@
     "@tradle/react-native-http": "^2.0.0",
     "@uniswap/v3-sdk": "^3.9.0",
     "@uniswap/widgets": "^2.7.0",
+    "@walletconnect/client": "^1.8.0",
+    "@walletconnect/qrcode-modal": "^1.8.0",
     "address-generator": "^1.0.2",
     "assert": "^2.0.0",
     "axios": "^0.27.2",

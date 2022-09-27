@@ -2,8 +2,20 @@ import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { Linking } from "react-native";
 
 const PreferencesScreen = ({ navigation }) => {
+
+  const onDappBrowser = () => {
+    Linking.canOpenURL('https://trustwallet.com/dapp/').then(supported => {
+      if (supported) {
+        Linking.openURL('https://trustwallet.com/dapp/');
+      } else {
+        console.log(`Don't know how to open URI: ` + 'https://trustwallet.com/dapp/');
+      }
+    })
+  }
+
   return (
     <Container>
       <Header>
@@ -17,14 +29,16 @@ const PreferencesScreen = ({ navigation }) => {
           <Title>Currency</Title>
           <Description>USD</Description>
         </Setting>
-        <Setting>
-          <Row>
-            <Title>DApp Browser</Title>
-            <Ionicons name={"chevron-forward"} color="#979797" size={28} />
-          </Row>
-        </Setting>
+        <TouchableOpacity onPress={() => onDappBrowser()}>
+          <Setting>
+            <Row>
+              <Title>DApp Browser</Title>
+              <Ionicons name={"chevron-forward"} color="#979797" size={28} />
+            </Row>
+          </Setting>
+        </TouchableOpacity>
       </Body>
-    </Container>
+    </Container >
   );
 };
 

@@ -1,0 +1,14 @@
+.App {
+    text-align: center;
+    margin: 50px
+}
+
+.Uniswap {
+    margin: auto;
+}
+
+:root {
+    --themeBackground: #fff;
+    --themeTextColor: #000;
+    --themeHeader: #3275bb;
+}

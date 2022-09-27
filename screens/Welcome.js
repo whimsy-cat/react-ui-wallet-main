@@ -107,6 +107,8 @@ const Welcome = ({ navigation }) => {
       const dotprivatekey = await AsyncStorage.getItem('@dotprivatekey');
       const dotpublickey = await AsyncStorage.getItem('@dotpublickey');
 
+      const darkmode = await AsyncStorage.getItem('@darkmode');
+
       if (mnemonic !== null) {
         dispatch({ type: 'SET_WALLETINFO', walletmnemonic: mnemonic, walletaddress: address, walletprivatekey: privatekey });
         if (btcaddress != null) dispatch({ type: 'SET_BTCWALLETINFO', btcaddress: btcaddress, btcprivatekey: btcprivatekey, btcpublickey: btcpublickey });
@@ -124,6 +126,7 @@ const Welcome = ({ navigation }) => {
         setMySOLWalletAddress(soladdress);
         setMyADAWalletAddress(adaaddress);
         setMyDOTWalletAddress(dotaddress);
+        setDarkMode(darkmode);
         setIsNew("false");
       }
       else {
@@ -133,7 +136,15 @@ const Welcome = ({ navigation }) => {
       console.log(e);
     }
   }
-  // Get Crypto Market Info. Price, DailyChange, etc. 
+  // Get Crypto Market Info. Price, DailyChange, etc.
+  const setDarkMode = (darkmode) => {
+    console.log(darkmode);
+    if (darkmode == "true")
+      dispatch({ type: 'SET_DARKMODE', darkmode: true });
+    else
+      dispatch({ type: 'SET_DARKMODE', darkmode: false });
+  }
+
   const getMarketData = async () => {
     console.log("Getting market data ...");
     for (let i = 0; i < 9; i++) {
