@@ -101,28 +101,28 @@ const SettingsScreen = ({ navigation }) => {
   }, [dark])
   return (
     <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
-      <Container>
-        <Header>Settings</Header>
+      <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
+        <Header style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }}>Settings</Header>
         <Body>
           <TouchableOpacity
             onPress={() => navigation.navigate("WalletsScreen")}
           >
-            <SettingsContainer>
+            <SettingsContainer style={state.DarkMode && { borderBottomColor: "#353535" }} >
               <SettingsName>
                 <Image source={require("../assets/images/wallet.png")} />
-                <Name>Wallets</Name>
+                <Name style={state.DarkMode && { color: "#fff" }}>Wallets</Name>
               </SettingsName>
               <Wallet>
-                <WalletName>Multi-Coin Wallet 1</WalletName>
+                <WalletName style={state.DarkMode && { color: "#aaa" }}>Multi-Coin Wallet 1</WalletName>
                 <Ionicons name={"chevron-forward"} color="#979797" size={28} />
               </Wallet>
             </SettingsContainer>
           </TouchableOpacity>
 
-          <SettingsContainer>
+          <SettingsContainer style={state.DarkMode && { borderBottomColor: "#353535" }} >
             <SettingsName>
               <Image source={require("../assets/images/dark.png")} />
-              <Name>Dark Mode</Name>
+              <Name style={state.DarkMode && { color: "#fff" }}>Dark Mode</Name>
             </SettingsName>
             <Switch value={dark} onValueChange={() => onHandleChange()} />
           </SettingsContainer>
@@ -130,10 +130,10 @@ const SettingsScreen = ({ navigation }) => {
           <TouchableOpacity
             onPress={() => navigation.navigate("SecurityScreen")}
           >
-            <SettingsContainer>
+            <SettingsContainer style={state.DarkMode && { borderBottomColor: "#353535" }} >
               <SettingsName>
                 <Image source={require("../assets/images/security.png")} />
-                <Name>Security</Name>
+                <Name style={state.DarkMode && { color: "#fff" }}>Security</Name>
               </SettingsName>
               <Ionicons name={"chevron-forward"} color="#979797" size={28} />
             </SettingsContainer>
@@ -142,10 +142,10 @@ const SettingsScreen = ({ navigation }) => {
           <TouchableOpacity
             onPress={() => navigation.navigate("PushNotificationsScreen")}
           >
-            <SettingsContainer>
+            <SettingsContainer style={state.DarkMode && { borderBottomColor: "#353535" }} >
               <SettingsName>
                 <Image source={require("../assets/images/push.png")} />
-                <Name>Push Notifications</Name>
+                <Name style={state.DarkMode && { color: "#fff" }}>Push Notifications</Name>
               </SettingsName>
               <Ionicons name={"chevron-forward"} color="#979797" size={28} />
             </SettingsContainer>
@@ -154,10 +154,10 @@ const SettingsScreen = ({ navigation }) => {
           <TouchableOpacity
             onPress={() => navigation.navigate("PreferencesScreen")}
           >
-            <SettingsContainer>
+            <SettingsContainer style={state.DarkMode && { borderBottomColor: "#353535" }} >
               <SettingsName>
                 <Image source={require("../assets/images/pref.png")} />
-                <Name>Preferences</Name>
+                <Name style={state.DarkMode && { color: "#fff" }}>Preferences</Name>
               </SettingsName>
               <Ionicons name={"chevron-forward"} color="#979797" size={28} />
             </SettingsContainer>
@@ -166,10 +166,10 @@ const SettingsScreen = ({ navigation }) => {
           <TouchableOpacity
             onPress={() => navigation.navigate("PriceAlertsScreen")}
           >
-            <SettingsContainer>
+            <SettingsContainer style={state.DarkMode && { borderBottomColor: "#353535" }} >
               <SettingsName>
                 <Image source={require("../assets/images/price.png")} />
-                <Name>Price Alerts</Name>
+                <Name style={state.DarkMode && { color: "#fff" }}>Price Alerts</Name>
               </SettingsName>
               <Ionicons name={"chevron-forward"} color="#979797" size={28} />
             </SettingsContainer>
@@ -178,10 +178,10 @@ const SettingsScreen = ({ navigation }) => {
           <TouchableOpacity
             onPress={() => navigation.navigate("WalletConnectScreen")}
           >
-            <SettingsContainer>
+            <SettingsContainer style={state.DarkMode && { borderBottomColor: "#353535" }} >
               <SettingsName>
                 <Image source={require("../assets/images/connect.png")} />
-                <Name>WalletConnect</Name>
+                <Name style={state.DarkMode && { color: "#fff" }}>WalletConnect</Name>
               </SettingsName>
               <Ionicons name={"chevron-forward"} color="#979797" size={28} />
             </SettingsContainer>
@@ -190,64 +190,64 @@ const SettingsScreen = ({ navigation }) => {
           <JoinCommunityText>Join Community</JoinCommunityText>
 
           <TouchableOpacity onPress={() => onHelpCenter()}>
-            <SettingsContainer>
+            <SettingsContainer style={state.DarkMode && { borderBottomColor: "#353535" }} >
               <SettingsName>
                 <Image source={require("../assets/images/helpcenter.png")} />
-                <Name>Help Center</Name>
+                <Name style={state.DarkMode && { color: "#fff" }}>Help Center</Name>
               </SettingsName>
               <Ionicons name={"chevron-forward"} color="#979797" size={28} />
             </SettingsContainer>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => onTwitter()}>
-            <SettingsContainer>
+            <SettingsContainer style={state.DarkMode && { borderBottomColor: "#353535" }} >
               <SettingsName>
                 <Image source={require("../assets/images/twitter.png")} />
-                <Name>Twitter</Name>
+                <Name style={state.DarkMode && { color: "#fff" }}>Twitter</Name>
               </SettingsName>
               <Ionicons name={"chevron-forward"} color="#979797" size={28} />
             </SettingsContainer>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => onTelegram()}>
-            <SettingsContainer>
+            <SettingsContainer style={state.DarkMode && { borderBottomColor: "#353535" }} >
               <SettingsName>
                 <Image source={require("../assets/images/telegram.png")} />
-                <Name>Telegram</Name>
+                <Name style={state.DarkMode && { color: "#fff" }}>Telegram</Name>
               </SettingsName>
               <Ionicons name={"chevron-forward"} color="#979797" size={28} />
             </SettingsContainer>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => onFacebook()}>
-            <SettingsContainer>
+            <SettingsContainer style={state.DarkMode && { borderBottomColor: "#353535" }} >
               <SettingsName>
                 <Image source={require("../assets/images/facebook.png")} />
-                <Name>Facebook</Name>
+                <Name style={state.DarkMode && { color: "#fff" }}>Facebook</Name>
               </SettingsName>
               <Ionicons name={"chevron-forward"} color="#979797" size={28} />
             </SettingsContainer>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => onReddit()}>
-            <SettingsContainer>
+            <SettingsContainer style={state.DarkMode && { borderBottomColor: "#353535" }} >
               <SettingsName>
                 <Image source={require("../assets/images/reddit.png")} />
-                <Name>Reddit</Name>
+                <Name style={state.DarkMode && { color: "#fff" }}>Reddit</Name>
               </SettingsName>
               <Ionicons name={"chevron-forward"} color="#979797" size={28} />
             </SettingsContainer>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => onYoutube()}>
-            <SettingsContainer>
+            <SettingsContainer style={state.DarkMode && { borderBottomColor: "#353535" }} >
               <SettingsName>
                 <Image source={require("../assets/images/youtube.png")} />
-                <Name>Youtube</Name>
+                <Name style={state.DarkMode && { color: "#fff" }}>Youtube</Name>
               </SettingsName>
               <Ionicons name={"chevron-forward"} color="#979797" size={28} />
             </SettingsContainer>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => onAbout()}>
-            <SettingsContainer>
+            <SettingsContainer style={state.DarkMode && { borderBottomColor: "#353535" }} >
               <SettingsName>
                 <Image source={require("../assets/images/about.png")} />
-                <Name>About</Name>
+                <Name style={state.DarkMode && { color: "#fff" }}>About</Name>
               </SettingsName>
               <Ionicons name={"chevron-forward"} color="#979797" size={28} />
             </SettingsContainer>
@@ -298,8 +298,9 @@ const SettingsName = styled.View`
   padding: 20px 20px 20px 0;
 `;
 const Image = styled.Image`
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
 `;
 const Name = styled.Text`
   font-size: 18px;

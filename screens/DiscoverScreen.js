@@ -1,79 +1,83 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from '../reducers/store'
 import styled from "styled-components";
+
 const DiscoverScreen = () => {
+  const [state, dispatch] = useContext(Context);
+
   return (
-    <Container>
-      <Header>Discover</Header>
+    <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
+      <Header style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }}>Discover</Header>
       <Body>
         <Staking>
           <DiscoveryHead>
-            <DiscoverySubHead>Staking</DiscoverySubHead>
-            <SeeAll>See All</SeeAll>
+            <DiscoverySubHead style={state.DarkMode && { color: "#fff" }}>Staking</DiscoverySubHead>
+            <SeeAll style={state.DarkMode && { color: "#ccc" }}>See All</SeeAll>
           </DiscoveryHead>
-          <StakingTokenInfo>
-            <Image source={require("../assets/images/btc.png")} />
+          <StakingTokenInfo style={state.DarkMode && { borderBottomColor: "#353535" }}>
+            <Image source={require("../assets/images/solana.png")} />
             <TokenDetails>
-              <StakingTokenName>Solana (SOL)</StakingTokenName>
+              <StakingTokenName style={state.DarkMode && { color: "#fff" }}>Solana (SOL)</StakingTokenName>
               <APR>
-                <APRText>APR:</APRText>
-                <APRPercent>6.5%</APRPercent>
+                <APRText style={state.DarkMode && { color: "#ccc" }}>APR:</APRText>
+                <APRPercent style={state.DarkMode && { color: "#ccc" }}>6.5%</APRPercent>
               </APR>
             </TokenDetails>
           </StakingTokenInfo>
-          <StakingTokenInfo>
-            <Image source={require("../assets/images/btc.png")} />
+          <StakingTokenInfo style={state.DarkMode && { borderBottomColor: "#353535" }}>
+            <Image source={require("../assets/images/cardano.png")} />
             <TokenDetails>
-              <StakingTokenName>Osmosis (OSMO)</StakingTokenName>
+              <StakingTokenName style={state.DarkMode && { color: "#fff" }}>Osmosis (OSMO)</StakingTokenName>
               <APR>
-                <APRText>APR:</APRText>
-                <APRPercent>6.5%</APRPercent>
+                <APRText style={state.DarkMode && { color: "#ccc" }}>APR:</APRText>
+                <APRPercent style={state.DarkMode && { color: "#ccc" }}>6.5%</APRPercent>
               </APR>
             </TokenDetails>
           </StakingTokenInfo>
-          <StakingTokenInfo>
-            <Image source={require("../assets/images/btc.png")} />
+          <StakingTokenInfo style={state.DarkMode && { borderBottomColor: "#353535" }}>
+            <Image source={require("../assets/images/polkadot.png")} />
             <TokenDetails>
-              <StakingTokenName>Kava (KAVA)</StakingTokenName>
+              <StakingTokenName style={state.DarkMode && { color: "#ccc" }}>Kava (KAVA)</StakingTokenName>
               <APR>
-                <APRText>APR:</APRText>
-                <APRPercent>6.5%</APRPercent>
+                <APRText style={state.DarkMode && { color: "#ccc" }}>APR:</APRText>
+                <APRPercent style={state.DarkMode && { color: "#ccc" }}>6.5%</APRPercent>
               </APR>
             </TokenDetails>
           </StakingTokenInfo>
         </Staking>
         <DefiTokens>
           <DiscoveryHead>
-            <DiscoverySubHead>DeFi Tokens</DiscoverySubHead>
-            <SeeAll>See All</SeeAll>
+            <DiscoverySubHead style={state.DarkMode && { color: "#fff" }}>DeFi Tokens</DiscoverySubHead>
+            <SeeAll style={state.DarkMode && { color: "#ccc" }}>See All</SeeAll>
           </DiscoveryHead>
-          <DefiTokenInfo>
+          <DefiTokenInfo style={state.DarkMode && { borderBottomColor: "#353535" }}>
             <Col1>
-              <Image source={require("../assets/images/btc.png")} />
-              <TokenName>Solana (SOL)</TokenName>
+              <Image source={require("../assets/images/solana.png")} />
+              <TokenName style={state.DarkMode && { color: "#fff" }}>Solana (SOL)</TokenName>
             </Col1>
             <Col2>
-              <TokenPrice>$43.31</TokenPrice>
-              <TokenPercent>-12.92%</TokenPercent>
+              <TokenPrice style={state.DarkMode && { color: "#ccc" }}>$43.31</TokenPrice>
+              <TokenPercent style={state.DarkMode && { color: "#ccc" }}>-12.92%</TokenPercent>
             </Col2>
           </DefiTokenInfo>
-          <DefiTokenInfo>
+          <DefiTokenInfo style={state.DarkMode && { borderBottomColor: "#353535" }}>
             <Col1>
-              <Image source={require("../assets/images/btc.png")} />
-              <TokenName>dYdX (DYDX)</TokenName>
+              <Image source={require("../assets/images/doge.png")} />
+              <TokenName style={state.DarkMode && { color: "#fff" }}>dYdX (DYDX)</TokenName>
             </Col1>
             <Col2>
-              <TokenPrice>$43.31</TokenPrice>
-              <TokenPercent>-12.92%</TokenPercent>
+              <TokenPrice style={state.DarkMode && { color: "#ccc" }}>$43.31</TokenPrice>
+              <TokenPercent style={state.DarkMode && { color: "#ccc" }}>-12.92%</TokenPercent>
             </Col2>
           </DefiTokenInfo>
-          <DefiTokenInfo>
+          <DefiTokenInfo style={state.DarkMode && { borderBottomColor: "#353535" }}>
             <Col1>
-              <Image source={require("../assets/images/btc.png")} />
-              <TokenName>Synthetix (SNX)</TokenName>
+              <Image source={require("../assets/images/xrp.png")} />
+              <TokenName style={state.DarkMode && { color: "#fff" }}>Synthetix (SNX)</TokenName>
             </Col1>
             <Col2>
-              <TokenPrice>$43.31</TokenPrice>
-              <TokenPercent>-12.92%</TokenPercent>
+              <TokenPrice style={state.DarkMode && { color: "#ccc" }}>$43.31</TokenPrice>
+              <TokenPercent style={state.DarkMode && { color: "#ccc" }}>-12.92%</TokenPercent>
             </Col2>
           </DefiTokenInfo>
         </DefiTokens>

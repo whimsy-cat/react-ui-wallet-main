@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import TokensContainer from "../components/TokensContainer";
+import { Context } from '../reducers/store'
 import { useNavigation } from "@react-navigation/native";
 
 export var selectedSendToken = "eth";
 
 const SendTokenChoose = ({ navigation }) => {
+  const [state, dispatch] = useContext(Context);
   const [searchKeyWord, setSearchKeyWord] = React.useState("");
 
   useEffect(() => {
@@ -27,12 +29,12 @@ const SendTokenChoose = ({ navigation }) => {
     navigation.navigate("SendTokenFormScreen");
   }
   return (
-    <Container>
-      <Header>
+    <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
+      <Header style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name={"arrow-back"} color="#fff" size={28} />
         </TouchableOpacity>
-        <SearchBar placeholder="Search - Send" placeholderTextColor="#CCDDEE" value={searchKeyWord} onChangeText={setSearchKeyWord} />
+        <SearchBar style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }} placeholder="Search - Send" placeholderTextColor="#CCDDEE" value={searchKeyWord} onChangeText={setSearchKeyWord} />
       </Header>
       <Body>
         <TouchableOpacity onPress={() => onHandleClick("btc")}>

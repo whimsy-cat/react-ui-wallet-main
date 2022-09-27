@@ -29,14 +29,15 @@ const DAppsScreen = () => {
                   image={card.image}
                   head={card.head}
                   body={card.body}
+                  darkmode={state.DarkMode}
                 />
               ))}
             </ScrollView>
           </NewDApps>
           <Defi>
             <DAppsHead>
-              <DAppsSubHead>DeFi</DAppsSubHead>
-              <SeeAll>See All</SeeAll>
+              <DAppsSubHead style={state.DarkMode && { color: "#fff" }}>DeFi</DAppsSubHead>
+              <SeeAll style={state.DarkMode && { color: "#eee" }}>See All</SeeAll>
             </DAppsHead>
             <ScrollView
               showsHorizontalScrollIndicator={false}
@@ -49,6 +50,7 @@ const DAppsScreen = () => {
                   image={card.image}
                   head={card.head}
                   body={card.body}
+                  darkmode={state.DarkMode}
                 />
               ))}
             </ScrollView>

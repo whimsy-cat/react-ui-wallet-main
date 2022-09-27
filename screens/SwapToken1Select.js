@@ -27,8 +27,8 @@ const SwapToken1Select = ({ navigation }) => {
     navigation.navigate("SwapScreen");
   }
   return (
-    <Container>
-      <Header>
+    <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
+      <Header style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name={"arrow-back"} color="#fff" size={28} />
         </TouchableOpacity>

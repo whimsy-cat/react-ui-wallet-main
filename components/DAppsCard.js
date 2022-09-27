@@ -3,26 +3,26 @@ import { Context } from '../reducers/store'
 import styled from "styled-components";
 
 const DAppsCard = (props) => (
-  <Container>
+  <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
     <Row>
       <Image source={props.image} />
       <RowInfo>
-        <RowHead>{props.head}</RowHead>
-        <RowBody>{props.body}</RowBody>
+        <RowHead style={props.darkmode && { color: "#fff" }}>{props.head}</RowHead>
+        <RowBody style={props.darkmode && { color: "#aaa" }}>{props.body}</RowBody>
       </RowInfo>
     </Row>
     <Row>
       <Image source={props.image} />
       <RowInfo>
-        <RowHead>{props.head}</RowHead>
-        <RowBody>{props.body}</RowBody>
+        <RowHead style={props.darkmode && { color: "#fff" }}>{props.head}</RowHead>
+        <RowBody style={props.darkmode && { color: "#aaa" }}>{props.body}</RowBody>
       </RowInfo>
     </Row>
     <Row>
       <Image source={props.image} />
       <RowInfo>
-        <RowHead>{props.head}</RowHead>
-        <RowBody>{props.body}</RowBody>
+        <RowHead style={props.darkmode && { color: "#fff" }}>{props.head}</RowHead>
+        <RowBody style={props.darkmode && { color: "#aaa" }}>{props.body}</RowBody>
       </RowInfo>
     </Row>
   </Container>

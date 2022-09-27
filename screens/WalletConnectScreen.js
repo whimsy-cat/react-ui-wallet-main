@@ -5,8 +5,8 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 const WalletConnectScreen = ({ navigation }) => {
   return (
-    <Container>
-      <Header>
+    <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
+      <Header style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }}>
         <HeaderTitle>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Ionicons name={"arrow-back"} color="#fff" size={28} />

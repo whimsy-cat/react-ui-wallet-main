@@ -57,8 +57,8 @@ const SwapScreen = ({ navigation }) => {
     setSpinner(true);
   }
   return (
-    <Container>
-      <Header>Swap</Header>
+    <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
+      <Header style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }}>Swap</Header>
       <Body>
         <Spinner
           visible={spinner}
@@ -67,7 +67,7 @@ const SwapScreen = ({ navigation }) => {
           color="#3275bb"
           size="large"
         />
-        <SwapContainer>
+        <SwapContainer style={state.DarkMode && { borderColor: "#353535", color: "#fff" }}>
           <Token1>
             <InputContainer>
               <SmallInfoText>You Pay</SmallInfoText>

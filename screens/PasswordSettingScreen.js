@@ -35,7 +35,7 @@ const PasswordSettingScreen = ({ navigation }) => {
     }
   }
   return (
-    <Container>
+    <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
       <Body>
         <Image source={require("../assets/images/splash.png")} />
         <Text>Secure and trusted multi-chain crypto wallet.</Text>

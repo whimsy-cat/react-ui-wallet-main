@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Ionicons } from "@expo/vector-icons";
+import { Context } from '../reducers/store';
 import styled from "styled-components";
+
 const ReceiveTokensScreen = () => {
+  const [state, dispatch] = useContext(Context);
+
   return (
-    <Container>
-      <Header>
+    <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
+      <Header style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }}>
         <Ionicons name={"arrow-back"} color="#fff" size={28} />
-        <SearchBar
+        <SearchBar style={state.DarkMode && { backgroundColor: "#151515", color: "#fff" }}
           placeholder="Search - Receive"
           placeholderTextColor="#CCDDEE"
         />

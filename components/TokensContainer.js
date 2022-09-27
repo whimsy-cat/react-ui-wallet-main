@@ -24,13 +24,13 @@ const TokensContainer = (props) => {
   if (isSwitch != false) {
     return (
       <View style={state.DarkMode ?
-        { width: "109%", paddingRight: 30, flexDirection: "row", alignItems: "center", justifyContent: "space-between", borderBottomWidth: 1, borderBottomColor: "#222" } :
-        { width: "109%", paddingRight: 30, flexDirection: "row", alignItems: "center", justifyContent: "space-between", borderBottomWidth: 1, borderBottomColor: "#eee" }}>
+        { width: "109%", paddingRight: 30, flexDirection: "row", alignItems: "center", justifyContent: "space-between", borderBottomWidth: 1, borderBottomColor: "#222", backgroundColor: "#151515" } :
+        { width: "109%", paddingRight: 30, flexDirection: "row", alignItems: "center", justifyContent: "space-between", borderBottomWidth: 1, borderBottomColor: "#eee", backgroundColor: "#151515" }}>
         <TokenLeft>
           <TokenName>
             <Image source={tokenImage} />
             <Token>
-              <Name style={state.DarkMode && { color: "#fff" }}>{tokenName}</Name>
+              <Name style={state.DarkMode && { backgroundColor: "#151515", color: "#fff" }}>{tokenName}</Name>
             </Token>
           </TokenName>
           <TokenCol2>

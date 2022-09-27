@@ -286,8 +286,8 @@ const SendTokenFormScreen = ({ navigation }) => {
     }
   }
   return (
-    <Container>
-      <Header>
+    <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
+      <Header style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name={"arrow-back"} color="#fff" size={28} />
         </TouchableOpacity>
@@ -296,21 +296,21 @@ const SendTokenFormScreen = ({ navigation }) => {
       </Header>
       <Body>
         <RecipientInfoContainer>
-          <Recipient>
-            <RecipientAddress placeholder="Recipient Address" value={recipentAddress} onChangeText={setRecipentAddress} />
+          <Recipient style={state.DarkMode && { borderColor: "#353535" }}>
+            <RecipientAddress style={state.DarkMode && { color: "#fff" }} placeholderTextColor={state.DarkMode && "#999"} placeholder="Recipient Address" value={recipentAddress} onChangeText={setRecipentAddress} />
             <Paste>
-              <Ionicons name={"clipboard-outline"} color="#3275bb" size={24} />
+              <Ionicons name={"clipboard-outline"} color="#62b5fb" size={24} />
               <TouchableOpacity onPress={() => onHandlePaste()}>
-                <PasteText>Paste</PasteText>
+                <PasteText style={state.DarkMode && { color: "#62b5fb" }}>Paste</PasteText>
               </TouchableOpacity>
             </Paste>
           </Recipient>
-          <AmountContainer>
-            <Amount placeholder="Amount BTC" value={send_token_amount} onChangeText={setAmount} />
+          <AmountContainer style={state.DarkMode && { borderColor: "#353535" }}>
+            <Amount style={state.DarkMode && { color: "#fff" }} placeholderTextColor={state.DarkMode && "#999"} placeholder="Amount BTC" value={send_token_amount} onChangeText={setAmount} />
             <TouchableOpacity onPress={() => onHandleMaxBalance()}>
               <MaxContainer>
-                <Max>Max</Max>
-                <TokenName>{selectedSendToken.toUpperCase()}</TokenName>
+                <Max style={state.DarkMode && { color: "#62b5fb" }}>Max</Max>
+                <TokenName style={state.DarkMode && { color: "#62b5fb" }}>{selectedSendToken.toUpperCase()}</TokenName>
               </MaxContainer>
             </TouchableOpacity>
           </AmountContainer>

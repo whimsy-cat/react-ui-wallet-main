@@ -4,8 +4,8 @@ import { Switch } from "react-native";
 import styled from "styled-components";
 const SettingsInScreen = () => {
   return (
-    <Container>
-      <Header>
+    <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
+      <Header style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }}>
         <Ionicons name={"arrow-back"} color="#fff" size={28} />
         <HeaderText>Price Alerts</HeaderText>
       </Header>

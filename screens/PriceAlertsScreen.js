@@ -1,30 +1,32 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { Switch } from "react-native";
 import styled from "styled-components";
+import { Context } from '../reducers/store'
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 const PriceAlertsScreen = ({ navigation }) => {
+  const [state, dispatch] = useContext(Context);
   const [priceAlert, setPriceAlert] = React.useState(false);
 
   const onHandleChange = () => {
     setPriceAlert(!priceAlert);
   }
   return (
-    <Container>
-      <Header>
+    <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
+      <Header style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name={"arrow-back"} color="#fff" size={28} />
         </TouchableOpacity>
         <HeaderText>Price Alerts</HeaderText>
       </Header>
       <Body>
-        <Setting>
+        <Setting style={state.DarkMode && { borderBottomColor: "#343434" }}>
           <Row>
-            <Title>Price Alerts</Title>
+            <Title style={state.DarkMode && { color: "#fff" }}>Price Alerts</Title>
             <Switch value={priceAlert} onValueChange={() => onHandleChange()} />
           </Row>
-          <Description>
+          <Description style={state.DarkMode && { color: "#fff" }}>
             Get alerts for significant price changes of your favorite
             cryptocurrencies.
           </Description>

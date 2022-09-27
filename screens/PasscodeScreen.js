@@ -12,6 +12,7 @@ LogBox.ignoreAllLogs();
 const PasscodeScreen = ({ navigation }) => {
   const [inputPassword, setInputPassword] = React.useState("");
   const [walletPassword, setWalletPassword] = React.useState("");
+  const [state, dispatch] = useContext(Context);
 
   useEffect(() => {
     getStoredData();
@@ -44,11 +45,11 @@ const PasscodeScreen = ({ navigation }) => {
     }
   }
   return (
-    <Container>
+    <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
       <Body>
         <Image source={require("../assets/images/splash.png")} />
-        <Text>Secure and trusted multi-chain crypto wallet.</Text>
-        <Input secureTextEntry={true} placeholder="Password" value={inputPassword} onChangeText={newText => setInputPassword(newText)} />
+        <Text style={state.DarkMode && { color: "#cdcdcd" }}>Secure and trusted multi-chain crypto wallet.</Text>
+        <Input style={state.DarkMode && { backgroundColor: "#050505", color: "#fff", borderColor: "#666" }} placeholderTextColor={state.DarkMode && "#444"} secureTextEntry={true} placeholder="Password" value={inputPassword} onChangeText={newText => setInputPassword(newText)} />
         <TouchableOpacity onPress={() => onHandleUnlock()}>
           <Button>Unlock</Button>
         </TouchableOpacity>

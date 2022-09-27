@@ -265,7 +265,7 @@ const Welcome = ({ navigation }) => {
   }
 
   return (
-    <Container>
+    <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
       <Body>
         <Image source={require("../assets/images/splash.png")} />
       </Body>

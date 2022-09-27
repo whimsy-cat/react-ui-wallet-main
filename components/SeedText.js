@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 
 const SeedText = (props) => (
-  <Container>
+  <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
     <Number>{props.number}</Number>
     <Word>{props.word}</Word>
   </Container>

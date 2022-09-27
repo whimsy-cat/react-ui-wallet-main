@@ -23,8 +23,8 @@ const SwapScreen = ({ navigation }) => {
     setGetBalance(payBalance * state.CoinPrice[state.CoinSymbol.indexOf(state.Swap1Token)] / state.CoinPrice[state.CoinSymbol.indexOf(state.Swap2Token)]);
   }, [state]);
   return (
-    <Container>
-      <Header>Swap</Header>
+    <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
+      <Header style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }}>Swap</Header>
       <Body>
         <SwapContainer>
           <Token1>

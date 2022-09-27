@@ -27,12 +27,12 @@ const SearchRecieveTokensScreen = ({ navigation }) => {
   }
   return (
 
-    <Container>
-      <Header>
+    <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
+      <Header style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name={"arrow-back"} color="#fff" size={28} />
         </TouchableOpacity>
-        <SearchBar placeholder="Search - Recieve" placeholderTextColor="#CCDDEE" value={searchKeyWord} onChangeText={setSearchKeyWord} />
+        <SearchBar style={state.DarkMode && { backgroundColor: "#151515", color: "#fff" }} placeholder="Search - Recieve" placeholderTextColor="#CCDDEE" value={searchKeyWord} onChangeText={setSearchKeyWord} />
       </Header>
       <Body>
         <TouchableOpacity onPress={() => onHandleClick("btc")}>

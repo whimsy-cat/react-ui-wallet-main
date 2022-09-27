@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { Switch } from "react-native";
 import styled from "styled-components";
+import { Context } from '../reducers/store';
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 const SecurityScreen = ({ navigation }) => {
   const [pass, setPass] = React.useState(false);
+  const [state, dispatch] = useContext(Context);
   const [transactionSigning, setTransactionSigning] = React.useState(false);
 
   const onHandleChange = () => {
@@ -17,8 +19,8 @@ const SecurityScreen = ({ navigation }) => {
     setTransactionSigning(!transactionSigning);
   }
   return (
-    <Container>
-      <Header>
+    <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
+      <Header style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }}>
         <HeaderTitle>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Ionicons name={"arrow-back"} color="#fff" size={28} />
@@ -27,32 +29,32 @@ const SecurityScreen = ({ navigation }) => {
         </HeaderTitle>
         <Ionicons name={"information-circle-outline"} color="#fff" size={28} />
       </Header>
-      <Body>
-        <Setting>
+      <Body style={state.DarkMode && { backgroundColor: "#151515", color: "#fff" }}>
+        <Setting style={state.DarkMode && { borderBottomColor: "#252525" }}>
           <Row>
-            <Title>Passcode</Title>
+            <Title style={state.DarkMode && { color: "#fff" }}>Passcode</Title>
             <Switch value={pass} onChange={() => onHandleChange()} />
           </Row>
         </Setting>
         <TouchableOpacity>
-          <Setting>
-            <Title>Auto-Lock</Title>
+          <Setting style={state.DarkMode && { borderBottomColor: "#252525" }}>
+            <Title style={state.DarkMode && { color: "#fff" }}>Auto-Lock</Title>
 
-            <Description>Immediate</Description>
+            <Description style={state.DarkMode && { color: "#aaa" }}>Immediate</Description>
           </Setting>
         </TouchableOpacity>
         <TouchableOpacity>
-          <Setting>
-            <Title>Lock Method</Title>
+          <Setting style={state.DarkMode && { borderBottomColor: "#252525" }}>
+            <Title style={state.DarkMode && { color: "#fff" }}>Lock Method</Title>
 
-            <Description>Passcode / Biometric</Description>
+            <Description style={state.DarkMode && { color: "#aaa" }}>Passcode / Biometric</Description>
           </Setting>
         </TouchableOpacity>
-        <AuthText>Ask authentication for</AuthText>
-        <Setting>
+        <AuthText style={state.DarkMode && { color: "#72a5fb" }}>Ask authentication for</AuthText>
+        <Setting style={state.DarkMode && { borderBottomColor: "#252525" }}>
 
           <Row>
-            <Title>Transaction Signing</Title>
+            <Title style={state.DarkMode && { color: "#fff" }}>Transaction Signing</Title>
             <Switch value={transactionSigning} onValueChange={() => onHandleTransaction()} />
           </Row>
         </Setting>

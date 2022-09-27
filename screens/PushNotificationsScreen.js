@@ -1,27 +1,29 @@
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { Switch } from "react-native";
+import { Context } from '../reducers/store'
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 const PushNotificationsScreen = ({ navigation }) => {
+  const [state, dispatch] = useContext(Context);
   const [pushNotification, setPushNotification] = React.useState(false);
 
   const onHandlePushNotification = () => {
     setPushNotification(!pushNotification);
   }
   return (
-    <Container>
-      <Header>
+    <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
+      <Header style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name={"arrow-back"} color="#fff" size={28} />
         </TouchableOpacity>
         <HeaderText>Push Notifications</HeaderText>
       </Header>
       <Body>
-        <Setting>
+        <Setting style={state.DarkMode && { borderBottomColor: "#343434" }}>
           <Row>
-            <Title>Allow Push Notifications</Title>
+            <Title style={state.DarkMode && { color: "#fff" }}>Allow Push Notifications</Title>
             <Switch value={pushNotification} onValueChange={() => onHandlePushNotification()} />
           </Row>
         </Setting>

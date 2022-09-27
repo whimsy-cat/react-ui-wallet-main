@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { Context } from '../reducers/store'
 import { Linking } from "react-native";
 
 const PreferencesScreen = ({ navigation }) => {
+  const [state, dispatch] = useContext(Context);
 
   const onDappBrowser = () => {
     Linking.canOpenURL('https://trustwallet.com/dapp/').then(supported => {
@@ -17,22 +19,22 @@ const PreferencesScreen = ({ navigation }) => {
   }
 
   return (
-    <Container>
-      <Header>
+    <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
+      <Header style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name={"arrow-back"} color="#fff" size={28} />
         </TouchableOpacity>
-        <HeaderText>Preferences</HeaderText>
+        <HeaderText style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }}>Preferences</HeaderText>
       </Header>
       <Body>
-        <Setting>
-          <Title>Currency</Title>
-          <Description>USD</Description>
+        <Setting style={state.DarkMode && { borderBottomColor: "#343434" }}>
+          <Title style={state.DarkMode && { backgroundColor: "#151515", color: "#fff" }}>Currency</Title>
+          <Description style={state.DarkMode && { backgroundColor: "#151515", color: "#aaa" }}>USD</Description>
         </Setting>
         <TouchableOpacity onPress={() => onDappBrowser()}>
-          <Setting>
+          <Setting style={state.DarkMode && { borderBottomColor: "#343434" }}>
             <Row>
-              <Title>DApp Browser</Title>
+              <Title style={state.DarkMode && { backgroundColor: "#151515", color: "#fff" }}>DApp Browser</Title>
               <Ionicons name={"chevron-forward"} color="#979797" size={28} />
             </Row>
           </Setting>
