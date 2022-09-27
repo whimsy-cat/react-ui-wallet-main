@@ -204,6 +204,7 @@ const Welcome = ({ navigation }) => {
     console.log("XRP balance : " + data.balance);
     dispatch({ type: 'SET_XRPBALANCE', currentdogebalance: data.balance });
   }
+
   const getSOLBalance = async (address) => {
     console.log(address);
     const resp = await fetch(
