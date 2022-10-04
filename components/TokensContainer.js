@@ -24,13 +24,13 @@ const TokensContainer = (props) => {
   if (isSwitch != false) {
     return (
       <View style={state.DarkMode ?
-        { width: "109%", paddingRight: 30, flexDirection: "row", alignItems: "center", justifyContent: "space-between", borderBottomWidth: 1, borderBottomColor: "#222", backgroundColor: "#151515" } :
-        { width: "109%", paddingRight: 30, flexDirection: "row", alignItems: "center", justifyContent: "space-between", borderBottomWidth: 1, borderBottomColor: "#eee", backgroundColor: "#151515" }}>
+        { width: "109%", paddingRight: 30, flexDirection: "row", alignItems: "center", justifyContent: "space-between", borderBottomWidth: 1, borderBottomColor: "#222", backgroundColor: "#1a222d" } :
+        { width: "109%", paddingRight: 30, flexDirection: "row", alignItems: "center", justifyContent: "space-between", borderBottomWidth: 1, borderBottomColor: "#eee", backgroundColor: "#1a222d" }}>
         <TokenLeft>
           <TokenName>
             <Image source={tokenImage} />
             <Token>
-              <Name style={state.DarkMode && { backgroundColor: "#151515", color: "#fff" }}>{tokenName}</Name>
+              <Name style={state.DarkMode && { backgroundColor: "#1a222d", color: "#fff" }}>{tokenName}</Name>
             </Token>
           </TokenName>
           <TokenCol2>
@@ -86,6 +86,9 @@ const TokenName = styled.View`
 const Image = styled.Image`
   width: 30px;
   height: 30px;
+  background-color: #fff; 
+  border-radius: 20px;
+  border: 1px solid #fff;
 `;
 const Name = styled.Text`
   font-size: 18px;

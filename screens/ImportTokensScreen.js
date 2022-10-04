@@ -21,15 +21,15 @@ const ImportTokensScreen = ({ navigation }) => {
     return true;
   }
   return (
-    <Container style={state.DarkMode && { backgroundColor: "#151515", color: "#fff" }}>
-      <Header style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }}>
+    <Container style={state.DarkMode && { backgroundColor: "#1a222d", color: "#fff" }}>
+      <Header style={state.DarkMode && { backgroundColor: "#232f3d", color: "#fff" }}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name={"arrow-back"} color="#fff" size={28} />
         </TouchableOpacity>
-        <SearchBar style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }} placeholder="Search tokens" placeholderTextColor="#CCDDEE" value={searchKeyWord} onChangeText={setSearchKeyWord} />
+        <SearchBar style={state.DarkMode && { backgroundColor: "#232f3d", color: "#fff" }} placeholder="Search tokens" placeholderTextColor="#CCDDEE" value={searchKeyWord} onChangeText={setSearchKeyWord} />
         <Ionicons name={"add"} color="#fff" size={28} />
       </Header>
-      <Body style={state.DarkMode && { backgroundColor: "#151515", color: "#fff" }}>
+      <Body style={state.DarkMode && { backgroundColor: "#1a222d", color: "#fff" }}>
         <TokensContainer tokenImage={require("../assets/images/btc.png")}
           tokenName="Bitcoin"
           tokenAmount=""

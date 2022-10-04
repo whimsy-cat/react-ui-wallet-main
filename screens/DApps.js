@@ -8,8 +8,8 @@ const DAppsScreen = () => {
   const [state, dispatch] = useContext(Context);
   return (
     <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
-      <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
-        <Header style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }}>
+      <Container style={state.DarkMode && { backgroundColor: "#1a222d" }}>
+        <Header style={state.DarkMode && { backgroundColor: "#232f3d", color: "#fff" }}>
           <SearchBar placeholder="Search or enter website url" />
         </Header>
         <Body>

@@ -286,8 +286,8 @@ const SendTokenFormScreen = ({ navigation }) => {
     }
   }
   return (
-    <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
-      <Header style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }}>
+    <Container style={state.DarkMode && { backgroundColor: "#1a222d" }}>
+      <Header style={state.DarkMode && { backgroundColor: "#232f3d", color: "#fff" }}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name={"arrow-back"} color="#fff" size={28} />
         </TouchableOpacity>

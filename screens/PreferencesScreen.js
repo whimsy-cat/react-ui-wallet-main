@@ -19,22 +19,22 @@ const PreferencesScreen = ({ navigation }) => {
   }
 
   return (
-    <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
-      <Header style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }}>
+    <Container style={state.DarkMode && { backgroundColor: "#1a222d" }}>
+      <Header style={state.DarkMode && { backgroundColor: "#232f3d", color: "#fff" }}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name={"arrow-back"} color="#fff" size={28} />
         </TouchableOpacity>
-        <HeaderText style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }}>Preferences</HeaderText>
+        <HeaderText style={state.DarkMode && { backgroundColor: "#232f3d", color: "#fff" }}>Preferences</HeaderText>
       </Header>
       <Body>
         <Setting style={state.DarkMode && { borderBottomColor: "#343434" }}>
-          <Title style={state.DarkMode && { backgroundColor: "#151515", color: "#fff" }}>Currency</Title>
-          <Description style={state.DarkMode && { backgroundColor: "#151515", color: "#aaa" }}>USD</Description>
+          <Title style={state.DarkMode && { backgroundColor: "#1a222d", color: "#fff" }}>Currency</Title>
+          <Description style={state.DarkMode && { backgroundColor: "#1a222d", color: "#aaa" }}>USD</Description>
         </Setting>
         <TouchableOpacity onPress={() => onDappBrowser()}>
           <Setting style={state.DarkMode && { borderBottomColor: "#343434" }}>
             <Row>
-              <Title style={state.DarkMode && { backgroundColor: "#151515", color: "#fff" }}>DApp Browser</Title>
+              <Title style={state.DarkMode && { backgroundColor: "#1a222d", color: "#fff" }}>DApp Browser</Title>
               <Ionicons name={"chevron-forward"} color="#979797" size={28} />
             </Row>
           </Setting>

@@ -7,7 +7,7 @@ import { Context } from '../reducers/store'
 
 const SettingsScreen = ({ navigation }) => {
   const [state, dispatch] = useContext(Context);
-  const [dark, setDark] = useState(false);
+  const [dark, setDark] = useState(state.DarkMode);
 
   const onHandleChange = () => {
     setDark(!dark);
@@ -91,9 +91,9 @@ const SettingsScreen = ({ navigation }) => {
       console.log('Failed To Save Data to Local Storage!!!');
     }
   }
-  useEffect(() => {
-    setDark(state.DarkMode);
-  }, [])
+  // useEffect(() => {
+  //   setDark(state.DarkMode);
+  // }, [])
 
   useEffect(() => {
     dispatch({ type: 'SET_DARKMODE', darkmode: dark });
@@ -101,8 +101,8 @@ const SettingsScreen = ({ navigation }) => {
   }, [dark])
   return (
     <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
-      <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
-        <Header style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }}>Settings</Header>
+      <Container style={state.DarkMode && { backgroundColor: "#1a222d" }}>
+        <Header style={state.DarkMode && { backgroundColor: "#232f3d", color: "#fff" }}>Settings</Header>
         <Body>
           <TouchableOpacity
             onPress={() => navigation.navigate("WalletsScreen")}

@@ -52,7 +52,7 @@ const BuyTokenDetailScreen = ({ navigation }) => {
   return (
 
     <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
-      <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
+      <Container style={state.DarkMode && { backgroundColor: "#1a222d" }}>
         <Header style={state.DarkMode && { backgroundColor: "#090909" }}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Ionicons name={"arrow-back"} color="#fff" size={28} />
@@ -259,7 +259,9 @@ const AmountInUSD = styled.Text`
 const Image = styled.Image`
   width: 40px;
   height: 40px;
+  background-color: #fff; 
   border-radius: 20px;
+  border: 1px solid #fff;
 `;
 const Token = styled.View`
   flex-direction: row;

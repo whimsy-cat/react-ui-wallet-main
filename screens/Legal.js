@@ -80,8 +80,8 @@ const LegalScreen = ({ navigation }) => {
   }
 
   return (
-    <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
-      <Header style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }}>Legal</Header>
+    <Container style={state.DarkMode && { backgroundColor: "#1a222d" }}>
+      <Header style={state.DarkMode && { backgroundColor: "#232f3d", color: "#fff" }}>Legal</Header>
       <Body>
         <ReviewText>
           Please review the Trust Wallet Terms of Service and Privacy Policy.

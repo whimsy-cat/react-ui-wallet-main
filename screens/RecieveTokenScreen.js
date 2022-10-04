@@ -30,14 +30,14 @@ const RecieveTokenScreen = ({ navigation }) => {
     console.log(state.RecieveToken);
   }, []);
   return (
-    <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
-      <Header style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }}>
+    <Container style={state.DarkMode && { backgroundColor: "#1a222d" }}>
+      <Header style={state.DarkMode && { backgroundColor: "#232f3d", color: "#fff" }}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name="arrow-back" color="#fff" size={24} />
         </TouchableOpacity>
         <Title>Recieve {state.RecieveToken}</Title>
       </Header>
-      <Body style={state.DarkMode && { backgroundColor: "#151515", color: "#fff" }}>
+      <Body style={state.DarkMode && { backgroundColor: "#1a222d", color: "#fff" }}>
         <QRContainer elevation={1} style={state.DarkMode && { backgroundColor: "#fff" }}>
           <Image source={{
             uri: `https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=${state.RecieveToken == "ETH" ||
@@ -72,7 +72,7 @@ const RecieveTokenScreen = ({ navigation }) => {
                         state.DOTAddress.toString()}
           </WalletAddress>
         </QRContainer>
-        <WarningText style={state.DarkMode && { backgroundColor: "#151515", color: "#fff" }}>
+        <WarningText style={state.DarkMode && { backgroundColor: "#1a222d", color: "#fff" }}>
           Send only Ethereum ({state.RecieveToken}) to this address. Sending any other coins may
           result in permanent loss.
         </WarningText>

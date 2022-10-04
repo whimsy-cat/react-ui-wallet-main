@@ -225,7 +225,7 @@ const VerifyPhraseScreen = ({ navigation }) => {
   }
 
   return (
-    <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
+    <Container style={state.DarkMode && { backgroundColor: "#1a222d" }}>
       <Spinner
         visible={spinner}
         textContent={'Generating Wallet info...'}
@@ -234,7 +234,7 @@ const VerifyPhraseScreen = ({ navigation }) => {
         size="large"
       />
       <Body>
-        <Header style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }}>Verify Secret Phrase</Header>
+        <Header style={state.DarkMode && { backgroundColor: "#232f3d", color: "#fff" }}>Verify Secret Phrase</Header>
         <SubHeader>
           Tap the words to put them next to each other in the correct order.
         </SubHeader>

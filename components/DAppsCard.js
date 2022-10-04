@@ -5,7 +5,7 @@ import styled from "styled-components";
 const DAppsCard = (props) => {
   const [state, dispatch] = useContext(Context);
   return (
-  <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
+  <Container style={state.DarkMode && { backgroundColor: "#1a222d" }}>
     <Row>
       <Image source={props.image} />
       <RowInfo>

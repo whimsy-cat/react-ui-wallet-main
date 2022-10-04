@@ -24,14 +24,14 @@ function FirstRoute() {
     console.log(state.DarkMode);
   }, []);
   return (
-    <First style={state.DarkMode && { backgroundColor: "#0c0c0c" }}>
+    <First style={state.DarkMode && { backgroundColor: "#232f3d" }}>
       <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
         {state.ImportedCoinFullName.map((coin, index) => (
           <TouchableOpacity
             key={index}
             onPress={() => onDetailToken(coin)}
           >
-            <Token style={state.DarkMode && { borderBottomColor: "#191919" }}>
+            <Token style={state.DarkMode && { borderBottomColor: "#3f3f3f" }}>
               <TokenDetails>
                 <Image source={state.CoinImage[state.CoinFullName.indexOf(state.ImportedCoinFullName[index])]} />
                 <TokenNamePrice>
@@ -109,7 +109,7 @@ function FirstRoute() {
             </TokenCol2>
           </Token>
         </TouchableOpacity> */}
-        {(myCustomTokenName != "") && (<Token style={state.DarkMode && { borderBottomColor: "#191919" }}>
+        {(myCustomTokenName != "") && (<Token style={state.DarkMode && { borderBottomColor: "#3f3f3f" }}>
           <TokenDetails>
             <Image source={require("../assets/images/cardano.png")} />
             <TokenNamePrice>
@@ -141,7 +141,7 @@ function FirstRoute() {
 function SecondRoute() {
   const [state, dispatch] = useContext(Context);
   return (
-    <Second style={state.DarkMode && { backgroundColor: "#0c0c0c" }}>
+    <Second style={state.DarkMode && { backgroundColor: "#232f3d" }}>
       <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
         <NftImage source={require("../assets/images/nft.png")} />
         <NftSubtext style={state.DarkMode && { color: "#eee" }}>Collectibles will appear here</NftSubtext>
@@ -168,8 +168,8 @@ export default function PortfolioScreen({ navigation }) {
   ]);
   const [state, dispatch] = useContext(Context);
   return (
-    <Container style={state.DarkMode && { backgroundColor: "#151515" }} >
-      <Header style={state.DarkMode && { backgroundColor: "#151515" }}>
+    <Container style={state.DarkMode && { backgroundColor: "#1a222d" }} >
+      <Header style={state.DarkMode && { backgroundColor: "#1a222d" }}>
         <WalletBalance>
           <Ionicons name={"notifications-outline"} color="#fff" size={28} />
           <Balance>$0.00</Balance>
@@ -265,7 +265,7 @@ export default function PortfolioScreen({ navigation }) {
         </HeaderActions>
       </Header>
 
-      <Body style={state.DarkMode && { backgroundColor: "#151515" }}>
+      <Body style={state.DarkMode && { backgroundColor: "#1a222d" }}>
         <TabView
           navigationState={{ index, routes }}
           renderScene={renderScene}
@@ -288,7 +288,7 @@ export default function PortfolioScreen({ navigation }) {
               {...props}
               // indicatorStyle={{ backgroundColor: '#695CFF' }}
               // style={{ backgroundColor: '#695CFF' }}
-              tabStyle={state.DarkMode ? { backgroundColor: "#0c0c0c", minHeight: 30 } : { backgroundColor: "#fff", minHeight: 30 }} // here
+              tabStyle={state.DarkMode ? { backgroundColor: "#232f3d", minHeight: 30 } : { backgroundColor: "#fff", minHeight: 30 }} // here
               renderLabel={({ route, focused }) => (
                 <Text
                   style={state.DarkMode ? {
@@ -446,7 +446,9 @@ const AddTokenText = styled.Text`
 const Image = styled.Image`
   width: 40px;
   height: 40px;
+  background-color: #fff; 
   border-radius: 20px;
+  border: 1px solid #fff;
 `;
 const NftImage = styled.Image`
   width: 150px;

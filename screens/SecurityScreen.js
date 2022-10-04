@@ -19,8 +19,8 @@ const SecurityScreen = ({ navigation }) => {
     setTransactionSigning(!transactionSigning);
   }
   return (
-    <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
-      <Header style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }}>
+    <Container style={state.DarkMode && { backgroundColor: "#1a222d" }}>
+      <Header style={state.DarkMode && { backgroundColor: "#232f3d", color: "#fff" }}>
         <HeaderTitle>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Ionicons name={"arrow-back"} color="#fff" size={28} />
@@ -29,7 +29,7 @@ const SecurityScreen = ({ navigation }) => {
         </HeaderTitle>
         <Ionicons name={"information-circle-outline"} color="#fff" size={28} />
       </Header>
-      <Body style={state.DarkMode && { backgroundColor: "#151515", color: "#fff" }}>
+      <Body style={state.DarkMode && { backgroundColor: "#1a222d", color: "#fff" }}>
         <Setting style={state.DarkMode && { borderBottomColor: "#252525" }}>
           <Row>
             <Title style={state.DarkMode && { color: "#fff" }}>Passcode</Title>

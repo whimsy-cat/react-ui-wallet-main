@@ -7,10 +7,10 @@ const ReceiveTokensScreen = () => {
   const [state, dispatch] = useContext(Context);
 
   return (
-    <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
-      <Header style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }}>
+    <Container style={state.DarkMode && { backgroundColor: "#1a222d" }}>
+      <Header style={state.DarkMode && { backgroundColor: "#232f3d", color: "#fff" }}>
         <Ionicons name={"arrow-back"} color="#fff" size={28} />
-        <SearchBar style={state.DarkMode && { backgroundColor: "#151515", color: "#fff" }}
+        <SearchBar style={state.DarkMode && { backgroundColor: "#1a222d", color: "#fff" }}
           placeholder="Search - Receive"
           placeholderTextColor="#CCDDEE"
         />
@@ -173,6 +173,9 @@ const TokenName = styled.View`
 const Image = styled.Image`
   width: 30px;
   height: 30px;
+  background-color: #fff; 
+  border-radius: 20px;
+  border: 1px solid #fff;
 `;
 const Name = styled.Text`
   font-size: 18px;

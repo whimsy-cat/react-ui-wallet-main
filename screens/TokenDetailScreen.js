@@ -49,8 +49,8 @@ const TokenDetailScreen = ({ navigation }) => {
 
 
   return (
-    <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
-      <Header style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }}>
+    <Container style={state.DarkMode && { backgroundColor: "#1a222d" }}>
+      <Header style={state.DarkMode && { backgroundColor: "#232f3d", color: "#fff" }}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name={"arrow-back"} color="#fff" size={28} />
         </TouchableOpacity>
@@ -78,8 +78,8 @@ const TokenDetailScreen = ({ navigation }) => {
               yAxisInterval={10} // optional, defaults to 1
               chartConfig={{
                 backgroundColor: state.DarkMode ? "#000" : "#fff",
-                backgroundGradientFrom: state.DarkMode ? "#151515" : "#fff",
-                backgroundGradientTo: state.DarkMode ? "#151515" : "#fff",
+                backgroundGradientFrom: state.DarkMode ? "#252f38" : "#fff",
+                backgroundGradientTo: state.DarkMode ? "#252f38" : "#fff",
                 decimalPlaces: 2, // optional, defaults to 2dp
                 color: (opacity = 1) => state.DarkMode ? "#5f7" : "#5fa",
                 labelColor: (opacity = 1) => state.DarkMode ? "#eee" : "#333",
@@ -265,6 +265,9 @@ const TokenName = styled.Text`
 const Image = styled.Image`
   width: 40px;
   height: 40px;
+  background-color: #fff; 
+  border-radius: 20px;
+  border: 1px solid #fff;
 `;
 const Slippage = styled.View`
   flex-direction: row;

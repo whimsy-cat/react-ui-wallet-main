@@ -21,8 +21,8 @@ const BottomTabNavigator = () => {
       tabBarOptions={state.DarkMode ? {
         activeTintColor: '#fff',
         inactiveTintColor: 'lightgray',
-        activeBackgroundColor: '#151515',
-        inactiveBackgroundColor: '#202020',
+        activeBackgroundColor: '#252f38',
+        inactiveBackgroundColor: '#151f28',
       } : {
         activeTintColor: '#030303',
         inactiveTintColor: '#030303',
@@ -50,7 +50,7 @@ const BottomTabNavigator = () => {
               <Ionicons
                 name="shield-checkmark"
                 size={28}
-                color={tabInfo.focused ? "#3175BD" : "#656565"}
+                color={tabInfo.focused ? "#4185CD" : "#858585"}
               />
             );
           },
@@ -87,7 +87,7 @@ const BottomTabNavigator = () => {
               <Ionicons
                 name="compass"
                 size={28}
-                color={tabInfo.focused ? "#3175BD" : "#656565"}
+                color={tabInfo.focused ? "#4185CD" : "#858585"}
               />
             );
           },
@@ -106,7 +106,7 @@ const BottomTabNavigator = () => {
               <Ionicons
                 name="grid"
                 size={28}
-                color={tabInfo.focused ? "#3175BD" : "#656565"}
+                color={tabInfo.focused ? "#4185CD" : "#858585"}
               />
             );
           },
@@ -125,7 +125,7 @@ const BottomTabNavigator = () => {
               <Ionicons
                 name="settings"
                 size={28}
-                color={tabInfo.focused ? "#3175BD" : "#656565"}
+                color={tabInfo.focused ? "#4185CD" : "#858585"}
               />
             );
           },

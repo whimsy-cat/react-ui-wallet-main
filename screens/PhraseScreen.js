@@ -25,9 +25,9 @@ const PhraseScreen = ({ navigation }) => {
   }
 
   return (
-    <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
+    <Container style={state.DarkMode && { backgroundColor: "#1a222d" }}>
       <Body>
-        <Header style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }}>Your Secret Phrase</Header>
+        <Header style={state.DarkMode && { backgroundColor: "#232f3d", color: "#fff" }}>Your Secret Phrase</Header>
         <SubHeader>
           Write down or copy these words in the right order and save them
           somewhere safe.
