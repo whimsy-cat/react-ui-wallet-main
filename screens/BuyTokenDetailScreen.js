@@ -51,7 +51,7 @@ const BuyTokenDetailScreen = ({ navigation }) => {
   };
   return (
 
-    <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
+    <ScrollView style={state.DarkMode && { backgroundColor: "#1a222d" }} showsVerticalScrollIndicator={false} bounces={true}>
       <Container style={state.DarkMode && { backgroundColor: "#1a222d" }}>
         <Header style={state.DarkMode && { backgroundColor: "#090909" }}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -60,7 +60,7 @@ const BuyTokenDetailScreen = ({ navigation }) => {
           <HeaderText> Buy {state.BuyToken}</HeaderText>
         </Header>
         <Body>
-          <Token>
+          <Token style={state.DarkMode && { borderBottomColor: "#3a424d" }}>
             <TokenDetails>
               <Image source={state.CoinImage[state.CoinSymbol.indexOf(state.BuyToken)]} />
               <TokenNamePrice>
@@ -76,19 +76,19 @@ const BuyTokenDetailScreen = ({ navigation }) => {
               <TokenSymbol style={state.DarkMode && { color: "#fff" }}>{state.BuyToken}</TokenSymbol>
             </TokenCol2>
           </Token>
-          <CoinbaseImage source={require("../assets/images/coinbase.png")}></CoinbaseImage>
+          {/* <CoinbaseImage source={require("../assets/images/coinbase.png")}></CoinbaseImage> */}
           <TouchableOpacity onPress={() => handleCoinBaseClick()}>
             <Button>  Continue to CoinBase Pay </Button>
           </TouchableOpacity>
-          <Transak source={require("../assets/images/transak.png")}></Transak>
+          {/* <Transak source={require("../assets/images/transak.png")}></Transak> */}
           <TouchableOpacity onPress={() => handleTransakClick()}>
             <Button>  Continue to Transak  </Button>
           </TouchableOpacity>
-          <MoonPay source={require("../assets/images/moonpay.png")}></MoonPay>
+          {/* <MoonPay source={require("../assets/images/moonpay.png")}></MoonPay> */}
           <TouchableOpacity onPress={() => handleMoonPayClick()}>
             <Button>  Continue to MoonPay  </Button>
           </TouchableOpacity>
-          <Wire source={require("../assets/images/wyre.png")}></Wire>
+          {/* <Wire source={require("../assets/images/wyre.png")}></Wire> */}
           <TouchableOpacity onPress={() => handleWireClick()}>
             <Button>  Continue to Wyre  </Button>
           </TouchableOpacity>
@@ -261,7 +261,8 @@ const Image = styled.Image`
   height: 40px;
   background-color: #fff; 
   border-radius: 20px;
-  border: 1px solid #fff;
+  border-width: 1px;
+  border-color: #fff;
 `;
 const Token = styled.View`
   flex-direction: row;
@@ -304,7 +305,8 @@ const PaymentButton = styled.Text`
   width: 300px;
   padding: 20px 0;
   border-radius: 5px;
-  border: 1px solid #dcdcdc;
+  border-width: 1px;
+  border-color: #dcdcdc;
   background: #3275bb;
   color: #fff;
   text-transform: uppercase;

@@ -10,7 +10,7 @@ const DAppsScreen = () => {
     <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
       <Container style={state.DarkMode && { backgroundColor: "#1a222d" }}>
         <Header style={state.DarkMode && { backgroundColor: "#232f3d", color: "#fff" }}>
-          <SearchBar placeholder="Search or enter website url" />
+          <SearchBar style={state.DarkMode && { backgroundColor: "#232f3d", color: "#fff" }} placeholderTextColor={state.DarkMode && "#898989"} placeholder="Search or enter website url" />
         </Header>
         <Body>
           <NewDApps>

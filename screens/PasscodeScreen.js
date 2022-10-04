@@ -49,7 +49,7 @@ const PasscodeScreen = ({ navigation }) => {
       <Body>
         <Image source={require("../assets/images/splash.png")} />
         <Text style={state.DarkMode && { color: "#cdcdcd" }}>Secure and trusted multi-chain crypto wallet.</Text>
-        <Input style={state.DarkMode && { backgroundColor: "#050505", color: "#fff", borderColor: "#666" }} placeholderTextColor={state.DarkMode && "#444"} secureTextEntry={true} placeholder="Password" value={inputPassword} onChangeText={newText => setInputPassword(newText)} />
+        <Input style={state.DarkMode && { backgroundColor: "#0a121d", color: "#fff", borderColor: "#666" }} placeholderTextColor={state.DarkMode && "#444"} secureTextEntry={true} placeholder="Password" value={inputPassword} onChangeText={newText => setInputPassword(newText)} />
         <TouchableOpacity onPress={() => onHandleUnlock()}>
           <Button>Unlock</Button>
         </TouchableOpacity>
@@ -65,7 +65,7 @@ const Input = styled.TextInput`
   padding: 10px 20px;
   margin: 30px 0;
   width: 330px;
-  border:1px solid #ccc;
+  border:1px #ccc;
   border-radius:5px;
   background-color: #f2f5f2;
 `;
@@ -113,7 +113,7 @@ const Text = styled.Text`
 `;
 const Button = styled.Text`
   width: 330px;
-  padding: 20px 0;
+  padding: 15px 0;
   background: #3275bb;
   text-transform: uppercase;
   color: #fff;

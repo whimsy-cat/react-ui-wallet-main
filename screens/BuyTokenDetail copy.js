@@ -220,7 +220,8 @@ const PaymentButton = styled.Text`
   width: 300px;
   padding: 20px 0;
   border-radius: 5px;
-  border: 1px solid #dcdcdc;
+  border-width: 1px;
+  border-color: #dcdcdc;
   background: #3275bb;
   color: #fff;
   text-transform: uppercase;

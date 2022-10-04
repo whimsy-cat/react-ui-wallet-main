@@ -10,6 +10,7 @@ import { Context } from '../reducers/store';
 LogBox.ignoreAllLogs();
 
 const PasswordSettingScreen = ({ navigation }) => {
+  const [state, dispatch] = useContext(Context);
   const [newPassword, setNewPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
 
@@ -38,9 +39,9 @@ const PasswordSettingScreen = ({ navigation }) => {
     <Container style={state.DarkMode && { backgroundColor: "#1a222d" }}>
       <Body>
         <Image source={require("../assets/images/splash.png")} />
-        <Text>Secure and trusted multi-chain crypto wallet.</Text>
-        <Input secureTextEntry={true} placeholder="New Password" value={newPassword} onChangeText={newText => setNewPassword(newText)} />
-        <Input secureTextEntry={true} placeholder="Confirm Password" value={confirmPassword} onChangeText={newText => setConfirmPassword(newText)} />
+        <Text style={state.DarkMode && { color: "#cdcdcd" }}>Secure and trusted multi-chain crypto wallet.</Text>
+        <Input style={state.DarkMode && { backgroundColor: "#0a121d", color: "#fff", borderColor: "#666" }} placeholderTextColor={state.DarkMode && "#3a424d"} secureTextEntry={true} placeholder="New Password" value={newPassword} onChangeText={newText => setNewPassword(newText)} />
+        <Input style={state.DarkMode && { backgroundColor: "#0a121d", color: "#fff", borderColor: "#666" }} placeholderTextColor={state.DarkMode && "#3a424d"} secureTextEntry={true} placeholder="Confirm Password" value={confirmPassword} onChangeText={newText => setConfirmPassword(newText)} />
         <TouchableOpacity onPress={() => onHandleUnlock()}>
           <Button>Set Password</Button>
         </TouchableOpacity>
@@ -56,7 +57,7 @@ const Input = styled.TextInput`
   padding: 10px 20px;
   margin-top: 20px;
   width: 330px;
-  border:1px solid #ccc;
+  border:1px #ccc;
   border-radius:5px;
   background-color: #f2f5f2;
 `;
@@ -104,7 +105,7 @@ const Text = styled.Text`
 `;
 const Button = styled.Text`
   width: 330px;
-  padding: 20px 0;
+  padding: 15px 0;
   background: #3275bb;
   text-transform: uppercase;
   color: #fff;

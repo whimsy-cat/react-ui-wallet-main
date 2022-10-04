@@ -448,7 +448,8 @@ const Image = styled.Image`
   height: 40px;
   background-color: #fff; 
   border-radius: 20px;
-  border: 1px solid #fff;
+  border-width: 1px;
+  border-color: #fff;
 `;
 const NftImage = styled.Image`
   width: 150px;

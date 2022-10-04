@@ -88,7 +88,8 @@ const Image = styled.Image`
   height: 30px;
   background-color: #fff; 
   border-radius: 20px;
-  border: 1px solid #fff;
+  border-width: 1px;
+  border-color: #fff;
 `;
 const Name = styled.Text`
   font-size: 18px;
