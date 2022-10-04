@@ -44,11 +44,11 @@ const SettingsScreen = ({ navigation }) => {
   }
 
   const onAbout = () => {
-    Linking.canOpenURL('https://support.trustwallet.io/').then(supported => {
+    Linking.canOpenURL('https://support.trustwallet.io/About').then(supported => {
       if (supported) {
-        Linking.openURL('https://support.trustwallet.io/');
+        Linking.openURL('https://support.trustwallet.io/About');
       } else {
-        console.log(`Don't know how to open URI: ` + 'https://support.trustwallet.io/');
+        console.log(`Don't know how to open URI: ` + 'https://support.trustwallet.io/About');
       }
     })
   }
