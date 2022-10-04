@@ -73,7 +73,9 @@ const initialState = {
     DOTPrivateKey: "", // DOT
     DOTPublicKey: "", // DOT
 
+    // Environment Varialbles
     DarkMode: false, // Dark Screen Mode
+    PushNotification: true, // Push Notification
 };
 
 const Store = ({ children }) => {

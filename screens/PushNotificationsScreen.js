@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { Switch } from "react-native";
 import { Context } from '../reducers/store'
@@ -9,7 +9,11 @@ const PushNotificationsScreen = ({ navigation }) => {
   const [state, dispatch] = useContext(Context);
   const [pushNotification, setPushNotification] = React.useState(false);
 
+  useEffect(() => {
+    setPushNotification(state.PushNotification);
+  }, [])
   const onHandlePushNotification = () => {
+    dispatch({ type: 'SET_PUSHNOTIFICATION', pushnotification: !pushNotification });
     setPushNotification(!pushNotification);
   }
   return (
@@ -24,7 +28,7 @@ const PushNotificationsScreen = ({ navigation }) => {
         <Setting style={state.DarkMode && { borderBottomColor: "#343434" }}>
           <Row>
             <Title style={state.DarkMode && { color: "#fff" }}>Allow Push Notifications</Title>
-            <Switch value={pushNotification} onValueChange={() => onHandlePushNotification()} />
+            <Switch value={state.PushNotification} onValueChange={() => onHandlePushNotification()} />
           </Row>
         </Setting>
       </Body>

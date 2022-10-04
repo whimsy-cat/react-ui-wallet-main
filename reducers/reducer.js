@@ -99,6 +99,11 @@ const Reducer = (state, action) => {
                 ...state,
                 DarkMode: action.darkmode,
             }
+        case 'SET_PUSHNOTIFICATION': // Dark Mode
+            return {
+                ...state,
+                PushNotification: action.pushnotification,
+            }
         case 'ADD_POST':
             return {
                 ...state,
