@@ -2,7 +2,9 @@ import React, { useContext } from "react";
 import { Context } from '../reducers/store'
 import styled from "styled-components";
 
-const DAppsCard = (props) => (
+const DAppsCard = (props) => {
+  const [state, dispatch] = useContext(Context);
+  return (
   <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
     <Row>
       <Image source={props.image} />
@@ -25,8 +27,9 @@ const DAppsCard = (props) => (
         <RowBody style={props.darkmode && { color: "#aaa" }}>{props.body}</RowBody>
       </RowInfo>
     </Row>
-  </Container>
-);
+    </Container>
+  )
+};
 
 export default DAppsCard;
 

@@ -1,9 +1,11 @@
-import React from "react";
+import React,  {useContext} from "react";
 import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components";
+import { Context } from '../reducers/store'
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 const WalletConnectScreen = ({ navigation }) => {
+  const [state, dispatch] = useContext(Context);
   return (
     <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
       <Header style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }}>
@@ -11,12 +13,12 @@ const WalletConnectScreen = ({ navigation }) => {
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Ionicons name={"arrow-back"} color="#fff" size={28} />
           </TouchableOpacity>
-          <HeaderText>WalletConnect</HeaderText>
+          <HeaderText >WalletConnect</HeaderText>
         </HeaderTitle>
         <Ionicons name={"information-circle-outline"} color="#fff" size={28} />
       </Header>
       <Body>
-        <Text>
+        <Text style={state.DarkMode && { color: "#fff" }} >
           Connect your wallet with WalletConnect to make transactions.
         </Text>
         <Button>Continue</Button>

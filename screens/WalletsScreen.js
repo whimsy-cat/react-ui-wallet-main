@@ -1,10 +1,12 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { Switch } from "react-native";
+import { Context } from '../reducers/store'
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 const WalletsScreen = ({ navigation }) => {
+  const [state, dispatch] = useContext(Context);
   return (
     <Container style={state.DarkMode && { backgroundColor: "#151515" }}>
       <Header style={state.DarkMode && { backgroundColor: "#0c0c0c", color: "#fff" }}>
@@ -14,14 +16,14 @@ const WalletsScreen = ({ navigation }) => {
         <HeaderText>Wallets</HeaderText>
       </Header>
       <Body>
-        <TopDescription>Multi Coin Wallets</TopDescription>
-        <Setting>
+        <TopDescription style={state.DarkMode && { color: "#ccc" }} >Multi Coin Wallets</TopDescription>
+        <Setting style={state.DarkMode && { borderBottomColor: "#555" }} >
           <Row>
             <WalletImageTitle>
               <Image source={require("../assets/images/twt-white.png")} />
               <WalletTitleGroup>
-                <Title>Multi-Coin Wallet 1</Title>
-                <Description>Multi Coin Wallet</Description>
+                <Title style={state.DarkMode && { color: "#fff" }} >Multi-Coin Wallet 1</Title>
+                <Description style={state.DarkMode && { color: "#ccc" }} >Multi Coin Wallet</Description>
               </WalletTitleGroup>
             </WalletImageTitle>
             <TouchableOpacity
@@ -80,7 +82,8 @@ const WalletTitleGroup = styled.View`
 `;
 const Image = styled.Image`
   width: 44px;
-  height: 44px;
+  height: 40px;
+  border-radius: 10px;
 `;
 const Title = styled.Text`
   font-size: 18px;

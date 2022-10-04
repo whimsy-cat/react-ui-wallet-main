@@ -71,7 +71,7 @@ const SwapScreen = ({ navigation }) => {
           <Token1>
             <InputContainer>
               <SmallInfoText>You Pay</SmallInfoText>
-              <Input placeholder="0" keyboardType="numeric" value={payBalance.toString()} onChangeText={newText => setPayBalance(newText)} />
+              <Input  style={state.DarkMode && { color: "#fff" }} placeholderTextColor={state.DarkMode && "#555"} placeholder="0" keyboardType="numeric" value={payBalance.toString()} onChangeText={newText => setPayBalance(newText)} />
               <BalanceInfo>
                 <Balance>Balance:</Balance>
                 <BalanceNumber> 0</BalanceNumber>
@@ -81,7 +81,7 @@ const SwapScreen = ({ navigation }) => {
             <TouchableOpacity onPress={() => navigation.navigate("SwapToken1Select")}>
               <TokenSelect>
                 <Image source={state.CoinImage[state.CoinSymbol.indexOf(state.Swap1Token)]} />
-                <TokenName>{state.Swap1Token}</TokenName>
+                <TokenName style={state.DarkMode && { color: "#ccc" }}>{state.Swap1Token}</TokenName>
                 <Ionicons
                   name={"chevron-forward"}
                   color="#979797"
@@ -114,7 +114,7 @@ const SwapScreen = ({ navigation }) => {
           <Token2>
             <InputContainer>
               <SmallInfoText>You Get</SmallInfoText>
-              <Input placeholder="0" keyboardType="numeric" value={getBalance.toFixed(5).toString()} />
+              <Input style={state.DarkMode && { color: "#fff" }} placeholderTextColor={state.DarkMode && "#555"} placeholder="0" keyboardType="numeric" value={getBalance.toFixed(5).toString()} />
               <BalanceInfo>
                 <Balance>Balance:</Balance>
                 <BalanceNumber> 0 </BalanceNumber>
@@ -124,7 +124,7 @@ const SwapScreen = ({ navigation }) => {
             <TouchableOpacity onPress={() => navigation.navigate("SwapToken2Select")}>
               <TokenSelect>
                 <Image source={state.CoinImage[state.CoinSymbol.indexOf(state.Swap2Token)]} />
-                <TokenName>{state.Swap2Token}</TokenName>
+                <TokenName style={state.DarkMode && { color: "#ccc" }}>{state.Swap2Token}</TokenName>
                 <Ionicons
                   name={"chevron-forward"}
                   color="#979797"

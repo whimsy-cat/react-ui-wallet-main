@@ -59,7 +59,7 @@ const TokenDetailScreen = ({ navigation }) => {
       </Header>
       <Body>
         <CryptoDetailContainer>
-          <CryptoCurrency>${price}</CryptoCurrency>
+          <CryptoCurrency style={state.DarkMode && { color: "#eee" }}>${price}</CryptoCurrency>
           <CryptoChange>{dailyChange > 0 ? "$" : "- $"}{Math.abs(price * dailyChange).toFixed(2)}  {dailyChange > 0 ? `+${dailyChange}` : `-${dailyChange}`}%</CryptoChange>
           <ChartView>
             <LineChart
@@ -77,12 +77,12 @@ const TokenDetailScreen = ({ navigation }) => {
               yAxisLabel="$"
               yAxisInterval={10} // optional, defaults to 1
               chartConfig={{
-                backgroundColor: "#ffffff",
-                backgroundGradientFrom: "#ffffff",
-                backgroundGradientTo: "#ffffff",
+                backgroundColor: state.DarkMode ? "#000" : "#fff",
+                backgroundGradientFrom: state.DarkMode ? "#151515" : "#fff",
+                backgroundGradientTo: state.DarkMode ? "#151515" : "#fff",
                 decimalPlaces: 2, // optional, defaults to 2dp
-                color: (opacity = 1) => `rgba(129, 201, 149, ${opacity})`,
-                labelColor: (opacity = 1) => `rgba(30, 30, 30, ${opacity})`,
+                color: (opacity = 1) => state.DarkMode ? "#5f7" : "#5fa",
+                labelColor: (opacity = 1) => state.DarkMode ? "#eee" : "#333",
                 style: {
                   borderRadius: 16
                 },
@@ -102,7 +102,7 @@ const TokenDetailScreen = ({ navigation }) => {
         </CryptoDetailContainer>
         <CryptoSetting>
           <PriceAlert>
-            <PriceAlertLabel>
+            <PriceAlertLabel style={state.DarkMode && { color: "#eee" }}>
               Price Alert
             </PriceAlertLabel>
             <PriceAlertSwitch>
@@ -113,7 +113,7 @@ const TokenDetailScreen = ({ navigation }) => {
             {state.DetailToken} is a cryptocurrency and worldwide payment system. It is the first decentralized digital currency, as the system works without a central bank or single administrator.
           </PriceDescription>
           <PriceAlert>
-            <PriceAlertLabel>
+            <PriceAlertLabel style={state.DarkMode && { color: "#eee" }}>
               Website
             </PriceAlertLabel>
             <PriceAlertLink>
@@ -121,7 +121,7 @@ const TokenDetailScreen = ({ navigation }) => {
             </PriceAlertLink>
           </PriceAlert>
           <PriceAlert>
-            <PriceAlertLabel>
+            <PriceAlertLabel style={state.DarkMode && { color: "#eee" }}>
               Explorer
             </PriceAlertLabel>
             <PriceAlertLink>

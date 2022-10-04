@@ -25,14 +25,14 @@ const WalletEditScreen = ({ navigation }) => {
         <Ionicons name={"trash"} color="#fff" size={28} />
       </Header>
       <Body>
-        <WalletNameInput placeholder="Multi-Coin Wallet 1" value={secretPhrase} />
+        <WalletNameInput style={state.DarkMode && { color: "#fff" }} placeholderTextColor={state.DarkMode && "#999"} placeholder="Multi-Coin Wallet 1" value={secretPhrase} />
         <TouchableOpacity
           onPress={() => onShowSecretPhrase()}
         >
           <Row>
             <SecretPhrase>
-              <Ionicons name={"document-text"} color="#000" size={28} />
-              <SubText>Show Secret Phrase</SubText>
+              <Ionicons name={"document-text"} style={state.DarkMode ? { color: "#fff" } : {color: "000"} }  size={28} />
+              <SubText style={state.DarkMode && { color: "#fff" }} >Show Secret Phrase</SubText>
             </SecretPhrase>
 
             <Ionicons name={"chevron-forward"} color="#979797" size={28} />

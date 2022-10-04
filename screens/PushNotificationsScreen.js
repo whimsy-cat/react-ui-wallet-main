@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { Switch } from "react-native";
 import { Context } from '../reducers/store'

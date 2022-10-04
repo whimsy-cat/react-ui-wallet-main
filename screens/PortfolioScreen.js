@@ -109,11 +109,11 @@ function FirstRoute() {
             </TokenCol2>
           </Token>
         </TouchableOpacity> */}
-        {(myCustomTokenName != "") && (<Token>
+        {(myCustomTokenName != "") && (<Token style={state.DarkMode && { borderBottomColor: "#191919" }}>
           <TokenDetails>
             <Image source={require("../assets/images/cardano.png")} />
             <TokenNamePrice>
-              <TokenName>{myCustomTokenName}</TokenName>
+              <TokenName style={state.DarkMode && { color: "#fff" }}>{myCustomTokenName}</TokenName>
               <TokenPriceAction>
                 <TokenPrice>$0.514</TokenPrice>
                 <TokenPercent>+0.75%</TokenPercent>
@@ -121,8 +121,8 @@ function FirstRoute() {
             </TokenNamePrice>
           </TokenDetails>
           <TokenCol2>
-            <TokenAmount>0</TokenAmount>
-            <TokenSymbol>{myCustomSymbol}</TokenSymbol>
+            <TokenAmount style={state.DarkMode && { color: "#eee" }}>0.0000</TokenAmount>
+            <TokenSymbol style={state.DarkMode && { color: "#eee" }}>{myCustomSymbol}</TokenSymbol>
           </TokenCol2>
         </Token>)}
         <TouchableOpacity
