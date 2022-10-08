@@ -25,7 +25,7 @@ const TokensContainer = (props) => {
     return (
       <View style={state.DarkMode ?
         { width: "109%", paddingRight: 30, flexDirection: "row", alignItems: "center", justifyContent: "space-between", borderBottomWidth: 1, borderBottomColor: "#222", backgroundColor: "#1a222d" } :
-        { width: "109%", paddingRight: 30, flexDirection: "row", alignItems: "center", justifyContent: "space-between", borderBottomWidth: 1, borderBottomColor: "#eee", backgroundColor: "#1a222d" }}>
+        { width: "109%", paddingRight: 30, flexDirection: "row", alignItems: "center", justifyContent: "space-between", borderBottomWidth: 1, borderBottomColor: "#eee", backgroundColor: "#fff" }}>
         <TokenLeft>
           <TokenName>
             <Image source={tokenImage} />

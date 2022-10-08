@@ -3,6 +3,7 @@ import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components";
 import { Context } from '../reducers/store'
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { Clipboard } from 'react-native';
 
 export var myCustomContractAdrress = "";
 export var myCustomTokenName = "";
@@ -22,6 +23,12 @@ const AddCustomTokenScreen = ({ navigation }) => {
     myCustomDecimals = customDecimals;
     navigation.navigate("PortfolioScreen")
   }
+  
+  const onHandlePaste = async () => {
+    const text = await Clipboard.getString()
+    setCustomContractAddress(text)
+  }
+
   return (
     <Container style={state.DarkMode && { backgroundColor: "#1a222d" }}>
       <Header style={state.DarkMode && { backgroundColor: "#232f3d", color: "#fff" }}>
@@ -45,10 +52,12 @@ const AddCustomTokenScreen = ({ navigation }) => {
           </TokenNetwork>
           <CA style={state.DarkMode && { borderColor: "#343434" }}>
             <CAInput style={state.DarkMode && { color: "#fff" }} placeholderTextColor={state.DarkMode && "#999"} placeholder="Contract Address" value={customContractAddress} onChangeText={(value) => setCustomContractAddress(value)} />
-            <Paste>
-              <PasteText>Paste</PasteText>
-              <Ionicons name={"clipboard-outline"} color="#3275bb" size={24} />
-            </Paste>
+            <TouchableOpacity onPress={() => onHandlePaste()}>
+              <Paste>
+                <PasteText>Paste</PasteText>
+                <Ionicons name={"clipboard-outline"} color="#3275bb" size={24} />
+              </Paste>
+            </TouchableOpacity>
           </CA>
           <Name style={state.DarkMode && { borderColor: "#343434", color: "#fff" }} placeholderTextColor={state.DarkMode && "#999"} placeholder="Name" value={customTokenName} onChangeText={(value) => setCustomTokenName(value)} />
           <Symbol style={state.DarkMode && { borderColor: "#343434", color: "#fff" }} placeholderTextColor={state.DarkMode && "#999"} placeholder="Symbol" value={customSymbol} onChangeText={(value) => setCustomSymbol(value)} />
@@ -132,6 +141,9 @@ const CA = styled.View`
 const CAInput = styled.TextInput`
   height: 60px;
   font-size: 16px;
+  
+  overflow: hidden;
+  width: 200px;
 `;
 const Paste = styled.View`
   flex-direction: row;

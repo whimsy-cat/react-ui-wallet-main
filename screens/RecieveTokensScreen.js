@@ -10,8 +10,8 @@ const ReceiveTokensScreen = () => {
     <Container style={state.DarkMode && { backgroundColor: "#1a222d" }}>
       <Header style={state.DarkMode && { backgroundColor: "#232f3d", color: "#fff" }}>
         <Ionicons name={"arrow-back"} color="#fff" size={28} />
-        <SearchBar style={state.DarkMode && { backgroundColor: "#1a222d", color: "#fff" }}
-          placeholder="Search - Receive"
+        <SearchBar style={state.DarkMode && { backgroundColor: "#232f3d", color: "#fff" }}
+          placeholder="Search - Receive"  
           placeholderTextColor="#CCDDEE"
         />
       </Header>

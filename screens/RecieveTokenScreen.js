@@ -42,18 +42,18 @@ const RecieveTokenScreen = ({ navigation }) => {
           <Image source={{
             uri: `https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=${state.RecieveToken == "ETH" ||
               state.RecieveToken == "BNB" ?
-              state.WalletAddress :
+              state.WalletAddress.toString() :
               state.RecieveToken == "BTC" ?
-                state.BTCAddress :
+                state.BTCAddress.toString() :
                 state.RecieveToken == "DOGE" ?
-                  state.DOGEAddress :
+                  state.DOGEAddress.toString() :
                   state.RecieveToken == "XRP" ?
-                    state.XRPAddress :
+                    state.XRPAddress.toString() :
                     state.RecieveToken == "SOL" ?
-                      state.SOLAddress :
+                      state.SOLAddress.toString() :
                       state.RecieveToken == "ADA" ?
-                        state.ADAAddress :
-                        state.DOTAddress}`
+                        state.ADAAddress.toString() :
+                        state.DOTAddress.toString()}`
           }} />
           <WalletAddress>
             {state.RecieveToken == "ETH" ||

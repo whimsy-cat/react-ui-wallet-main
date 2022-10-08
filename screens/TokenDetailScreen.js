@@ -81,7 +81,7 @@ const TokenDetailScreen = ({ navigation }) => {
                 backgroundGradientFrom: state.DarkMode ? "#252f38" : "#fff",
                 backgroundGradientTo: state.DarkMode ? "#252f38" : "#fff",
                 decimalPlaces: 2, // optional, defaults to 2dp
-                color: (opacity = 1) => state.DarkMode ? "#5f7" : "#5fa",
+                color: (opacity = 1) => state.DarkMode ? "#5f7" : "#5af",
                 labelColor: (opacity = 1) => state.DarkMode ? "#eee" : "#333",
                 style: {
                   borderRadius: 16

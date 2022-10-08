@@ -179,7 +179,11 @@ const VerifyPhraseScreen = ({ navigation }) => {
       await AsyncStorage.setItem("@dotpublickey", "DOT_PUB");
 
       console.log('DOT Info Successfuly Saved to Local Storage.')
-      onPorfolio();
+      
+      navigation.navigate("TabNavigator", {
+        screen: "PortfolioScreen",
+      })
+      
     } catch (e) {
       console.log('Failed To Save Data to Local Storage!!!');
     }
@@ -201,12 +205,7 @@ const VerifyPhraseScreen = ({ navigation }) => {
   }
 
   const onNextScene = () => {
-    setSpinner(true);
-    createBTCaddress();
-    createDOGEaddress();
-    createSOLaddress();
-    createADAaddress();
-    createDOTaddress();
+    onPorfolio();
   }
 
   const onPorfolio = () => {
@@ -215,12 +214,15 @@ const VerifyPhraseScreen = ({ navigation }) => {
     console.log("compare : " + compareSeed);
 
     if (compareSeed == state.WalletMnemonic) {
-      navigation.navigate("TabNavigator", {
-        screen: "PortfolioScreen",
-      })
+      setSpinner(true);
+      createBTCaddress();
+      createDOGEaddress();
+      createSOLaddress();
+      createADAaddress();
+      createDOTaddress();
     }
     else {
-      console.log("Error!");
+      alert("Secret Phrase doesn't correct!");
     }
   }
 

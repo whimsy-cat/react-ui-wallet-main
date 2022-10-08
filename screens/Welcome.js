@@ -23,7 +23,7 @@ const Welcome = ({ navigation }) => {
   const [state, dispatch] = useContext(Context);
 
   useEffect(() => {
-    //  clearAsyncStorage();
+    clearAsyncStorage();
     getStoredData();
     getMarketData();
   }, []);
