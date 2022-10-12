@@ -5,66 +5,130 @@ import { Ionicons } from "@expo/vector-icons";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import { useNavigation } from "@react-navigation/native";
-import { myCustomContractAdrress, myCustomSymbol, myCustomTokenName, myCustomTokenDecimals } from "./AddCustomTokenScreen";
-import { Context } from '../reducers/store'
+import {
+  myCustomContractAdrress,
+  myCustomSymbol,
+  myCustomTokenName,
+  myCustomTokenDecimals,
+} from "./AddCustomTokenScreen";
+import { Context } from "../reducers/store";
 
-import "react-native-get-random-values"
-import "@ethersproject/shims"
+import "react-native-get-random-values";
+import "@ethersproject/shims";
 
 function FirstRoute() {
   const [state, dispatch] = useContext(Context);
   const navigation = useNavigation();
 
   const onDetailToken = (coin) => {
-    dispatch({ type: 'SET_DETAILTOKEN', detailtoken: coin });
+    dispatch({ type: "SET_DETAILTOKEN", detailtoken: coin });
     navigation.navigate("TokenDetailScreen");
-  }
+  };
 
   useEffect(() => {
-    console.log(state.DarkMode);
+    console.log("*** doge balance : " + state.CurrentDOGEBalance);
+    console.log("*** bnbb balance : " + state.CurrentBNBBBalance);
+    console.log("*** bnbs balance : " + state.CurrentBNBSBalance);
+    console.log("*** sol balance : " + state.CurrentSOLBalance);
+    console.log("*** dot balance : " + state.CurrentDOTBalance);
   }, []);
   return (
     <First style={state.DarkMode && { backgroundColor: "#232f3d" }}>
       <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
         {state.ImportedCoinFullName.map((coin, index) => (
-          <TouchableOpacity
-            key={index}
-            onPress={() => onDetailToken(coin)}
-          >
+          <TouchableOpacity key={index} onPress={() => onDetailToken(coin)}>
             <Token style={state.DarkMode && { borderBottomColor: "#3f3f3f" }}>
               <TokenDetails>
-                <Image source={state.CoinImage[state.CoinFullName.indexOf(state.ImportedCoinFullName[index])]} />
+                <Image
+                  source={
+                    state.CoinImage[
+                      state.CoinFullName.indexOf(
+                        state.ImportedCoinFullName[index]
+                      )
+                    ]
+                  }
+                />
                 <TokenNamePrice>
-                  <TokenName style={state.DarkMode && { color: "#fff" }}>{coin}</TokenName>
+                  <TokenName style={state.DarkMode && { color: "#fff" }}>
+                    {coin}
+                  </TokenName>
                   <TokenPriceAction>
-                    <TokenPrice style={state.DarkMode && { color: "#c3c3c3" }}>{state.CoinPrice[state.CoinFullName.indexOf(state.ImportedCoinFullName[index])]}</TokenPrice>
-                    <TokenPercent>{state.CoinDailyChange[index] > 0 ? "+" : ""}{state.CoinDailyChange[index]} %</TokenPercent>
+                    <TokenPrice style={state.DarkMode && { color: "#c3c3c3" }}>
+                      {
+                        state.CoinPrice[
+                          state.CoinFullName.indexOf(
+                            state.ImportedCoinFullName[index]
+                          )
+                        ]
+                      }
+                    </TokenPrice>
+                    <TokenPercent>
+                      {state.CoinDailyChange[index] > 0 ? "+" : ""}
+                      {state.CoinDailyChange[index]} %
+                    </TokenPercent>
                   </TokenPriceAction>
-                  <TokenAddress>{coin == "Ethereum" ||
+                  <TokenAddress>
+                    {coin == "Ethereum" ||
                     coin == "BNB Beacon Chain" ||
-                    coin == "BNB Smart Chain" ?
-                    state.WalletAddress.toString().substring(0, 25).concat(" . . . ") :
-                    coin == "Bitcoin" ?
-                      state.BTCAddress.toString().substring(0, 25).concat(" . . .") :
-                      coin == "DogeCoin" ?
-                        state.DOGEAddress.toString().substring(0, 25).concat(" . . .") :
-                        coin == "XRP" ?
-                          state.XRPAddress.toString().substring(0, 25).concat(" . . .") :
-                          coin == "Solana" ?
-                            state.SOLAddress.toString().substring(0, 25).concat(" . . .") :
-                            coin == "Cardano" ?
-                              state.ADAAddress.toString().substring(0, 25).concat(" . . .") :
-                              state.DOTAddress.toString().substring(0, 25).concat(" . . .")}
+                    coin == "BNB Smart Chain"
+                      ? state.WalletAddress.toString()
+                          .substring(0, 25)
+                          .concat(" . . . ")
+                      : coin == "Bitcoin"
+                      ? state.BTCAddress.toString()
+                          .substring(0, 25)
+                          .concat(" . . .")
+                      : coin == "DogeCoin"
+                      ? state.DOGEAddress.toString()
+                          .substring(0, 25)
+                          .concat(" . . .")
+                      : coin == "XRP"
+                      ? state.XRPAddress.toString()
+                          .substring(0, 25)
+                          .concat(" . . .")
+                      : coin == "Solana"
+                      ? state.SOLAddress.toString()
+                          .substring(0, 25)
+                          .concat(" . . .")
+                      : coin == "Cardano"
+                      ? state.ADAAddress.toString()
+                          .substring(0, 25)
+                          .concat(" . . .")
+                      : state.DOTAddress.toString()
+                          .substring(0, 25)
+                          .concat(" . . .")}
                   </TokenAddress>
                 </TokenNamePrice>
               </TokenDetails>
               <TokenCol2>
-                <TokenAmount style={state.DarkMode && { color: "#eee" }}>{coin == "Ethereum" ?
-                  Number(state.CurrentETHBalance).toFixed(4) :
-                  coin == "Bitcoin" ?
-                    Number(state.CurrentBTCBalance).toFixed(4) :
-                    Number(state.CurrentDOGEBalance).toFixed(4)}</TokenAmount>
-                <TokenSymbol style={state.DarkMode && { color: "#eee" }}>{state.CoinSymbol[state.CoinFullName.indexOf(state.ImportedCoinFullName[index])]}</TokenSymbol>
+                <TokenAmount style={state.DarkMode && { color: "#eee" }}>
+                  {coin == "Ethereum"
+                    ? Number(state.CurrentETHBalance).toFixed(4)
+                    : coin == "Bitcoin"
+                    ? Number(state.CurrentBTCBalance).toFixed(4)
+                    : coin == "BNB Beacon Chain"
+                    ? Number(state.CurrentBNBBBalance).toFixed(4)
+                    : coin == "BNB Smart Chain"
+                    ? Number(state.CurrentBNBSBalance).toFixed(4)
+                    : coin == "DogeCoin"
+                    ? Number(state.CurrentDOGEBalance).toFixed(4)
+                    : coin == "XRP"
+                    ? Number(state.CurrentXRPBalance).toFixed(4)
+                    : coin == "Solana"
+                    ? Number(state.CurrentSOLBalance).toFixed(4)
+                    : coin == "Cardano"
+                    ? Number(state.CurrentADABalance).toFixed(4)
+                    : Number(state.CurrentDOTBalance).toFixed(4)}
+                </TokenAmount>
+                <TokenSymbol style={state.DarkMode && { color: "#eee" }}>
+                  {
+                    state.CoinSymbol[
+                      state.CoinFullName.indexOf(
+                        state.ImportedCoinFullName[index]
+                      )
+                    ]
+                  }
+                </TokenSymbol>
               </TokenCol2>
             </Token>
           </TouchableOpacity>
@@ -109,22 +173,30 @@ function FirstRoute() {
             </TokenCol2>
           </Token>
         </TouchableOpacity> */}
-        {(myCustomTokenName != "") && (<Token style={state.DarkMode && { borderBottomColor: "#3f3f3f" }}>
-          <TokenDetails>
-            <Image source={require("../assets/images/cardano.png")} />
-            <TokenNamePrice>
-              <TokenName style={state.DarkMode && { color: "#fff" }}>{myCustomTokenName}</TokenName>
-              <TokenPriceAction>
-                <TokenPrice>$0.514</TokenPrice>
-                <TokenPercent>+0.75%</TokenPercent>
-              </TokenPriceAction>
-            </TokenNamePrice>
-          </TokenDetails>
-          <TokenCol2>
-            <TokenAmount style={state.DarkMode && { color: "#eee" }}>0.0000</TokenAmount>
-            <TokenSymbol style={state.DarkMode && { color: "#eee" }}>{myCustomSymbol}</TokenSymbol>
-          </TokenCol2>
-        </Token>)}
+        {myCustomTokenName != "" && (
+          <Token style={state.DarkMode && { borderBottomColor: "#3f3f3f" }}>
+            <TokenDetails>
+              <Image source={require("../assets/images/cardano.png")} />
+              <TokenNamePrice>
+                <TokenName style={state.DarkMode && { color: "#fff" }}>
+                  {myCustomTokenName}
+                </TokenName>
+                <TokenPriceAction>
+                  <TokenPrice>$0.514</TokenPrice>
+                  <TokenPercent>+0.75%</TokenPercent>
+                </TokenPriceAction>
+              </TokenNamePrice>
+            </TokenDetails>
+            <TokenCol2>
+              <TokenAmount style={state.DarkMode && { color: "#eee" }}>
+                0.0000
+              </TokenAmount>
+              <TokenSymbol style={state.DarkMode && { color: "#eee" }}>
+                {myCustomSymbol}
+              </TokenSymbol>
+            </TokenCol2>
+          </Token>
+        )}
         <TouchableOpacity
           onPress={() => navigation.navigate("AddCustomTokenScreen")}
         >
@@ -144,12 +216,14 @@ function SecondRoute() {
     <Second style={state.DarkMode && { backgroundColor: "#232f3d" }}>
       <ScrollView showsVerticalScrollIndicator={false} bounces={true}>
         <NftImage source={require("../assets/images/nft.png")} />
-        <NftSubtext style={state.DarkMode && { color: "#eee" }}>Collectibles will appear here</NftSubtext>
+        <NftSubtext style={state.DarkMode && { color: "#eee" }}>
+          Collectibles will appear here
+        </NftSubtext>
         <NftRecieve>Recieve</NftRecieve>
         <OpenSeaCTA>Open on Opensea.io</OpenSeaCTA>
       </ScrollView>
     </Second>
-  )
+  );
 }
 
 const initialLayout = { width: Dimensions.get("window").width };
@@ -160,19 +234,43 @@ const renderScene = SceneMap({
 });
 
 export default function PortfolioScreen({ navigation }) {
-
   const [index, setIndex] = React.useState(0);
+  const [tmpUSD, setTmpUSD] = React.useState(0.0);
+  const [totalUSD, setTotalUSD] = React.useState(0.0);
   const [routes] = React.useState([
     { key: "first", title: "Tokens" },
     { key: "second", title: "NFTs" },
   ]);
   const [state, dispatch] = useContext(Context);
+  const onHandleNotification = () => {
+    navigation.navigate("NotificationScreen");
+  };
+
+  useEffect(() => {
+    let totalBalance =
+      state.CurrentBTCBalance * state.CoinPrice[0] +
+      state.CurrentETHBalance * state.CoinPrice[1] +
+      state.CurrentBNBBBalance * state.CoinPrice[2] +
+      state.CurrentBNBSBalance * state.CoinPrice[3] +
+      state.CurrentADABalance * state.CoinPrice[4] +
+      state.CurrentXRPBalance * state.CoinPrice[5] +
+      state.CurrentSOLBalance * state.CoinPrice[6] +
+      state.CurrentDOGEBalance * state.CoinPrice[7] +
+      state.CurrentDOTBalance * state.CoinPrice[8];
+    setTotalUSD(totalBalance);
+  }, []);
+
+  useEffect(() => {
+    if (totalUSD > 0.0) setTmpUSD(totalUSD);
+  }, [totalUSD]);
   return (
-    <Container style={state.DarkMode && { backgroundColor: "#1a222d" }} >
+    <Container style={state.DarkMode && { backgroundColor: "#1a222d" }}>
       <Header style={state.DarkMode && { backgroundColor: "#1a222d" }}>
         <WalletBalance>
-          <Ionicons name={"notifications-outline"} color="#fff" size={28} />
-          <Balance>$0.00</Balance>
+          <TouchableOpacity onPress={() => onHandleNotification()}>
+            <Ionicons name={"notifications-outline"} color="#fff" size={28} />
+          </TouchableOpacity>
+          <Balance>${tmpUSD.toFixed(4)}</Balance>
           <TouchableOpacity
             onPress={() => navigation.navigate("ImportTokensScreen")}
           >
@@ -271,33 +369,43 @@ export default function PortfolioScreen({ navigation }) {
           renderScene={renderScene}
           onIndexChange={setIndex}
           initialLayout={initialLayout}
-          style={!state.DarkMode ? {
-            marginTop: 3,
-            backgroundColor: "#ffffff",
-            borderTopLeftRadius: 20,
-            borderTopRightRadius: 20,
-          } : {
-            marginTop: 3,
-            backgroundColor: "#000",
-            borderTopLeftRadius: 20,
-            borderTopRightRadius: 20,
-          }
+          style={
+            !state.DarkMode
+              ? {
+                  marginTop: 3,
+                  backgroundColor: "#ffffff",
+                  borderTopLeftRadius: 20,
+                  borderTopRightRadius: 20,
+                }
+              : {
+                  marginTop: 3,
+                  backgroundColor: "#000",
+                  borderTopLeftRadius: 20,
+                  borderTopRightRadius: 20,
+                }
           }
           renderTabBar={(props) => (
             <TabBar
               {...props}
               // indicatorStyle={{ backgroundColor: '#695CFF' }}
               // style={{ backgroundColor: '#695CFF' }}
-              tabStyle={state.DarkMode ? { backgroundColor: "#232f3d", minHeight: 30 } : { backgroundColor: "#fff", minHeight: 30 }} // here
+              tabStyle={
+                state.DarkMode
+                  ? { backgroundColor: "#232f3d", minHeight: 30 }
+                  : { backgroundColor: "#fff", minHeight: 30 }
+              } // here
               renderLabel={({ route, focused }) => (
                 <Text
-                  style={state.DarkMode ? {
-                    color: "#fff",
-                    margin: 8,
-                  } : {
-                    color: "#050505",
-                    margin: 8,
-                  }
+                  style={
+                    state.DarkMode
+                      ? {
+                          color: "#fff",
+                          margin: 8,
+                        }
+                      : {
+                          color: "#050505",
+                          margin: 8,
+                        }
                   }
                 >
                   {route.title}
@@ -425,8 +533,8 @@ const TokenPrice = styled.Text`
 `;
 const TokenAddress = styled.Text`
   font-size: 12px;
-  color:#777777;
-`
+  color: #777777;
+`;
 const TokenPercent = styled.Text`
   font-size: 12px;
   color: #6eb8aa;
@@ -446,7 +554,7 @@ const AddTokenText = styled.Text`
 const Image = styled.Image`
   width: 40px;
   height: 40px;
-  background-color: #fff; 
+  background-color: #fff;
   border-radius: 20px;
   border-width: 1px;
   border-color: #fff;

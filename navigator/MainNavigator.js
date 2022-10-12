@@ -31,7 +31,7 @@ import SendTokenChoose from "../screens/SendTokenChoose";
 import Welcome from "../screens/Welcome";
 import PasscodeScreen from "../screens/PasscodeScreen";
 import PasswordSettingScreen from "../screens/PasswordSettingScreen";
-
+import NotificationScreen from "../screens/NotificationScreen";
 
 const Stack = createStackNavigator();
 
@@ -55,6 +55,7 @@ const PortfolioStackNavigator = () => {
       <Stack.Screen name="SwapToken1Select" component={SwapToken1Select} />
       <Stack.Screen name="SwapToken2Select" component={SwapToken2Select} />
       <Stack.Screen name="SendTokenChoose" component={SendTokenChoose} />
+      <Stack.Screen name="NotificationScreen" component={NotificationScreen} />
 
     </Stack.Navigator>
   );

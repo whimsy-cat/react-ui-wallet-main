@@ -2,10 +2,10 @@ import React, { useEffect, useState, useContext } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import Spinner from 'react-native-loading-spinner-overlay';
-import { StyleSheet } from 'react-native';
+import Spinner from "react-native-loading-spinner-overlay";
+import { StyleSheet } from "react-native";
 import { AsyncStorage, LogBox } from "react-native";
-import { Context } from '../reducers/store';
+import { Context } from "../reducers/store";
 
 LogBox.ignoreAllLogs();
 
@@ -16,45 +16,64 @@ const PasscodeScreen = ({ navigation }) => {
 
   useEffect(() => {
     getStoredData();
+    if (state.walletPassword == null) {
+      navigation.navigate("TabNavigator", {
+        screen: "PortfolioScreen",
+      });
+    }
   }, []);
   const onHandleUnlock = () => {
     console.log("inputpassword : " + inputPassword);
     console.log("walletpassword : " + walletPassword);
     if (inputPassword != walletPassword) {
       alert("Password incorrect!");
-    }
-    else {
+    } else {
       navigation.navigate("TabNavigator", {
         screen: "PortfolioScreen",
-      })
+      });
     }
-  }
+  };
   const getStoredData = async () => {
     console.log("Getting data from localstorage ...");
     try {
-      const password = await AsyncStorage.getItem('@walletpassword');
+      const password = await AsyncStorage.getItem("@walletpassword");
       console.log("wallet password : " + password);
       setWalletPassword(password);
       if (password == null) {
         navigation.navigate("TabNavigator", {
           screen: "PortfolioScreen",
-        })
+        });
       }
     } catch (e) {
       console.log(e);
     }
-  }
+  };
   return (
     <Container style={state.DarkMode && { backgroundColor: "#1a222d" }}>
       <Body>
         <Image source={require("../assets/images/splash.png")} />
-        <Text style={state.DarkMode && { color: "#cdcdcd" }}>Secure and trusted multi-chain crypto wallet.</Text>
-        <Input style={state.DarkMode && { backgroundColor: "#0a121d", color: "#fff", borderColor: "#666" }} placeholderTextColor={state.DarkMode && "#444"} secureTextEntry={true} placeholder="Password" value={inputPassword} onChangeText={newText => setInputPassword(newText)} />
+        <Text style={state.DarkMode && { color: "#cdcdcd" }}>
+          Secure and trusted multi-chain crypto wallet.
+        </Text>
+        <Input
+          style={
+            state.DarkMode && {
+              backgroundColor: "#0a121d",
+              color: "#fff",
+              borderColor: "#666",
+            }
+          }
+          placeholderTextColor={state.DarkMode && "#444"}
+          secureTextEntry={true}
+          placeholder="Password"
+          value={inputPassword}
+          onChangeText={(newText) => setInputPassword(newText)}
+        />
         <TouchableOpacity onPress={() => onHandleUnlock()}>
           <Button>Unlock</Button>
         </TouchableOpacity>
       </Body>
-    </Container >
+    </Container>
   );
 };
 
@@ -65,8 +84,8 @@ const Input = styled.TextInput`
   padding: 10px 20px;
   margin: 30px 0;
   width: 330px;
-  border:1px #ccc;
-  border-radius:5px;
+  border: 1px #ccc;
+  border-radius: 5px;
   background-color: #f2f5f2;
 `;
 const Image = styled.Image`
@@ -77,7 +96,7 @@ const Image = styled.Image`
 `;
 const styles = StyleSheet.create({
   spinnerTextStyle: {
-    color: '#fff'
+    color: "#fff",
   },
 });
 const Container = styled.View`
@@ -119,5 +138,5 @@ const Button = styled.Text`
   color: #fff;
   text-align: center;
   margin: 0 auto;
-  border-radius:5px;
+  border-radius: 5px;
 `;

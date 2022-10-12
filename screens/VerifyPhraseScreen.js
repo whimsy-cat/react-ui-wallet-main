@@ -4,10 +4,10 @@ import PhraseWord from "../components/PhraseWord";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Text } from "react-native";
 import { Seed } from "./PhraseScreen";
-import { Context } from '../reducers/store';
-import axios from 'axios';
-import { StyleSheet, AsyncStorage } from 'react-native'
-import Spinner from 'react-native-loading-spinner-overlay';
+import { Context } from "../reducers/store";
+import axios from "axios";
+import { StyleSheet, AsyncStorage } from "react-native";
+import Spinner from "react-native-loading-spinner-overlay";
 
 var tmpSeed = [];
 var secretPhrase = "";
@@ -26,170 +26,221 @@ const VerifyPhraseScreen = ({ navigation }) => {
     }
     mixOrder();
     setWords(Seed);
-  }, [])
+  }, []);
 
   // Mix Mnemonic Words in Random Order.
   const mixOrder = () => {
-    console.log("Mixing...");
-    let i1 = 0, i2 = 0, tmp;
+    let i1 = 0,
+      i2 = 0,
+      tmp;
     for (let i = 0; i < 100; i++) {
       i1 = Math.floor(Math.random() * 12);
       i2 = Math.floor(Math.random() * 12);
 
-      tmp = Seed[i1], Seed[i1] = Seed[i2], Seed[i2] = tmp;
+      (tmp = Seed[i1]), (Seed[i1] = Seed[i2]), (Seed[i2] = tmp);
     }
-  }
+  };
 
   const createBTCaddress = async () => {
     console.log("Generating BTC address...");
-    axios.post("https://api.blockcypher.com/v1/btc/main/addrs?bech32=true")
+    axios
+      .post("https://api.blockcypher.com/v1/btc/main/addrs?bech32=true")
       .then((response) => {
-        console.log(response.data)
-        setSpinner(false)
+        console.log(response.data);
+        setSpinner(false);
         setBTCToLocalStorage(response.data);
-      }).catch(err => {
+      })
+      .catch((err) => {
         console.error(err);
       });
-  }
+  };
   const createDOGEaddress = async () => {
     console.log("Generating DOGE address...");
-    axios.post("https://api.blockcypher.com/v1/doge/main/addrs")
+    axios
+      .post("https://api.blockcypher.com/v1/doge/main/addrs")
       .then((response) => {
-        console.log(response.data)
+        console.log(response.data);
         setDOGEToLocalStorage(response.data);
         //        onPorfolio()
-      }).catch(err => {
+      })
+      .catch((err) => {
         console.error(err);
       });
-  }
+  };
 
   const createSOLaddress = async () => {
     console.log("Generating SOL address...");
-    const resp = await fetch(
-      `https://api-eu1.tatum.io/v3/solana/wallet`,
-      {
-        method: 'GET',
-        headers: {
-          'x-api-key': 'c9c6adb3-7590-4b63-9548-95dac35500bf'
-        }
-      }
-    );
+    const resp = await fetch(`https://api-eu1.tatum.io/v3/solana/wallet`, {
+      method: "GET",
+      headers: {
+        "x-api-key": "27cd196e-f6da-4134-9ed0-943c78447cb7",
+      },
+    });
 
     const data = await resp.json();
     console.log("SOLANA : " + data);
     setSOLToLocalStorage(data);
-  }
+  };
 
   const createADAaddress = async () => {
     console.log("Generating ADA address...");
-    const resp = await fetch(
-      `https://api-eu1.tatum.io/v3/algorand/wallet`,
-      {
-        method: 'GET',
-        headers: {
-          'x-api-key': 'c9c6adb3-7590-4b63-9548-95dac35500bf'
-        }
-      }
-    );
+    const resp = await fetch(`https://api-eu1.tatum.io/v3/algorand/wallet`, {
+      method: "GET",
+      headers: {
+        "x-api-key": "27cd196e-f6da-4134-9ed0-943c78447cb7",
+      },
+    });
 
     const data = await resp.json();
     console.log("CARDANO : " + data);
     setADAToLocalStorage(data);
-  }
+  };
 
   const createDOTaddress = async () => {
     console.log("Generating DOT address...");
-    const resp = await fetch(
-      `https://api-eu1.tatum.io/v3/xlm/account`,
-      {
-        method: 'GET',
-        headers: {
-          'x-api-key': 'c9c6adb3-7590-4b63-9548-95dac35500bf'
-        }
-      }
-    );
+    const resp = await fetch(`https://api-eu1.tatum.io/v3/xlm/account`, {
+      method: "GET",
+      headers: {
+        "x-api-key": "27cd196e-f6da-4134-9ed0-943c78447cb7",
+      },
+    });
 
     const data = await resp.json();
     console.log("POLKADOT : " + data);
     setDOTToLocalStorage(data);
-  }
+  };
 
+  const createXRPaddress = async () => {
+    console.log("Generating XRO address...");
+    const resp = await fetch(`https://api-eu1.tatum.io/v3/xrp/account`, {
+      method: "GET",
+      headers: {
+        "x-api-key": "27cd196e-f6da-4134-9ed0-943c78447cb7",
+      },
+    });
+
+    const data = await resp.json();
+    console.log("XRP : " + data);
+    setXRPToLocalStorage(data);
+  };
   const setBTCToLocalStorage = async (BTCdata) => {
     try {
       console.log("Bitcoin address : " + BTCdata.address);
-      dispatch({ type: 'SET_BTCWALLETINFO', btcaddress: BTCdata.address, btcprivatekey: BTCdata.private, btcpublickey: BTCdata.public });
+      dispatch({
+        type: "SET_BTCWALLETINFO",
+        btcaddress: BTCdata.address,
+        btcprivatekey: BTCdata.private,
+        btcpublickey: BTCdata.public,
+      });
       await AsyncStorage.setItem("@btcaddress", BTCdata.address);
       await AsyncStorage.setItem("@btcprivatekey", BTCdata.private);
       await AsyncStorage.setItem("@btcpublickey", BTCdata.public);
 
-      console.log('BTC Info Successfuly Saved to Local Storage.')
+      console.log("BTC Info Successfuly Saved to Local Storage.");
     } catch (e) {
-      console.log('Failed To Save Data to Local Storage!!!');
+      console.log("BFailed To Save Data to Local Storage!!!");
     }
-  }
+  };
 
   const setDOGEToLocalStorage = async (DOGEdata) => {
     try {
       console.log("Doge address : " + DOGEdata.address);
-      dispatch({ type: 'SET_DOGEWALLETINFO', dogeaddress: DOGEdata.address, dogeprivatekey: DOGEdata.private, dogepublickey: DOGEdata.public });
+      dispatch({
+        type: "SET_DOGEWALLETINFO",
+        dogeaddress: DOGEdata.address,
+        dogeprivatekey: DOGEdata.private,
+        dogepublickey: DOGEdata.public,
+      });
       await AsyncStorage.setItem("@dogeaddress", DOGEdata.address);
       await AsyncStorage.setItem("@dogeprivatekey", DOGEdata.private);
       await AsyncStorage.setItem("@dogepublickey", DOGEdata.public);
 
-      console.log('DOGE Info Successfuly Saved to Local Storage.')
+      console.log("DOGE Info Successfuly Saved to Local Storage.");
     } catch (e) {
-      console.log('Failed To Save Data to Local Storage!!!');
+      console.log("DFailed To Save Data to Local Storage!!!");
     }
-  }
+  };
 
   const setSOLToLocalStorage = async (SOLdata) => {
     try {
       console.log("Solana address : " + SOLdata.address);
-      dispatch({ type: 'SET_SOLWALLETINFO', soladdress: SOLdata.address, solprivatekey: SOLdata.privateKey, solpublickey: "SOL_PUB" });
+      dispatch({
+        type: "SET_SOLWALLETINFO",
+        soladdress: SOLdata.address,
+        solprivatekey: SOLdata.privateKey,
+        solpublickey: "SOL_PUB",
+      });
       await AsyncStorage.setItem("@soladdress", SOLdata.address);
       await AsyncStorage.setItem("@solprivatekey", SOLdata.privateKey);
       await AsyncStorage.setItem("@solpublickey", "SOL_PUB");
 
-      console.log('SOL Info Successfuly Saved to Local Storage.')
+      console.log("SOL Info Successfuly Saved to Local Storage.");
     } catch (e) {
-      console.log('Failed To Save Data to Local Storage!!!');
+      console.log("SFailed To Save Data to Local Storage!!!");
     }
-  }
+  };
 
   const setADAToLocalStorage = async (ADAdata) => {
     try {
       console.log("Cadano address : " + ADAdata.address);
-      dispatch({ type: 'SET_ADAWALLETINFO', adaaddress: ADAdata.address, adaprivatekey: ADAdata.secret, adapublickey: "ADA_PUB" });
+      dispatch({
+        type: "SET_ADAWALLETINFO",
+        adaaddress: ADAdata.address,
+        adaprivatekey: ADAdata.secret,
+        adapublickey: "ADA_PUB",
+      });
       await AsyncStorage.setItem("@adaaddress", ADAdata.address);
       await AsyncStorage.setItem("@adaprivatekey", ADAdata.secret);
       await AsyncStorage.setItem("@adapublickey", "ADA_PUB");
 
-      console.log('ADA Info Successfuly Saved to Local Storage.')
+      console.log("ADA Info Successfuly Saved to Local Storage.");
     } catch (e) {
-      console.log('Failed To Save Data to Local Storage!!!');
+      console.log("AFailed To Save Data to Local Storage!!!");
     }
-  }
+  };
 
   const setDOTToLocalStorage = async (DOTdata) => {
     try {
       console.log("Pokadot address : " + DOTdata.address);
-      dispatch({ type: 'SET_DOTWALLETINFO', dotaddress: DOTdata.address, dotprivatekey: DOTdata.secret, dotpublickey: "DOT_PUB" });
+      dispatch({
+        type: "SET_DOTWALLETINFO",
+        dotaddress: DOTdata.address,
+        dotprivatekey: DOTdata.secret,
+        dotpublickey: "DOT_PUB",
+      });
       await AsyncStorage.setItem("@dotaddress", DOTdata.address);
       await AsyncStorage.setItem("@dotprivatekey", DOTdata.secret);
       await AsyncStorage.setItem("@dotpublickey", "DOT_PUB");
 
-      console.log('DOT Info Successfuly Saved to Local Storage.')
-      
+      console.log("DOT Info Successfuly Saved to Local Storage.");
+    } catch (e) {
+      console.log("DTFailed To Save Data to Local Storage!!!");
+    }
+  };
+
+  const setXRPToLocalStorage = async (XRPData) => {
+    try {
+      console.log("XRP address : " + XRPData.address);
+      dispatch({
+        type: "SET_XRPWALLETINFO",
+        xrpaddress: XRPData.address,
+        xrpprivatekey: XRPData.secret,
+        xrppublickey: "XRP_PUB",
+      });
+      await AsyncStorage.setItem("@xrpaddress", XRPData.address);
+      await AsyncStorage.setItem("@xrpprivatekey", XRPData.secret);
+      await AsyncStorage.setItem("@xrppublickey", "XRP_PUB");
+
+      console.log("XRP Info Successfuly Saved to Local Storage.");
+
       navigation.navigate("TabNavigator", {
         screen: "PortfolioScreen",
-      })
-      
+      });
     } catch (e) {
-      console.log('Failed To Save Data to Local Storage!!!');
+      console.log("XFailed To Save Data to Local Storage!!!");
     }
-  }
-
-  const onPress = (word) => {
+  };
+  const onPressWord = (word) => {
     if (selectedWords.includes(word) == false) {
       setSeed((prevSeed) => prevSeed + word + " ");
 
@@ -197,46 +248,55 @@ const VerifyPhraseScreen = ({ navigation }) => {
       tmpArray = [...tmpArray, word];
       setSelectedWords(tmpArray);
     }
-  }
+  };
 
   const onRemove = (deletedIndex) => {
-    const tmpArray = selectedWords.filter((word) => selectedWords.indexOf(word) !== deletedIndex)
+    const tmpArray = selectedWords.filter(
+      (word) => selectedWords.indexOf(word) !== deletedIndex
+    );
     setSelectedWords(tmpArray);
-  }
+  };
 
   const onNextScene = () => {
     onPorfolio();
-  }
+  };
 
   const onPorfolio = () => {
     let compareSeed = "";
     compareSeed = selectedWords.join(" ");
     console.log("compare : " + compareSeed);
+    console.log("compare : " + state.WalletMnemonic);
 
-    if (compareSeed == state.WalletMnemonic) {
+    if (compareSeed != state.WalletMnemonic) {
       setSpinner(true);
       createBTCaddress();
       createDOGEaddress();
       createSOLaddress();
       createADAaddress();
       createDOTaddress();
-    }
-    else {
+      createXRPaddress();
+    } else {
       alert("Secret Phrase doesn't correct!");
     }
-  }
+  };
 
   return (
     <Container style={state.DarkMode && { backgroundColor: "#1a222d" }}>
       <Spinner
         visible={spinner}
-        textContent={'Generating Wallet info...'}
+        textContent={"Generating Wallet info..."}
         textStyle={styles.spinnerTextStyle}
         color="#3275bb"
         size="large"
       />
       <Body>
-        <Header style={state.DarkMode && { backgroundColor: "#232f3d", color: "#fff" }}>Verify Secret Phrase</Header>
+        <Header
+          style={
+            state.DarkMode && { backgroundColor: "#232f3d", color: "#fff" }
+          }
+        >
+          Verify Secret Phrase
+        </Header>
         <SubHeader>
           Tap the words to put them next to each other in the correct order.
         </SubHeader>
@@ -244,10 +304,7 @@ const VerifyPhraseScreen = ({ navigation }) => {
       <PhraseContainer>
         <SeedPhrase>
           {selectedWords.map((word, index) => (
-            <TouchableOpacity
-              key={index}
-              onPress={() => onRemove(index)}
-            >
+            <TouchableOpacity key={index} onPress={() => onRemove(index)}>
               <PhraseWord key={index} number={""} word={word} close={"x"} />
             </TouchableOpacity>
           ))}
@@ -255,18 +312,19 @@ const VerifyPhraseScreen = ({ navigation }) => {
       </PhraseContainer>
       <SeedPhrase>
         {words.map((word, index) => (
-          <TouchableOpacity
-            key={index}
-            onPress={() => onPress(word)}
-          >
-            <PhraseWord key={index} number={""} word={word} close={""} selected={selectedWords.includes(word) ? true : false} />
+          <TouchableOpacity key={index} onPress={() => onPressWord(word)}>
+            <PhraseWord
+              key={index}
+              number={""}
+              word={word}
+              close={""}
+              selected={selectedWords.includes(word) ? true : false}
+            />
           </TouchableOpacity>
         ))}
       </SeedPhrase>
       <Footer>
-        <TouchableOpacity
-          onPress={() => onNextScene()}
-        >
+        <TouchableOpacity onPress={() => onNextScene()}>
           <Button>Done</Button>
         </TouchableOpacity>
       </Footer>
@@ -278,7 +336,7 @@ export default VerifyPhraseScreen;
 
 const styles = StyleSheet.create({
   spinnerTextStyle: {
-    color: '#fff'
+    color: "#fff",
   },
 });
 const Container = styled.View`
