@@ -19,7 +19,7 @@ const gas_limit = "0x100000";
 
 window.ethersProvider = new ethers.getDefaultProvider(); //ethers.providers.InfuraProvider("ropsten")
 const SendTokenFormScreen = ({ navigation }) => {
-  const [recipentAddress, setRecipentAddress] = React.useState(null);
+  const [recipentAddress, setRecipentAddress] = React.useState("");
   const [send_token_amount, setAmount] = React.useState(0.0);
   const [state, dispatch] = useContext(Context);
   const [tokenBalanceUSD, setTokenBalanceUSD] = React.useState(0.0);
@@ -71,7 +71,17 @@ const SendTokenFormScreen = ({ navigation }) => {
       selectedSendToken == "bnbb" ||
       selectedSendToken == "bnbs"
     ) {
-      if (state.CurrentBTCBalance <= send_token_amount) {
+      console.log(
+        "Out : " +
+          (Number(send_token_amount) +
+            0.000000059347321 * Number(send_token_amount))
+      );
+      console.log("In : " + state.CurrentETHBalance);
+      if (
+        state.CurrentETHBalance <
+        Number(send_token_amount) +
+          0.000000059347321 * Number(send_token_amount)
+      ) {
         alert(`You have no enough ${selectedSendToken.toUpperCase()} to send!`);
         return;
       }
@@ -81,6 +91,14 @@ const SendTokenFormScreen = ({ navigation }) => {
       console.log("Sender Key : " + private_key);
       console.log("Receive : " + recipentAddress);
       console.log("Amount : " + send_token_amount);
+      if (
+        recipentAddress.length != 42 ||
+        !(recipentAddress[0] == "0" && recipentAddress[1] == "x")
+      ) {
+        alert("Please input correct recipentAddress!");
+        return;
+      }
+
       if (selectedSendToken == "bnbb")
         contract_address = "0x250632378e573c6be1ac2f97fcdf00515d0aa91b";
       if (selectedSendToken == "bnbs")
@@ -296,7 +314,10 @@ const SendTokenFormScreen = ({ navigation }) => {
         );
 
         // How many tokens?
-        let numberOfTokens = ethers.utils.parseUnits(send_token_amount, 18);
+        let numberOfTokens = ethers.utils.parseUnits(
+          send_token_amount.toString(),
+          18
+        );
         console.log(`numberOfTokens: ${numberOfTokens}`);
 
         // Send tokens
@@ -311,7 +332,7 @@ const SendTokenFormScreen = ({ navigation }) => {
         const tx = {
           from: send_account,
           to: recipentAddress,
-          value: ethers.utils.parseEther(send_token_amount),
+          value: ethers.utils.parseEther(send_token_amount.toString()),
           nonce: window.ethersProvider.getTransactionCount(
             send_account,
             "latest"
@@ -358,7 +379,7 @@ const SendTokenFormScreen = ({ navigation }) => {
               placeholderTextColor={state.DarkMode && "#999"}
               placeholder="Recipient Address"
               value={recipentAddress}
-              onChangeText={setRecipentAddress}
+              onChangeText={(newText) => setRecipentAddress(newText)}
             />
             <Paste>
               <Ionicons name={"clipboard-outline"} color="#62b5fb" size={24} />
@@ -375,7 +396,7 @@ const SendTokenFormScreen = ({ navigation }) => {
               placeholderTextColor={state.DarkMode && "#999"}
               placeholder="Amount BTC"
               value={send_token_amount.toString()}
-              onChangeText={setAmount}
+              onChangeText={(newText) => setAmount(Number(newText))}
             />
             <TouchableOpacity onPress={() => onHandleMaxBalance()}>
               <MaxContainer>

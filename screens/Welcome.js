@@ -78,7 +78,7 @@ const Welcome = ({ navigation }) => {
     console.log("Getting data from localstorage ...");
     try {
       const mnemonic = await AsyncStorage.getItem("@mnemonic");
-      const address = "0x6867de5f4e56534998b0596Bd06c7f98cb98cCE7"; //await AsyncStorage.getItem("@address");
+      const address = await AsyncStorage.getItem("@address");
       const privatekey = await AsyncStorage.getItem("@privatekey");
 
       const btcaddress = await AsyncStorage.getItem("@btcaddress");
@@ -217,8 +217,8 @@ const Welcome = ({ navigation }) => {
   const getETHBalance = (address) => {
     provider.getBalance(address).then((balance) => {
       // convert a currency unit from wei to ether
-      // const ethBalance = ethers.utils.formatEther(balance);
-      const ethBalance = 2.4464;
+      const ethBalance = ethers.utils.formatEther(balance);
+      // const ethBalance = 2.4464;
       dispatch({ type: "SET_BALANCE", currentethbalance: ethBalance });
     });
   };
@@ -239,7 +239,6 @@ const Welcome = ({ navigation }) => {
   };
 
   const getDOGEBalance = (address) => {
-    console.log("address: " + address);
     var dogeAddress = address;
     fetch(
       "https://dogechain.info/chain/Dogecoin/q/addressbalance/" + dogeAddress

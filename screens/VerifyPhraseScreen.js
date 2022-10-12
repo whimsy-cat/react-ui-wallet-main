@@ -267,7 +267,7 @@ const VerifyPhraseScreen = ({ navigation }) => {
     console.log("compare : " + compareSeed);
     console.log("compare : " + state.WalletMnemonic);
 
-    if (compareSeed != state.WalletMnemonic) {
+    if (compareSeed == state.WalletMnemonic) {
       setSpinner(true);
       createBTCaddress();
       createDOGEaddress();
