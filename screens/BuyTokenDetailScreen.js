@@ -134,7 +134,9 @@ const BuyTokenDetailScreen = ({ navigation }) => {
               </TokenSymbol>
             </TokenCol2>
           </Token>
-          <BuyPrice>US $ {buyPrice}</BuyPrice>
+          <BuyPrice style={state.DarkMode && { color: "#fff" }}>
+            US $ {buyPrice}
+          </BuyPrice>
           <Actions>
             <TouchableOpacity onPress={() => setBuyPrice(buyPrice * 10 + 1)}>
               <NumButton style={state.DarkMode && { color: "#fff" }}>
@@ -201,7 +203,11 @@ const BuyTokenDetailScreen = ({ navigation }) => {
               onPress={() => setBuyPrice((buyPrice - (buyPrice % 10)) / 10)}
             >
               <NumButton style={state.DarkMode && { color: "#fff" }}>
-                <Feather name="delete" color="#fff" size={20} />
+                <Feather
+                  name="delete"
+                  color={state.DarkMode ? "#fff" : "#000"}
+                  size={20}
+                />
               </NumButton>
             </TouchableOpacity>
           </Actions>
@@ -297,7 +303,7 @@ const HeaderText = styled.Text`
 const BuyPrice = styled.Text`
   margin-top: 30px;
   text-align: center;
-  color: #fff;
+  color: #000;
   font-weight: bold;
   font-size: 50px;
 `;
