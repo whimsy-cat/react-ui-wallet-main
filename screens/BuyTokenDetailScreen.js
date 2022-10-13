@@ -1,59 +1,91 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, Feather } from "@expo/vector-icons";
 import styled from "styled-components";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
-import { Linking } from 'react-native';
-import { Context } from '../reducers/store'
+import { Linking } from "react-native";
+import { Context } from "../reducers/store";
 
 const BuyTokenDetailScreen = ({ navigation }) => {
   const [buyAmount, setBuyAmount] = React.useState(100);
   const [state, dispatch] = useContext(Context);
+  const [buyPrice, setBuyPrice] = React.useState(100);
 
   const handleCoinBaseClick = () => {
     console.log("opening...");
-    Linking.canOpenURL(`https://pay.coinbase.com/buy/select-asset?appId=ab4b8829-a59d-44d3-accc-de77e4f18df2&attribution=extension&destinationWallets=%5B%7B%22address%22%3A%22${state.WalletAddress}%22%2C%22assets%22%3A%5B%22${state.BuyToken}%22%2C%22USDC%22%2C%22DAI%22%5D%7D%5D`).then(supported => {
+    Linking.canOpenURL(
+      `https://pay.coinbase.com/buy/select-asset?appId=ab4b8829-a59d-44d3-accc-de77e4f18df2&attribution=extension&destinationWallets=%5B%7B%22address%22%3A%22${state.WalletAddress}%22%2C%22assets%22%3A%5B%22${state.BuyToken}%22%2C%22USDC%22%2C%22DAI%22%5D%7D%5D`
+    ).then((supported) => {
       if (supported) {
-        Linking.openURL(`https://pay.coinbase.com/buy/select-asset?appId=ab4b8829-a59d-44d3-accc-de77e4f18df2&attribution=extension&destinationWallets=%5B%7B%22address%22%3A%22${state.WalletAddress}%22%2C%22assets%22%3A%5B%22${state.BuyToken}%22%2C%22USDC%22%2C%22DAI%22%5D%7D%5D`);
+        Linking.openURL(
+          `https://pay.coinbase.com/buy/select-asset?appId=ab4b8829-a59d-44d3-accc-de77e4f18df2&attribution=extension&destinationWallets=%5B%7B%22address%22%3A%22${state.WalletAddress}%22%2C%22assets%22%3A%5B%22${state.BuyToken}%22%2C%22USDC%22%2C%22DAI%22%5D%7D%5D`
+        );
       } else {
-        console.log(`Don't know how to open URI: ` + `https://pay.coinbase.com/buy/select-asset?appId=ab4b8829-a59d-44d3-accc-de77e4f18df2&attribution=extension&destinationWallets=%5B%7B%22address%22%3A%22${state.WalletAddress}%22%2C%22assets%22%3A%5B%22${state.BuyToken}%22%2C%22USDC%22%2C%22DAI%22%5D%7D%5D`);
+        console.log(
+          `Don't know how to open URI: ` +
+            `https://pay.coinbase.com/buy/select-asset?appId=ab4b8829-a59d-44d3-accc-de77e4f18df2&attribution=extension&destinationWallets=%5B%7B%22address%22%3A%22${state.WalletAddress}%22%2C%22assets%22%3A%5B%22${state.BuyToken}%22%2C%22USDC%22%2C%22DAI%22%5D%7D%5D`
+        );
       }
     });
   };
   const handleTransakClick = () => {
     console.log(`opening...`);
-    Linking.canOpenURL(`https://global.transak.com/?apiKey=25ac1309-a49b-4411-b20e-5e56c61a5b1c&hostURL=https%3A%2F%2Fmetamask.io&cryptoCurrencyList=ETH%2CUSDT%2CUSDC%2CDAI&defaultCryptoCurrency=${state.BuyToken}&networks=ethereum&walletAddress=${state.WalletAddress}`).then(supported => {
+    Linking.canOpenURL(
+      `https://global.transak.com/?apiKey=25ac1309-a49b-4411-b20e-5e56c61a5b1c&hostURL=https%3A%2F%2Fmetamask.io&cryptoCurrencyList=ETH%2CUSDT%2CUSDC%2CDAI&defaultCryptoCurrency=${state.BuyToken}&networks=ethereum&walletAddress=${state.WalletAddress}`
+    ).then((supported) => {
       if (supported) {
-        Linking.openURL(`https://global.transak.com/?apiKey=25ac1309-a49b-4411-b20e-5e56c61a5b1c&hostURL=https%3A%2F%2Fmetamask.io&cryptoCurrencyList=ETH%2CUSDT%2CUSDC%2CDAI&defaultCryptoCurrency=${state.BuyToken}&networks=ethereum&walletAddress=${state.WalletAddress}`);
+        Linking.openURL(
+          `https://global.transak.com/?apiKey=25ac1309-a49b-4411-b20e-5e56c61a5b1c&hostURL=https%3A%2F%2Fmetamask.io&cryptoCurrencyList=ETH%2CUSDT%2CUSDC%2CDAI&defaultCryptoCurrency=${state.BuyToken}&networks=ethereum&walletAddress=${state.WalletAddress}`
+        );
       } else {
-        console.log(`Don't know how to open URI: ` + `https://global.transak.com/?apiKey=25ac1309-a49b-4411-b20e-5e56c61a5b1c&hostURL=https%3A%2F%2Fmetamask.io&cryptoCurrencyList=ETH%2CUSDT%2CUSDC%2CDAI&defaultCryptoCurrency=${state.BuyToken}&networks=ethereum&walletAddress=${state.WalletAddress}`);
+        console.log(
+          `Don't know how to open URI: ` +
+            `https://global.transak.com/?apiKey=25ac1309-a49b-4411-b20e-5e56c61a5b1c&hostURL=https%3A%2F%2Fmetamask.io&cryptoCurrencyList=ETH%2CUSDT%2CUSDC%2CDAI&defaultCryptoCurrency=${state.BuyToken}&networks=ethereum&walletAddress=${state.WalletAddress}`
+        );
       }
     });
   };
   const handleMoonPayClick = () => {
     console.log(`opening...`);
-    Linking.canOpenURL(`https://buy.moonpay.com/?apiKey=pk_live_WbCpe6PxSIcGPCSd6lKCbJNRht7uy&walletAddress=${state.WalletAddress}&defaultCurrencyCode=eth&showOnlyCurrencies=eth%2Cusdt%2Cusdc%2Cdai&signature=UKNTu3Z0YsmtC6jPDTOZuQRU4gg%2FwN1tfCxDu3D2QpE%3D`).then(supported => {
+    Linking.canOpenURL(
+      `https://buy.moonpay.com/?apiKey=pk_live_WbCpe6PxSIcGPCSd6lKCbJNRht7uy&walletAddress=${state.WalletAddress}&defaultCurrencyCode=eth&showOnlyCurrencies=eth%2Cusdt%2Cusdc%2Cdai&signature=UKNTu3Z0YsmtC6jPDTOZuQRU4gg%2FwN1tfCxDu3D2QpE%3D`
+    ).then((supported) => {
       if (supported) {
-        Linking.openURL(`https://buy.moonpay.com/?apiKey=pk_live_WbCpe6PxSIcGPCSd6lKCbJNRht7uy&walletAddress=${state.WalletAddress}&defaultCurrencyCode=eth&showOnlyCurrencies=eth%2Cusdt%2Cusdc%2Cdai&signature=UKNTu3Z0YsmtC6jPDTOZuQRU4gg%2FwN1tfCxDu3D2QpE%3D`);
+        Linking.openURL(
+          `https://buy.moonpay.com/?apiKey=pk_live_WbCpe6PxSIcGPCSd6lKCbJNRht7uy&walletAddress=${state.WalletAddress}&defaultCurrencyCode=eth&showOnlyCurrencies=eth%2Cusdt%2Cusdc%2Cdai&signature=UKNTu3Z0YsmtC6jPDTOZuQRU4gg%2FwN1tfCxDu3D2QpE%3D`
+        );
       } else {
-        console.log(`Don't know how to open URI: ` + `https://buy.moonpay.com/?apiKey=pk_live_WbCpe6PxSIcGPCSd6lKCbJNRht7uy&walletAddress=${state.WalletAddress}&defaultCurrencyCode=eth&showOnlyCurrencies=eth%2Cusdt%2Cusdc%2Cdai&signature=UKNTu3Z0YsmtC6jPDTOZuQRU4gg%2FwN1tfCxDu3D2QpE%3D`);
+        console.log(
+          `Don't know how to open URI: ` +
+            `https://buy.moonpay.com/?apiKey=pk_live_WbCpe6PxSIcGPCSd6lKCbJNRht7uy&walletAddress=${state.WalletAddress}&defaultCurrencyCode=eth&showOnlyCurrencies=eth%2Cusdt%2Cusdc%2Cdai&signature=UKNTu3Z0YsmtC6jPDTOZuQRU4gg%2FwN1tfCxDu3D2QpE%3D`
+        );
       }
     });
   };
   const handleWireClick = () => {
     console.log(`opening...`);
-    Linking.canOpenURL(`https://pay.sendwyre.com/purchase?accountId=AC-7AG3W4XH4N2&utm_campaign=AC-7AG3W4XH4N2&destCurrency=${state.BuyToken}&utm_medium=widget&paymentMethod=debit-card&reservation=EAXZNRULNJRMYZZVM2EZ&autoRedirect=false&dest=ethereum%3A${state.WalletAddress}utm_source=checkout`).then(supported => {
+    Linking.canOpenURL(
+      `https://pay.sendwyre.com/purchase?accountId=AC-7AG3W4XH4N2&utm_campaign=AC-7AG3W4XH4N2&destCurrency=${state.BuyToken}&utm_medium=widget&paymentMethod=debit-card&reservation=EAXZNRULNJRMYZZVM2EZ&autoRedirect=false&dest=ethereum%3A${state.WalletAddress}utm_source=checkout`
+    ).then((supported) => {
       if (supported) {
-        Linking.openURL(`https://pay.sendwyre.com/purchase?accountId=AC-7AG3W4XH4N2&utm_campaign=AC-7AG3W4XH4N2&destCurrency=${state.BuyToken}&utm_medium=widget&paymentMethod=debit-card&reservation=EAXZNRULNJRMYZZVM2EZ&autoRedirect=false&dest=ethereum%3A${state.WalletAddress}utm_source=checkout`);
+        Linking.openURL(
+          `https://pay.sendwyre.com/purchase?accountId=AC-7AG3W4XH4N2&utm_campaign=AC-7AG3W4XH4N2&destCurrency=${state.BuyToken}&utm_medium=widget&paymentMethod=debit-card&reservation=EAXZNRULNJRMYZZVM2EZ&autoRedirect=false&dest=ethereum%3A${state.WalletAddress}utm_source=checkout`
+        );
       } else {
-        console.log(`Don't know how to open URI: ` + `https://pay.sendwyre.com/purchase?accountId=AC-7AG3W4XH4N2&utm_campaign=AC-7AG3W4XH4N2&destCurrency=${state.BuyToken}&utm_medium=widget&paymentMethod=debit-card&reservation=EAXZNRULNJRMYZZVM2EZ&autoRedirect=false&dest=ethereum%3A${state.WalletAddress}utm_source=checkout`);
+        console.log(
+          `Don't know how to open URI: ` +
+            `https://pay.sendwyre.com/purchase?accountId=AC-7AG3W4XH4N2&utm_campaign=AC-7AG3W4XH4N2&destCurrency=${state.BuyToken}&utm_medium=widget&paymentMethod=debit-card&reservation=EAXZNRULNJRMYZZVM2EZ&autoRedirect=false&dest=ethereum%3A${state.WalletAddress}utm_source=checkout`
+        );
       }
     });
   };
   return (
-
-    <ScrollView style={state.DarkMode && { backgroundColor: "#1a222d" }} showsVerticalScrollIndicator={false} bounces={true}>
+    <ScrollView
+      style={state.DarkMode && { backgroundColor: "#1a222d" }}
+      showsVerticalScrollIndicator={false}
+      bounces={true}
+    >
       <Container style={state.DarkMode && { backgroundColor: "#1a222d" }}>
-        <Header style={state.DarkMode && { backgroundColor: "#090909" }}>
+        <Header style={state.DarkMode && { backgroundColor: "#232f3d" }}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Ionicons name={"arrow-back"} color="#fff" size={28} />
           </TouchableOpacity>
@@ -62,9 +94,15 @@ const BuyTokenDetailScreen = ({ navigation }) => {
         <Body>
           <Token style={state.DarkMode && { borderBottomColor: "#3a424d" }}>
             <TokenDetails>
-              <Image source={state.CoinImage[state.CoinSymbol.indexOf(state.BuyToken)]} />
+              <Image
+                source={
+                  state.CoinImage[state.CoinSymbol.indexOf(state.BuyToken)]
+                }
+              />
               <TokenNamePrice>
-                <TokenName style={state.DarkMode && { color: "#ccc" }}>{state.BuyToken}</TokenName>
+                <TokenName style={state.DarkMode && { color: "#ccc" }}>
+                  {state.BuyToken}
+                </TokenName>
                 <TokenPriceAction>
                   <TokenPrice>$1597</TokenPrice>
                   <TokenPercent>+0.0997 %</TokenPercent>
@@ -72,29 +110,119 @@ const BuyTokenDetailScreen = ({ navigation }) => {
               </TokenNamePrice>
             </TokenDetails>
             <TokenCol2>
-              <TokenAmount style={state.DarkMode && { color: "#fff" }}>0</TokenAmount>
-              <TokenSymbol style={state.DarkMode && { color: "#fff" }}>{state.BuyToken}</TokenSymbol>
+              <TokenAmount style={state.DarkMode && { color: "#fff" }}>
+                {state.BuyToken == "ETH"
+                  ? Number(state.CurrentETHBalance).toFixed(4)
+                  : state.BuyToken == "BTC"
+                  ? Number(state.CurrentBTCBalance).toFixed(4)
+                  : state.BuyToken == "BNBB"
+                  ? Number(state.CurrentBNBBBalance).toFixed(4)
+                  : state.BuyToken == "BNBS"
+                  ? Number(state.CurrentBNBSBalance).toFixed(4)
+                  : state.BuyToken == "DOGE"
+                  ? Number(state.CurrentDOGEBalance).toFixed(4)
+                  : state.BuyToken == "XRP"
+                  ? Number(state.CurrentXRPBalance).toFixed(4)
+                  : state.BuyToken == "SOL"
+                  ? Number(state.CurrentSOLBalance).toFixed(4)
+                  : state.BuyToken == "ADA"
+                  ? Number(state.CurrentADABalance).toFixed(4)
+                  : Number(state.CurrentDOTBalance).toFixed(4)}
+              </TokenAmount>
+              <TokenSymbol style={state.DarkMode && { color: "#fff" }}>
+                {state.BuyToken}
+              </TokenSymbol>
             </TokenCol2>
           </Token>
+          <BuyPrice>US $ {buyPrice}</BuyPrice>
+          <Actions>
+            <TouchableOpacity onPress={() => setBuyPrice(buyPrice * 10 + 1)}>
+              <NumButton style={state.DarkMode && { color: "#fff" }}>
+                1
+              </NumButton>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setBuyPrice(buyPrice * 10 + 2)}>
+              <NumButton style={state.DarkMode && { color: "#fff" }}>
+                2
+              </NumButton>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setBuyPrice(buyPrice * 10 + 3)}>
+              <NumButton style={state.DarkMode && { color: "#fff" }}>
+                3
+              </NumButton>
+            </TouchableOpacity>
+          </Actions>
+          <Actions>
+            <TouchableOpacity onPress={() => setBuyPrice(buyPrice * 10 + 4)}>
+              <NumButton style={state.DarkMode && { color: "#fff" }}>
+                4
+              </NumButton>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setBuyPrice(buyPrice * 10 + 5)}>
+              <NumButton style={state.DarkMode && { color: "#fff" }}>
+                5
+              </NumButton>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setBuyPrice(buyPrice * 10 + 6)}>
+              <NumButton style={state.DarkMode && { color: "#fff" }}>
+                6
+              </NumButton>
+            </TouchableOpacity>
+          </Actions>
+          <Actions>
+            <TouchableOpacity onPress={() => setBuyPrice(buyPrice * 10 + 7)}>
+              <NumButton style={state.DarkMode && { color: "#fff" }}>
+                7
+              </NumButton>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setBuyPrice(buyPrice * 10 + 8)}>
+              <NumButton style={state.DarkMode && { color: "#fff" }}>
+                8
+              </NumButton>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setBuyPrice(buyPrice * 10 + 9)}>
+              <NumButton style={state.DarkMode && { color: "#fff" }}>
+                9
+              </NumButton>
+            </TouchableOpacity>
+          </Actions>
+          <Actions>
+            <TouchableOpacity>
+              <NumButton style={state.DarkMode && { color: "#fff" }}>
+                .
+              </NumButton>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setBuyPrice(buyPrice * 10 + 0)}>
+              <NumButton style={state.DarkMode && { color: "#fff" }}>
+                0
+              </NumButton>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => setBuyPrice((buyPrice - (buyPrice % 10)) / 10)}
+            >
+              <NumButton style={state.DarkMode && { color: "#fff" }}>
+                <Feather name="delete" color="#fff" size={20} />
+              </NumButton>
+            </TouchableOpacity>
+          </Actions>
           {/* <CoinbaseImage source={require("../assets/images/coinbase.png")}></CoinbaseImage> */}
           <TouchableOpacity onPress={() => handleCoinBaseClick()}>
-            <Button>  Continue to CoinBase Pay </Button>
+            <Button> Continue to CoinBase Pay </Button>
           </TouchableOpacity>
           {/* <Transak source={require("../assets/images/transak.png")}></Transak> */}
           <TouchableOpacity onPress={() => handleTransakClick()}>
-            <Button>  Continue to Transak  </Button>
+            <Button> Continue to Transak </Button>
           </TouchableOpacity>
           {/* <MoonPay source={require("../assets/images/moonpay.png")}></MoonPay> */}
           <TouchableOpacity onPress={() => handleMoonPayClick()}>
-            <Button>  Continue to MoonPay  </Button>
+            <Button> Continue to MoonPay </Button>
           </TouchableOpacity>
           {/* <Wire source={require("../assets/images/wyre.png")}></Wire> */}
           <TouchableOpacity onPress={() => handleWireClick()}>
-            <Button>  Continue to Wyre  </Button>
+            <Button> Continue to Wyre </Button>
           </TouchableOpacity>
         </Body>
       </Container>
-
     </ScrollView>
   );
 };
@@ -125,20 +253,20 @@ const CoinBaseInfo = styled.Text`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  font-size:30px;
+  font-size: 30px;
 `;
 const CoinBaseHeder = styled.Text`
   margin: auto;
 `;
 const CoinBase = styled.Text`
   font-size: 40px;
-  font-weight:bold;
-  color : #3355cc;
+  font-weight: bold;
+  color: #3355cc;
 `;
 const CoinBaseRow = styled.View`
   width: 50%;
   margin: auto;
-`
+`;
 const CoinBaseDetail = styled.Text`
   font-size: 20px;
   color: #989898;
@@ -165,6 +293,15 @@ const HeaderText = styled.Text`
   font-weight: bold;
   font-size: 18px;
 `;
+
+const BuyPrice = styled.Text`
+  margin-top: 30px;
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  font-size: 50px;
+`;
+
 const Continue = styled.Text`
   text-transform: uppercase;
   color: #fff;
@@ -239,10 +376,9 @@ const TokenName = styled.Text`
   margin-left: 10px;
   font-weight: bold;
 `;
-const PriceUSD = styled.Text`
-`;
+const PriceUSD = styled.Text``;
 const SText = styled.Text`
-  margin:auto;
+  margin: auto;
   margin-top: 100px;
   font-size: 50px;
 `;
@@ -259,7 +395,7 @@ const AmountInUSD = styled.Text`
 const Image = styled.Image`
   width: 40px;
   height: 40px;
-  background-color: #fff; 
+  background-color: #fff;
   border-radius: 20px;
   border-width: 1px;
   border-color: #fff;
@@ -314,13 +450,28 @@ const PaymentButton = styled.Text`
   margin: 35px auto 0 auto;
 `;
 
-
 const Button = styled.Text`
   width: 300px;
-  padding: 20px 0;
+  padding: 15px 0;
   background: #3275bb;
   text-transform: uppercase;
   color: #fff;
   text-align: center;
-  margin: 30px auto 30px auto;
+  margin: 10px auto 10px auto;
+`;
+
+const Actions = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 350px;
+`;
+
+const NumButton = styled.Text`
+  color: #000;
+  padding: 15px;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: bold;
 `;

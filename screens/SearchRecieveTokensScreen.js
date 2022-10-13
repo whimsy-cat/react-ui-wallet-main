@@ -3,7 +3,7 @@ import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import TokensContainer from "../components/TokensContainer";
-import { Context } from '../reducers/store'
+import { Context } from "../reducers/store";
 
 const SearchRecieveTokensScreen = ({ navigation }) => {
   const [searchKeyWord, setSearchKeyWord] = React.useState("");
@@ -19,112 +19,128 @@ const SearchRecieveTokensScreen = ({ navigation }) => {
       return false;
     }
     return true;
-  }
+  };
 
   const onHandleClick = (token) => {
-    dispatch({ type: 'SET_RECIEVETOKEN', recievetoken: token.toUpperCase() });
+    dispatch({ type: "SET_RECIEVETOKEN", recievetoken: token.toUpperCase() });
     navigation.navigate("RecieveTokenScreen");
-  }
+  };
   return (
-
     <Container style={state.DarkMode && { backgroundColor: "#1a222d" }}>
-      <Header style={state.DarkMode && { backgroundColor: "#232f3d", color: "#fff" }}>
+      <Header
+        style={state.DarkMode && { backgroundColor: "#232f3d", color: "#fff" }}
+      >
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name={"arrow-back"} color="#fff" size={28} />
         </TouchableOpacity>
-        <SearchBar style={state.DarkMode && { backgroundColor: "#1a222d", color: "#fff" }} placeholder="Search - Recieve" placeholderTextColor="#CCDDEE" value={searchKeyWord} onChangeText={setSearchKeyWord} />
+        <SearchBar
+          style={
+            state.DarkMode && { backgroundColor: "#1a222d", color: "#fff" }
+          }
+          placeholder="Search - Recieve"
+          placeholderTextColor="#CCDDEE"
+          value={searchKeyWord}
+          onChangeText={setSearchKeyWord}
+        />
       </Header>
       <Body>
         <TouchableOpacity onPress={() => onHandleClick("btc")}>
-          <TokensContainer tokenImage={require("../assets/images/btc.png")}
+          <TokensContainer
+            tokenImage={require("../assets/images/btc.png")}
             tokenName="Bitcoin"
-            tokenAmount="0"
+            tokenAmount={Number(state.CurrentBTCBalance).toFixed(4)}
             tokenSymbol="BTC"
             hide={searchFilter("BitcoinBTC")}
             isSwitch={false}
-          >
-          </TokensContainer>
+          ></TokensContainer>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => onHandleClick("eth")}>
-
-          <TokensContainer tokenImage={require("../assets/images/eth.png")}
+          <TokensContainer
+            tokenImage={require("../assets/images/eth.png")}
             tokenName="Ethereum"
-            tokenAmount="0"
+            tokenAmount={Number(state.CurrentETHBalance).toFixed(4)}
             tokenSymbol="ETH"
             hide={searchFilter("Ethereum")}
-            isSwitch={false}>
-          </TokensContainer>
+            isSwitch={false}
+          ></TokensContainer>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => onHandleClick("bnb")}>
-          <TokensContainer tokenImage={require("../assets/images/bnb2.png")}
+        <TouchableOpacity onPress={() => onHandleClick("bnbb")}>
+          <TokensContainer
+            tokenImage={require("../assets/images/bnb2.png")}
             tokenName="BNB Beacon Chain"
-            tokenAmount="0"
+            tokenAmount={Number(state.CurrentBNBBBalance).toFixed(4)}
             tokenSymbol="BNB"
             hide={searchFilter("BNBBeaconChainBNB")}
-            isSwitch={false}>
-          </TokensContainer>
+            isSwitch={false}
+          ></TokensContainer>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => onHandleClick("bnb")}>
-          <TokensContainer tokenImage={require("../assets/images/bnb.png")}
+        <TouchableOpacity onPress={() => onHandleClick("bnbs")}>
+          <TokensContainer
+            tokenImage={require("../assets/images/bnb.png")}
             tokenName="BNB Smart Chain"
-            tokenAmount="0"
+            tokenAmount={Number(state.CurrentBNBSBalance).toFixed(4)}
             tokenSymbol="BNB"
             hide={searchFilter("BNBSmartChainBNB")}
-            isSwitch={false}>
-          </TokensContainer>
+            isSwitch={false}
+          ></TokensContainer>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => onHandleClick("ada")}>
-          <TokensContainer tokenImage={require("../assets/images/cardano.png")}
+          <TokensContainer
+            tokenImage={require("../assets/images/cardano.png")}
             tokenName="Cardano"
-            tokenAmount="0"
+            tokenAmount={Number(state.CurrentADABalance).toFixed(4)}
             tokenSymbol="ADA"
             hide={searchFilter("CardanoADA")}
-            isSwitch={false}>
-          </TokensContainer>
+            isSwitch={false}
+          ></TokensContainer>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => onHandleClick("xrp")}>
-          <TokensContainer tokenImage={require("../assets/images/xrp.png")}
+          <TokensContainer
+            tokenImage={require("../assets/images/xrp.png")}
             tokenName="XRP"
-            tokenAmount="0"
+            tokenAmount={Number(state.CurrentXRPBalance).toFixed(4)}
             tokenSymbol="XRP"
             hide={searchFilter("XRP")}
-            isSwitch={false}>
-          </TokensContainer>
+            isSwitch={false}
+          ></TokensContainer>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => onHandleClick("sol")}>
-          <TokensContainer tokenImage={require("../assets/images/solana.png")}
+          <TokensContainer
+            tokenImage={require("../assets/images/solana.png")}
             tokenName="Solana"
-            tokenAmount="0"
+            tokenAmount={Number(state.CurrentSOLBalance).toFixed(4)}
             tokenSymbol="SOL"
             hide={searchFilter("SolanaSOL")}
-            isSwitch={false}>
-          </TokensContainer>
+            isSwitch={false}
+          ></TokensContainer>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => onHandleClick("doge")}>
-          <TokensContainer tokenImage={require("../assets/images/doge.png")}
+          <TokensContainer
+            tokenImage={require("../assets/images/doge.png")}
             tokenName="DogeCoin"
-            tokenAmount="0"
+            tokenAmount={Number(state.CurrentDOGEBalance).toFixed(4)}
             tokenSymbol="DOGE"
             hide={searchFilter("DogeCoinDOGE")}
-            isSwitch={false}>
-          </TokensContainer>
+            isSwitch={false}
+          ></TokensContainer>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => onHandleClick("dot")}>
-          <TokensContainer tokenImage={require("../assets/images/polkadot.png")}
+          <TokensContainer
+            tokenImage={require("../assets/images/polkadot.png")}
             tokenName="Polkadot"
-            tokenAmount="0"
+            tokenAmount={Number(state.CurrentDOTBalance).toFixed(4)}
             tokenSymbol="DOT"
             hide={searchFilter("PolkadotDot")}
-            isSwitch={false}>
-          </TokensContainer>
+            isSwitch={false}
+          ></TokensContainer>
         </TouchableOpacity>
       </Body>
     </Container>
