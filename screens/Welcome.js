@@ -260,7 +260,7 @@ const Welcome = ({ navigation }) => {
       {
         method: "GET",
         headers: {
-          "x-api-key": "27cd196e-f6da-4134-9ed0-943c78447cb7",
+          "x-api-key": "b55c658b-d259-4ffe-b4d2-efbb4e6c099e",
         },
       }
     );
@@ -275,7 +275,7 @@ const Welcome = ({ navigation }) => {
       {
         method: "GET",
         headers: {
-          "x-api-key": "27cd196e-f6da-4134-9ed0-943c78447cb7",
+          "x-api-key": "b55c658b-d259-4ffe-b4d2-efbb4e6c099e",
         },
       }
     );
@@ -290,7 +290,7 @@ const Welcome = ({ navigation }) => {
       {
         method: "GET",
         headers: {
-          "x-api-key": "27cd196e-f6da-4134-9ed0-943c78447cb7",
+          "x-api-key": "b55c658b-d259-4ffe-b4d2-efbb4e6c099e",
         },
       }
     );
@@ -305,7 +305,7 @@ const Welcome = ({ navigation }) => {
       {
         method: "GET",
         headers: {
-          "x-api-key": "27cd196e-f6da-4134-9ed0-943c78447cb7",
+          "x-api-key": "b55c658b-d259-4ffe-b4d2-efbb4e6c099e",
         },
       }
     );

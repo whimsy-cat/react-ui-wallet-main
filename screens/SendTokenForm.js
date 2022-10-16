@@ -123,7 +123,7 @@ const SendTokenFormScreen = ({ navigation }) => {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
-                "x-api-key": "27cd196e-f6da-4134-9ed0-943c78447cb7",
+                "x-api-key": "b55c658b-d259-4ffe-b4d2-efbb4e6c099e",
               },
               body: JSON.stringify({
                 fromAddress: [
@@ -142,6 +142,7 @@ const SendTokenFormScreen = ({ navigation }) => {
             }
           );
           const data = await resp.json();
+          navigation.navigate("PortfolioScreen");
           alert("Successfuly Sent!");
         }
       } else if (selectedSendToken == "ada") {
@@ -156,7 +157,7 @@ const SendTokenFormScreen = ({ navigation }) => {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
-                "x-api-key": "27cd196e-f6da-4134-9ed0-943c78447cb7",
+                "x-api-key": "b55c658b-d259-4ffe-b4d2-efbb4e6c099e",
               },
               body: JSON.stringify({
                 from: state.ADAAddress,
@@ -167,6 +168,7 @@ const SendTokenFormScreen = ({ navigation }) => {
             }
           );
           const data = await resp.json();
+          navigation.navigate("PortfolioScreen");
           alert("Successfuly Sent!");
         }
       } else if (selectedSendToken == "xrp") {
@@ -181,7 +183,7 @@ const SendTokenFormScreen = ({ navigation }) => {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
-                "x-api-key": "27cd196e-f6da-4134-9ed0-943c78447cb7",
+                "x-api-key": "b55c658b-d259-4ffe-b4d2-efbb4e6c099e",
               },
               body: JSON.stringify({
                 fromAccount: state.XRPAddress,
@@ -193,6 +195,7 @@ const SendTokenFormScreen = ({ navigation }) => {
           );
 
           const data = await resp.json();
+          navigation.navigate("PortfolioScreen");
           alert("Successfuly Sent!");
         }
       } else if (selectedSendToken == "sol") {
@@ -207,7 +210,7 @@ const SendTokenFormScreen = ({ navigation }) => {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
-                "x-api-key": "27cd196e-f6da-4134-9ed0-943c78447cb7",
+                "x-api-key": "b55c658b-d259-4ffe-b4d2-efbb4e6c099e",
               },
               body: JSON.stringify({
                 from: state.SOLAddress,
@@ -219,6 +222,7 @@ const SendTokenFormScreen = ({ navigation }) => {
           );
 
           const data = await resp.json();
+          navigation.navigate("PortfolioScreen");
           alert("Successfuly Sent!");
         }
       } else if (selectedSendToken == "doge") {
@@ -233,7 +237,7 @@ const SendTokenFormScreen = ({ navigation }) => {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
-                "x-api-key": "27cd196e-f6da-4134-9ed0-943c78447cb7",
+                "x-api-key": "b55c658b-d259-4ffe-b4d2-efbb4e6c099e",
               },
               body: JSON.stringify({
                 fee: "0.0015",
@@ -259,6 +263,7 @@ const SendTokenFormScreen = ({ navigation }) => {
           );
 
           const data = await resp.json();
+          navigation.navigate("PortfolioScreen");
           alert("Successfuly Sent!");
         }
       } else if (selectedSendToken == "dot") {
@@ -273,7 +278,7 @@ const SendTokenFormScreen = ({ navigation }) => {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
-                "x-api-key": "27cd196e-f6da-4134-9ed0-943c78447cb7",
+                "x-api-key": "b55c658b-d259-4ffe-b4d2-efbb4e6c099e",
               },
               body: JSON.stringify({
                 fromAccount: state.DOTAddress,
@@ -285,6 +290,7 @@ const SendTokenFormScreen = ({ navigation }) => {
           );
 
           const data = await resp.json();
+          navigation.navigate("PortfolioScreen");
           alert("Successfuly Sent!");
         }
       }
@@ -325,7 +331,8 @@ const SendTokenFormScreen = ({ navigation }) => {
           .transfer(recipentAddress, numberOfTokens)
           .then((transferResult) => {
             console.dir(transferResult);
-            alert("sent token");
+            alert("Sent finished");
+            navigation.navigate("PortfolioScreen");
           });
       } // ether send
       else {
@@ -345,6 +352,7 @@ const SendTokenFormScreen = ({ navigation }) => {
           walletSigner.sendTransaction(tx).then((transaction) => {
             console.log(transaction);
             alert("Send finished!");
+            navigation.navigate("PortfolioScreen");
           });
         } catch (error) {
           alert("failed to send!!");

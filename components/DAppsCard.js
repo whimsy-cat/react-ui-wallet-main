@@ -1,34 +1,24 @@
 import React, { useContext } from "react";
-import { Context } from '../reducers/store'
+import { Context } from "../reducers/store";
 import styled from "styled-components";
 
 const DAppsCard = (props) => {
   const [state, dispatch] = useContext(Context);
   return (
-  <Container style={state.DarkMode && { backgroundColor: "#1a222d" }}>
-    <Row>
-      <Image source={props.image} />
-      <RowInfo>
-        <RowHead style={props.darkmode && { color: "#fff" }}>{props.head}</RowHead>
-        <RowBody style={props.darkmode && { color: "#aaa" }}>{props.body}</RowBody>
-      </RowInfo>
-    </Row>
-    <Row>
-      <Image source={props.image} />
-      <RowInfo>
-        <RowHead style={props.darkmode && { color: "#fff" }}>{props.head}</RowHead>
-        <RowBody style={props.darkmode && { color: "#aaa" }}>{props.body}</RowBody>
-      </RowInfo>
-    </Row>
-    <Row>
-      <Image source={props.image} />
-      <RowInfo>
-        <RowHead style={props.darkmode && { color: "#fff" }}>{props.head}</RowHead>
-        <RowBody style={props.darkmode && { color: "#aaa" }}>{props.body}</RowBody>
-      </RowInfo>
-    </Row>
+    <Container style={state.DarkMode && { backgroundColor: "#1a222d" }}>
+      <Row>
+        <Image source={props.image} />
+        <RowInfo>
+          <RowHead style={props.darkmode && { color: "#fff" }}>
+            {props.head}
+          </RowHead>
+          <RowBody style={props.darkmode && { color: "#aaa" }}>
+            {props.body}
+          </RowBody>
+        </RowInfo>
+      </Row>
     </Container>
-  )
+  );
 };
 
 export default DAppsCard;

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Context } from '../reducers/store'
+import { Context } from "../reducers/store";
 import styled from "styled-components";
 
 const DiscoverScreen = () => {
@@ -7,45 +7,74 @@ const DiscoverScreen = () => {
 
   return (
     <Container style={state.DarkMode && { backgroundColor: "#1a222d" }}>
-      <Header style={state.DarkMode && { backgroundColor: "#232f3d", color: "#fff" }}>Discover</Header>
+      <Header
+        style={state.DarkMode && { backgroundColor: "#232f3d", color: "#fff" }}
+      >
+        Discover
+      </Header>
       <Body>
         <Staking>
           <DiscoveryHead>
-            <DiscoverySubHead style={state.DarkMode && { color: "#fff" }}>Staking</DiscoverySubHead>
-            <SeeAll style={state.DarkMode && { color: "#ccc" }}>See All</SeeAll>
+            <DiscoverySubHead style={state.DarkMode && { color: "#fff" }}>
+              Staking
+            </DiscoverySubHead>
           </DiscoveryHead>
-          <StakingTokenInfo style={state.DarkMode && { borderBottomColor: "#353535" }}>
+          <StakingTokenInfo
+            style={state.DarkMode && { borderBottomColor: "#353535" }}
+          >
             <Image source={require("../assets/images/solana.png")} />
             <TokenDetails>
-              <StakingTokenName style={state.DarkMode && { color: "#fff" }}>Solana (SOL)</StakingTokenName>
+              <StakingTokenName style={state.DarkMode && { color: "#fff" }}>
+                Solana (SOL)
+              </StakingTokenName>
               <APR>
-                <APRText style={state.DarkMode && { color: "#ccc" }}>APR:</APRText>
-                <APRPercent style={state.DarkMode && { color: "#ccc" }}>6.5%</APRPercent>
+                <APRText style={state.DarkMode && { color: "#ccc" }}>
+                  APR:
+                </APRText>
+                <APRPercent style={state.DarkMode && { color: "#ccc" }}>
+                  6.5%
+                </APRPercent>
               </APR>
             </TokenDetails>
           </StakingTokenInfo>
-          <StakingTokenInfo style={state.DarkMode && { borderBottomColor: "#353535" }}>
+          <StakingTokenInfo
+            style={state.DarkMode && { borderBottomColor: "#353535" }}
+          >
             <Image source={require("../assets/images/cardano.png")} />
             <TokenDetails>
-              <StakingTokenName style={state.DarkMode && { color: "#fff" }}>Osmosis (OSMO)</StakingTokenName>
+              <StakingTokenName style={state.DarkMode && { color: "#fff" }}>
+                Osmosis (OSMO)
+              </StakingTokenName>
               <APR>
-                <APRText style={state.DarkMode && { color: "#ccc" }}>APR:</APRText>
-                <APRPercent style={state.DarkMode && { color: "#ccc" }}>6.5%</APRPercent>
+                <APRText style={state.DarkMode && { color: "#ccc" }}>
+                  APR:
+                </APRText>
+                <APRPercent style={state.DarkMode && { color: "#ccc" }}>
+                  6.5%
+                </APRPercent>
               </APR>
             </TokenDetails>
           </StakingTokenInfo>
-          <StakingTokenInfo style={state.DarkMode && { borderBottomColor: "#353535" }}>
+          <StakingTokenInfo
+            style={state.DarkMode && { borderBottomColor: "#353535" }}
+          >
             <Image source={require("../assets/images/polkadot.png")} />
             <TokenDetails>
-              <StakingTokenName style={state.DarkMode && { color: "#ccc" }}>Kava (KAVA)</StakingTokenName>
+              <StakingTokenName style={state.DarkMode && { color: "#ccc" }}>
+                Kava (KAVA)
+              </StakingTokenName>
               <APR>
-                <APRText style={state.DarkMode && { color: "#ccc" }}>APR:</APRText>
-                <APRPercent style={state.DarkMode && { color: "#ccc" }}>6.5%</APRPercent>
+                <APRText style={state.DarkMode && { color: "#ccc" }}>
+                  APR:
+                </APRText>
+                <APRPercent style={state.DarkMode && { color: "#ccc" }}>
+                  6.5%
+                </APRPercent>
               </APR>
             </TokenDetails>
           </StakingTokenInfo>
         </Staking>
-        <DefiTokens>
+        {/* <DefiTokens>
           <DiscoveryHead>
             <DiscoverySubHead style={state.DarkMode && { color: "#fff" }}>DeFi Tokens</DiscoverySubHead>
             <SeeAll style={state.DarkMode && { color: "#ccc" }}>See All</SeeAll>
@@ -80,7 +109,7 @@ const DiscoverScreen = () => {
               <TokenPercent style={state.DarkMode && { color: "#ccc" }}>-12.92%</TokenPercent>
             </Col2>
           </DefiTokenInfo>
-        </DefiTokens>
+        </DefiTokens> */}
       </Body>
     </Container>
   );
@@ -132,7 +161,7 @@ const StakingTokenInfo = styled.View`
 const Image = styled.Image`
   width: 40px;
   height: 40px;
-  background-color: #fff; 
+  background-color: #fff;
   border-radius: 20px;
   border-width: 1px;
   border-color: #fff;

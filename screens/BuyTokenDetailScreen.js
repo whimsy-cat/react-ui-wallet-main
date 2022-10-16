@@ -9,6 +9,13 @@ const BuyTokenDetailScreen = ({ navigation }) => {
   const [buyAmount, setBuyAmount] = React.useState(100);
   const [state, dispatch] = useContext(Context);
   const [buyPrice, setBuyPrice] = React.useState(100);
+  const [tokenPrice, setTokenPrice] = React.useState(1);
+
+  useEffect(() => {
+    let price = state.CoinPrice[state.CoinSymbol.indexOf(state.BuyToken)];
+    console.log(price);
+    setTokenPrice(price);
+  }, []);
 
   const handleCoinBaseClick = () => {
     console.log("opening...");
@@ -135,8 +142,12 @@ const BuyTokenDetailScreen = ({ navigation }) => {
             </TokenCol2>
           </Token>
           <BuyPrice style={state.DarkMode && { color: "#fff" }}>
-            US $ {buyPrice}
+            {state.Currency} {buyPrice}
           </BuyPrice>
+          <BuyPriceCrypto style={state.DarkMode && { color: "#fff" }}>
+            {state.BuyToken} {buyPrice / tokenPrice}
+          </BuyPriceCrypto>
+
           <Actions>
             <TouchableOpacity onPress={() => setBuyPrice(buyPrice * 10 + 1)}>
               <NumButton style={state.DarkMode && { color: "#fff" }}>
@@ -308,6 +319,13 @@ const BuyPrice = styled.Text`
   font-size: 50px;
 `;
 
+const BuyPriceCrypto = styled.Text`
+  margin-top: 5px;
+  text-align: center;
+  color: #000;
+  font-size: 20px;
+`;
+
 const Continue = styled.Text`
   text-transform: uppercase;
   color: #fff;
@@ -463,7 +481,8 @@ const Button = styled.Text`
   text-transform: uppercase;
   color: #fff;
   text-align: center;
-  margin: 10px auto 10px auto;
+  font-weight: bold;
+  margin: 8px auto 5px auto;
 `;
 
 const Actions = styled.View`

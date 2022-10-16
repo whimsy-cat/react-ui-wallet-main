@@ -13,7 +13,7 @@ import ImportTokensScreen from "../screens/ImportTokensScreen";
 import AddCustomTokenScreen from "../screens/AddCustomTokenScreen";
 import BuyTokensScreen from "../screens/BuyTokensScreen";
 import BuyTokenDetailScreen from "../screens/BuyTokenDetailScreen";
-import TokenDetailScreen from "../screens/TokenDetailScreen"
+import TokenDetailScreen from "../screens/TokenDetailScreen";
 import RecieveTokenScreen from "../screens/RecieveTokenScreen";
 import SearchRecieveTokensScreen from "../screens/SearchRecieveTokensScreen";
 import SwapScreen from "../screens/SwapScreen";
@@ -32,6 +32,7 @@ import Welcome from "../screens/Welcome";
 import PasscodeScreen from "../screens/PasscodeScreen";
 import PasswordSettingScreen from "../screens/PasswordSettingScreen";
 import NotificationScreen from "../screens/NotificationScreen";
+import CurrencySetting from "../screens/CurrencySetting";
 
 const Stack = createStackNavigator();
 
@@ -44,19 +45,30 @@ const PortfolioStackNavigator = () => {
         options={{ headerLeft: (props) => null }}
       />
       <Stack.Screen name="ImportTokensScreen" component={ImportTokensScreen} />
-      <Stack.Screen name="AddCustomTokenScreen" component={AddCustomTokenScreen} />
+      <Stack.Screen
+        name="AddCustomTokenScreen"
+        component={AddCustomTokenScreen}
+      />
       <Stack.Screen name="BuyTokensScreen" component={BuyTokensScreen} />
-      <Stack.Screen name="BuyTokenDetailScreen" component={BuyTokenDetailScreen} />
+      <Stack.Screen
+        name="BuyTokenDetailScreen"
+        component={BuyTokenDetailScreen}
+      />
       <Stack.Screen name="RecieveTokenScreen" component={RecieveTokenScreen} />
-      <Stack.Screen name="SearchRecieveTokensScreen" component={SearchRecieveTokensScreen} />
+      <Stack.Screen
+        name="SearchRecieveTokensScreen"
+        component={SearchRecieveTokensScreen}
+      />
       <Stack.Screen name="SwapScreen" component={SwapScreen} />
       <Stack.Screen name="TokenDetailScreen" component={TokenDetailScreen} />
-      <Stack.Screen name="SendTokenFormScreen" component={SendTokenFormScreen} />
+      <Stack.Screen
+        name="SendTokenFormScreen"
+        component={SendTokenFormScreen}
+      />
       <Stack.Screen name="SwapToken1Select" component={SwapToken1Select} />
       <Stack.Screen name="SwapToken2Select" component={SwapToken2Select} />
       <Stack.Screen name="SendTokenChoose" component={SendTokenChoose} />
       <Stack.Screen name="NotificationScreen" component={NotificationScreen} />
-
     </Stack.Navigator>
   );
 };
@@ -98,9 +110,19 @@ const SettingsStackNavigator = () => {
       <Stack.Screen name="WalletsScreen" component={WalletsScreen} />
       <Stack.Screen name="WalletEditScreen" component={WalletEditScreen} />
       <Stack.Screen name="PreferencesScreen" component={PreferencesScreen} />
-      <Stack.Screen name="WalletConnectScreen" component={WalletConnectScreen} />
-      <Stack.Screen name="PushNotificationsScreen" component={PushNotificationsScreen} />
-      <Stack.Screen name="PasswordSettingScreen" component={PasswordSettingScreen} />
+      <Stack.Screen
+        name="WalletConnectScreen"
+        component={WalletConnectScreen}
+      />
+      <Stack.Screen
+        name="PushNotificationsScreen"
+        component={PushNotificationsScreen}
+      />
+      <Stack.Screen
+        name="PasswordSettingScreen"
+        component={PasswordSettingScreen}
+      />
+      <Stack.Screen name="CurrencySetting" component={CurrencySetting} />
     </Stack.Navigator>
   );
 };

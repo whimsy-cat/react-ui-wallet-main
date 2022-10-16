@@ -21,7 +21,6 @@ const WalletConnectScreen = ({ navigation }) => {
         <Text style={state.DarkMode && { color: "#fff" }} >
           Connect your wallet with WalletConnect to make transactions.
         </Text>
-        <Button>Continue</Button>
       </Body>
     </Container>
   );

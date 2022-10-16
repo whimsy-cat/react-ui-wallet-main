@@ -206,7 +206,7 @@ const RecieveTokenScreen = ({ navigation }) => {
             state.DarkMode && { backgroundColor: "#1a222d", color: "#fff" }
           }
         >
-          ${recievePrice}
+          {state.Currency} {recievePrice}
         </RecievePrice>
         <WarningText
           style={

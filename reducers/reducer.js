@@ -1,3 +1,5 @@
+import { ActivityIndicatorComponent } from "react-native";
+
 const Reducer = (state, action) => {
   switch (action.type) {
     case "SET_POSTS":
@@ -127,6 +129,11 @@ const Reducer = (state, action) => {
       return {
         ...state,
         DarkMode: action.darkmode,
+      };
+    case "SET_CURRENCY": // Currency
+      return {
+        ...state,
+        Currency: action.currency,
       };
     case "SET_PUSHNOTIFICATION": // Dark Mode
       return {

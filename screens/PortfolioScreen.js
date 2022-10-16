@@ -15,6 +15,11 @@ import { Context } from "../reducers/store";
 
 import "react-native-get-random-values";
 import "@ethersproject/shims";
+import "react-native-get-random-values";
+import "@ethersproject/shims";
+import { ethers } from "ethers";
+
+const provider = ethers.getDefaultProvider();
 
 function FirstRoute() {
   const [state, dispatch] = useContext(Context);
@@ -174,28 +179,30 @@ function FirstRoute() {
           </Token>
         </TouchableOpacity> */}
         {myCustomTokenName != "" && (
-          <Token style={state.DarkMode && { borderBottomColor: "#3f3f3f" }}>
-            <TokenDetails>
-              <Image source={require("../assets/images/cardano.png")} />
-              <TokenNamePrice>
-                <TokenName style={state.DarkMode && { color: "#fff" }}>
-                  {myCustomTokenName}
-                </TokenName>
-                <TokenPriceAction>
-                  <TokenPrice>$0.514</TokenPrice>
-                  <TokenPercent>+0.75%</TokenPercent>
-                </TokenPriceAction>
-              </TokenNamePrice>
-            </TokenDetails>
-            <TokenCol2>
-              <TokenAmount style={state.DarkMode && { color: "#eee" }}>
-                0.0000
-              </TokenAmount>
-              <TokenSymbol style={state.DarkMode && { color: "#eee" }}>
-                {myCustomSymbol}
-              </TokenSymbol>
-            </TokenCol2>
-          </Token>
+          <TouchableOpacity onPress={() => onDetailToken("XRP")}>
+            <Token style={state.DarkMode && { borderBottomColor: "#3f3f3f" }}>
+              <TokenDetails>
+                <Image source={require("../assets/images/cardano.png")} />
+                <TokenNamePrice>
+                  <TokenName style={state.DarkMode && { color: "#fff" }}>
+                    {myCustomTokenName}
+                  </TokenName>
+                  <TokenPriceAction>
+                    <TokenPrice>$0.514</TokenPrice>
+                    <TokenPercent>+0.75%</TokenPercent>
+                  </TokenPriceAction>
+                </TokenNamePrice>
+              </TokenDetails>
+              <TokenCol2>
+                <TokenAmount style={state.DarkMode && { color: "#eee" }}>
+                  0.0000
+                </TokenAmount>
+                <TokenSymbol style={state.DarkMode && { color: "#eee" }}>
+                  {myCustomSymbol}
+                </TokenSymbol>
+              </TokenCol2>
+            </Token>
+          </TouchableOpacity>
         )}
         <TouchableOpacity
           onPress={() => navigation.navigate("AddCustomTokenScreen")}
@@ -258,11 +265,130 @@ export default function PortfolioScreen({ navigation }) {
       state.CurrentDOGEBalance * state.CoinPrice[7] +
       state.CurrentDOTBalance * state.CoinPrice[8];
     setTotalUSD(totalBalance);
+    // var interval = setInterval(() => {
+    //   console.log("Update Balance!");
+    //   updateBalance();
+    // }, 10000);
   }, []);
 
   useEffect(() => {
     if (totalUSD > 0.0) setTmpUSD(totalUSD);
   }, [totalUSD]);
+
+  ////////////////////////////////////////
+  // Get ETH Balance from My Wallet Address
+
+  const updateBalance = () => {
+    getETHBalance(state.WalletAddress);
+    getBTCBalance(state.BTCAddress);
+    getDOGEBalance(state.DOGEAddress);
+    getXRPBalance(state.XRPAddress);
+    getSOLBalance(state.SOLAddress);
+    getADABalance(state.ADAAddress);
+    getDOTBalance(state.DOTAddress);
+  };
+
+  const getETHBalance = (address) => {
+    provider.getBalance(address).then((balance) => {
+      // convert a currency unit from wei to ether
+      const ethBalance = ethers.utils.formatEther(balance);
+      // const ethBalance = 2.4464;
+      dispatch({ type: "SET_BALANCE", currentethbalance: ethBalance });
+    });
+  };
+
+  const getBTCBalance = (address) => {
+    fetch("https://blockchain.info/q/addressbalance/" + address)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (json) {
+        var btcBalance = parseInt(json, 10);
+        console.log("bitcoin balance : " + btcBalance / 100000000);
+        dispatch({
+          type: "SET_BTCBALANCE",
+          currentbtcbalance: btcBalance / 100000000,
+        });
+      });
+  };
+
+  const getDOGEBalance = (address) => {
+    var dogeAddress = address;
+    fetch(
+      "https://dogechain.info/chain/Dogecoin/q/addressbalance/" + dogeAddress
+    )
+      .then(function (response) {
+        console.log("response : " + response);
+        return response.json();
+      })
+      .then(function (json) {
+        console.log("AAAA : " + json);
+        var dogeBalance = json;
+        dispatch({ type: "SET_DOGEBALANCE", currentdogebalance: dogeBalance });
+      });
+  };
+
+  const getXRPBalance = async (address) => {
+    const resp = await fetch(
+      `https://api-eu1.tatum.io/v3/xrp/account/${address}/balance`,
+      {
+        method: "GET",
+        headers: {
+          "x-api-key": "b55c658b-d259-4ffe-b4d2-efbb4e6c099e",
+        },
+      }
+    );
+    const data = await resp.json();
+    console.log("XRP balance : " + data.balance);
+    dispatch({ type: "SET_XRPBALANCE", currentxrpbalance: data.balance });
+  };
+
+  const getSOLBalance = async (address) => {
+    const resp = await fetch(
+      `https://api-eu1.tatum.io/v3/solana/account/balance/${address}`,
+      {
+        method: "GET",
+        headers: {
+          "x-api-key": "b55c658b-d259-4ffe-b4d2-efbb4e6c099e",
+        },
+      }
+    );
+
+    const data = await resp.json();
+    console.log("Solana balance : " + data.balance);
+    dispatch({ type: "SET_SOLBALANCE", currentsolbalance: data.balance });
+  };
+  const getADABalance = async (address) => {
+    const resp = await fetch(
+      `https://api-eu1.tatum.io/v3/algorand/account/balance/${address}`,
+      {
+        method: "GET",
+        headers: {
+          "x-api-key": "b55c658b-d259-4ffe-b4d2-efbb4e6c099e",
+        },
+      }
+    );
+
+    const data = await resp.json();
+    console.log("Cardano balance : " + data.balance);
+    dispatch({ type: "SET_ADABALANCE", currentadabalance: data.balance });
+  };
+  const getDOTBalance = async (address) => {
+    const resp = await fetch(
+      `https://api-eu1.tatum.io/v3/xlm/account/${address}`,
+      {
+        method: "GET",
+        headers: {
+          "x-api-key": "b55c658b-d259-4ffe-b4d2-efbb4e6c099e",
+        },
+      }
+    );
+
+    const data = await resp.json();
+    console.log("Dot Balance : " + data);
+  };
+  /////////////////////////////////////////
+
   return (
     <Container style={state.DarkMode && { backgroundColor: "#1a222d" }}>
       <Header style={state.DarkMode && { backgroundColor: "#1a222d" }}>
@@ -270,7 +396,9 @@ export default function PortfolioScreen({ navigation }) {
           <TouchableOpacity onPress={() => onHandleNotification()}>
             <Ionicons name={"notifications-outline"} color="#fff" size={28} />
           </TouchableOpacity>
-          <Balance>${tmpUSD.toFixed(4)}</Balance>
+          <Balance>
+            {state.Currency} {tmpUSD.toFixed(4)}
+          </Balance>
           <TouchableOpacity
             onPress={() => navigation.navigate("ImportTokensScreen")}
           >

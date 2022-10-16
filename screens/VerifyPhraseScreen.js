@@ -73,7 +73,7 @@ const VerifyPhraseScreen = ({ navigation }) => {
     const resp = await fetch(`https://api-eu1.tatum.io/v3/solana/wallet`, {
       method: "GET",
       headers: {
-        "x-api-key": "27cd196e-f6da-4134-9ed0-943c78447cb7",
+        "x-api-key": "b55c658b-d259-4ffe-b4d2-efbb4e6c099e",
       },
     });
 
@@ -87,7 +87,7 @@ const VerifyPhraseScreen = ({ navigation }) => {
     const resp = await fetch(`https://api-eu1.tatum.io/v3/algorand/wallet`, {
       method: "GET",
       headers: {
-        "x-api-key": "27cd196e-f6da-4134-9ed0-943c78447cb7",
+        "x-api-key": "b55c658b-d259-4ffe-b4d2-efbb4e6c099e",
       },
     });
 
@@ -101,7 +101,7 @@ const VerifyPhraseScreen = ({ navigation }) => {
     const resp = await fetch(`https://api-eu1.tatum.io/v3/xlm/account`, {
       method: "GET",
       headers: {
-        "x-api-key": "27cd196e-f6da-4134-9ed0-943c78447cb7",
+        "x-api-key": "b55c658b-d259-4ffe-b4d2-efbb4e6c099e",
       },
     });
 
@@ -115,7 +115,7 @@ const VerifyPhraseScreen = ({ navigation }) => {
     const resp = await fetch(`https://api-eu1.tatum.io/v3/xrp/account`, {
       method: "GET",
       headers: {
-        "x-api-key": "27cd196e-f6da-4134-9ed0-943c78447cb7",
+        "x-api-key": "b55c658b-d259-4ffe-b4d2-efbb4e6c099e",
       },
     });
 
