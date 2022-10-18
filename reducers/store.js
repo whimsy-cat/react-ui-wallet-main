@@ -61,6 +61,8 @@ const initialState = {
   CurrentADABalance: 0.0,
   CurrentDOTBalance: 0.0,
 
+  WalletPassword: "", // Password of Wallet
+
   WalletMnemonic: "",
   WalletAddress: "", // Ethereum, BNB Smart Chain, BNB Beacon Chain
   WalletPrivateKey: "", // Ethereum, BNB Smart Chain, BNB Beacon Chain
@@ -92,6 +94,7 @@ const initialState = {
   // Environment Varialbles
   DarkMode: false, // Dark Screen Mode
   PushNotification: true, // Push Notification
+  PassCodeSetting: false, // PassCode Set
 };
 
 const Store = ({ children }) => {

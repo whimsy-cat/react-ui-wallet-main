@@ -2,11 +2,12 @@ import React, { useState, useEffect, useContext } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { Clipboard } from "react-native";
+import { Clipboard, StyleSheet } from "react-native";
 import "react-native-get-random-values";
 import "@ethersproject/shims";
 import { ethers } from "ethers";
 import { selectedSendToken } from "./SendTokenChoose";
+import Spinner from "react-native-loading-spinner-overlay";
 import { Context } from "../reducers/store";
 // const provider = ethers.getDefaultProvider("ropsten");
 
@@ -24,6 +25,7 @@ const SendTokenFormScreen = ({ navigation }) => {
   const [state, dispatch] = useContext(Context);
   const [tokenBalanceUSD, setTokenBalanceUSD] = React.useState(0.0);
   const [tokenBalance, setTokenBalance] = React.useState(0.0);
+  const [spinner, setSpinner] = React.useState(false);
 
   useEffect(() => {
     let balance =
@@ -71,17 +73,9 @@ const SendTokenFormScreen = ({ navigation }) => {
       selectedSendToken == "bnbb" ||
       selectedSendToken == "bnbs"
     ) {
-      console.log(
-        "Out : " +
-          (Number(send_token_amount) +
-            0.000000059347321 * Number(send_token_amount))
-      );
+      console.log("Out : " + (Number(send_token_amount) + 0.00029703));
       console.log("In : " + state.CurrentETHBalance);
-      if (
-        state.CurrentETHBalance <
-        Number(send_token_amount) +
-          0.000000059347321 * Number(send_token_amount)
-      ) {
+      if (state.CurrentETHBalance < Number(send_token_amount) + 0.00029703) {
         alert(`You have no enough ${selectedSendToken.toUpperCase()} to send!`);
         return;
       }
@@ -123,7 +117,7 @@ const SendTokenFormScreen = ({ navigation }) => {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
-                "x-api-key": "b55c658b-d259-4ffe-b4d2-efbb4e6c099e",
+                "x-api-key": "57e98f74-9e98-4391-80d1-f1532cecf4fd",
               },
               body: JSON.stringify({
                 fromAddress: [
@@ -157,7 +151,7 @@ const SendTokenFormScreen = ({ navigation }) => {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
-                "x-api-key": "b55c658b-d259-4ffe-b4d2-efbb4e6c099e",
+                "x-api-key": "57e98f74-9e98-4391-80d1-f1532cecf4fd",
               },
               body: JSON.stringify({
                 from: state.ADAAddress,
@@ -183,7 +177,7 @@ const SendTokenFormScreen = ({ navigation }) => {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
-                "x-api-key": "b55c658b-d259-4ffe-b4d2-efbb4e6c099e",
+                "x-api-key": "57e98f74-9e98-4391-80d1-f1532cecf4fd",
               },
               body: JSON.stringify({
                 fromAccount: state.XRPAddress,
@@ -210,7 +204,7 @@ const SendTokenFormScreen = ({ navigation }) => {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
-                "x-api-key": "b55c658b-d259-4ffe-b4d2-efbb4e6c099e",
+                "x-api-key": "57e98f74-9e98-4391-80d1-f1532cecf4fd",
               },
               body: JSON.stringify({
                 from: state.SOLAddress,
@@ -237,7 +231,7 @@ const SendTokenFormScreen = ({ navigation }) => {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
-                "x-api-key": "b55c658b-d259-4ffe-b4d2-efbb4e6c099e",
+                "x-api-key": "57e98f74-9e98-4391-80d1-f1532cecf4fd",
               },
               body: JSON.stringify({
                 fee: "0.0015",
@@ -278,7 +272,7 @@ const SendTokenFormScreen = ({ navigation }) => {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
-                "x-api-key": "b55c658b-d259-4ffe-b4d2-efbb4e6c099e",
+                "x-api-key": "57e98f74-9e98-4391-80d1-f1532cecf4fd",
               },
               body: JSON.stringify({
                 fromAccount: state.DOTAddress,
@@ -303,7 +297,8 @@ const SendTokenFormScreen = ({ navigation }) => {
     send_account,
     private_key
   ) {
-    console.log("send transaction");
+    setSpinner(true);
+    console.log("sending...");
     let wallet = new ethers.Wallet(private_key);
     let walletSigner = wallet.connect(window.ethersProvider);
 
@@ -334,6 +329,7 @@ const SendTokenFormScreen = ({ navigation }) => {
             alert("Sent finished");
             navigation.navigate("PortfolioScreen");
           });
+        setSpinner(false);
       } // ether send
       else {
         const tx = {
@@ -351,10 +347,12 @@ const SendTokenFormScreen = ({ navigation }) => {
         try {
           walletSigner.sendTransaction(tx).then((transaction) => {
             console.log(transaction);
+            setSpinner(false);
             alert("Send finished!");
             navigation.navigate("PortfolioScreen");
           });
         } catch (error) {
+          setSpinner(false);
           alert("failed to send!!");
         }
       }
@@ -377,9 +375,18 @@ const SendTokenFormScreen = ({ navigation }) => {
           <Ionicons name={"arrow-back"} color="#fff" size={28} />
         </TouchableOpacity>
         <HeaderText>Send {selectedSendToken.toUpperCase()}</HeaderText>
-        <Continue onPress={() => sendToken()}>Continue</Continue>
+        <TouchableOpacity onPress={() => sendToken()}>
+          <Continue>Send</Continue>
+        </TouchableOpacity>
       </Header>
       <Body>
+        <Spinner
+          visible={spinner}
+          textContent={"Wait a few minutes..."}
+          textStyle={styles.spinnerTextStyle}
+          color="#3275bb"
+          size="large"
+        />
         <RecipientInfoContainer>
           <Recipient style={state.DarkMode && { borderColor: "#353535" }}>
             <RecipientAddress
@@ -423,7 +430,11 @@ const SendTokenFormScreen = ({ navigation }) => {
 };
 
 export default SendTokenFormScreen;
-
+const styles = StyleSheet.create({
+  spinnerTextStyle: {
+    color: "#fff",
+  },
+});
 const Container = styled.View`
   flex: 1;
   background: #fff;

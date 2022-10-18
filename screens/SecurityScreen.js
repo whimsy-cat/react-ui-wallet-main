@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { Switch } from "react-native";
 import styled from "styled-components";
-import { Context } from '../reducers/store';
+import { Context } from "../reducers/store";
+import { AsyncStorage } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 const SecurityScreen = ({ navigation }) => {
@@ -10,17 +11,37 @@ const SecurityScreen = ({ navigation }) => {
   const [state, dispatch] = useContext(Context);
   const [transactionSigning, setTransactionSigning] = React.useState(false);
 
+  useEffect(() => {
+    console.log("state : " + state.WalletPassword);
+    if (state.WalletPassword != "") setPass(true);
+    else setPass(false);
+  });
+
   const onHandleChange = () => {
     setPass(!pass);
+    setPassStateLocalStorage(!pass);
     navigation.navigate("PasswordSettingScreen");
-  }
+  };
 
   const onHandleTransaction = () => {
     setTransactionSigning(!transactionSigning);
-  }
+  };
+
+  const setPassStateLocalStorage = async (state) => {
+    try {
+      let st = state == true ? "true" : "false";
+      await AsyncStorage.setItem("@passcodestate", st);
+      console.log("Passcode state successfuly saved to local storage.");
+    } catch (e) {
+      console.log("Failed To Save Data to Local Storage!!!");
+    }
+  };
+
   return (
     <Container style={state.DarkMode && { backgroundColor: "#1a222d" }}>
-      <Header style={state.DarkMode && { backgroundColor: "#232f3d", color: "#fff" }}>
+      <Header
+        style={state.DarkMode && { backgroundColor: "#232f3d", color: "#fff" }}
+      >
         <HeaderTitle>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Ionicons name={"arrow-back"} color="#fff" size={28} />
@@ -29,7 +50,9 @@ const SecurityScreen = ({ navigation }) => {
         </HeaderTitle>
         <Ionicons name={"information-circle-outline"} color="#fff" size={28} />
       </Header>
-      <Body style={state.DarkMode && { backgroundColor: "#1a222d", color: "#fff" }}>
+      <Body
+        style={state.DarkMode && { backgroundColor: "#1a222d", color: "#fff" }}
+      >
         <Setting style={state.DarkMode && { borderBottomColor: "#252525" }}>
           <Row>
             <Title style={state.DarkMode && { color: "#fff" }}>Passcode</Title>
@@ -40,22 +63,34 @@ const SecurityScreen = ({ navigation }) => {
           <Setting style={state.DarkMode && { borderBottomColor: "#252525" }}>
             <Title style={state.DarkMode && { color: "#fff" }}>Auto-Lock</Title>
 
-            <Description style={state.DarkMode && { color: "#aaa" }}>Immediate</Description>
+            <Description style={state.DarkMode && { color: "#aaa" }}>
+              Immediate
+            </Description>
           </Setting>
         </TouchableOpacity>
         <TouchableOpacity>
           <Setting style={state.DarkMode && { borderBottomColor: "#252525" }}>
-            <Title style={state.DarkMode && { color: "#fff" }}>Lock Method</Title>
+            <Title style={state.DarkMode && { color: "#fff" }}>
+              Lock Method
+            </Title>
 
-            <Description style={state.DarkMode && { color: "#aaa" }}>Passcode / Biometric</Description>
+            <Description style={state.DarkMode && { color: "#aaa" }}>
+              Passcode / Biometric
+            </Description>
           </Setting>
         </TouchableOpacity>
-        <AuthText style={state.DarkMode && { color: "#72a5fb" }}>Ask authentication for</AuthText>
+        <AuthText style={state.DarkMode && { color: "#72a5fb" }}>
+          Ask authentication for
+        </AuthText>
         <Setting style={state.DarkMode && { borderBottomColor: "#252525" }}>
-
           <Row>
-            <Title style={state.DarkMode && { color: "#fff" }}>Transaction Signing</Title>
-            <Switch value={transactionSigning} onValueChange={() => onHandleTransaction()} />
+            <Title style={state.DarkMode && { color: "#fff" }}>
+              Transaction Signing
+            </Title>
+            <Switch
+              value={transactionSigning}
+              onValueChange={() => onHandleTransaction()}
+            />
           </Row>
         </Setting>
       </Body>

@@ -16,11 +16,6 @@ const PasscodeScreen = ({ navigation }) => {
 
   useEffect(() => {
     getStoredData();
-    if (state.walletPassword == null) {
-      navigation.navigate("TabNavigator", {
-        screen: "PortfolioScreen",
-      });
-    }
   }, []);
   const onHandleUnlock = () => {
     console.log("inputpassword : " + inputPassword);
@@ -38,6 +33,8 @@ const PasscodeScreen = ({ navigation }) => {
     try {
       const password = await AsyncStorage.getItem("@walletpassword");
       console.log("wallet password : " + password);
+      dispatch({ type: "SET_PASSWORD", walletpassword: password });
+
       setWalletPassword(password);
       if (password == null) {
         navigation.navigate("TabNavigator", {

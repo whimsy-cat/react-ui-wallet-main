@@ -23,7 +23,7 @@ const Welcome = ({ navigation }) => {
   const [state, dispatch] = useContext(Context);
 
   useEffect(() => {
-    //  clearAsyncStorage();
+    //clearAsyncStorage();
     getStoredData();
     getMarketData();
   }, []);
@@ -106,6 +106,7 @@ const Welcome = ({ navigation }) => {
       const dotpublickey = await AsyncStorage.getItem("@dotpublickey");
 
       const darkmode = await AsyncStorage.getItem("@darkmode");
+      var passcodestate = await AsyncStorage.getItem("@passcodestate");
 
       console.log("btc address : " + btcaddress);
       console.log("eth address : " + address);
@@ -114,6 +115,7 @@ const Welcome = ({ navigation }) => {
       console.log("sol address : " + soladdress);
       console.log("ada address : " + adaaddress);
       console.log("polka address : " + dotaddress);
+      console.log("passcodstate : " + passcodestate);
 
       if (mnemonic !== null) {
         dispatch({
@@ -177,8 +179,11 @@ const Welcome = ({ navigation }) => {
           });
           setMyDOTWalletAddress(dotaddress);
         }
+        if (passcodestate == null) {
+          passcodestate = false;
+        } else passcodestate = true;
+        dispatch({ type: "SET_PASSCODE", passcodesetting: passcodestate });
         setDarkMode(darkmode);
-        setIsNew("false");
       } else {
         setIsNew("true");
       }
@@ -260,7 +265,7 @@ const Welcome = ({ navigation }) => {
       {
         method: "GET",
         headers: {
-          "x-api-key": "b55c658b-d259-4ffe-b4d2-efbb4e6c099e",
+          "x-api-key": "57e98f74-9e98-4391-80d1-f1532cecf4fd",
         },
       }
     );
@@ -275,7 +280,7 @@ const Welcome = ({ navigation }) => {
       {
         method: "GET",
         headers: {
-          "x-api-key": "b55c658b-d259-4ffe-b4d2-efbb4e6c099e",
+          "x-api-key": "57e98f74-9e98-4391-80d1-f1532cecf4fd",
         },
       }
     );
@@ -290,7 +295,7 @@ const Welcome = ({ navigation }) => {
       {
         method: "GET",
         headers: {
-          "x-api-key": "b55c658b-d259-4ffe-b4d2-efbb4e6c099e",
+          "x-api-key": "57e98f74-9e98-4391-80d1-f1532cecf4fd",
         },
       }
     );
@@ -305,13 +310,15 @@ const Welcome = ({ navigation }) => {
       {
         method: "GET",
         headers: {
-          "x-api-key": "b55c658b-d259-4ffe-b4d2-efbb4e6c099e",
+          "x-api-key": "57e98f74-9e98-4391-80d1-f1532cecf4fd",
         },
       }
     );
 
     const data = await resp.json();
+    setIsNew("false");
     console.log("Dot Balance : " + data);
+    // setIsNew("false");
   };
 
   return (

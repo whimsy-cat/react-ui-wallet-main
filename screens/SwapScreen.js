@@ -2,9 +2,9 @@ import React, { useState, useEffect, createContext, useContext } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { Context } from '../reducers/store'
-import { ActivityIndicator, StyleSheet } from 'react-native';
-import Spinner from 'react-native-loading-spinner-overlay';
+import { Context } from "../reducers/store";
+import { ActivityIndicator, StyleSheet } from "react-native";
+import Spinner from "react-native-loading-spinner-overlay";
 
 const SwapScreen = ({ navigation }) => {
   const [token1, setToken1] = React.useState("");
@@ -13,9 +13,53 @@ const SwapScreen = ({ navigation }) => {
   const [getBalance, setGetBalance] = React.useState(0.0);
   const [swapAPI, setSwapAPI] = React.useState("");
   const [spinner, setSpinner] = React.useState(false);
+  const [swap1Balance, setSwap1Balance] = React.useState(0.0);
+  const [swap2Balance, setSwap2Balance] = React.useState(0.0);
 
   useEffect(() => {
-    setGetBalance(payBalance * state.CoinPrice[state.CoinSymbol.indexOf(state.Swap1Token)] / state.CoinPrice[state.CoinSymbol.indexOf(state.Swap2Token)]);
+    let balance =
+      state.Swap1Token == "ETH"
+        ? Number(state.CurrentETHBalance).toFixed(4)
+        : state.Swap1Token == "BTC"
+        ? Number(state.CurrentBTCBalance).toFixed(4)
+        : state.Swap1Token == "BNB"
+        ? Number(state.CurrentBNBSBalance).toFixed(4)
+        : state.Swap1Token == "DOGE"
+        ? Number(state.CurrentDOGEBalance).toFixed(4)
+        : state.Swap1Token == "XRP"
+        ? Number(state.CurrentXRPBalance).toFixed(4)
+        : state.Swap1Token == "SOL"
+        ? Number(state.CurrentSOLBalance).toFixed(4)
+        : state.Swap1Token == "ADA"
+        ? Number(state.CurrentADABalance).toFixed(4)
+        : Number(state.CurrentDOTBalance).toFixed(4);
+    setSwap1Balance(balance);
+
+    let balance1 =
+      state.Swap2Token == "ETH"
+        ? Number(state.CurrentETHBalance).toFixed(4)
+        : state.Swap2Token == "BTC"
+        ? Number(state.CurrentBTCBalance).toFixed(4)
+        : state.Swap2Token == "BNB"
+        ? Number(state.CurrentBNBSBalance).toFixed(4)
+        : state.Swap2Token == "DOGE"
+        ? Number(state.CurrentDOGEBalance).toFixed(4)
+        : state.Swap2Token == "XRP"
+        ? Number(state.CurrentXRPBalance).toFixed(4)
+        : state.Swap2Token == "SOL"
+        ? Number(state.CurrentSOLBalance).toFixed(4)
+        : state.Swap2Token == "ADA"
+        ? Number(state.CurrentADABalance).toFixed(4)
+        : Number(state.CurrentDOTBalance).toFixed(4);
+    setSwap2Balance(balance1);
+  }, []);
+
+  useEffect(() => {
+    setGetBalance(
+      (payBalance *
+        state.CoinPrice[state.CoinSymbol.indexOf(state.Swap1Token)]) /
+        state.CoinPrice[state.CoinSymbol.indexOf(state.Swap2Token)]
+    );
     // value * state.CoinPrice[state.CoinSymbol.indexOf(state.Swap1Token)] / state.CoinPrice[state.CoinSymbol.indexOf(state.Swap2Token)]);
   }, [payBalance]);
 
@@ -28,60 +72,88 @@ const SwapScreen = ({ navigation }) => {
     if (swapAPI != "") {
       doSwap();
     }
-  }, [swapAPI])
+  }, [swapAPI]);
 
   const doSwap = async () => {
     console.log("Start swapping...");
-    let res = await fetch(
-      `${swapAPI}`
-    );
+    let res = await fetch(`${swapAPI}`);
     let data = await res.json();
     console.log(data);
     setSpinner(false);
     if (data.statusCode == "400") {
       if (data.description.includes("sync")) {
         alert("Not Enough Balance to Swap!");
-      }
-      else alert(data.description);
-    }
-    else {
+      } else alert(data.description);
+    } else {
       alert("Finish to swap");
     }
-  }
+  };
   const onSwapHandle = () => {
-    if (state.CurrentETHBalance * (10 ** 18) < payBalance || state.Swap1Token != "ETH") {
+    if (
+      state.CurrentETHBalance * 10 ** 18 < payBalance ||
+      state.Swap1Token != "ETH"
+    ) {
       alert("Not Enough Balance to Swap!");
       return;
     }
-    setSwapAPI(`https://api.1inch.io/v4.0/1/swap?fromTokenAddress=${state.ContractAddress[state.CoinSymbol.indexOf(state.Swap1Token)]}&toTokenAddress=${state.ContractAddress[state.CoinSymbol.indexOf(state.Swap2Token)]}&amount=${payBalance * 10 ** 18}&fromAddress=0x35fD12f4ED2Eb8678710063795A7a20d32541aa0&slippage=20`);
+    setSwapAPI(
+      `https://api.1inch.io/v4.0/1/swap?fromTokenAddress=${
+        state.ContractAddress[state.CoinSymbol.indexOf(state.Swap1Token)]
+      }&toTokenAddress=${
+        state.ContractAddress[state.CoinSymbol.indexOf(state.Swap2Token)]
+      }&amount=${
+        payBalance * 10 ** 18
+      }&fromAddress=0x35fD12f4ED2Eb8678710063795A7a20d32541aa0&slippage=20`
+    );
     setSpinner(true);
-  }
+  };
   return (
     <Container style={state.DarkMode && { backgroundColor: "#1a222d" }}>
-      <Header style={state.DarkMode && { backgroundColor: "#232f3d", color: "#fff" }}>Swap</Header>
+      <Header
+        style={state.DarkMode && { backgroundColor: "#232f3d", color: "#fff" }}
+      >
+        Swap
+      </Header>
       <Body>
         <Spinner
           visible={spinner}
-          textContent={'Wait a few minutes...'}
+          textContent={"Wait a few minutes..."}
           textStyle={styles.spinnerTextStyle}
           color="#3275bb"
           size="large"
         />
-        <SwapContainer style={state.DarkMode && { borderColor: "#353535", color: "#fff" }}>
+        <SwapContainer
+          style={state.DarkMode && { borderColor: "#353535", color: "#fff" }}
+        >
           <Token1>
             <InputContainer>
               <SmallInfoText>You Pay</SmallInfoText>
-              <Input  style={state.DarkMode && { color: "#fff" }} placeholderTextColor={state.DarkMode && "#555"} placeholder="0" keyboardType="numeric" value={payBalance.toString()} onChangeText={newText => setPayBalance(newText)} />
+              <Input
+                style={state.DarkMode && { color: "#fff" }}
+                placeholderTextColor={state.DarkMode && "#555"}
+                placeholder="0"
+                keyboardType="numeric"
+                value={payBalance.toString()}
+                onChangeText={(newText) => setPayBalance(newText)}
+              />
               <BalanceInfo>
                 <Balance>Balance:</Balance>
-                <BalanceNumber> 0</BalanceNumber>
+                <BalanceNumber> {swap1Balance}</BalanceNumber>
                 <BalanceToken>{state.Swap1Token}</BalanceToken>
               </BalanceInfo>
             </InputContainer>
-            <TouchableOpacity onPress={() => navigation.navigate("SwapToken1Select")}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("SwapToken1Select")}
+            >
               <TokenSelect>
-                <Image source={state.CoinImage[state.CoinSymbol.indexOf(state.Swap1Token)]} />
-                <TokenName style={state.DarkMode && { color: "#ccc" }}>{state.Swap1Token}</TokenName>
+                <Image
+                  source={
+                    state.CoinImage[state.CoinSymbol.indexOf(state.Swap1Token)]
+                  }
+                />
+                <TokenName style={state.DarkMode && { color: "#ccc" }}>
+                  {state.Swap1Token}
+                </TokenName>
                 <Ionicons
                   name={"chevron-forward"}
                   color="#979797"
@@ -114,17 +186,31 @@ const SwapScreen = ({ navigation }) => {
           <Token2>
             <InputContainer>
               <SmallInfoText>You Get</SmallInfoText>
-              <Input style={state.DarkMode && { color: "#fff" }} placeholderTextColor={state.DarkMode && "#555"} placeholder="0" keyboardType="numeric" value={getBalance.toFixed(5).toString()} />
+              <Input
+                style={state.DarkMode && { color: "#fff" }}
+                placeholderTextColor={state.DarkMode && "#555"}
+                placeholder="0"
+                keyboardType="numeric"
+                value={getBalance.toFixed(5).toString()}
+              />
               <BalanceInfo>
                 <Balance>Balance:</Balance>
-                <BalanceNumber> 0 </BalanceNumber>
+                <BalanceNumber> {swap2Balance} </BalanceNumber>
                 <BalanceToken>{state.Swap2Token}</BalanceToken>
               </BalanceInfo>
             </InputContainer>
-            <TouchableOpacity onPress={() => navigation.navigate("SwapToken2Select")}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("SwapToken2Select")}
+            >
               <TokenSelect>
-                <Image source={state.CoinImage[state.CoinSymbol.indexOf(state.Swap2Token)]} />
-                <TokenName style={state.DarkMode && { color: "#ccc" }}>{state.Swap2Token}</TokenName>
+                <Image
+                  source={
+                    state.CoinImage[state.CoinSymbol.indexOf(state.Swap2Token)]
+                  }
+                />
+                <TokenName style={state.DarkMode && { color: "#ccc" }}>
+                  {state.Swap2Token}
+                </TokenName>
                 <Ionicons
                   name={"chevron-forward"}
                   color="#979797"
@@ -167,7 +253,7 @@ export default SwapScreen;
 
 const styles = StyleSheet.create({
   spinnerTextStyle: {
-    color: '#fff'
+    color: "#fff",
   },
 });
 const Container = styled.View`
@@ -247,7 +333,7 @@ const TokenName = styled.Text`
 const Image = styled.Image`
   width: 40px;
   height: 40px;
-  background-color: #fff; 
+  background-color: #fff;
   border-radius: 20px;
   border-width: 1px;
   border-color: #fff;

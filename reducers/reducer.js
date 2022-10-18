@@ -140,6 +140,16 @@ const Reducer = (state, action) => {
         ...state,
         PushNotification: action.pushnotification,
       };
+    case "SET_PASSCODE": // Passcode Set Mode
+      return {
+        ...state,
+        PassCodeSetting: action.passcodesetting,
+      };
+    case "SET_PASSWORD": // Password Set
+      return {
+        ...state,
+        WalletPassword: action.walletpassword,
+      };
     case "ADD_POST":
       return {
         ...state,

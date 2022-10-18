@@ -265,6 +265,16 @@ export default function PortfolioScreen({ navigation }) {
       state.CurrentDOGEBalance * state.CoinPrice[7] +
       state.CurrentDOTBalance * state.CoinPrice[8];
     setTotalUSD(totalBalance);
+    console.log("1 : " + state.CurrentBTCBalance * state.CoinPrice[0]);
+    console.log("1 : " + state.CurrentETHBalance * state.CoinPrice[1]);
+    console.log("1 : " + state.CurrentBNBBBalance * state.CoinPrice[2]);
+    console.log("1 : " + state.CurrentBNBSBalance * state.CoinPrice[3]);
+    console.log("1 : " + state.CurrentADABalance * state.CoinPrice[4]);
+    console.log("1 : " + state.CurrentXRPBalance * state.CoinPrice[5]);
+    console.log("1 : " + state.CurrentSOLBalance * state.CoinPrice[6]);
+    console.log("1 : " + state.CurrentDOGEBalance * state.CoinPrice[7]);
+    console.log("1 : " + state.CurrentDOTBalance * state.CoinPrice[8]);
+    console.log("* : " + totalBalance);
     // var interval = setInterval(() => {
     //   console.log("Update Balance!");
     //   updateBalance();
@@ -272,6 +282,7 @@ export default function PortfolioScreen({ navigation }) {
   }, []);
 
   useEffect(() => {
+    console.log("here");
     if (totalUSD > 0.0) setTmpUSD(totalUSD);
   }, [totalUSD]);
 
@@ -334,7 +345,7 @@ export default function PortfolioScreen({ navigation }) {
       {
         method: "GET",
         headers: {
-          "x-api-key": "b55c658b-d259-4ffe-b4d2-efbb4e6c099e",
+          "x-api-key": "57e98f74-9e98-4391-80d1-f1532cecf4fd",
         },
       }
     );
@@ -349,7 +360,7 @@ export default function PortfolioScreen({ navigation }) {
       {
         method: "GET",
         headers: {
-          "x-api-key": "b55c658b-d259-4ffe-b4d2-efbb4e6c099e",
+          "x-api-key": "57e98f74-9e98-4391-80d1-f1532cecf4fd",
         },
       }
     );
@@ -364,7 +375,7 @@ export default function PortfolioScreen({ navigation }) {
       {
         method: "GET",
         headers: {
-          "x-api-key": "b55c658b-d259-4ffe-b4d2-efbb4e6c099e",
+          "x-api-key": "57e98f74-9e98-4391-80d1-f1532cecf4fd",
         },
       }
     );
@@ -379,7 +390,7 @@ export default function PortfolioScreen({ navigation }) {
       {
         method: "GET",
         headers: {
-          "x-api-key": "b55c658b-d259-4ffe-b4d2-efbb4e6c099e",
+          "x-api-key": "57e98f74-9e98-4391-80d1-f1532cecf4fd",
         },
       }
     );

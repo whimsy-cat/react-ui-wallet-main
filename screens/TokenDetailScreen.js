@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import styled from "styled-components";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { Context } from "../reducers/store";
 import {
   LineChart,
@@ -25,6 +25,7 @@ const TokenDetailScreen = ({ navigation }) => {
   const [transactionValues, setTransactionValue] = React.useState([]);
   const [address, setAddress] = React.useState("");
   const [transaction, setTransaction] = useState(false);
+  const [currentUSD, setCurrentUSD] = useState(0.0);
 
   let min = 9999;
 
@@ -51,6 +52,26 @@ const TokenDetailScreen = ({ navigation }) => {
       if (min > tmpArray[i]) min = tmpArray[i];
     }
     setChart(tmpArray);
+    let currentUSD =
+      state.DetailToken == "Ethereum"
+        ? Number(state.CurrentETHBalance).toFixed(4)
+        : state.DetailToken == "BNB Beacon Chain"
+        ? Number(state.CurrentBNBBBalance).toFixed(4)
+        : state.DetailToken == "BNB Smart Chain"
+        ? Number(state.CurrentBNBSBalance).toFixed(4)
+        : state.DetailToken == "Bitcoin"
+        ? Number(state.CurrentBTCBalance).toFixed(4)
+        : state.DetailToken == "DogeCoin"
+        ? Number(state.CurrentDOGEBalance).toFixed(4)
+        : state.DetailToken == "XRP"
+        ? Number(state.CurrentXRPBalance).toFixed(4)
+        : state.DetailToken == "Solana"
+        ? Number(state.CurrentSOLBalance).toFixed(4)
+        : state.DetailToken == "Cardano"
+        ? Number(state.CurrentADABalance).toFixed(4)
+        : Number(state.CurrentDOTBalance).toFixed(4);
+    setCurrentUSD(currentUSD);
+
     let address =
       state.DetailToken == "Ethereum" ||
       state.DetailToken == "BNB Beacon Chain" ||
@@ -90,7 +111,7 @@ const TokenDetailScreen = ({ navigation }) => {
       {
         method: "GET",
         headers: {
-          "x-api-key": "f9f42ec5-cb84-4999-b9d9-585a2d19926a",
+          "x-api-key": "57e98f74-9e98-4391-80d1-f1532cecf4fd",
         },
       }
     );
@@ -114,7 +135,7 @@ const TokenDetailScreen = ({ navigation }) => {
       {
         method: "GET",
         headers: {
-          "x-api-key": "f9f42ec5-cb84-4999-b9d9-585a2d19926a",
+          "x-api-key": "57e98f74-9e98-4391-80d1-f1532cecf4fd",
         },
       }
     );
@@ -149,7 +170,7 @@ const TokenDetailScreen = ({ navigation }) => {
       {
         method: "GET",
         headers: {
-          "x-api-key": "f9f42ec5-cb84-4999-b9d9-585a2d19926a",
+          "x-api-key": "57e98f74-9e98-4391-80d1-f1532cecf4fd",
         },
       }
     );
@@ -178,7 +199,7 @@ const TokenDetailScreen = ({ navigation }) => {
       {
         method: "GET",
         headers: {
-          "x-api-key": "f9f42ec5-cb84-4999-b9d9-585a2d19926a",
+          "x-api-key": "57e98f74-9e98-4391-80d1-f1532cecf4fd",
         },
       }
     );
@@ -208,7 +229,7 @@ const TokenDetailScreen = ({ navigation }) => {
       {
         method: "GET",
         headers: {
-          "x-api-key": "f9f42ec5-cb84-4999-b9d9-585a2d19926a",
+          "x-api-key": "57e98f74-9e98-4391-80d1-f1532cecf4fd",
         },
       }
     );
@@ -238,7 +259,7 @@ const TokenDetailScreen = ({ navigation }) => {
       {
         method: "GET",
         headers: {
-          "x-api-key": "f9f42ec5-cb84-4999-b9d9-585a2d19926a",
+          "x-api-key": "57e98f74-9e98-4391-80d1-f1532cecf4fd",
         },
       }
     );
@@ -267,7 +288,7 @@ const TokenDetailScreen = ({ navigation }) => {
       {
         method: "GET",
         headers: {
-          "x-api-key": "f9f42ec5-cb84-4999-b9d9-585a2d19926a",
+          "x-api-key": "57e98f74-9e98-4391-80d1-f1532cecf4fd",
         },
       }
     );
@@ -293,7 +314,7 @@ const TokenDetailScreen = ({ navigation }) => {
       {
         method: "GET",
         headers: {
-          "x-api-key": "f9f42ec5-cb84-4999-b9d9-585a2d19926a",
+          "x-api-key": "57e98f74-9e98-4391-80d1-f1532cecf4fd",
         },
       }
     );
@@ -320,7 +341,7 @@ const TokenDetailScreen = ({ navigation }) => {
       {
         method: "GET",
         headers: {
-          "x-api-key": "f9f42ec5-cb84-4999-b9d9-585a2d19926a",
+          "x-api-key": "57e98f74-9e98-4391-80d1-f1532cecf4fd",
         },
       }
     );
@@ -347,7 +368,7 @@ const TokenDetailScreen = ({ navigation }) => {
       {
         method: "GET",
         headers: {
-          "x-api-key": "f9f42ec5-cb84-4999-b9d9-585a2d19926a",
+          "x-api-key": "57e98f74-9e98-4391-80d1-f1532cecf4fd",
         },
       }
     );
@@ -367,105 +388,115 @@ const TokenDetailScreen = ({ navigation }) => {
     console.log(transactionValue);
   };
   return (
-    <Container style={state.DarkMode && { backgroundColor: "#1a222d" }}>
-      <Header
-        style={state.DarkMode && { backgroundColor: "#232f3d", color: "#fff" }}
-      >
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Ionicons name={"arrow-back"} color="#fff" size={28} />
-        </TouchableOpacity>
-        <HeaderText>{state.DetailToken}</HeaderText>
-        <Continue></Continue>
-      </Header>
-      <Body>
-        <CryptoDetailContainer>
-          <CryptoCurrency style={state.DarkMode && { color: "#eee" }}>
-            ${price}
-          </CryptoCurrency>
-          <CryptoChange>
-            {dailyChange > 0 ? "$" : "- $"}
-            {Math.abs(price * dailyChange).toFixed(2)}{" "}
-            {dailyChange > 0 ? `+${dailyChange}` : `-${dailyChange}`}%
-          </CryptoChange>
-          <ChartView>
-            <LineChart
-              data={{
-                labels: [],
-                datasets: [
-                  {
-                    data: chart,
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      bounces={true}
+      style={state.DarkMode && { backgroundColor: "#1a222d" }}
+    >
+      <Container style={state.DarkMode && { backgroundColor: "#1a222d" }}>
+        <Header
+          style={
+            state.DarkMode && { backgroundColor: "#232f3d", color: "#fff" }
+          }
+        >
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Ionicons name={"arrow-back"} color="#fff" size={28} />
+          </TouchableOpacity>
+          <HeaderText>{state.DetailToken}</HeaderText>
+          <Continue></Continue>
+        </Header>
+        <Body>
+          <CryptoDetailContainer>
+            <CryptoCurrency style={state.DarkMode && { color: "#eee" }}>
+              ${price}
+            </CryptoCurrency>
+            <CryptoChange>
+              {dailyChange > 0 ? "$" : "- $"}
+              {Math.abs(price * dailyChange).toFixed(2)}{" "}
+              {dailyChange > 0 ? `+${dailyChange}` : `-${dailyChange}`}%
+            </CryptoChange>
+            <ChartView>
+              <LineChart
+                data={{
+                  labels: [],
+                  datasets: [
+                    {
+                      data: chart,
+                    },
+                  ],
+                }}
+                segments={5}
+                width={Dimensions.get("window").width * 0.85} // from react-native
+                height={220}
+                yAxisLabel="$"
+                yAxisInterval={10} // optional, defaults to 1
+                chartConfig={{
+                  backgroundColor: state.DarkMode ? "#000" : "#fff",
+                  backgroundGradientFrom: state.DarkMode ? "#252f38" : "#fff",
+                  backgroundGradientTo: state.DarkMode ? "#252f38" : "#fff",
+                  decimalPlaces: 2, // optional, defaults to 2dp
+                  color: (opacity = 1) => (state.DarkMode ? "#5f7" : "#5af"),
+                  labelColor: (opacity = 1) =>
+                    state.DarkMode ? "#eee" : "#333",
+                  style: {
+                    borderRadius: 16,
                   },
-                ],
-              }}
-              segments={5}
-              width={Dimensions.get("window").width * 0.85} // from react-native
-              height={220}
-              yAxisLabel="$"
-              yAxisInterval={10} // optional, defaults to 1
-              chartConfig={{
-                backgroundColor: state.DarkMode ? "#000" : "#fff",
-                backgroundGradientFrom: state.DarkMode ? "#252f38" : "#fff",
-                backgroundGradientTo: state.DarkMode ? "#252f38" : "#fff",
-                decimalPlaces: 2, // optional, defaults to 2dp
-                color: (opacity = 1) => (state.DarkMode ? "#5f7" : "#5af"),
-                labelColor: (opacity = 1) => (state.DarkMode ? "#eee" : "#333"),
-                style: {
+                  propsForDots: {
+                    r: "0",
+                    strokeWidth: "2",
+                    stroke: "#80c796",
+                  },
+                }}
+                bezier
+                style={{
+                  marginVertical: 8,
                   borderRadius: 16,
-                },
-                propsForDots: {
-                  r: "0",
-                  strokeWidth: "2",
-                  stroke: "#80c796",
-                },
-              }}
-              bezier
-              style={{
-                marginVertical: 8,
-                borderRadius: 16,
-              }}
-            />
-          </ChartView>
-        </CryptoDetailContainer>
-        <TransHeader style={state.DarkMode && { color: "#fff" }}>
-          Transactions{transactionAddrs.length == 0 ? " No history" : ""}
-        </TransHeader>
-        {transactionAddrs.map((Addr, index) => (
-          <Transaction
-            Type={Addr == { address } ? "Sent" : "Recieved"}
-            key={index}
-            Address={Addr}
-            Amount={transactionValues[index]}
-          ></Transaction>
-        ))}
-        <CryptoSetting>
-          <PriceAlert>
-            <PriceAlertLabel style={state.DarkMode && { color: "#eee" }}>
-              Price Alert
-            </PriceAlertLabel>
-            <PriceAlertSwitch>
-              <Switch />
-            </PriceAlertSwitch>
-          </PriceAlert>
-          <PriceDescription>
-            {state.DetailToken} is a cryptocurrency and worldwide payment
-            system. It is the first decentralized digital currency, as the
-            system works without a central bank or single administrator.
-          </PriceDescription>
-          <PriceAlert>
-            <PriceAlertLabel style={state.DarkMode && { color: "#eee" }}>
-              Website
-            </PriceAlertLabel>
-            <PriceAlertLink>{state.DetailToken}.org</PriceAlertLink>
-          </PriceAlert>
-          <PriceAlert>
-            <PriceAlertLabel style={state.DarkMode && { color: "#eee" }}>
-              Explorer
-            </PriceAlertLabel>
-            <PriceAlertLink>{state.DetailToken}.info</PriceAlertLink>
-          </PriceAlert>
-        </CryptoSetting>
-      </Body>
-    </Container>
+                }}
+              />
+            </ChartView>
+          </CryptoDetailContainer>
+          <TransHeader style={state.DarkMode && { color: "#fff" }}>
+            Transactions{transactionAddrs.length == 0 ? " No history" : ""}{" "}
+            {Number(currentUSD * price).toFixed(4)} $
+          </TransHeader>
+          {transactionAddrs.map((Addr, index) => (
+            <Transaction
+              Type={Addr == { address } ? "Sent" : "Recieved"}
+              key={index}
+              Address={Addr.toString().substring(0, 20).concat(" . . .")}
+              Amount={transactionValues[index]}
+            ></Transaction>
+          ))}
+          <CryptoSetting>
+            <PriceAlert>
+              <PriceAlertLabel style={state.DarkMode && { color: "#eee" }}>
+                Price Alert
+              </PriceAlertLabel>
+              <PriceAlertSwitch>
+                <Switch />
+              </PriceAlertSwitch>
+            </PriceAlert>
+            <PriceDescription>
+              {state.DetailToken} is a cryptocurrency and worldwide payment
+              system. It is the first decentralized digital currency, as the
+              system works without a central bank or single administrator.
+            </PriceDescription>
+            <PriceAlert>
+              <PriceAlertLabel style={state.DarkMode && { color: "#eee" }}>
+                Website
+              </PriceAlertLabel>
+              <PriceAlertLink>{state.DetailToken}.org</PriceAlertLink>
+            </PriceAlert>
+            <PriceAlert>
+              <PriceAlertLabel style={state.DarkMode && { color: "#eee" }}>
+                Explorer
+              </PriceAlertLabel>
+              <PriceAlertLink>{state.DetailToken}.info</PriceAlertLink>
+            </PriceAlert>
+          </CryptoSetting>
+        </Body>
+      </Container>
+    </ScrollView>
   );
 };
 
