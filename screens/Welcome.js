@@ -117,7 +117,15 @@ const Welcome = ({ navigation }) => {
       console.log("polka address : " + dotaddress);
       console.log("passcodstate : " + passcodestate);
 
-      if (mnemonic !== null) {
+      if (
+        mnemonic !== null &&
+        btcaddress !== null &&
+        dogeaddress !== null &&
+        xrpaddress !== null &&
+        soladdress !== null &&
+        adaaddress !== null &&
+        dotaddress !== null
+      ) {
         dispatch({
           type: "SET_WALLETINFO",
           walletmnemonic: mnemonic,
